@@ -12,7 +12,7 @@ export default function useMobile() {
       setWidth(window.innerWidth);
     };
     window.addEventListener("resize", handleResize);
-    if (width < 1098) {
+    if (width < 1022) {
       setIsMobile(true);
     } else {
       setIsMobile(false);

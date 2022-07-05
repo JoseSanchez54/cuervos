@@ -21,11 +21,7 @@ module.exports = {
         protocol: "https",
       },
     ],
-    domains: [
-      "api.saboreandoblog.es",
-      "api2.cbd10.online",
-      "apiplantilla.mwlb.es",
-    ],
+    domains: ["apicuervos.bitmac.es"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
   },
   env: {
