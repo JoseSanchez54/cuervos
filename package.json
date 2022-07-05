@@ -14,9 +14,6 @@
     "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "algoliasearch": "^4.13.0",
     "axios": "^0.26.0",
-    "framer": "^2.0.0-beta.18",
-    "framer-motion": "^5.6.0",
-    "framer-motion-3d": "^6.2.9",
     "instantsearch.css": "^7.4.5",
     "memory-cache": "^0.2.0",
     "next": "^12.1.4",
@@ -39,7 +36,6 @@
     "redux-thunk": "^2.4.0",
     "swiper": "^8.0.6",
     "swr": "^1.2.2",
-    "three": "^0.139.2",
     "woocommerce-api": "^1.5.0"
   },
   "devDependencies": {
