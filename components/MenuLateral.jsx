@@ -70,21 +70,21 @@ const MenuLateral = ({ opciones }) => {
                     <div className="flex flex-col w-full gap-5 justify-between">
                       <button
                         style={{ textAlign: "start" }}
-                        onClick={(e) => handleSeccion("categorias")}
+                        onClick={(e) => handleSeccion("vinos")}
                       >
-                        <a className="enlaceSup">Categorías</a>
+                        <a className="enlaceSup">Vinos</a>
                       </button>
                       <button
                         style={{ textAlign: "start" }}
-                        onClick={(e) => handleSeccion("actividad")}
+                        onClick={(e) => handleSeccion("accesorios")}
                       >
-                        <a className="enlaceSup">Actividad</a>
+                        <a className="enlaceSup">Accesorios</a>
                       </button>
                       <button
                         style={{ textAlign: "start" }}
-                        onClick={(e) => handleSeccion("ediciones")}
+                        onClick={(e) => handleSeccion("merchandising")}
                       >
-                        <a className="enlaceSup">Ediciones</a>
+                        <a className="enlaceSup">Merchandising</a>
                       </button>
                     </div>
                   </div>
