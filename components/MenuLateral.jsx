@@ -90,13 +90,11 @@ const MenuLateral = ({ opciones }) => {
                   </div>
                   <div className="flex flex-row p-9 w-full">
                     <div className="flex flex-col gap-3 w-full">
-                      {menuBruto.map((e) => {
+                      {menuBruto.map((e, index) => {
                         return (
-                          <>
-                            <Link href={e.enlace}>
-                              <a className="enlaceBot">{e.label}</a>
-                            </Link>
-                          </>
+                          <Link key={index} href={e.enlace}>
+                            <a className="enlaceBot">{e.label}</a>
+                          </Link>
                         );
                       })}
                     </div>
@@ -138,11 +136,9 @@ const MenuLateral = ({ opciones }) => {
                   <div className="flex flex-col gap-3 w-full">
                     {menuBruto.map((e, index) => {
                       return (
-                        <>
-                          <Link key={index} href={e.enlace}>
-                            <a className="enlaceBot">{e.label}</a>
-                          </Link>
-                        </>
+                        <Link key={index} href={e.enlace}>
+                          <a className="enlaceBot">{e.label}</a>
+                        </Link>
                       );
                     })}
                   </div>

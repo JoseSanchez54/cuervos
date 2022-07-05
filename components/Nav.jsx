@@ -14,7 +14,6 @@ const Nav = ({ opciones }) => {
       <FranjaPromo opciones={opciones} />
       <div className="flex flex-row w-full justify-between  my-4">
         <div className="flex flex-col w-1/3 h-auto items-start p-1  justify-center">
-            
           <MenuLateral opciones={opciones} />
         </div>
         <div className="flex flex-col w-1/3 items-center h-auto">
@@ -32,7 +31,11 @@ const Nav = ({ opciones }) => {
           <div className="flex flex-row w-full gap-3 justify-end items-center">
             {!isMobile ? (
               <Link href="#">
-                <a style={{ color: "black" }}>Tu cuenta</a>
+                <a
+                  style={{ color: "black", fontFamily: opciones.fuente_global }}
+                >
+                  Tu cuenta
+                </a>
               </Link>
             ) : (
               <Link href="#">
