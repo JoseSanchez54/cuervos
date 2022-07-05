@@ -2,7 +2,7 @@ import { GiHamburgerMenu } from "react-icons/gi/";
 import { useState } from "react";
 import useMobile from "../hooks/useMobile";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "next/Link";
 import { motion, AnimatePresence } from "framer-motion";
 import { GrClose } from "react-icons/gr/";
 const MenuLateral = ({ opciones }) => {
@@ -136,10 +136,10 @@ const MenuLateral = ({ opciones }) => {
                 </div>
                 <div className="flex flex-row p-9 w-full">
                   <div className="flex flex-col gap-3 w-full">
-                    {menuBruto.map((e) => {
+                    {menuBruto.map((e, index) => {
                       return (
                         <>
-                          <Link href={e.enlace}>
+                          <Link key={index} href={e.enlace}>
                             <a className="enlaceBot">{e.label}</a>
                           </Link>
                         </>
