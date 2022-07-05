@@ -9,12 +9,47 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "12.2.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "@nextui-org/react": "*",
+    "@react-three/fiber": "^8.0.10",
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
+    "algoliasearch": "^4.13.0",
+    "axios": "^0.26.0",
+    "framer": "^2.0.0-beta.18",
+    "framer-motion": "^5.6.0",
+    "framer-motion-3d": "^6.2.9",
+    "instantsearch.css": "^7.4.5",
+    "memory-cache": "^0.2.0",
+    "next": "^12.1.4",
+    "next-redux-wrapper": "^7.0.5",
+    "next-seo": "^5.4.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.0.0-rc.3",
+    "react-dom": "^18.0.0-rc.3",
+    "react-fast-marquee": "^1.3.1",
+    "react-icons": "^4.3.1",
+    "react-instantsearch-dom": "^6.23.3",
+    "react-intersection-observer": "^9.1.0",
+    "react-loading-skeleton": "^3.1.0",
+    "react-redux": "^7.2.6",
+    "react-router": "^6.2.2",
+    "react-use-measure": "^2.1.1",
+    "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.0",
+    "swiper": "^8.0.6",
+    "swr": "^1.2.2",
+    "three": "^0.139.2",
+    "woocommerce-api": "^1.5.0"
   },
   "devDependencies": {
-    "eslint": "8.19.0",
-    "eslint-config-next": "12.2.0"
+    "@tailwindcss/typography": "^0.5.2",
+    "autoprefixer": "^10.4.2",
+    "css-loader": "^6.7.1",
+    "eslint": "8.10.0",
+    "eslint-config-next": "12.1.0",
+    "postcss": "^8.4.5",
+    "style-loader": "^3.3.1",
+    "tailwindcss": "^3.0.23"
   }
 }
