@@ -9,6 +9,10 @@ const MenuLateral = ({ opciones }) => {
   const { isMobile } = useMobile();
   const [abrir, setAbrir] = useState(false);
   const [seccion, setSeccion] = useState(null);
+  const handleSeccion = (seccion) => {
+    setSeccion(seccion);
+  };
+
   const handleAbrir = () => {
     setAbrir(!abrir);
   };
@@ -64,15 +68,24 @@ const MenuLateral = ({ opciones }) => {
                   </div>
                   <div className="flex flex-row w-full borde-b p-9 borde-t ">
                     <div className="flex flex-col w-full gap-5 justify-between">
-                      <Link href="/categorias">
+                      <button
+                        style={{ textAlign: "start" }}
+                        onClick={(e) => handleSeccion("categorias")}
+                      >
                         <a className="enlaceSup">Categorías</a>
-                      </Link>
-                      <Link href="/act">
+                      </button>
+                      <button
+                        style={{ textAlign: "start" }}
+                        onClick={(e) => handleSeccion("actividad")}
+                      >
                         <a className="enlaceSup">Actividad</a>
-                      </Link>
-                      <Link href="/act">
+                      </button>
+                      <button
+                        style={{ textAlign: "start" }}
+                        onClick={(e) => handleSeccion("ediciones")}
+                      >
                         <a className="enlaceSup">Ediciones</a>
-                      </Link>
+                      </button>
                     </div>
                   </div>
                   <div className="flex flex-row p-9 w-full">
