@@ -40,7 +40,7 @@ const MenuLateral = ({ opciones, categorias }) => {
               top: 0,
               bottom: 0,
               backgroundColor: "white",
-              zIndex: 9,
+              zIndex: 99,
               cursor: "pointer",
             }}
             animate={{
