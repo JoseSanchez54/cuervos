@@ -7,14 +7,14 @@ import useMobile from "../hooks/useMobile";
 import { IoIosCart } from "react-icons/io";
 import { BiUser } from "react-icons/bi";
 import { motion, AnimatePresence } from "framer-motion";
-const Nav = ({ opciones }) => {
+const Nav = ({ opciones, categorias }) => {
   const { isMobile } = useMobile();
   return (
     <>
       <FranjaPromo opciones={opciones} />
       <div className="flex flex-row w-full justify-between  my-4">
         <div className="flex flex-col w-1/3 h-auto items-start p-1  justify-center">
-          <MenuLateral opciones={opciones} />
+          <MenuLateral categorias={categorias} opciones={opciones} />
         </div>
         <div className="flex flex-col w-1/3 items-center h-auto">
           <Link href="/">

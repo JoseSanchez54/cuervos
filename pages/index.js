@@ -1,13 +1,17 @@
-import Head from "next/head";
-import Image from "next/image";
-import FranjaPromo from "../components/FranjaPromo";
 import axios from "axios";
-import Nav from "../components/Nav";
 
-export default function Home({ options }) {
+import WooCommerce from "../woocommerce/Woocommerce";
+import HomeCuervos from "../components/Home";
+
+export default function Home({ options, categorias, pagesNew, productos }) {
   return (
     <>
-      <Nav opciones={options} />
+      <HomeCuervos
+        pagina={pagesNew}
+        categorias={categorias}
+        opciones={options}
+        productos={productos}
+      />
     </>
   );
 }
@@ -33,6 +37,14 @@ export async function getStaticProps() {
   const options = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
+  const categorias = await WooCommerce.get("products/categories").then(
+    (response) => {
+      return response.data;
+    }
+  );
+  const productos = await WooCommerce.get("products").then((response) => {
+    return response.data;
+  });
 
   return {
     props: {
@@ -41,6 +53,8 @@ export async function getStaticProps() {
       template: template,
       entradas: posts,
       internos: internos,
+      categorias,
+      productos,
     },
     revalidate: 10,
   };

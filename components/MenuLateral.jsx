@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/Link";
 import { motion, AnimatePresence } from "framer-motion";
 import { GrClose } from "react-icons/gr/";
-const MenuLateral = ({ opciones }) => {
+import { AiOutlineArrowLeft } from "react-icons/ai";
+const MenuLateral = ({ opciones, categorias }) => {
   const { isMobile } = useMobile();
   const [abrir, setAbrir] = useState(false);
   const [seccion, setSeccion] = useState(null);
@@ -19,6 +20,8 @@ const MenuLateral = ({ opciones }) => {
   const menuBruto = Object.values(opciones.menu_rep).map((key) => {
     return key;
   });
+  const padres = categorias.filter((res) => res.parent === 0);
+  const hijos = categorias.filter((res) => res.parent === seccion);
 
   return (
     <>
@@ -68,24 +71,16 @@ const MenuLateral = ({ opciones }) => {
                   </div>
                   <div className="flex flex-row w-full borde-b p-9 borde-t ">
                     <div className="flex flex-col w-full gap-5 justify-between">
-                      <button
-                        style={{ textAlign: "start" }}
-                        onClick={(e) => handleSeccion("vinos")}
-                      >
-                        <a className="enlaceSup">Vinos</a>
-                      </button>
-                      <button
-                        style={{ textAlign: "start" }}
-                        onClick={(e) => handleSeccion("accesorios")}
-                      >
-                        <a className="enlaceSup">Accesorios</a>
-                      </button>
-                      <button
-                        style={{ textAlign: "start" }}
-                        onClick={(e) => handleSeccion("merchandising")}
-                      >
-                        <a className="enlaceSup">Merchandising</a>
-                      </button>
+                      {padres.map((res) => {
+                        return (
+                          <button
+                            style={{ textAlign: "start" }}
+                            onClick={(e) => handleSeccion(res.id)}
+                          >
+                            <a className="enlaceSup">{res.name}</a>
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                   <div className="flex flex-row p-9 w-full">
@@ -101,7 +96,64 @@ const MenuLateral = ({ opciones }) => {
                   </div>
                 </div>
               ) : (
-                <></>
+                <AnimatePresence>
+                  <div className="flex flex-col lg:w-1/2 w-full h-full">
+                    <div className="flex flex-row justify-between items-center w-full p-9  borde-b ">
+                      <Link href="/">
+                        <a>
+                          <Image
+                            width="85px"
+                            height="63px"
+                            src={opciones.logo_principal}
+                          ></Image>
+                        </a>
+                      </Link>
+                      <button onClick={(e) => setSeccion(null)}>
+                        <AiOutlineArrowLeft />
+                      </button>
+                    </div>
+                    <div className="flex flex-row w-full borde-b p-9 borde-t ">
+                      <motion.div
+                        initial={{
+                          opacity: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                        }}
+                        exit={{
+                          opacity: 0,
+                        }}
+                        className="flex flex-col w-full gap-5 justify-between"
+                      >
+                        {hijos.map((res) => {
+                          if (hijos.length === 0) {
+                            return <span>No hay más subcategorías</span>;
+                          } else {
+                            return (
+                              <button
+                                style={{ textAlign: "start" }}
+                                onClick={(e) => handleSeccion(res.id)}
+                              >
+                                <a className="enlaceSup">{res.name}</a>
+                              </button>
+                            );
+                          }
+                        })}
+                      </motion.div>
+                    </div>
+                    <div className="flex flex-row p-9 w-full">
+                      <div className="flex flex-col gap-3 w-full">
+                        {menuBruto.map((e, index) => {
+                          return (
+                            <Link key={index} href={e.enlace}>
+                              <a className="enlaceBot">{e.label}</a>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </AnimatePresence>
               )
             ) : (
               <div className="flex flex-col lg:w-1/2 w-full h-full">
@@ -115,21 +167,29 @@ const MenuLateral = ({ opciones }) => {
                       ></Image>
                     </a>
                   </Link>
-                  <button onClick={(e) => handleAbrir()}>
-                    <GrClose />
-                  </button>
+                  {!seccion ? (
+                    <button onClick={(e) => handleAbrir()}>
+                      <GrClose />
+                    </button>
+                  ) : (
+                    <button onClick={(e) => setSeccion(null)}>
+                      <AiOutlineArrowLeft />
+                    </button>
+                  )}
                 </div>
                 <div className="flex flex-row w-full borde-b p-9 borde-t ">
                   <div className="flex flex-col w-full gap-5 justify-between">
-                    <Link href="/categorias">
-                      <a className="enlaceSup">Categorías</a>
-                    </Link>
-                    <Link href="/act">
-                      <a className="enlaceSup">Actividad</a>
-                    </Link>
-                    <Link href="/act">
-                      <a className="enlaceSup">Ediciones</a>
-                    </Link>
+                    {padres.map((res, index) => {
+                      return (
+                        <button
+                          key={index}
+                          style={{ textAlign: "start" }}
+                          onClick={(e) => handleSeccion(res.id)}
+                        >
+                          <a className="enlaceSup">{res.name}</a>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="flex flex-row p-9 w-full">
@@ -150,31 +210,90 @@ const MenuLateral = ({ opciones }) => {
               <></>
             ) : (
               <>
-                {!seccion && (
-                  <div className="lg:flex flex-col lg:w-1/2 w-full hidden">
-                    <div className="relative h-screen w-full">
-                      {opciones.imagen_promocion && (
-                        <>
-                          <div className="flex flex-col justify-end h-full">
-                            <span className="promoTitle">
-                              {opciones.titulo_promocion}
-                            </span>
-                            <button className="buyNow">
-                              <Link href="/tienda">
-                                <a>Comprar ahora</a>
-                              </Link>
-                            </button>
-                            <div className="overlay w-full h-screen"></div>
-                            <Image
-                              objectFit="cover"
-                              layout="fill"
-                              src={opciones.imagen_promocion}
-                            />
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
+                {!seccion ? (
+                  <AnimatePresence>
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                      }}
+                      animate={{
+                        opacity: 1,
+                      }}
+                      exit={{
+                        opacity: 0,
+                      }}
+                      transition={{
+                        duration: 0.5,
+                      }}
+                      className="lg:flex flex-col lg:w-1/2 w-full hidden"
+                    >
+                      <div className="relative h-screen w-full">
+                        {opciones.imagen_promocion && (
+                          <>
+                            <div className="flex flex-col justify-end h-full">
+                              <span className="promoTitle">
+                                {opciones.titulo_promocion}
+                              </span>
+                              <button className="buyNow">
+                                <Link href="/tienda">
+                                  <a>Comprar ahora</a>
+                                </Link>
+                              </button>
+                              <div className="overlay w-full h-screen"></div>
+                              <Image
+                                objectFit="cover"
+                                layout="fill"
+                                src={opciones.imagen_promocion}
+                              />
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                ) : (
+                  <AnimatePresence>
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                      }}
+                      animate={{
+                        opacity: 1,
+                      }}
+                      exit={{
+                        opacity: 0,
+                      }}
+                      transition={{
+                        duration: 0.5,
+                      }}
+                      className="lg:flex flex-col lg:w-1/2 w-full hidden"
+                    >
+                      <div className="relative h-screen w-full">
+                        {opciones.imagen_promocion && (
+                          <>
+                            <div className="flex flex-col justify-start gap-5 p-5 mt-[150px] h-full">
+                              {hijos.map((res) => {
+                                if (hijos.length === 0) {
+                                  return <span>No hay más subcategorías</span>;
+                                } else {
+                                  return (
+                                    <button
+                                      style={{ textAlign: "start" }}
+                                      onClick={(e) => handleSeccion(res.id)}
+                                    >
+                                      <Link href={"/categoria/" + res.slug}>
+                                        <a className="enlaceinf">{res.name}</a>
+                                      </Link>
+                                    </button>
+                                  );
+                                }
+                              })}
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
                 )}
               </>
             )}
@@ -211,6 +330,11 @@ const MenuLateral = ({ opciones }) => {
           transition: background-size 0.3s;
         }
         .enlaceBot {
+          font-family: ${opciones.fuente_global};
+          color: ${opciones.color_texto_header};
+          font-size: 1.1em;
+        }
+        .enlaceinf {
           font-family: ${opciones.fuente_global};
           color: ${opciones.color_texto_header};
           font-size: 1.1em;
