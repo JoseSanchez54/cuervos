@@ -3,10 +3,7 @@ const Nav = dynamic(() => import("../components/Nav"));
 const Image = dynamic(() => import("next/image"));
 import { motion } from "framer-motion";
 import Link from "next/Link";
-const HomeCuervos = ({ opciones, pagina, categorias, productos }) => {
-  const vinos = productos.map((prod) =>
-    prod.categories.filter((cat) => cat.slug === "vinos")
-  );
+const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
   console.log(vinos);
   return (
     <>

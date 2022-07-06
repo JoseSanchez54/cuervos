@@ -3,14 +3,14 @@ import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
 import HomeCuervos from "../components/Home";
 
-export default function Home({ options, categorias, pagesNew, productos }) {
+export default function Home({ options, categorias, pagesNew, vinos }) {
   return (
     <>
       <HomeCuervos
         pagina={pagesNew}
         categorias={categorias}
         opciones={options}
-        productos={productos}
+        vinos={vinos}
       />
     </>
   );
@@ -42,9 +42,11 @@ export async function getStaticProps() {
       return response.data;
     }
   );
-  const productos = await WooCommerce.get("products").then((response) => {
-    return response.data;
-  });
+  const vinos = await WooCommerce.get("products?category=89").then(
+    (response) => {
+      return response.data;
+    }
+  );
 
   return {
     props: {
@@ -54,7 +56,7 @@ export async function getStaticProps() {
       entradas: posts,
       internos: internos,
       categorias,
-      productos,
+      vinos,
     },
     revalidate: 10,
   };
