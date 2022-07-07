@@ -3,8 +3,21 @@ const Nav = dynamic(() => import("../components/Nav"));
 const Image = dynamic(() => import("next/image"));
 import { motion } from "framer-motion";
 import Link from "next/Link";
+const Grid = dynamic(() => import("../components/Grid"));
+import { AiOutlineArrowRight } from "react-icons/ai";
 const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
-  console.log(vinos);
+  const variablesBoton = {
+    initial: {
+      display: "flex",
+      color: "#000",
+      fontFamily: opciones.fuente_global,
+      fontSize: "16px",
+    },
+  };
+  const variablesIcono = {
+    initial: { marginLeft: "0px" },
+    hover: { marginLeft: "10px" },
+  };
   return (
     <>
       <Nav categorias={categorias} opciones={opciones} />
@@ -303,11 +316,90 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
         </div>
       </div>
       <div className="flex flex-row w-full justify-center mt-[40px] lg:mt-[100px]">
-        <div className="flex flex-col w-full max-w-[1016px]">
+        <div className="flex flex-col w-full h-full max-w-[1200px]">
           <div className="flex flex-row w-full">
-            <span className="tituloseccion">Elige tu vino</span>
+            <span className="tituloseccion ml-3">Elige tu vino</span>
           </div>
-          <div className="flex flex-row w-full"></div>
+          <div className="flex flex-row flex-wrap lg:flex-nowrap justify-center w-full min-h-[508px] h-full">
+            <Grid productos={vinos} opciones={opciones} />
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row w-full max-h-[63px] justify-center mt-[40px] lg:mt-[100px]">
+        <div className="flex flex-col w-full max-w-[1200px]">
+          <div className="flex flex-row justify-center w-full">
+            <Link href="/productos">
+              <a>
+                <motion.button
+                  variants={variablesBoton}
+                  initial="initial"
+                  whileHover="hover"
+                  className="flex flex-row gap-2 items-center"
+                >
+                  TODOS NUESTROS PRODUCTOS{" "}
+                  <motion.div variants={variablesIcono}>
+                    <AiOutlineArrowRight />
+                  </motion.div>
+                </motion.button>
+              </a>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row w-full justify-center mt-[40px] lg:mt-[100px]">
+        <div className="flex flex-col w-full max-w-[1200px]">
+          <div className="flex flex-row min-h-[339px] my-9 w-full bg-black">
+            <div className="flex flex-col justify-center p-5 w-full lg:w-1/3">
+              {" "}
+              <Image
+                width="300"
+                height="100"
+                objectFit="contain"
+                src={pagina.titulo_banner}
+              ></Image>
+              <p
+                className="lg:ml-[40px]"
+                style={{
+                  color: "white",
+                  fontFamily: opciones.fuente_global,
+                  fontSize: "14px",
+                }}
+              >
+                {pagina.parrafo_banner}
+              </p>
+            </div>
+            <div className="lg:flex hidden flex-col w-2/3">
+              <div className="relative w-full h-full">
+                <Image
+                  objectFit="contain"
+                  layout="fill"
+                  src={pagina.imagen_fondo_banner}
+                ></Image>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row p-5 w-full justify-center mt-[40px] lg:mt-[100px]">
+        <div className="flex flex-col w-full max-w-[1200px]">
+          <span
+            style={{
+              fontFamily: opciones.fuente_titulos,
+              fontSize: "36px",
+              textTransform: "uppercase",
+            }}
+          >
+            ¡AQUí y ahora!
+          </span>
+          <p
+            style={{
+              fontFamily: opciones.fuente_global,
+              fontSize: "16px",
+              textTransform: "uppercase",
+            }}
+          >
+            ESOS MOMENTOS QUE nos hacen ser diferentes
+          </p>
         </div>
       </div>
 

@@ -1,9 +1,9 @@
-import { addToCart } from "../../utils/addToCart";
+import { addToCart } from "../utils/addToCart";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { BsCartPlus } from "react-icons/bs";
-import useMobile from "../../hooks/useMobile";
+import useMobile from "../hooks/useMobile";
 
 const AddToCart = ({ seleccion, lista, producto, opciones }) => {
   const variable = producto.attributes.length > 0;
@@ -46,7 +46,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones }) => {
 
   return (
     <>
-      <div className="flex flex-row w-full gap-2 justify-between md:justify-start suma flex-nowrap">
+      <div className="flex flex-row z-[12] w-full gap-2 justify-between md:justify-start suma flex-nowrap">
         <div className="flex flex-col justify-center items-center">
           {variable ? (
             <>

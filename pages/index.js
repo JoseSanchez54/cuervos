@@ -37,11 +37,11 @@ export async function getStaticProps() {
   const options = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
-  const categorias = await WooCommerce.get("products/categories").then(
-    (response) => {
-      return response.data;
-    }
-  );
+  const categorias = await WooCommerce.get(
+    "products/categories?order=desc"
+  ).then((response) => {
+    return response.data;
+  });
   const vinos = await WooCommerce.get("products?category=89").then(
     (response) => {
       return response.data;
