@@ -1,6 +1,7 @@
 import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
 import { useOptions } from "../hooks/useOptions";
+import { useProducts } from "../hooks/useProducts";
 import Categorias from "../components/Categorias";
 export const getStaticPaths = async () => {
   const categorias = await WooCommerce.get("products/categories").then(
@@ -72,6 +73,9 @@ export async function getStaticProps(props) {
 
 export default function Tienda({ options, categorias, pagesNew, productos }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
+  const { products: productosSWR } = useProducts(productos);
+  console.log("a", productosSWR);
+  console.log("productos", productos);
 
   return (
     <>
@@ -79,7 +83,7 @@ export default function Tienda({ options, categorias, pagesNew, productos }) {
         pagina={pagesNew}
         categorias={categorias}
         opciones={optionsSWR}
-        productos={productos}
+        productos={productosSWR}
       />
     </>
   );

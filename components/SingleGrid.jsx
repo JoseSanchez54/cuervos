@@ -7,12 +7,11 @@ const Precio = dynamic(() => import("../components/Precio"));
 import { useDispatch } from "react-redux";
 
 const SingleGrid = ({ producto, opciones }) => {
-  console.log(producto);
   const [cambioImagen, setCambioImagen] = useState(false);
   const dispatch = useDispatch();
 
   const hover = producto?.meta_data?.filter((res) => res.key === "imagenh")[0]
-    .value;
+    ?.value;
   const textMotion = {
     initial: {
       fontFamily: opciones.fuente_global,

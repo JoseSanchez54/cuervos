@@ -34,7 +34,7 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
           </div>
           <div className="flex flex-row flex-wrap  w-full">
             {productos.map((producto, index) => {
-              console.log(index);
+        
               return (
                 <>
                   {index > 0 && (
