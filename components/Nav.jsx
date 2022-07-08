@@ -3,18 +3,20 @@ const FranjaPromo = dynamic(() => import("../components/FranjaPromo"));
 const Image = dynamic(() => import("next/image"));
 const Link = dynamic(() => import("next/link"));
 const MenuLateral = dynamic(() => import("../components/MenuLateral"));
+import { useOptions } from "../hooks/useOptions";
 import useMobile from "../hooks/useMobile";
 import { IoIosCart } from "react-icons/io";
 import { BiUser } from "react-icons/bi";
 
 const Nav = ({ opciones, categorias }) => {
+  const { isLoading, options: optionsSWR } = useOptions(opciones);
   const { isMobile } = useMobile();
   return (
     <>
       <FranjaPromo opciones={opciones} />
       <div className="flex flex-row w-full justify-between  my-4">
         <div className="flex flex-col w-1/3 h-auto items-start p-1  justify-center">
-          <MenuLateral categorias={categorias} opciones={opciones} />
+          <MenuLateral categorias={categorias} opciones={optionsSWR} />
         </div>
         <div className="flex flex-col w-1/3 items-center h-auto">
           <Link href="/">
@@ -22,7 +24,7 @@ const Nav = ({ opciones, categorias }) => {
               <Image
                 width="85px"
                 height="63px"
-                src={opciones.logo_principal}
+                src={optionsSWR?.logo_principal}
               ></Image>
             </a>
           </Link>
@@ -32,7 +34,10 @@ const Nav = ({ opciones, categorias }) => {
             {!isMobile ? (
               <Link href="#">
                 <a
-                  style={{ color: "black", fontFamily: opciones.fuente_global }}
+                  style={{
+                    color: "black",
+                    fontFamily: optionsSWR?.fuente_global,
+                  }}
                 >
                   Tu cuenta
                 </a>
