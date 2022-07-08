@@ -95,11 +95,13 @@ const SingleGrid = ({ producto, opciones }) => {
                   </motion.a>
                 </Link>
               </div>
-              <Image
-                objectFit="cover"
-                layout="fill"
-                src={!cambioImagen ? producto?.images[0].src : hover}
-              ></Image>
+              {hover && (
+                <Image
+                  objectFit="cover"
+                  layout="fill"
+                  src={!cambioImagen ? producto?.images[0].src : hover}
+                ></Image>
+              )}
             </div>
           </>
         </Link>
