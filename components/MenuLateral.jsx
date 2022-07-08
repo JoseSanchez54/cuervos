@@ -6,13 +6,17 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { GrClose } from "react-icons/gr/";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useRouter } from "next/router";
 const MenuLateral = ({ opciones, categorias }) => {
   const { isMobile } = useMobile();
   const [abrir, setAbrir] = useState(false);
   const [seccion, setSeccion] = useState(null);
+  const router = useRouter();
+  const { pathname } = router;
+
   useEffect(() => {
     setAbrir(false);
-  }, []);
+  }, [pathname]);
   const handleSeccion = (seccion) => {
     setSeccion(seccion);
   };
