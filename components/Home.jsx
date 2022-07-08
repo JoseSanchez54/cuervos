@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 const Nav = dynamic(() => import("../components/Nav"));
 const Image = dynamic(() => import("next/image"));
 import { motion } from "framer-motion";
-import Link from "next/Link";
+import Link from "next/link";
 const Grid = dynamic(() => import("../components/Grid"));
 import { AiOutlineArrowRight } from "react-icons/ai";
 const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {

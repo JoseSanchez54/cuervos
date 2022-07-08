@@ -2,7 +2,7 @@ import { GiHamburgerMenu } from "react-icons/gi/";
 import { useState } from "react";
 import useMobile from "../hooks/useMobile";
 import Image from "next/image";
-import Link from "next/Link";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { GrClose } from "react-icons/gr/";
 import { AiOutlineArrowLeft } from "react-icons/ai";

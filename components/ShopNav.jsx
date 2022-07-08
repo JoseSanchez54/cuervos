@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Link from "next/Link";
+import Link from "next/link";
 const ShopNav = ({ pagina, opciones }) => {
   const menuBruto = Object.values(pagina.menu_tienda).map((key) => {
     return key;

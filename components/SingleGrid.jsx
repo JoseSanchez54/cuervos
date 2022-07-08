@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 const Image = dynamic(() => import("next/image"));
-import Link from "next/Link";
+import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 const Precio = dynamic(() => import("../components/Precio"));

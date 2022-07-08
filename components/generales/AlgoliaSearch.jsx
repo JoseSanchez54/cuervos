@@ -273,13 +273,13 @@ const SearchPanel = ({ cerrar }) => {
                                     fontSize: "14px",
                                   }}
                                 >
-                                    <a
-                                          className="flex flex-row gap-2 items-center"
-                                          href={"/productos/" + selecciona.slug}
-                                        >
-                                          Ver producto
-                                          <BsEyeFill />
-                                        </a>
+                                  <a
+                                    className="flex flex-row gap-2 items-center"
+                                    href={"/productos/" + selecciona.slug}
+                                  >
+                                    Ver producto
+                                    <BsEyeFill />
+                                  </a>
                                 </motion.button>
                               </div>
                             </div>
