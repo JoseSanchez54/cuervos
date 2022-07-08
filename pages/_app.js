@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }) {
     <SWRConfig
       value={{
         fetcher: fetcher,
-        provider: () => new Map(),
+        revalidate: 1,
         refreshInterval: 30,
       }}
     >
