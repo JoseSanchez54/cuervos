@@ -5,19 +5,13 @@ export const useOptions = (initialdata) => {
   const { data, isValidating, error } = useSWR(
     process.env.URLBASE + "wp-json/jet-cct/opciones_generales",
     {
-      fallbackData: initialdata,
+      fallbackData: [initialdata],
     }
   );
 
-  if (initialdata === "") {
-    initialdata = [];
-  }
-
-  const listMemo = useMemo(() => (data ? data : [initialdata]), [data]);
-
   return {
     isLoading: !error && !data,
-    options: listMemo,
+    options: data[0],
     isError: error,
     isValidating,
   };

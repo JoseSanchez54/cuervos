@@ -4,7 +4,6 @@ const ShopNav = dynamic(() => import("../components/ShopNav"));
 const SingleGrid = dynamic(() => import("../components/SingleGrid"));
 const Image = dynamic(() => import("next/image"));
 const Categorias = ({ opciones, pagina, categorias, productos }) => {
-  console.log(productos[0]);
   return (
     <>
       <Nav categorias={categorias} opciones={opciones} />
@@ -35,18 +34,19 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
           </div>
           <div className="flex flex-row flex-wrap  w-full">
             {productos.map((producto, index) => {
+              console.log(index);
               return (
                 <>
                   {index > 0 && (
                     <SingleGrid
-                      key={index}
+                      key={producto.id}
                       opciones={opciones}
                       producto={producto}
                     />
                   )}
                   {index === 6 && (
                     <div
-                      key={index}
+                      key={producto.id}
                       className="flex flex-row  flex-wrap lg:flex-nowrap  w-full"
                     >
                       <div className="flex flex-col min-h-[200px] w-full lg:w-2/3">

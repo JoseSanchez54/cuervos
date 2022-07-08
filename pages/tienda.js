@@ -2,14 +2,16 @@ import axios from "axios";
 
 import WooCommerce from "../woocommerce/Woocommerce";
 import HomeCuervos from "../components/Home";
+import { useOptions } from "../hooks/useOptions";
 
 export default function Tienda({ options, categorias, pagesNew, vinos }) {
+  const { isLoading, options: optionsSWR } = useOptions(options);
   return (
     <>
       <HomeCuervos
         pagina={pagesNew}
         categorias={categorias}
-        opciones={options}
+        opciones={optionsSWR}
         vinos={vinos}
       />
     </>

@@ -4,10 +4,11 @@ const Grid = ({ productos, opciones, max = 1000 }) => {
   return (
     <>
       {productos.map((producto, index) => {
+        console.log(producto.id);
         return (
           <>
             {index < max && (
-              <SingleGrid key={index} producto={producto} opciones={opciones} />
+              <SingleGrid producto={producto} opciones={opciones} />
             )}
           </>
         );
