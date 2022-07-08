@@ -26,7 +26,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           <div className="relative w-full h-full">
             <div className="flex flex-col justify-end w-full h-full">
               <div className="p-9 z-[10]">
-                <span className="z-[10] titulo lg:ml-[40px]">
+                <span className="z-[10] uppercase titulo lg:ml-[40px]">
                   {pagina.titulo}
                 </span>
               </div>
@@ -52,7 +52,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                       style={{
                         fontSize: "55px",
                       }}
-                      className="tituloPrimera z-[10]"
+                      className="tituloPrimera uppercase z-[10]"
                     >
                       {pagina.segunda_primer_titulo}
                     </span>
@@ -82,7 +82,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           style={{
                             fontSize: "40px",
                           }}
-                          className="tituloPrimera z-[10]"
+                          className="tituloPrimera uppercase z-[10]"
                         >
                           {pagina.segunda_segundo_titulo}
                         </span>
@@ -106,7 +106,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           style={{
                             fontSize: "36px",
                           }}
-                          className="tituloPrimera z-[10]"
+                          className="tituloPrimera uppercase z-[10]"
                         >
                           {pagina.segunda_tercer_titulo}
                         </span>
@@ -145,7 +145,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                             maxWidth: "260px",
                             display: "block",
                           }}
-                          className="tituloPrimera z-[10]"
+                          className="tituloPrimera uppercase z-[10]"
                         >
                           {pagina.segunda_cuarto_titulo}
                         </span>
@@ -176,7 +176,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           style={{
                             fontSize: "36px",
                           }}
-                          className="tituloPrimera z-[10]"
+                          className="tituloPrimera uppercase z-[10]"
                         >
                           {pagina.segunda_quinto_titulo}
                         </span>
@@ -234,7 +234,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                             maxWidth: "260px",
                             display: "block",
                           }}
-                          className="tituloPrimera z-[10]"
+                          className="tituloPrimera uppercase z-[10]"
                         >
                           {pagina.segunda_sexta_titulo}
                         </span>
@@ -265,7 +265,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           style={{
                             fontSize: "36px",
                           }}
-                          className="tituloPrimera z-[10]"
+                          className="tituloPrimera uppercase z-[10]"
                         >
                           {pagina.segunda_septima_titulo}
                         </span>
@@ -295,7 +295,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           style={{
                             fontSize: "36px",
                           }}
-                          className="tituloPrimera z-[10]"
+                          className="tituloPrimera uppercase z-[10]"
                         >
                           {pagina.segunda_octava_titulo}
                         </span>
@@ -318,7 +318,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
       <div className="flex flex-row w-full justify-center mt-[40px] lg:mt-[100px]">
         <div className="flex flex-col w-full h-full max-w-[1200px]">
           <div className="flex flex-row w-full">
-            <span className="tituloseccion ml-3">Elige tu vino</span>
+            <span className="tituloseccion ml-3 uppercase">Elige tu vino</span>
           </div>
           <div className="flex flex-row flex-wrap lg:flex-nowrap justify-center w-full min-h-[508px] h-full">
             <Grid productos={vinos} opciones={opciones} />
