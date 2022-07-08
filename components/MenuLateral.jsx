@@ -1,5 +1,5 @@
 import { GiHamburgerMenu } from "react-icons/gi/";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useMobile from "../hooks/useMobile";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,9 @@ const MenuLateral = ({ opciones, categorias }) => {
   const { isMobile } = useMobile();
   const [abrir, setAbrir] = useState(false);
   const [seccion, setSeccion] = useState(null);
+  useEffect(() => {
+    setAbrir(false);
+  }, []);
   const handleSeccion = (seccion) => {
     setSeccion(seccion);
   };
