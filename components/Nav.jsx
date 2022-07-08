@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 const FranjaPromo = dynamic(() => import("../components/FranjaPromo"));
 const Image = dynamic(() => import("next/image"));
-const Link = dynamic(() => import("next/Link"));
+const Link = dynamic(() => import("next/link"));
 const MenuLateral = dynamic(() => import("../components/MenuLateral"));
 import useMobile from "../hooks/useMobile";
 import { IoIosCart } from "react-icons/io";
