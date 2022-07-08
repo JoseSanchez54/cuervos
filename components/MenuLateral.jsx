@@ -12,14 +12,15 @@ const MenuLateral = ({ opciones, categorias }) => {
   const [abrir, setAbrir] = useState(false);
   const [seccion, setSeccion] = useState(null);
   const router = useRouter();
-  const { pathname } = router;
+  const { query } = router;
 
   useEffect(() => {
     setAbrir(false);
-  }, [pathname]);
+  }, [query]);
   const handleSeccion = (seccion) => {
     setSeccion(seccion);
   };
+  console.log(router);
 
   const handleAbrir = () => {
     setAbrir(!abrir);
