@@ -19,12 +19,12 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
             <div className="flex flex-col min-h-[200px] w-full lg:w-2/3">
               <div className="relative p-3 w-full h-full justify-center items-center flex-col flex">
                 <span className="z-[20] uppercase text-center titulo2">
-                  {pagina.primer_titulo_tienda}
+                  {pagina?.primer_titulo_tienda}
                 </span>
                 <Image
                   objectFit="cover"
                   layout="fill"
-                  src={pagina.banner_tienda}
+                  src={pagina?.banner_tienda}
                 />
               </div>
             </div>
@@ -34,7 +34,6 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
           </div>
           <div className="flex flex-row flex-wrap  w-full">
             {productos.map((producto, index) => {
-        
               return (
                 <>
                   {index > 0 && (
@@ -52,12 +51,12 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
                       <div className="flex flex-col min-h-[200px] w-full lg:w-2/3">
                         <div className="relative p-3 w-full h-full justify-center items-center flex-col flex">
                           <span className="z-[20] uppercase text-center titulo2">
-                            {pagina.segundo_titulo_tienda}
+                            {pagina?.segundo_titulo_tienda}
                           </span>
                           <Image
                             objectFit="cover"
                             layout="fill"
-                            src={pagina.banner_tienda_segundo}
+                            src={pagina?.banner_tienda_segundo}
                           />
                         </div>
                       </div>

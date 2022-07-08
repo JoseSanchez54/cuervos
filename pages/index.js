@@ -3,16 +3,21 @@ import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
 import HomeCuervos from "../components/Home";
 import { useOptions } from "../hooks/useOptions";
+import { useProducts } from "../hooks/useProducts";
+import { usePages } from "../hooks/usePages";
 
 export default function Home({ options, categorias, pagesNew, vinos }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
+  const { data, isValidating } = usePages(pagesNew, "Principal");
+  const { products: productosSWR } = useProducts(vinos);
+  console.log(data);
   return (
     <>
       <HomeCuervos
         pagina={pagesNew}
         categorias={categorias}
         opciones={optionsSWR}
-        vinos={vinos}
+        vinos={productosSWR}
       />
     </>
   );
