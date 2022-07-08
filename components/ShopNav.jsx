@@ -1,6 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 const ShopNav = ({ pagina, opciones }) => {
+  const router = useRouter();
+
+  const [activo, setActivo] = useState("");
+  useEffect(() => {
+    setActivo(router.asPath);
+  }, [router]);
   const menuBruto = Object.values(pagina.menu_tienda).map((key) => {
     return key;
   });
@@ -19,6 +26,8 @@ const ShopNav = ({ pagina, opciones }) => {
                         fontFamily: opciones.fuente_global,
                         fontSize: "16px",
                         color: "black",
+                        textDecoration:
+                          activo === menu.url ? "underline" : "none",
                       }}
                     >
                       {menu.etiqueta}
