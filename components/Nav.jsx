@@ -6,7 +6,7 @@ const MenuLateral = dynamic(() => import("../components/MenuLateral"));
 import useMobile from "../hooks/useMobile";
 import { IoIosCart } from "react-icons/io";
 import { BiUser } from "react-icons/bi";
-import { motion, AnimatePresence } from "framer-motion";
+
 const Nav = ({ opciones, categorias }) => {
   const { isMobile } = useMobile();
   return (

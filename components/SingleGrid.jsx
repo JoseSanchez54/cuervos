@@ -5,11 +5,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 const Precio = dynamic(() => import("../components/Precio"));
 import { useDispatch } from "react-redux";
+
 const SingleGrid = ({ producto, opciones }) => {
+  console.log(producto);
   const [cambioImagen, setCambioImagen] = useState(false);
   const dispatch = useDispatch();
 
-  const hover = producto.meta_data.filter((res) => res.key === "imagenh")[0]
+  const hover = producto?.meta_data?.filter((res) => res.key === "imagenh")[0]
     .value;
   const textMotion = {
     initial: {
@@ -36,11 +38,11 @@ const SingleGrid = ({ producto, opciones }) => {
         onMouseLeave={(e) => setCambioImagen(false)}
         className="flex flex-col z-[21] w-full h-[508px] max-h-[508px]  max-w-[404px]"
       >
-        <Link href={`/productos/${producto.slug}`} passHref>
+        <Link href={`/productos/${producto?.slug}`} passHref>
           <>
             <div className="relative w-full max-h-[508px] h-full max-w-[404px]">
               <div className="flex flex-col p-7">
-                <Link href={`/productos/${producto.slug}`}>
+                <Link href={`/productos/${producto?.slug}`}>
                   <span
                     style={{
                       color: cambioImagen ? "#fff" : "#000",
@@ -49,12 +51,12 @@ const SingleGrid = ({ producto, opciones }) => {
                     }}
                     className="z-[10]"
                   >
-                    {producto.name}
+                    {producto?.name}
                   </span>
                 </Link>
                 <Precio
-                  precio={producto.regular_price}
-                  rebaja={producto.sale_price}
+                  precio={producto?.regular_price}
+                  rebaja={producto?.sale_price}
                   hover={cambioImagen}
                   opciones={opciones}
                 />
@@ -62,7 +64,7 @@ const SingleGrid = ({ producto, opciones }) => {
                   variants={texto}
                   initial="initial"
                   whileHover="hover"
-                  href={`/productos/${producto.slug}`}
+                  href={`/productos/${producto?.slug}`}
                   passHref
                 >
                   <motion.a
@@ -97,7 +99,7 @@ const SingleGrid = ({ producto, opciones }) => {
               <Image
                 objectFit="cover"
                 layout="fill"
-                src={!cambioImagen ? producto.images[0].src : hover}
+                src={!cambioImagen ? producto?.images[0].src : hover}
               ></Image>
             </div>
           </>

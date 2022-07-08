@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 const Marquee = dynamic(() => import("react-fast-marquee"));
 const FranjaPromo = ({ opciones }) => {
-  console.log(opciones);
   return (
     <>
       <div

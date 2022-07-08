@@ -321,14 +321,14 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
             <span className="tituloseccion ml-3 uppercase">Elige tu vino</span>
           </div>
           <div className="flex flex-row flex-wrap lg:flex-nowrap justify-center w-full min-h-[508px] h-full">
-            <Grid productos={vinos} opciones={opciones} />
+            <Grid max="3" productos={vinos} opciones={opciones} />
           </div>
         </div>
       </div>
       <div className="flex flex-row w-full max-h-[63px] justify-center mt-[40px] lg:mt-[100px]">
         <div className="flex flex-col w-full max-w-[1200px]">
           <div className="flex flex-row justify-center w-full">
-            <Link href="/productos">
+            <Link href="/todos">
               <a>
                 <motion.button
                   variants={variablesBoton}

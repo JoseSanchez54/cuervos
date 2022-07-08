@@ -1,6 +1,7 @@
 import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
 import Nav from "../components/Nav";
+import Categorias from "../components/Categorias";
 export const getStaticPaths = async () => {
   const categorias = await WooCommerce.get("products/categories").then(
     (response) => {
@@ -35,13 +36,13 @@ export async function getStaticProps(props) {
     process.env.URLBASE + "/wp-json/jet-cct/paginas"
   );
   const home2 = await pagesNew.data.find(
-    (page) => page.pagina_asociada === "Principal"
+    (page) => page.pagina_asociada === "tienda"
   );
-  const categorias = await WooCommerce.get("products/categories").then(
-    (response) => {
-      return response.data;
-    }
-  );
+  const categorias = await WooCommerce.get(
+    "products/categories?order=desc"
+  ).then((response) => {
+    return response.data;
+  });
   const categoriaActual = categorias.find(
     (e) => e.slug === props.params.categoria
   );
@@ -69,6 +70,15 @@ export async function getStaticProps(props) {
   };
 }
 
-export default function Tienda({ options, categorias, pagesNew, vinos }) {
-  return <Nav opciones={options} categorias={categorias} />;
+export default function Tienda({ options, categorias, pagesNew, productos }) {
+  return (
+    <>
+      <Categorias
+        pagina={pagesNew}
+        categorias={categorias}
+        opciones={options}
+        productos={productos}
+      />
+    </>
+  );
 }

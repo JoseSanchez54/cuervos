@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import WooCommerce from "../woocommerce/Woocommerce";
+import HomeCuervos from "../components/Home";
 
 export default function Tienda({ options, categorias, pagesNew, vinos }) {
   return (
@@ -30,7 +31,7 @@ export async function getStaticProps() {
     process.env.URLBASE + "/wp-json/jet-cct/paginas"
   );
   const home2 = await pagesNew.data.find(
-    (page) => page.pagina_asociada === "Tienda"
+    (page) => page.pagina_asociada === "Principal"
   );
 
   const options = await axios.get(

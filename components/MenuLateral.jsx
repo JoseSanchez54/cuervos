@@ -73,12 +73,17 @@ const MenuLateral = ({ opciones, categorias }) => {
                     <div className="flex flex-col w-full gap-5 justify-between">
                       {padres.map((res) => {
                         return (
-                          <button
-                            style={{ textAlign: "start" }}
-                            onClick={(e) => handleSeccion(res.id)}
-                          >
-                            <a className="enlaceSup">{res.name}</a>
-                          </button>
+                          <>
+                            {res.slug !== "todos" && (
+                              <button
+                                key={index}
+                                style={{ textAlign: "start" }}
+                                onClick={(e) => handleSeccion(res.id)}
+                              >
+                                <a className="enlaceSup">{res.name}</a>
+                              </button>
+                            )}
+                          </>
                         );
                       })}
                     </div>
@@ -88,7 +93,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                       {menuBruto.map((e, index) => {
                         return (
                           <Link key={index} href={e.enlace}>
-                            <a className="enlaceBot">{e.label}</a>
+                            <a className="enlaceBot uppercase">{e.label}</a>
                           </Link>
                         );
                       })}
@@ -130,12 +135,17 @@ const MenuLateral = ({ opciones, categorias }) => {
                             return <span>No hay más subcategorías</span>;
                           } else {
                             return (
-                              <button
-                                style={{ textAlign: "start" }}
-                                onClick={(e) => handleSeccion(res.id)}
-                              >
-                                <a className="enlaceSup">{res.name}</a>
-                              </button>
+                              <>
+                                {res.slug !== "todos" && (
+                                  <button
+                                    key={index}
+                                    style={{ textAlign: "start" }}
+                                    onClick={(e) => handleSeccion(res.id)}
+                                  >
+                                    <a className="enlaceSup">{res.name}</a>
+                                  </button>
+                                )}
+                              </>
                             );
                           }
                         })}
@@ -181,13 +191,17 @@ const MenuLateral = ({ opciones, categorias }) => {
                   <div className="flex flex-col w-full gap-5 justify-between">
                     {padres.map((res, index) => {
                       return (
-                        <button
-                          key={index}
-                          style={{ textAlign: "start" }}
-                          onClick={(e) => handleSeccion(res.id)}
-                        >
-                          <a className="enlaceSup">{res.name}</a>
-                        </button>
+                        <>
+                          {res.slug !== "todos" && (
+                            <button
+                              key={index}
+                              style={{ textAlign: "start" }}
+                              onClick={(e) => handleSeccion(res.id)}
+                            >
+                              <a className="enlaceSup">{res.name}</a>
+                            </button>
+                          )}
+                        </>
                       );
                     })}
                   </div>
@@ -277,12 +291,11 @@ const MenuLateral = ({ opciones, categorias }) => {
                                   return <span>No hay más subcategorías</span>;
                                 } else {
                                   return (
-                                    <button
-                                      style={{ textAlign: "start" }}
-                                      onClick={(e) => handleSeccion(res.id)}
-                                    >
-                                      <Link href={"/categoria/" + res.slug}>
-                                        <a className="enlaceinf">{res.name}</a>
+                                    <button style={{ textAlign: "start" }}>
+                                      <Link href={"/" + res.slug}>
+                                        <a className="enlaceinf uppercase">
+                                          {res.name}
+                                        </a>
                                       </Link>
                                     </button>
                                   );
@@ -328,16 +341,19 @@ const MenuLateral = ({ opciones, categorias }) => {
           background-repeat: no-repeat;
           background-size: 0% 2px;
           transition: background-size 0.3s;
+          text-transform: uppercase;
         }
         .enlaceBot {
           font-family: ${opciones.fuente_global};
           color: ${opciones.color_texto_header};
           font-size: 1.1em;
+          text-transform: uppercase;
         }
         .enlaceinf {
           font-family: ${opciones.fuente_global};
           color: ${opciones.color_texto_header};
           font-size: 1.1em;
+          text-transform: uppercase;
         }
         a:hover {
           color: ${opciones.color_texto_header_hover};
