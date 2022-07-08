@@ -67,15 +67,22 @@ export async function getStaticProps(props) {
       internos: internos,
       productos,
       categorias,
+      categoriaActual,
     },
     revalidate: 10,
   };
 }
 
-export default function Tienda({ options, categorias, pagesNew, productos }) {
+export default function Tienda({
+  options,
+  categorias,
+  pagesNew,
+  productos,
+  categoriaActual,
+}) {
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { data, isValidating } = usePages(pagesNew, "tienda");
-  const { products: productosSWR } = useProducts(productos);
+  const { products: productosSWR } = useProducts(productos, categoriaActual);
   console.log(data);
 
   return (
