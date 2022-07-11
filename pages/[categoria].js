@@ -60,7 +60,7 @@ export async function getStaticProps(props) {
 
   return {
     props: {
-      options: options.data,
+      options: options.data[0],
       pagesNew: home2,
       template: template,
       entradas: posts,
