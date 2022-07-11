@@ -92,7 +92,7 @@ export default function Tienda({
           pagina={data}
           categorias={categorias}
           opciones={optionsSWR}
-          productos={productosSWR}
+          productos={productos}
         />
       )}
     </>
