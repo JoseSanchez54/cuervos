@@ -38,14 +38,14 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
                 <>
                   {index > 0 && (
                     <SingleGrid
-                      key={producto.id}
+                      key={producto?.id}
                       opciones={opciones}
                       producto={producto}
                     />
                   )}
                   {index === 6 && (
                     <div
-                      key={producto.id}
+                      key={producto?.id}
                       className="flex flex-row  flex-wrap lg:flex-nowrap  w-full"
                     >
                       <div className="flex flex-col min-h-[200px] w-full lg:w-2/3">
@@ -73,23 +73,23 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
       </div>
       <style jsx>{`
         .titulo {
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           font-size: 36px;
         }
         .titulo2 {
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           font-size: 55px;
           color: white;
         }
         @media (max-width: 1022px) {
           .titulo {
-            font-family: ${opciones.fuente_titulos};
+            font-family: ${opciones?.fuente_titulos};
             font-size: 36px;
             line-height: 1.1;
           }
 
           .titulo2 {
-            font-family: ${opciones.fuente_titulos};
+            font-family: ${opciones?.fuente_titulos};
             font-size: 36px;
           }
         }
