@@ -7,9 +7,9 @@ import { useProducts } from "../hooks/useProducts";
 import { usePages } from "../hooks/usePages";
 
 export default function Home({ options, categorias, pagesNew, vinos }) {
-/*   const { isLoading, options: optionsSWR } = useOptions(options);
+  const { isLoading, options: optionsSWR } = useOptions(options);
   const { data, isValidating } = usePages(pagesNew, "Principal");
-  const { products: productosSWR } = useProducts(vinos); */
+  const { products: productosSWR } = useProducts(vinos);
 
   return <></>;
 }
