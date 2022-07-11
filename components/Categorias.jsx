@@ -28,7 +28,9 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col w-full lg:w-1/3"></div>
+            <div className="flex flex-col w-full lg:w-1/3">
+              <SingleGrid opciones={opciones} producto={productos[0]} />
+            </div>
           </div>
           <div className="flex flex-row flex-wrap  w-full">
             {productos.map((producto, index) => {
