@@ -7,7 +7,7 @@ import { useProducts } from "../hooks/useProducts";
 import { usePages } from "../hooks/usePages";
 
 export default function Home({ options, categorias, pagesNew, vinos }) {
-  /*   const { isLoading, options: optionsSWR } = useOptions(options);
+/*   const { isLoading, options: optionsSWR } = useOptions(options);
   const { data, isValidating } = usePages(pagesNew, "Principal");
   const { products: productosSWR } = useProducts(vinos); */
 
@@ -47,7 +47,15 @@ export async function getStaticProps() {
   );
 
   return {
-    props: {},
+    props: {
+      options: options.data,
+      pagesNew: home2,
+      template: template,
+      entradas: posts,
+      internos: internos,
+      categorias,
+      vinos,
+    },
     revalidate: 10,
   };
 }
