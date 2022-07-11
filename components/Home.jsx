@@ -10,7 +10,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
     initial: {
       display: "flex",
       color: "#000",
-      fontFamily: opciones?.fuente_global,
+      fontFamily: opciones.fuente_global,
       fontSize: "16px",
     },
   };
@@ -27,13 +27,13 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
             <div className="flex flex-col justify-end w-full h-full">
               <div className="p-9 z-[10]">
                 <span className="z-[10] uppercase titulo lg:ml-[40px]">
-                  {pagina?.titulo}
+                  {pagina.titulo}
                 </span>
               </div>
 
               <Image
                 objectFit="cover"
-                src={pagina?.primera_imagen}
+                src={pagina.primera_imagen}
                 layout="fill"
                 priority="high"
               ></Image>
@@ -54,15 +54,15 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                       }}
                       className="tituloPrimera uppercase z-[10]"
                     >
-                      {pagina?.segunda_primer_titulo}
+                      {pagina.segunda_primer_titulo}
                     </span>
-                    <p>{pagina?.segunda_primer_parrafo}</p>
+                    <p>{pagina.segunda_primer_parrafo}</p>
                   </div>
-                  {pagina?.segunda_primera_imagen_fondo && (
+                  {pagina.segunda_primera_imagen_fondo && (
                     <Image
                       objectFit="cover"
                       layout="fill"
-                      src={pagina?.segunda_primera_imagen_fondo}
+                      src={pagina.segunda_primera_imagen_fondo}
                     ></Image>
                   )}
                 </div>
@@ -84,15 +84,15 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           }}
                           className="tituloPrimera uppercase z-[10]"
                         >
-                          {pagina?.segunda_segundo_titulo}
+                          {pagina.segunda_segundo_titulo}
                         </span>
-                        <p>{pagina?.segunda_segundo_parrafo}</p>
+                        <p>{pagina.segunda_segundo_parrafo}</p>
                       </div>
-                      {pagina?.segunda_segunda_imagen_fondo && (
+                      {pagina.segunda_segunda_imagen_fondo && (
                         <Image
                           objectFit="cover"
                           layout="fill"
-                          src={pagina?.segunda_segunda_imagen_fondo}
+                          src={pagina.segunda_segunda_imagen_fondo}
                         ></Image>
                       )}
                     </div>
@@ -108,15 +108,15 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           }}
                           className="tituloPrimera uppercase z-[10]"
                         >
-                          {pagina?.segunda_tercer_titulo}
+                          {pagina.segunda_tercer_titulo}
                         </span>
-                        <p>{pagina?.segunda_tercer_parrafo}</p>
+                        <p>{pagina.segunda_tercer_parrafo}</p>
                       </div>
-                      {pagina?.segunda_tercera_imagen_fondo && (
+                      {pagina.segunda_tercera_imagen_fondo && (
                         <Image
                           objectFit="cover"
                           layout="fill"
-                          src={pagina?.segunda_tercera_imagen_fondo}
+                          src={pagina.segunda_tercera_imagen_fondo}
                         ></Image>
                       )}
                     </div>
@@ -147,15 +147,15 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           }}
                           className="tituloPrimera uppercase z-[10]"
                         >
-                          {pagina?.segunda_cuarto_titulo}
+                          {pagina.segunda_cuarto_titulo}
                         </span>
-                        <p>{pagina?.segunda_cuarto_parrafo}</p>
+                        <p>{pagina.segunda_cuarto_parrafo}</p>
                       </div>
-                      {pagina?.segunda_cuarta_imagen_fondo_ && (
+                      {pagina.segunda_cuarta_imagen_fondo_ && (
                         <Image
                           objectFit="cover"
                           layout="fill"
-                          src={pagina?.segunda_cuarta_imagen_fondo_}
+                          src={pagina.segunda_cuarta_imagen_fondo_}
                         ></Image>
                       )}
                     </div>
@@ -178,9 +178,9 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           }}
                           className="tituloPrimera uppercase z-[10]"
                         >
-                          {pagina?.segunda_quinto_titulo}
+                          {pagina.segunda_quinto_titulo}
                         </span>
-                        <Link href={pagina?.quinto_enlace}>
+                        <Link href={pagina.quinto_enlace}>
                           <motion.button
                             initial={{
                               border: "2px solid white",
@@ -190,7 +190,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                               padding: "20px 20px",
                               marginTop: "25px",
                               fontSize: "14px",
-                              fontFamily: opciones?.fuente_titulos,
+                              fontFamily: opciones.fuente_titulos,
                             }}
                             whileHover={{
                               backgroundColor: "white",
@@ -201,11 +201,11 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           </motion.button>
                         </Link>
                       </div>
-                      {pagina?.segunda_quinta_imagen_fondo && (
+                      {pagina.segunda_quinta_imagen_fondo && (
                         <Image
                           objectFit="cover"
                           layout="fill"
-                          src={pagina?.segunda_quinta_imagen_fondo}
+                          src={pagina.segunda_quinta_imagen_fondo}
                         ></Image>
                       )}
                     </div>
@@ -236,15 +236,15 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           }}
                           className="tituloPrimera uppercase z-[10]"
                         >
-                          {pagina?.segunda_sexta_titulo}
+                          {pagina.segunda_sexta_titulo}
                         </span>
-                        <p>{pagina?.segunda_sexto_parrafo}</p>
+                        <p>{pagina.segunda_sexto_parrafo}</p>
                       </div>
-                      {pagina?.segunda_sexta_imagen_fondo && (
+                      {pagina.segunda_sexta_imagen_fondo && (
                         <Image
                           objectFit="cover"
                           layout="fill"
-                          src={pagina?.segunda_sexta_imagen_fondo}
+                          src={pagina.segunda_sexta_imagen_fondo}
                         ></Image>
                       )}
                     </div>
@@ -267,14 +267,14 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           }}
                           className="tituloPrimera uppercase z-[10]"
                         >
-                          {pagina?.segunda_septima_titulo}
+                          {pagina.segunda_septima_titulo}
                         </span>
                       </div>
-                      {pagina?.segunda_septima_imagen_fondo && (
+                      {pagina.segunda_septima_imagen_fondo && (
                         <Image
                           objectFit="cover"
                           layout="fill"
-                          src={pagina?.segunda_septima_imagen_fondo}
+                          src={pagina.segunda_septima_imagen_fondo}
                         ></Image>
                       )}
                     </div>
@@ -297,14 +297,14 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           }}
                           className="tituloPrimera uppercase z-[10]"
                         >
-                          {pagina?.segunda_octava_titulo}
+                          {pagina.segunda_octava_titulo}
                         </span>
                       </div>
-                      {pagina?.segunda_octava_imagen_fondo && (
+                      {pagina.segunda_octava_imagen_fondo && (
                         <Image
                           objectFit="cover"
                           layout="fill"
-                          src={pagina?.segunda_octava_imagen_fondo}
+                          src={pagina.segunda_octava_imagen_fondo}
                         ></Image>
                       )}
                     </div>
@@ -355,17 +355,17 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                 width="300"
                 height="100"
                 objectFit="contain"
-                src={pagina?.titulo_banner}
+                src={pagina.titulo_banner}
               ></Image>
               <p
                 className="lg:ml-[40px]"
                 style={{
                   color: "white",
-                  fontFamily: opciones?.fuente_global,
+                  fontFamily: opciones.fuente_global,
                   fontSize: "14px",
                 }}
               >
-                {pagina?.parrafo_banner}
+                {pagina.parrafo_banner}
               </p>
             </div>
             <div className="lg:flex hidden flex-col w-2/3">
@@ -373,7 +373,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                 <Image
                   objectFit="contain"
                   layout="fill"
-                  src={pagina?.imagen_fondo_banner}
+                  src={pagina.imagen_fondo_banner}
                 ></Image>
               </div>
             </div>
@@ -384,7 +384,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
         <div className="flex flex-col w-full max-w-[1200px]">
           <span
             style={{
-              fontFamily: opciones?.fuente_titulos,
+              fontFamily: opciones.fuente_titulos,
               fontSize: "36px",
               textTransform: "uppercase",
             }}
@@ -393,7 +393,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           </span>
           <p
             style={{
-              fontFamily: opciones?.fuente_global,
+              fontFamily: opciones.fuente_global,
               fontSize: "16px",
               textTransform: "uppercase",
             }}
@@ -405,26 +405,26 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
 
       <style jsx>{`
         .titulo {
-          font-family: ${opciones?.fuente_titulos};
+          font-family: ${opciones.fuente_titulos};
           font-size: 120px;
         }
         .tituloPrimera {
-          font-family: ${opciones?.fuente_titulos};
+          font-family: ${opciones.fuente_titulos};
         }
         .parrafoPrimera {
-          font-family: ${opciones?.fuente_global};
+          font-family: ${opciones.fuente_global};
           font-size: 16px;
         }
         .alto {
           height: calc(100vh - 144px);
         }
         .tituloseccion {
-          font-family: ${opciones?.fuente_titulos};
+          font-family: ${opciones.fuente_titulos};
           font-size: 36px;
         }
         @media (max-width: 1022px) {
           .titulo {
-            font-family: ${opciones?.fuente_titulos};
+            font-family: ${opciones.fuente_titulos};
             font-size: 90px;
             line-height: 1.1;
           }

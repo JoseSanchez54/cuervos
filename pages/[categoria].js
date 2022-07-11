@@ -53,7 +53,7 @@ export async function getStaticProps(props) {
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const productos = await WooCommerce.get(
-    "products?category=" + categoriaActual?.id
+    "products?category=" + categoriaActual.id
   ).then((response) => {
     return response.data;
   });
@@ -83,6 +83,7 @@ export default function Tienda({
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { data, isValidating } = usePages(pagesNew, "tienda");
   const { products: productosSWR } = useProducts(productos, categoriaActual);
+  console.log(data);
 
   return (
     <>
@@ -91,7 +92,7 @@ export default function Tienda({
           pagina={data}
           categorias={categorias}
           opciones={optionsSWR}
-          productos={productos}
+          productos={productosSWR}
         />
       )}
     </>
