@@ -30,9 +30,9 @@ const Footer = ({ options }) => {
             );
           })}
         </div>
-        <div className="flex flex-row gap-9 pt-9 w-full">
-          <div className="flex flex-col justify-center  w-full lg:w-1/2">
-            <div className="flex flex-row justify-between items-center w-full">
+        <div className="flex flex-row flex-wrap gap-9 pt-9 w-full">
+          <div className="flex flex-col justify-center  w-full ">
+            <div className="flex flex-row lg:justify-between flex-wrap justify-center  items-center w-full">
               <Link href="privacidad" passHref>
                 <a>
                   <button
@@ -76,21 +76,20 @@ const Footer = ({ options }) => {
                   </button>
                 </a>
               </Link>
+              <span
+                style={{
+                  fontFamily: options.fuente_global,
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  color: "black",
+                  textAlign: "center",
+                }}
+              >
+                {"@" +
+                  new Date().getFullYear() +
+                  " cría cuervos, TODOS LOS DERECHOS RESERVADOS"}
+              </span>
             </div>
-          </div>
-          <div className="flex flex-col  justify-center  w-full lg:w-1/2">
-            <span
-              style={{
-                fontFamily: options.fuente_global,
-                fontSize: "12px",
-                textTransform: "uppercase",
-                color: "black",
-              }}
-            >
-              {"@" +
-                new Date().getFullYear() +
-                " cría cuervos, TODOS LOS DERECHOS RESERVADOS"}
-            </span>
           </div>
         </div>
       </div>
