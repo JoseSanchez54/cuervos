@@ -21,7 +21,10 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
               return (
                 <>
                   {index === 0 && (
-                    <div className="flex flex-row  flex-wrap lg:flex-nowrap  w-full">
+                    <div
+                      key={index}
+                      className="flex flex-row  flex-wrap lg:flex-nowrap  w-full"
+                    >
                       <div className="flex flex-col min-h-[200px] w-full lg:w-2/3">
                         <div className="relative p-3 w-full h-full justify-center items-center flex-col flex">
                           <span className="z-[20] uppercase text-center titulo2">
@@ -41,13 +44,16 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
                   )}
                   {index > 0 && index < 7 && (
                     <SingleGrid
-                      key={producto.id}
+                      key={index}
                       opciones={opciones}
                       producto={producto}
                     />
                   )}
                   {index === 6 && (
-                    <div className="flex flex-row  flex-wrap lg:flex-nowrap  w-full">
+                    <div
+                      key={index + 1}
+                      className="flex flex-row  flex-wrap lg:flex-nowrap  w-full"
+                    >
                       <div className="flex flex-col min-h-[200px] w-full lg:w-2/3">
                         <div className="relative p-3 w-full h-full justify-center items-center flex-col flex">
                           <span className="z-[20] uppercase text-center titulo2">
@@ -70,7 +76,7 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
                   )}
                   {index > 7 && (
                     <SingleGrid
-                      key={producto.id}
+                      key={index}
                       opciones={opciones}
                       producto={producto}
                     />
