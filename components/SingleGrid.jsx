@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 const SingleGrid = ({ producto, opciones }) => {
   const [cambioImagen, setCambioImagen] = useState(false);
   const dispatch = useDispatch();
+  console.log(producto);
 
   const hover = producto?.meta_data?.filter((res) => res.key === "imagenh")[0]
     ?.value;
