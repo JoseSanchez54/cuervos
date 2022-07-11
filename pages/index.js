@@ -11,16 +11,7 @@ export default function Home({ options, categorias, pagesNew, vinos }) {
   const { data, isValidating } = usePages(pagesNew, "Principal");
   const { products: productosSWR } = useProducts(vinos);
 
-  return (
-    <>
-      <HomeCuervos
-        pagina={pagesNew}
-        categorias={categorias}
-        opciones={options}
-        vinos={vinos}
-      />
-    </>
-  );
+  return <></>;
 }
 
 export async function getStaticProps() {
