@@ -48,7 +48,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      options: options.data[0],
+      options: options.data,
       pagesNew: home2,
       template: template,
       entradas: posts,
