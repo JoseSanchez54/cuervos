@@ -14,7 +14,7 @@ export default function Home({ options, categorias, pagesNew, vinos }) {
   return (
     <>
       <HomeCuervos
-        pagina={pagesNew}
+        pagina={data}
         categorias={categorias}
         opciones={optionsSWR}
         vinos={productosSWR}

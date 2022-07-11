@@ -20,7 +20,6 @@ const MenuLateral = ({ opciones, categorias }) => {
   const handleSeccion = (seccion) => {
     setSeccion(seccion);
   };
-  console.log(router);
 
   const handleAbrir = () => {
     setAbrir(!abrir);
