@@ -26,14 +26,7 @@ function MyApp({ Component, pageProps }) {
       envios: e.data,
     })
   ); */
-  useEffect(() => {
-    let cookie = localStorage.getItem("cookieAd");
-    if (cookie === "true") {
-      setCookies("true");
-    } else {
-      setCookies("false");
-    }
-  }, [cookies]);
+
   return (
     <SWRConfig
       value={{
@@ -45,9 +38,6 @@ function MyApp({ Component, pageProps }) {
       <PersistGate persistor={store.__persistor}>
         <NextUIProvider>
           <Component {...pageProps} />
-          <AnimatePresence>
-            {cookies === "false" && <CookieAd funcion={setCookies} />}
-          </AnimatePresence>
         </NextUIProvider>
       </PersistGate>
     </SWRConfig>
