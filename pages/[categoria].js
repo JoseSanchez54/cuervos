@@ -86,14 +86,12 @@ export default function Tienda({
 
   return (
     <>
-      {!isValidating && (
-        <Categorias
-          pagina={pagesNew}
-          categorias={categorias}
-          opciones={options}
-          productos={productos}
-        />
-      )}
+      <Categorias
+        pagina={pagesNew}
+        categorias={categorias}
+        opciones={options}
+        productos={productos}
+      />
     </>
   );
 }
