@@ -84,5 +84,14 @@ export default function Tienda({
   const { data, isValidating } = usePages(pagesNew, "tienda");
   const { products: productosSWR } = useProducts(productos, categoriaActual);
 
-  return <></>;
+  return (
+    <>
+      <Categorias
+        pagina={pagesNew}
+        categorias={categorias}
+        opciones={options}
+        productos={productos}
+      />
+    </>
+  );
 }
