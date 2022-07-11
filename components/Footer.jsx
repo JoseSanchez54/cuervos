@@ -32,7 +32,7 @@ const Footer = ({ options }) => {
         </div>
         <div className="flex flex-row flex-wrap gap-9 pt-9 w-full">
           <div className="flex flex-col justify-center  w-full ">
-            <div className="flex flex-row lg:justify-between flex-wrap justify-center  items-center w-full">
+            <div className="flex flex-row gap-4 lg:justify-between flex-wrap justify-center  items-center w-full">
               <Link href="privacidad" passHref>
                 <a>
                   <button
