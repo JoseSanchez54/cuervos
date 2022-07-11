@@ -88,9 +88,9 @@ export default function Tienda({
     <>
       {!isValidating && (
         <Categorias
-          pagina={data}
+          pagina={pagesNew}
           categorias={categorias}
-          opciones={optionsSWR}
+          opciones={options}
           productos={productos}
         />
       )}
