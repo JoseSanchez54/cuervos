@@ -80,9 +80,5 @@ export default function Tienda({
   productos,
   categoriaActual,
 }) {
-  const { isLoading, options: optionsSWR } = useOptions(options);
-  const { data, isValidating } = usePages(pagesNew, "tienda");
-  const { products: productosSWR } = useProducts(productos, categoriaActual);
-
   return <></>;
 }
