@@ -16,8 +16,8 @@ export default function Home({ options, categorias, pagesNew, vinos }) {
       <HomeCuervos
         pagina={pagesNew}
         categorias={categorias}
-        opciones={options}
-        vinos={vinos}
+        opciones={optionsSWR}
+        vinos={productosSWR}
       />
     </>
   );
