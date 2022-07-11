@@ -3,6 +3,7 @@ const Nav = dynamic(() => import("../components/Nav"));
 const ShopNav = dynamic(() => import("../components/ShopNav"));
 const SingleGrid = dynamic(() => import("../components/SingleGrid"));
 const Image = dynamic(() => import("next/image"));
+const Footer = dynamic(() => import("../components/Footer"));
 const Categorias = ({ opciones, pagina, categorias, productos }) => {
   return (
     <>
@@ -16,7 +17,7 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
             <ShopNav opciones={opciones} pagina={pagina} />
           </div>
 
-          <div className="flex flex-row flex-wrap  w-full">
+          <div className="flex flex-row flex-wrap justify-center lg:justify-start  w-full">
             {productos.map((producto, index) => {
               return (
                 <>
@@ -25,7 +26,7 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
                       key={index}
                       className="flex flex-row  flex-wrap lg:flex-nowrap  w-full"
                     >
-                      <div className="flex flex-col min-h-[200px] w-full lg:w-2/3">
+                      <div className="flex flex-col min-h-[200px] w-full items-center lg:w-2/3">
                         <div className="relative p-3 w-full h-full justify-center items-center flex-col flex">
                           <span className="z-[20] uppercase text-center titulo2">
                             {pagina?.primer_titulo_tienda}
@@ -37,7 +38,7 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
                           />
                         </div>
                       </div>
-                      <div className="flex flex-col w-full lg:w-1/3">
+                      <div className="flex flex-col w-full items-center lg:w-1/3">
                         <SingleGrid opciones={opciones} producto={producto} />
                       </div>
                     </div>
@@ -54,7 +55,7 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
                       key={index + 1}
                       className="flex flex-row  flex-wrap lg:flex-nowrap  w-full"
                     >
-                      <div className="flex flex-col min-h-[200px] w-full lg:w-2/3">
+                      <div className="flex flex-col min-h-[200px] w-full items-center lg:w-2/3">
                         <div className="relative p-3 w-full h-full justify-center items-center flex-col flex">
                           <span className="z-[20] uppercase text-center titulo2">
                             {pagina?.segundo_titulo_tienda}
@@ -66,7 +67,7 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
                           />
                         </div>
                       </div>
-                      <div className="flex flex-col w-full lg:w-1/3">
+                      <div className="flex flex-col w-full items-center lg:w-1/3">
                         <SingleGrid
                           opciones={opciones}
                           producto={productos[index + 1]}
@@ -87,6 +88,7 @@ const Categorias = ({ opciones, pagina, categorias, productos }) => {
           </div>
         </div>
       </div>
+      <Footer options={opciones}></Footer>
       <style jsx>{`
         .titulo {
           font-family: ${opciones.fuente_titulos};
