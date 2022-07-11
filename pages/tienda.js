@@ -1,4 +1,4 @@
-/* import axios from "axios";
+import axios from "axios";
 
 import WooCommerce from "../woocommerce/Woocommerce";
 import HomeCuervos from "../components/Home";
@@ -62,4 +62,4 @@ export async function getStaticProps() {
     },
     revalidate: 10,
   };
-} */
+}
