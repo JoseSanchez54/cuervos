@@ -22,7 +22,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
   return (
     <>
       <Nav categorias={categorias} opciones={opciones} />
-      <div className="flex flex-row w-full h-[95vh] alto items-end justify-center">
+      <div className="flex flex-row w-full  alto items-end justify-center">
         <div className="flex flex-col justify-end w-full h-full">
           <div className="relative w-full h-full">
             <div className="flex flex-col justify-end w-full h-full">
