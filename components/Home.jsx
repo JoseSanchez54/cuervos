@@ -4,6 +4,7 @@ const Image = dynamic(() => import("next/image"));
 import { motion } from "framer-motion";
 import Link from "next/link";
 const Grid = dynamic(() => import("../components/Grid"));
+const Footer = dynamic(() => import("../components/Footer"));
 import { AiOutlineArrowRight } from "react-icons/ai";
 const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
   const variablesBoton = {
@@ -402,6 +403,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           </p>
         </div>
       </div>
+      <Footer options={opciones}></Footer>
 
       <style jsx>{`
         .titulo {
