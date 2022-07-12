@@ -245,7 +245,7 @@ const SingleProduct = ({
       <div className="flex flex-row w-full justify-center mt-[50px]">
         <div className="flex flex-col w-full max-w-[1920px] items-center">
           <div className="flex flex-row gap-9 lg:flex-nowrap flex-wrap w-full justify-center">
-            <div className="flex flex-col w-full lg:w-1/2">
+            <div className="flex flex-col w-full lg:w-3/5">
               <div className="flex flex-row justify-center w-full">
                 <div className="flex flex-col w-1/2">
                   <Image
@@ -289,7 +289,7 @@ const SingleProduct = ({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col pt-5 w-full lg:w-1/2">
+            <div className="flex flex-col pt-5 w-full lg:w-2/5">
               <div className="flex flex-row w-full">
                 <div className="flex p-5 flex-col">
                   <span className="etiqueta">
@@ -309,7 +309,7 @@ const SingleProduct = ({
                 </div>
               </div>
               <div className="divider flex flex-row w-full my-6 px-5"></div>
-              <div className="flex flex-row gap-5 w-full p-5 justify-center">
+              <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
                 {variaciones.map((e, index) => {
                   return (
                     <div className="flex flex-col w-auto">
