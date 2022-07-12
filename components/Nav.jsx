@@ -12,7 +12,7 @@ const Nav = ({ opciones, categorias }) => {
   return (
     <>
       <FranjaPromo opciones={opciones} />
-      <div className="flex flex-row w-full justify-between  my-4">
+      <div className="flex sticky top-0 bg-white pt-[8px] z-[30] flex-row w-full justify-between  my-4">
         <div className="flex flex-col w-1/3 h-auto items-start p-1  justify-center">
           <MenuLateral categorias={categorias} opciones={opciones} />
         </div>
