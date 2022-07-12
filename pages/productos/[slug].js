@@ -293,7 +293,7 @@ const SingleProduct = ({
               <div className="flex flex-row w-full">
                 <div className="flex p-5 flex-col">
                   <span className="etiqueta">
-                    {metadata.map((e) => {
+                    {metadata.map((e, index) => {
                       if (e.key === "etiqueta") {
                         return e.value;
                       }
@@ -312,7 +312,7 @@ const SingleProduct = ({
               <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
                 {variaciones.map((e, index) => {
                   return (
-                    <div className="flex flex-col w-auto">
+                    <div key={index} className="flex flex-col w-auto">
                       <button>
                         <Image width="101px" height="108px" src={e.image.src} />
                       </button>
