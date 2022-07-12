@@ -355,6 +355,14 @@ const SingleProduct = ({
                     COMPRAR AHORA
                   </motion.button>
                 </div>
+                <div className="flex flex-row w-full">
+                  <div className="flex flex-col items-center w-1/2">
+                    <Image height="25px" width="25px" src="/truck.png"></Image>
+                  </div>
+                  <div className="flex flex-col items-center w-1/2">
+                    <Image height="25px" width="25px" src="/shop.png"></Image>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
