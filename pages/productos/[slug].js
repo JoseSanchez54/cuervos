@@ -342,6 +342,7 @@ const SingleProduct = ({
                       padding: "15px",
                       backgroundColor: "black",
                       fontFamily: options.fuente_global,
+                      border: "2px solid transparent",
                     }}
                     whileHover={{
                       color: "black",
