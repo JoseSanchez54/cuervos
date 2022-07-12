@@ -248,44 +248,51 @@ const SingleProduct = ({
             <div className="flex flex-col w-full lg:w-3/5">
               <div className="flex flex-row justify-center w-full">
                 <div className="flex flex-col w-1/2">
-                  <Image
-                    height="798px"
-                    width="553px"
-                    src={producto.images[0].src}
-                    quality="100"
-                    objectFit="cover"
-                  />
+                  {producto.images[0].src && (
+                    <Image
+                      height="798px"
+                      width="553px"
+                      src={producto.images[0].src}
+                      quality="100"
+                      objectFit="cover"
+                    />
+                  )}
                 </div>
                 <div className="lg:flex hidden flex-col w-1/2">
-                  {" "}
-                  <Image
-                    height="798px"
-                    width="553px"
-                    src={producto.images[1].src}
-                    quality="100"
-                    objectFit="cover"
-                  />
+                  {producto.images[1].src && (
+                    <Image
+                      height="798px"
+                      width="553px"
+                      src={producto.images[1].src}
+                      quality="100"
+                      objectFit="cover"
+                    />
+                  )}
                 </div>
               </div>
               <div className="lg:flex hidden flex-row justify-center w-full">
                 <div className="flex flex-col w-1/2">
-                  <Image
-                    height="798px"
-                    width="553px"
-                    src={producto.images[2].src}
-                    quality="100"
-                    objectFit="cover"
-                  />
+                  {producto.images[2].src && (
+                    <Image
+                      height="798px"
+                      width="553px"
+                      src={producto.images[2].src}
+                      quality="100"
+                      objectFit="cover"
+                    />
+                  )}
                 </div>
                 <div className="flex flex-col w-1/2">
                   {" "}
-                  <Image
-                    height="798px"
-                    width="553px"
-                    src={producto.images[3].src}
-                    quality="100"
-                    objectFit="cover"
-                  />
+                  {producto.images[3].src && (
+                    <Image
+                      height="798px"
+                      width="553px"
+                      src={producto.images[3].src}
+                      quality="100"
+                      objectFit="cover"
+                    />
+                  )}
                 </div>
               </div>
             </div>
@@ -309,17 +316,23 @@ const SingleProduct = ({
                 </div>
               </div>
               <div className="divider flex flex-row w-full my-6 px-5"></div>
-              <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
-                {variaciones.map((e, index) => {
-                  return (
-                    <div key={index} className="flex flex-col w-auto">
-                      <button>
-                        <Image width="101px" height="108px" src={e.image.src} />
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
+              {variaciones.length > 0 && (
+                <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
+                  {variaciones.map((e, index) => {
+                    return (
+                      <div key={index} className="flex flex-col w-auto">
+                        <button>
+                          <Image
+                            width="101px"
+                            height="108px"
+                            src={e.image.src}
+                          />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>
