@@ -4,6 +4,7 @@ import fetcherWc from "../../utils/fetcherWc";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Nav from "../../components/Nav";
+import { motion } from "framer-motion";
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50")
     .then((response) => {
@@ -334,6 +335,25 @@ const SingleProduct = ({
                     })}
                   </div>
                 )}
+                <div className="flex flex-row mt-7 p-5 w-full">
+                  <motion.button
+                    initial={{
+                      color: "white",
+                      padding: "15px",
+                      backgroundColor: "black",
+                      fontFamily: options.fuente_global,
+                    }}
+                    whileHover={{
+                      color: "black",
+                      backgroundColor: "transparent",
+                      border: "2px solid black",
+                    }}
+                    transition={{ type: "spring", stiffness: 100 }}
+                    className="block w-full "
+                  >
+                    COMPRAR AHORA
+                  </motion.button>
+                </div>
               </div>
             </div>
           </div>
