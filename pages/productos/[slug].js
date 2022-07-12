@@ -296,43 +296,45 @@ const SingleProduct = ({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col pt-5 w-full lg:w-2/5">
-              <div className="flex flex-row w-full">
-                <div className="flex p-5 flex-col">
-                  <span className="etiqueta">
-                    {metadata.map((e, index) => {
-                      if (e.key === "etiqueta") {
-                        return e.value;
-                      }
+            <div className="flex flex-col pt-5 lg:h-[1600px] w-full lg:w-2/5">
+              <div className="sticky flex flex-col self-start top-[90px]">
+                <div className="flex flex-row w-full">
+                  <div className="flex p-5 flex-col">
+                    <span className="etiqueta">
+                      {metadata.map((e, index) => {
+                        if (e.key === "etiqueta") {
+                          return e.value;
+                        }
+                      })}
+                    </span>
+                    <span className="titulo mt-8">{producto.name}</span>
+                    <div
+                      className="mb-8"
+                      dangerouslySetInnerHTML={{
+                        __html: producto.short_description,
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="divider flex flex-row w-full my-6 px-5"></div>
+                {variaciones.length > 0 && (
+                  <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
+                    {variaciones.map((e, index) => {
+                      return (
+                        <div key={index} className="flex flex-col w-auto">
+                          <button>
+                            <Image
+                              width="101px"
+                              height="108px"
+                              src={e.image.src}
+                            />
+                          </button>
+                        </div>
+                      );
                     })}
-                  </span>
-                  <span className="titulo mt-8">{producto.name}</span>
-                  <div
-                    className="mb-8"
-                    dangerouslySetInnerHTML={{
-                      __html: producto.short_description,
-                    }}
-                  />
-                </div>
+                  </div>
+                )}
               </div>
-              <div className="divider flex flex-row w-full my-6 px-5"></div>
-              {variaciones.length > 0 && (
-                <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
-                  {variaciones.map((e, index) => {
-                    return (
-                      <div key={index} className="flex flex-col w-auto">
-                        <button>
-                          <Image
-                            width="101px"
-                            height="108px"
-                            src={e.image.src}
-                          />
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
             </div>
           </div>
         </div>
