@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import { useMemo } from "react";
 
 export const useProducts = (initialdata, categoria) => {
   const { data, error, isValidating, mutate } = useSWR("/api/test", {

@@ -2,7 +2,7 @@ import WooCommerce from "../../woocommerce/Woocommerce";
 
 export default async (req, res) => {
   return WooCommerce.get(
-    "products?per_page=50products?category=" + req?.categoria?.id
+    "products/" + req.query.id + "/variations" + "?per_page=50"
   ).then((response) => {
     return res.status(200).json(response.data);
   });

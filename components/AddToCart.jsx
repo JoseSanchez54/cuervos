@@ -18,10 +18,6 @@ const AddToCart = ({ seleccion, lista, producto, opciones }) => {
   };
   const newV = productoA();
 
-  const [precio, setPrecio] = useState({
-    precio: newV.regular_price,
-    rebaja: newV.sale_price,
-  });
   const dispatch = useDispatch();
   const handleCart = () => {
     if (variable) {
@@ -37,162 +33,35 @@ const AddToCart = ({ seleccion, lista, producto, opciones }) => {
       });
     }
   };
-  useEffect(() => {
-    setPrecio({
-      precio: newV.regular_price,
-      rebaja: newV.sale_price,
-    });
-  }, [seleccion]);
 
   return (
     <>
-      <div className="flex flex-row z-[12] w-full gap-2 justify-between md:justify-start suma flex-nowrap">
-        <div className="flex flex-col justify-center items-center">
-          {variable ? (
-            <>
-              {precio.rebaja !== "" ? (
-                <>
-                  <div className="flex gap-3 flex-row items-center">
-                    <div className="relative">
-                      {" "}
-                      <span
-                        style={{
-                          fontFamily: opciones[0].fuente_global,
-                          fontWeight: "bold",
-                          fontSize: "18px",
-                          textDecoration: "line-through",
-                          opacity: "0.5",
-                        }}
-                      >
-                        {precio.precio}€
-                      </span>
-                    </div>
+      <motion.button
+        initial={{
+          color: "white",
+          padding: "15px",
+          backgroundColor: "black",
+          fontFamily: opciones.fuente_global,
+          border: "2px solid transparent",
+        }}
+        whileHover={{
+          color: "black",
+          backgroundColor: "transparent",
+          border: "2px solid black",
+        }}
+        transition={{ type: "spring", stiffness: 100 }}
+        className="block w-full "
+        whileTap={{
+          backgroundColor: opciones.color_boton_hover,
+          color: opciones.color_boton,
+          border: "1px solid",
+          borderColor: opciones.color_boton,
+        }}
+        onClick={() => handleCart()}
+      >
+        {isMobile ? <BsCartPlus /> : <span>COMPRAR AHORA</span>}
+      </motion.button>
 
-                    <span
-                      style={{
-                        fontFamily: opciones[0].fuente_global,
-                        fontWeight: "bold",
-                        fontSize: "23px",
-                      }}
-                    >
-                      {precio.rebaja}€
-                    </span>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {" "}
-                  <span
-                    style={{
-                      fontFamily: opciones[0].fuente_global,
-                      fontWeight: "bold",
-                      fontSize: "23px",
-                    }}
-                  >
-                    {precio.precio}€
-                  </span>
-                </>
-              )}
-            </>
-          ) : (
-            <>
-              {producto.sale_price === "" ? (
-                <>
-                  <span
-                    style={{
-                      fontFamily: opciones[0].fuente_global,
-                      fontWeight: "bold",
-                      fontSize: "23px",
-                    }}
-                  >
-                    {precio.precio}€
-                  </span>
-                </>
-              ) : (
-                <>
-                  <span
-                    style={{
-                      fontFamily: opciones[0].fuente_global,
-                      fontWeight: "bold",
-                      fontSize: "23px",
-                    }}
-                  >
-                    {precio.rebaja}€
-                  </span>
-                </>
-              )}
-            </>
-          )}
-        </div>
-        <div
-          style={{
-            border: "1px solid #e6e6e6",
-          }}
-          className="flex flex-row items-center border-2 rounded-full"
-        >
-          <div className="flex flex-col justify-center">
-            <button
-              onClick={() => setValor(valor > 1 ? parseInt(valor) - 1 : 1)}
-              style={{
-                fontSize: "20px",
-              }}
-            >
-              -
-            </button>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <input
-              style={{
-                maxWidth: "20px",
-                appearance: "none",
-                WebkitAppearance: "none",
-                textAlign: "center",
-                backgroundColor: "transparent",
-              }}
-              type="number"
-              onChange={(e) => setValor(e.target.value)}
-              defaultValue={1}
-              value={valor}
-              min="1"
-            ></input>
-          </div>
-          <div className="flex flex-col justify-center">
-            <button
-              onClick={() => setValor(parseInt(valor) + 1)}
-              style={{
-                fontSize: "20px",
-              }}
-            >
-              +
-            </button>
-          </div>
-        </div>
-        <motion.button
-          initial={{
-            fontFamily: opciones[0].fuente_global,
-            backgroundColor: opciones[0].color_boton,
-            color: opciones[0].color_boton_hover,
-            padding: "10px 20px",
-            borderRadius: "5px",
-            maxWidth: "300px",
-          }}
-          whileHover={{
-            backgroundColor: opciones[0].color_boton_hover,
-            color: opciones[0].color_boton,
-            border: "1px solid",
-            borderColor: opciones[0].color_boton,
-          }}
-          whileTap={{
-            backgroundColor: opciones[0].color_boton_hover,
-            color: opciones[0].color_boton,
-            border: "1px solid",
-            borderColor: opciones[0].color_boton,
-          }}
-          onClick={() => handleCart()}
-        >
-          {isMobile ? <BsCartPlus /> : <span>Añadir al carrito</span>}
-        </motion.button>
-      </div>
       <style jsx>{`
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {

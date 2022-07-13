@@ -1,18 +1,17 @@
 import WooCommerce from "../../woocommerce/Woocommerce";
 import axios from "axios";
 import fetcherWc from "../../utils/fetcherWc";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Nav from "../../components/Nav";
-import { motion } from "framer-motion";
+import useMobile from "../../hooks/useMobile";
+import AddToCart from "../../components/AddToCart";
 export const getStaticPaths = async () => {
-  const products = await WooCommerce.get("products?per_page=50")
-    .then((response) => {
+  const products = await WooCommerce.get("products?per_page=50").then(
+    (response) => {
       return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    }
+  );
 
   const paths = products.map((produ) => {
     return {
@@ -43,15 +42,14 @@ export async function getStaticProps(context) {
   const options = await axios.get(
     process.env.URLBASE + "wp-json/jet-cct/opciones_generales/"
   );
-  const categorias = await WooCommerce.get("products/categories")
-    .then((response) => {
+  const categorias = await WooCommerce.get("products/categories").then(
+    (response) => {
       return response.data.filter(
         (fil) => fil.name === products[0]?.categories[0].name
       );
-    })
-    .catch((error) => {
-      console.log(error.response.data);
-    });
+    }
+  );
+
   const categoriasAll = await WooCommerce.get(
     "products/categories?order=desc"
   ).then((response) => {
@@ -60,13 +58,9 @@ export async function getStaticProps(context) {
 
   const variaciones = await WooCommerce.get(
     "products/" + products[0]?.id + "/variations" + "?per_page=50"
-  )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  ).then((response) => {
+    return response.data;
+  });
 
   return {
     props: {
@@ -92,23 +86,6 @@ const SingleProduct = ({
   relacionados,
   categoriasAll,
 }) => {
-  const productToChild = {
-    product: products[0],
-    variaciones,
-  };
-
-  const id = products[0]?.id;
-  const precio_final = products[0]?.price;
-  const [talla, setTalla] = useState(null);
-  const [color, setColor] = useState(null);
-  const [test, setTest] = useState([]);
-  const [variacionSelecionada, setVariacionSelecionada] = useState({
-    color: null,
-    talla: null,
-    id: null,
-  });
-  console.log(variaciones);
-
   const [producto, setProducto] = useState({
     id: products[0]?.id,
     name: products[0]?.name,
@@ -144,102 +121,55 @@ const SingleProduct = ({
     attributes: products[0]?.attributes,
     downloads: products[0]?.downloads,
   });
-  let selectionByColor = [];
-  let selectionByTalla = [];
 
-  useEffect(() => {
-    variaciones.map((e) => {
-      e.attributes.map((atributo) => {
-        if (atributo.name === "Color") {
-          setVariacionSelecionada({
-            ...variacionSelecionada,
-            color: color,
-          });
-        }
-      });
-    });
-    if (color && talla) {
-      variaciones.map((e) => {
-        e.attributes.filter((r) => {
-          if (r.option === color) {
-            selectionByColor.push(e);
-          }
-        });
-      });
-    }
-    if (color && talla) {
-      selectionByColor.map((e) => {
-        e.attributes.filter((r) => {
-          if (r.option === talla) {
-            setTest(e);
-          }
-        });
-      });
-      setVariacionSelecionada({
-        ...variacionSelecionada,
-        id: test.id,
-      });
-    }
-  }, [color]);
-  useEffect(() => {
-    variaciones.map((e) => {
-      e.attributes.map((atributo) => {
-        if (atributo.name === "Talla") {
-          setVariacionSelecionada({
-            ...variacionSelecionada,
-            talla: talla,
-          });
-        }
-      });
-    });
-    if (color && talla) {
-      variaciones.map((e) => {
-        e.attributes.filter((r) => {
-          if (r.option === color) {
-            selectionByColor.push(e);
-          }
-        });
-      });
-    }
-    if (color && talla) {
-      selectionByColor.map((e) => {
-        e.attributes.filter((r) => {
-          if (r.option === talla) {
-            setTest(e);
-          }
-        });
-      });
-      setVariacionSelecionada({
-        ...variacionSelecionada,
-        id: test.id,
-      });
-    }
-  }, [talla]);
   const metadata = Object.values(producto.meta_data).map((key) => {
     return key;
   });
-  const handleTalla = (e) => {
-    e.target.classList.add("active");
-    setTalla(e.target.attributes.data.value);
+  function definirVariaciones(p, v) {
+    const atributos = p.attributes
+      .filter((e, index) => e.variation === true)
+      .map((e) => {
+        const objeto = {
+          nombre: e.name,
+          opciones: e.options,
+        };
+        const variable = true;
+        return {
+          ...objeto,
+          variable,
+        };
+      });
+
+    return atributos;
+  }
+  const atributos = definirVariaciones(producto, variaciones);
+
+  let tt = atributos.map((res) => {
+    let objeto = {
+      ...tt,
+      [res.nombre]: res.opciones[0],
+    };
+    return objeto;
+  });
+  let newTT = new Object();
+
+  atributos.forEach(function (valor, indice) {
+    var key = valor.nombre;
+    var value = valor.opciones[0];
+    newTT[key] = value;
+  });
+
+  const [seleccion, setSeleccion] = useState(newTT);
+  const [isActive, setIsActive] = useState(false);
+  const handleVariations = (e, tipo) => {
+    const resultado = {
+      ...seleccion,
+      [tipo]: e.currentTarget.value,
+    };
+    setSeleccion(resultado);
   };
-  const handleColor = (e) => {
-    e.target.classList.add("active");
-    setColor(e.target.attributes.data.value);
-  };
-  useEffect(() => {
-    document.querySelectorAll(".size").forEach((e) => {
-      if (e.getAttribute("data") !== talla) {
-        e.classList.remove("active");
-      }
-    });
-  }, [talla]);
-  useEffect(() => {
-    document.querySelectorAll(".color").forEach((e) => {
-      if (e.getAttribute("data") !== color) {
-        e.classList.remove("active");
-      }
-    });
-  }, [color]);
+  const { isMobile } = useMobile();
+
   return (
     <>
       <Nav categorias={categoriasAll} opciones={options} />
@@ -260,7 +190,7 @@ const SingleProduct = ({
                   )}
                 </div>
                 <div className="lg:flex hidden flex-col w-1/2">
-                  {producto.images[1].src && (
+                  {producto.images.length > 1 && (
                     <Image
                       height="798px"
                       width="553px"
@@ -273,7 +203,7 @@ const SingleProduct = ({
               </div>
               <div className="lg:flex hidden flex-row justify-center w-full">
                 <div className="flex flex-col w-1/2">
-                  {producto.images[2].src && (
+                  {producto.images.length > 2 && (
                     <Image
                       height="798px"
                       width="553px"
@@ -285,7 +215,7 @@ const SingleProduct = ({
                 </div>
                 <div className="flex flex-col w-1/2">
                   {" "}
-                  {producto.images[3].src && (
+                  {producto.images.length > 3 && (
                     <Image
                       height="798px"
                       width="553px"
@@ -298,7 +228,7 @@ const SingleProduct = ({
               </div>
             </div>
             <div className="flex flex-col pt-5 lg:h-[1600px] w-full lg:w-2/5">
-              <div className="sticky flex flex-col self-start top-[90px]">
+              <div className="w-full flex flex-col self-start top-[90px]">
                 <div className="flex flex-row w-full">
                   <div className="flex p-5 flex-col">
                     <span className="etiqueta">
@@ -321,9 +251,24 @@ const SingleProduct = ({
                 {variaciones.length > 0 && (
                   <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
                     {variaciones.map((e, index) => {
+                      console.log(e);
                       return (
                         <div key={index} className="flex flex-col w-auto">
-                          <button>
+                          <button
+                            style={{
+                              border:
+                                seleccion.Botellas === e.attributes[0].option
+                                  ? "solid 2px #000"
+                                  : "none",
+                              height: isMobile ? "76px" : "112px",
+                              borderRadius: "6px",
+                            }}
+                            className="botonVaria"
+                            value={e.attributes[0].option}
+                            onClick={(r) =>
+                              handleVariations(r, e.attributes[0].name)
+                            }
+                          >
                             <Image
                               width="101px"
                               height="108px"
@@ -336,31 +281,61 @@ const SingleProduct = ({
                   </div>
                 )}
                 <div className="flex flex-row mt-7 p-5 w-full">
-                  <motion.button
-                    initial={{
-                      color: "white",
-                      padding: "15px",
-                      backgroundColor: "black",
-                      fontFamily: options.fuente_global,
-                      border: "2px solid transparent",
-                    }}
-                    whileHover={{
-                      color: "black",
-                      backgroundColor: "transparent",
-                      border: "2px solid black",
-                    }}
-                    transition={{ type: "spring", stiffness: 100 }}
-                    className="block w-full "
-                  >
-                    COMPRAR AHORA
-                  </motion.button>
+                  <AddToCart
+                    lista={variaciones}
+                    producto={producto}
+                    opciones={options}
+                    seleccion={seleccion}
+                  />
                 </div>
-                <div className="flex flex-row mt-9 w-full">
-                  <div className="flex flex-col items-center w-1/2">
-                    <Image height="25px" width="25px" src="/truck.png"></Image>
-                  </div>
-                  <div className="flex flex-col items-center w-1/2">
-                    <Image height="25px" width="25px" src="/shop.png"></Image>
+                <div className="flex flex-row mt-9 w-full justify-center">
+                  <div className="flex flex-col tems-center min-w-[200px]">
+                    <div
+                      style={{ border: "solid 2px black" }}
+                      className="flex flex-row gap-5  lg:flex-nowrap flex-wrap w-full p-8"
+                    >
+                      {" "}
+                      <div className="flex flex-col items-center w-full lg:w-1/2">
+                        <Image
+                          objectFit="contain"
+                          height="25px"
+                          width="31px"
+                          src="/truck.png"
+                        ></Image>
+                        <span
+                          style={{
+                            fontSize: "14px",
+                            textAlign: "center",
+                            fontFamily: options.fuente_titulos,
+                            marginTop: "10px",
+                            display: "block",
+                          }}
+                        >
+                          Recibe tu pedido en 48 a 72 hrs.
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-center w-full lg:w-1/2">
+                        <Image
+                          objectFit="contain"
+                          height="25px"
+                          width="31px"
+                          src="/shop.png"
+                        ></Image>
+                        <span>
+                          <span
+                            style={{
+                              fontSize: "14px",
+                              textAlign: "center",
+                              fontFamily: options.fuente_titulos,
+                              marginTop: "10px",
+                              display: "block",
+                            }}
+                          >
+                            Recibe tu pedido en 48 a 72 hrs.
+                          </span>
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

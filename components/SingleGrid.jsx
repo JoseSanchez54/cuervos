@@ -5,10 +5,32 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 const Precio = dynamic(() => import("../components/Precio"));
 import { useDispatch } from "react-redux";
+import { useVariations } from "../hooks/useVariations";
 
 const SingleGrid = ({ producto, opciones }) => {
+  const { variacion, isValidating } = useVariations(producto.id);
+  console.log(producto);
+
   const [cambioImagen, setCambioImagen] = useState(false);
   const dispatch = useDispatch();
+  function definirVariaciones(p, v) {
+    const atributos = p.attributes
+      .filter((e, index) => e.variation === true)
+      .map((e) => {
+        const objeto = {
+          nombre: e.name,
+          opciones: e.options,
+        };
+        const variable = true;
+        return {
+          ...objeto,
+          variable,
+        };
+      });
+
+    return atributos;
+  }
+  //const atributos = definirVariaciones(producto, variaciones);
 
   const hover = producto?.meta_data?.filter((res) => res.key === "imagenh")[0]
     ?.value;
@@ -53,12 +75,17 @@ const SingleGrid = ({ producto, opciones }) => {
                     {producto?.name}
                   </span>
                 </Link>
-                <Precio
-                  precio={producto?.regular_price}
-                  rebaja={producto?.sale_price}
-                  hover={cambioImagen}
-                  opciones={opciones}
-                />
+                {!isValidating && (
+                  <Precio
+                    precio={producto?.regular_price}
+                    rebaja={producto?.sale_price}
+                    hover={cambioImagen}
+                    opciones={opciones}
+                    variable={producto.type === "variable"}
+                    variaciones={variacion}
+                  />
+                )}
+
                 <Link
                   variants={texto}
                   initial="initial"

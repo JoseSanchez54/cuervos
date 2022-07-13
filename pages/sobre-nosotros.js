@@ -31,7 +31,6 @@ export async function getStaticProps() {
   const home2 = await pagesNew.data.find(
     (page) => page.pagina_asociada === "nosotros"
   );
-  console.log(home2);
 
   const options = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"

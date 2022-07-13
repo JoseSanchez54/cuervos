@@ -78,7 +78,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                   </div>
                   <div className="flex flex-row w-full borde-b p-9 borde-t ">
                     <div className="flex flex-col w-full gap-5 justify-between">
-                      {padres.map((res) => {
+                      {padres.map((res, index) => {
                         return (
                           <>
                             {res.slug !== "todos" && (
@@ -99,8 +99,10 @@ const MenuLateral = ({ opciones, categorias }) => {
                     <div className="flex flex-col gap-3 w-full">
                       {menuBruto.map((e, index) => {
                         return (
-                          <Link key={index} href={e.enlace}>
-                            <a className="enlaceBot uppercase">{e.label}</a>
+                          <Link passHref key={index} href={e.enlace}>
+                            <a className="enlaceBot uppercase mini1">
+                              {e.label}
+                            </a>
                           </Link>
                         );
                       })}
@@ -137,7 +139,8 @@ const MenuLateral = ({ opciones, categorias }) => {
                         }}
                         className="flex flex-col w-full gap-5 justify-between"
                       >
-                        {hijos.map((res) => {
+                        {hijos.map((res, index) => {
+                          console.log(res);
                           if (hijos.length === 0) {
                             return <span>No hay más subcategorías</span>;
                           } else {
@@ -149,7 +152,11 @@ const MenuLateral = ({ opciones, categorias }) => {
                                     style={{ textAlign: "start" }}
                                     onClick={(e) => handleSeccion(res.id)}
                                   >
-                                    <a className="enlaceSup">{res.name}</a>
+                                    <Link key={index} href={"/" + res.slug}>
+                                      <a className="enlaceSup mini2">
+                                        {res.name}
+                                      </a>
+                                    </Link>
                                   </button>
                                 )}
                               </>
@@ -159,7 +166,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                       </motion.div>
                     </div>
                     <div className="flex flex-row p-9 w-full">
-                      <div className="flex flex-col gap-3 w-full">
+                      <div className="flex flex-col gap-3 mini w-full">
                         {menuBruto.map((e, index) => {
                           return (
                             <Link key={index} href={e.enlace}>
@@ -200,12 +207,12 @@ const MenuLateral = ({ opciones, categorias }) => {
                       return (
                         <>
                           {res.slug !== "todos" && (
-                            <button
-                              key={index}
-                              style={{ textAlign: "start" }}
-                              onClick={(e) => handleSeccion(res.id)}
-                            >
-                              <a className="enlaceSup">{res.name}</a>
+                            <button key={index} style={{ textAlign: "start" }}>
+                              <Link passHref href={"/" + res.slug}>
+                                <a className="enlaceinf uppercase">
+                                  {res.name}
+                                </a>
+                              </Link>
                             </button>
                           )}
                         </>
