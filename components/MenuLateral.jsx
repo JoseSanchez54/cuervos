@@ -147,7 +147,6 @@ const MenuLateral = ({ opciones, categorias }) => {
                                   <button
                                     key={index}
                                     style={{ textAlign: "start" }}
-                                    onClick={(e) => handleSeccion(res.id)}
                                   >
                                     <Link key={index} href={"/" + res.slug}>
                                       <a className="enlaceSup">{res.name}</a>
