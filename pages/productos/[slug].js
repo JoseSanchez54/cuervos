@@ -135,7 +135,18 @@ const SingleProduct = ({
   const parrafoBanner = metadata.filter(
     (m) => m.key === "parrafo_banner_copy"
   )[0]?.value;
-  console.log(metadata);
+  const fichaTecnica = {
+    variedad: metadata.filter((m) => m.key === "variedad")[0]?.value,
+    anada: metadata.filter((m) => m.key === "anada")[0]?.value,
+    grado: metadata.filter((m) => m.key === "grado-alcoholico")[0]?.value,
+    localizacion: metadata.filter((m) => m.key === "localizacion")[0]?.value,
+    crianza: metadata.filter((m) => m.key === "crianza")[0]?.value,
+    tipo: metadata.filter((m) => m.key === "suelo")[0]?.value,
+    formato: metadata.filter((m) => m.key === "formato")[0]?.value,
+    imagenTecnica: metadata.filter((m) => m.key === "imagen_tecnica")[0].value,
+    notas: metadata.filter((m) => m.key === "notas")[0]?.value,
+  };
+  console.log(fichaTecnica);
   function definirVariaciones(p, v) {
     const atributos = p.attributes
       .filter((e, index) => e.variation === true)
@@ -543,8 +554,232 @@ const SingleProduct = ({
               </div>
             </div>
           </div>
+          {fichaTecnica.variedad && (
+            <div
+              style={{
+                background: isMobile
+                  ? "transparent"
+                  : "linear-gradient(90deg, #000 50%, #fff 50%)",
+              }}
+              className="flex flex-row w-full justify-center"
+            >
+              <div className="flex flex-col w-full max-w-[1202px]">
+                <div className="flex flex-row gap-6 flex-wrap lg:flex-nowrap w-full justify-center">
+                  <div
+                    style={{ background: isMobile ? "black" : "transparent" }}
+                    className="flex flex-col gap-3 pt-9 p-7 w-full "
+                  >
+                    <span
+                      style={{
+                        fontSize: "24px",
+                        fontFamily: options.fuente_titulos,
+                        textTransform: "uppercase",
+                        color: "#fff",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      FICHA TÉCNICA
+                    </span>
+
+                    <div className="flex flex-row gap-2 items-center">
+                      {" "}
+                      <span
+                        style={{
+                          fontSize: "16px",
+                          fontFamily: options.fuente_global,
+                          textTransform: "uppercase",
+                          color: "#fff",
+                        }}
+                      >
+                        Variedad
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          fontFamily: options.fuente_global,
+                          color: "#fff",
+                        }}
+                      >
+                        {fichaTecnica.variedad}
+                      </span>
+                    </div>
+                    <div className="flex flex-row gap-2 items-center">
+                      {" "}
+                      <span
+                        style={{
+                          fontSize: "16px",
+                          fontFamily: options.fuente_global,
+                          textTransform: "uppercase",
+                          color: "#fff",
+                        }}
+                      >
+                        AÑADA
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          fontFamily: options.fuente_global,
+                          color: "#fff",
+                        }}
+                      >
+                        {fichaTecnica.anada}
+                      </span>
+                    </div>
+                    <div className="flex flex-row gap-2 items-center">
+                      {" "}
+                      <span
+                        style={{
+                          fontSize: "16px",
+                          fontFamily: options.fuente_global,
+                          textTransform: "uppercase",
+                          color: "#fff",
+                        }}
+                      >
+                        GRADO ALCOHÓLICO
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          fontFamily: options.fuente_global,
+                          color: "#fff",
+                        }}
+                      >
+                        {fichaTecnica.grado}
+                      </span>
+                    </div>
+                    <div className="flex flex-row gap-2 items-center">
+                      {" "}
+                      <span
+                        style={{
+                          fontSize: "16px",
+                          fontFamily: options.fuente_global,
+                          textTransform: "uppercase",
+                          color: "#fff",
+                        }}
+                      >
+                        LOCALIZACIÓN
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          fontFamily: options.fuente_global,
+                          color: "#fff",
+                        }}
+                      >
+                        {fichaTecnica.localizacion}
+                      </span>
+                    </div>
+                    <div className="flex flex-row gap-2 items-center">
+                      {" "}
+                      <span
+                        style={{
+                          fontSize: "16px",
+                          fontFamily: options.fuente_global,
+                          textTransform: "uppercase",
+                          color: "#fff",
+                        }}
+                      >
+                        CRIANZA
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          fontFamily: options.fuente_global,
+                          color: "#fff",
+                        }}
+                      >
+                        {fichaTecnica.crianza}
+                      </span>
+                    </div>
+                    <div className="flex flex-row gap-2 items-center">
+                      {" "}
+                      <span
+                        style={{
+                          fontSize: "16px",
+                          fontFamily: options.fuente_global,
+                          textTransform: "uppercase",
+                          color: "#fff",
+                        }}
+                      >
+                        TIPO DE SUELO
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          fontFamily: options.fuente_global,
+                          color: "#fff",
+                        }}
+                      >
+                        {fichaTecnica.tipo}
+                      </span>
+                    </div>
+                    <div className="flex flex-row gap-2 items-center">
+                      {" "}
+                      <span
+                        style={{
+                          fontSize: "16px",
+                          fontFamily: options.fuente_global,
+                          textTransform: "uppercase",
+                          color: "#fff",
+                        }}
+                      >
+                        FORMATO DE BOTELLA
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          fontFamily: options.fuente_global,
+                          color: "#fff",
+                        }}
+                      >
+                        {fichaTecnica.formato}
+                      </span>
+                    </div>
+                    <div className="flex flex-row w-full">
+                      {" "}
+                      {fichaTecnica.imagenTecnica ? (
+                        <Image
+                          height="88px"
+                          width="239px"
+                          src={fichaTecnica.imagenTecnica}
+                          objectFit="contain"
+                        ></Image>
+                      ) : (
+                        <Image
+                          height="88px"
+                          width="239px"
+                          src="/duero.png"
+                          objectFit="contain"
+                        ></Image>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex flex-col justify-center pt-9 p-7  w-full">
+                    <span
+                      style={{
+                        fontSize: "27px",
+                        fontFamily: options.fuente_titulos,
+                        textTransform: "uppercase",
+                        color: "#000",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      NOTAS DE CATA
+                    </span>
+                    <Image
+                      height="300px"
+                      width="443px"
+                      src={fichaTecnica.notas}
+                      objectFit="contain"
+                    ></Image>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
+
       <style jsx>{`
         .titulo {
           font-family: ${options.fuente_titulos};
