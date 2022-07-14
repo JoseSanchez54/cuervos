@@ -9,6 +9,8 @@ import AddToCart from "../../components/AddToCart";
 import { DefaultSeo } from "next-seo";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Grid from "../../components/Grid";
+import Footer from "../../components/Footer";
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
     (response) => {
@@ -34,10 +36,14 @@ export async function getStaticProps(context) {
   const products = await fetcherWc("products?slug=" + slug);
 
   let relacionados = [];
-  const getRelacionados = await products[0]?.cross_sell_ids.map((e) => {
+  const getRelacionados = await products[0]?.related_ids.map((e) => {
     const getting = fetcherWc("products/" + e).then((d) =>
       relacionados.push(d)
     );
+  });
+  let upSells = [];
+  const getUpsells = await products[0]?.upsell_ids.map((e) => {
+    const getting = fetcherWc("products/" + e).then((d) => upSells.push(d));
   });
   const paquete = await axios
     .get(process.env.URLBASE + "wp-json/jet-cct/ajustes_internos/")
@@ -75,6 +81,7 @@ export async function getStaticProps(context) {
       categorias,
       relacionados,
       categoriasAll,
+      upSells,
     },
     revalidate: 1,
   };
@@ -88,7 +95,9 @@ const SingleProduct = ({
   categorias,
   relacionados,
   categoriasAll,
+  upSells,
 }) => {
+  console.log(upSells);
   const [producto, setProducto] = useState({
     id: products[0]?.id,
     name: products[0]?.name,
@@ -284,7 +293,6 @@ const SingleProduct = ({
                 {variaciones.length > 0 && (
                   <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
                     {variaciones.map((e, index) => {
-                      console.log(e);
                       return (
                         <div key={index} className="flex flex-col w-auto">
                           <button
@@ -782,8 +790,33 @@ const SingleProduct = ({
               </div>
             </div>
           )}
+
+          <div className="flex flex-row lg:mt-[100px] w-full justify-center">
+            <div className="flex flex-col w-full max-w-[1202px]">
+              <div className="flex flex-row w-full">
+                <span
+                  style={{
+                    fontSize: "24px",
+                    fontFamily: options.fuente_titulos,
+                    textTransform: "uppercase",
+                    color: "#000",
+                  }}
+                >
+                  TAMBIÉN TE PUEDE INTERESAR
+                </span>
+              </div>
+              <div className="flex flex-row w-full my-9 justify-start">
+                {upSells.length > 0 ? (
+                  <Grid productos={upSells} opciones={options} max={3} />
+                ) : (
+                  <Grid productos={relacionados} opciones={options} max={3} />
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <Footer options={options}></Footer>
 
       <style jsx>{`
         .titulo {

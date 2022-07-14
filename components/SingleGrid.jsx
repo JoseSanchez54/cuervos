@@ -9,7 +9,6 @@ import { useVariations } from "../hooks/useVariations";
 
 const SingleGrid = ({ producto, opciones }) => {
   const { variacion, isValidating } = useVariations(producto.id);
-  console.log(producto);
 
   const [cambioImagen, setCambioImagen] = useState(false);
   const dispatch = useDispatch();

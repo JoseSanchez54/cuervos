@@ -6,7 +6,6 @@ const Image = dynamic(() => import("next/image"));
 const Footer = dynamic(() => import("../components/Footer"));
 import { DefaultSeo } from "next-seo";
 const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
-  console.log(categorias);
   return (
     <>
       <DefaultSeo
