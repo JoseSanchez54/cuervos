@@ -60,7 +60,7 @@ const SingleGrid = ({ producto, opciones }) => {
         className="flex flex-col z-[21] w-full h-[508px] max-h-[508px]  max-w-[404px]"
       >
         <Link href={`/productos/${producto?.slug}`} passHref>
-          <a>
+          <a className="h-full">
             <>
               <div className="relative w-full max-h-[508px] h-full max-w-[404px]">
                 <div className="flex flex-col p-7">
