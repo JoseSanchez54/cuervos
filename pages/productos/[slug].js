@@ -135,18 +135,7 @@ const SingleProduct = ({
   const parrafoBanner = metadata.filter(
     (m) => m.key === "parrafo_banner_copy"
   )[0]?.value;
-  const fichaTecnica = {
-    variedad: metadata.filter((m) => m.key === "variedad")[0]?.value,
-    anada: metadata.filter((m) => m.key === "anada")[0]?.value,
-    grado: metadata.filter((m) => m.key === "grado-alcoholico")[0]?.value,
-    localizacion: metadata.filter((m) => m.key === "localizacion")[0]?.value,
-    crianza: metadata.filter((m) => m.key === "crianza")[0]?.value,
-    tipo: metadata.filter((m) => m.key === "suelo")[0]?.value,
-    formato: metadata.filter((m) => m.key === "formato")[0]?.value,
-    imagenTecnica: metadata.filter((m) => m.key === "imagen_tecnica")[0].value,
-    notas: metadata.filter((m) => m.key === "notas")[0]?.value,
-  };
-  console.log(fichaTecnica);
+
   function definirVariaciones(p, v) {
     const atributos = p.attributes
       .filter((e, index) => e.variation === true)
@@ -554,7 +543,7 @@ const SingleProduct = ({
               </div>
             </div>
           </div>
-          {fichaTecnica.variedad && (
+          {metadata.filter((m) => m.key === "variedad")[0]?.value && (
             <div
               style={{
                 background: isMobile
@@ -600,7 +589,7 @@ const SingleProduct = ({
                           color: "#fff",
                         }}
                       >
-                        {fichaTecnica.variedad}
+                        {metadata.filter((m) => m.key === "variedad")[0]?.value}
                       </span>
                     </div>
                     <div className="flex flex-row gap-2 items-center">
@@ -622,7 +611,7 @@ const SingleProduct = ({
                           color: "#fff",
                         }}
                       >
-                        {fichaTecnica.anada}
+                        {metadata.filter((m) => m.key === "anada")[0]?.value}
                       </span>
                     </div>
                     <div className="flex flex-row gap-2 items-center">
@@ -644,7 +633,11 @@ const SingleProduct = ({
                           color: "#fff",
                         }}
                       >
-                        {fichaTecnica.grado}
+                        {
+                          metadata.filter(
+                            (m) => m.key === "grado-alcoholico"
+                          )[0]?.value
+                        }
                       </span>
                     </div>
                     <div className="flex flex-row gap-2 items-center">
@@ -666,7 +659,10 @@ const SingleProduct = ({
                           color: "#fff",
                         }}
                       >
-                        {fichaTecnica.localizacion}
+                        {
+                          metadata.filter((m) => m.key === "localizacion")[0]
+                            ?.value
+                        }
                       </span>
                     </div>
                     <div className="flex flex-row gap-2 items-center">
@@ -688,7 +684,7 @@ const SingleProduct = ({
                           color: "#fff",
                         }}
                       >
-                        {fichaTecnica.crianza}
+                        {metadata.filter((m) => m.key === "crianza")[0]?.value}
                       </span>
                     </div>
                     <div className="flex flex-row gap-2 items-center">
@@ -710,7 +706,7 @@ const SingleProduct = ({
                           color: "#fff",
                         }}
                       >
-                        {fichaTecnica.tipo}
+                        {metadata.filter((m) => m.key === "suelo")[0]?.value}
                       </span>
                     </div>
                     <div className="flex flex-row gap-2 items-center">
@@ -732,16 +728,21 @@ const SingleProduct = ({
                           color: "#fff",
                         }}
                       >
-                        {fichaTecnica.formato}
+                        {metadata.filter((m) => m.key === "formato")[0]?.value}
                       </span>
                     </div>
                     <div className="flex flex-row w-full">
                       {" "}
-                      {fichaTecnica.imagenTecnica ? (
+                      {metadata.filter((m) => m.key === "imagen_tecnica")[0]
+                        .value ? (
                         <Image
                           height="88px"
                           width="239px"
-                          src={fichaTecnica.imagenTecnica}
+                          src={
+                            metadata.filter(
+                              (m) => m.key === "imagen_tecnica"
+                            )[0].value
+                          }
                           objectFit="contain"
                         ></Image>
                       ) : (
@@ -766,12 +767,16 @@ const SingleProduct = ({
                     >
                       NOTAS DE CATA
                     </span>
-                    <Image
-                      height="300px"
-                      width="443px"
-                      src={fichaTecnica.notas}
-                      objectFit="contain"
-                    ></Image>
+                    {metadata.filter((m) => m.key === "notas")[0]?.value && (
+                      <Image
+                        height="300px"
+                        width="443px"
+                        src={
+                          metadata.filter((m) => m.key === "notas")[0]?.value
+                        }
+                        objectFit="contain"
+                      ></Image>
+                    )}
                   </div>
                 </div>
               </div>
