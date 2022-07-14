@@ -128,6 +128,13 @@ const SingleProduct = ({
   const metadata = Object.values(producto.meta_data).map((key) => {
     return key;
   });
+  const imagenBanner = metadata.filter((m) => m.key === "imagen_vinero")[0]
+    ?.value;
+  const tituloBanner = metadata.filter((m) => m.key === "titulo_banner")[0]
+    ?.value;
+  const parrafoBanner = metadata.filter(
+    (m) => m.key === "parrafo_banner_copy"
+  )[0]?.value;
   console.log(metadata);
   function definirVariaciones(p, v) {
     const atributos = p.attributes
@@ -463,8 +470,76 @@ const SingleProduct = ({
           </div>
           <div className="flex mt-[80px] flex-row w-full justify-center">
             <div className="flex flex-col w-full max-w-[1202px] p-5 items-center">
-              <div className="relative flex w-full min-h-[490px]">
-                <Image src="/vino.png" layout="fill" objectFit="cover"></Image>
+              <div className="relative flex w-full lg:min-h-[490px] min-h-[290px]  p-[20px] lg:p-[40px]">
+                <div className="flex flex-col md:justify-center w-full z-20">
+                  {tituloBanner ? (
+                    <span
+                      className="lg:max-w-[400px] w-full "
+                      style={{
+                        fontSize: "55px",
+                        fontFamily: options.fuente_titulos,
+                        color: "#fff",
+                        lineHeight: "1.1",
+                      }}
+                    >
+                      {tituloBanner}
+                    </span>
+                  ) : (
+                    <span
+                      className="lg:max-w-[400px] w-full "
+                      style={{
+                        fontSize: "55px",
+                        fontFamily: options.fuente_titulos,
+                        color: "#fff",
+                        lineHeight: "1.1",
+                      }}
+                    >
+                      CONOCE PESQUERA DEL DUERO
+                    </span>
+                  )}
+                  {parrafoBanner ? (
+                    <span
+                      className="lg:max-w-[300px] w-full"
+                      style={{
+                        fontSize: "16px",
+                        fontFamily: options.fuente_global,
+                        color: "#fff",
+                        lineHeight: "1.1",
+                        marginTop: "10px",
+                      }}
+                    >
+                      {parrafoBanner}
+                    </span>
+                  ) : (
+                    <span
+                      className="lg:max-w-[300px] w-full"
+                      style={{
+                        fontSize: "16px",
+                        fontFamily: options.fuente_global,
+                        color: "#fff",
+                        lineHeight: "1.1",
+                        marginTop: "10px",
+                      }}
+                    >
+                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                      sed diam nonumy eirmod.
+                    </span>
+                  )}
+                </div>
+
+                {imagenBanner ? (
+                  <Image
+                    src={imagenBanner}
+                    layout="fill"
+                    objectFit="cover"
+                  ></Image>
+                ) : (
+                  <Image
+                    src="/vino.png"
+                    layout="fill"
+                    objectFit="cover"
+                  ></Image>
+                )}
               </div>
             </div>
           </div>
