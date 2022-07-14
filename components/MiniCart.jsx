@@ -467,15 +467,15 @@ const MiniCart = (props) => {
           height: 20px;
           font-family: "Helvetica";
           font-size: 13px;
-          top: 4px;
-          background-color: #e00000;
+          top: 19px;
+          background-color: #000000;
           color: #fff;
           border-radius: 100%;
           padding: -1px;
           display: block;
           text-align: center;
           line-height: 20px;
-          margin-left: 45px;
+          margin-left: 12px;
         }
         .label {
           color: #fff;
