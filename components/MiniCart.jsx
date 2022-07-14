@@ -11,9 +11,6 @@ const FormularioCheckout = dynamic(() => import("./Checkout"), {
 const Image = dynamic(() => import("next/image"), {
   ssr: false,
 });
-const Newsletter = dynamic(() => import("./Newsletter"), {
-  ssr: false,
-});
 
 const MiniCart = (props) => {
   const { isMobile } = useMobile();
@@ -25,6 +22,7 @@ const MiniCart = (props) => {
   const handleCheckout = (checkout) => {
     setCheckout(!checkout);
   };
+  console.log(actualCart);
 
   let clasesEntrada =
     "animate__slideInRight fixed h-full z-50 menu_desplegado animate__animated p-5";
@@ -70,21 +68,6 @@ const MiniCart = (props) => {
           )}
         </span>
       </div>
-      {open && (
-        <div className="overlay animate__animated animate__fadeIn ">
-          <div className="newsletter">
-            <Newsletter />
-          </div>
-          <div style={{ right: "36%" }} className="copyright">
-            <span className="copy">© Copyright 2021.</span>
-
-            <span className="copy rels c3">
-              All Right Reserved
-              <img className="logocopy" src="/Recurso-2-1.png" />®
-            </span>
-          </div>
-        </div>
-      )}
 
       {open && (
         <div className={handle()}>
@@ -108,7 +91,7 @@ const MiniCart = (props) => {
                 {actualCart.length !== 0 &&
                   actualCart?.map((producto, index) => {
                     const { attributes, id, image, price, sku, sale_price } =
-                      producto.variacion;
+                      producto;
                     return (
                       <div
                         className={
@@ -119,12 +102,14 @@ const MiniCart = (props) => {
                         key={index}
                       >
                         <div className="flex flex-col justify-start ">
-                          <Image
-                            src={image?.src}
-                            width="150px"
-                            height="150px"
-                            objectFit="contain"
-                          />
+                          {image?.src && (
+                            <Image
+                              src={image?.src}
+                              width="150px"
+                              height="150px"
+                              objectFit="contain"
+                            />
+                          )}
                         </div>
                         <div className="flex flex-row justify-center mt-5 md:flex-row md:mt-0">
                           <div className="flex flex-col justify-center pl-5 mt-5 text-center md:text-start md:mt-0">
