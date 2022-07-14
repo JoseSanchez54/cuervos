@@ -44,7 +44,6 @@ const Nav = ({ opciones, categorias }) => {
               </Link>
             )}
             <MiniCart />
-            <IoIosCart size="25px" />
           </div>
         </div>
       </div>

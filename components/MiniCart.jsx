@@ -5,6 +5,7 @@ import { CgClose } from "react-icons/cg";
 import { useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import useMobile from "../hooks/useMobile";
+import { IoIosCart } from "react-icons/io";
 const FormularioCheckout = dynamic(() => import("./Checkout"), {
   ssr: false,
 });
@@ -60,7 +61,7 @@ const MiniCart = (props) => {
     <>
       <div className="flex justify-end p-2 pr-5 mt-1">
         <span onClick={() => handleOpen()} className="minicartD">
-          CART
+          <IoIosCart size="25px" />
           {cantidad !== 0 && (
             <span className="bubble animate__animated animate__bounceIn">
               {cantidad}
