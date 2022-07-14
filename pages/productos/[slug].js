@@ -471,7 +471,7 @@ const SingleProduct = ({
           <div className="flex mt-[80px] flex-row w-full justify-center">
             <div className="flex flex-col w-full max-w-[1202px] p-5 items-center">
               <div className="relative flex w-full lg:min-h-[490px] min-h-[290px]  p-[20px] lg:p-[40px]">
-                <div className="flex flex-col md:justify-center w-full z-20">
+                <div className="flex flex-col md:justify-center lg:justify-start justify-center w-full z-20">
                   {tituloBanner ? (
                     <span
                       className="lg:max-w-[400px] w-full "
