@@ -561,7 +561,7 @@ const SingleProduct = ({
                   ? "transparent"
                   : "linear-gradient(90deg, #000 50%, #fff 50%)",
               }}
-              className="flex flex-row w-full justify-center"
+              className="flex flex-row w-full mt-[80px] justify-center"
             >
               <div className="flex flex-col w-full max-w-[1202px]">
                 <div className="flex flex-row gap-6 flex-wrap lg:flex-nowrap w-full justify-center">
