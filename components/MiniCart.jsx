@@ -102,9 +102,16 @@ const MiniCart = (props) => {
                         key={index}
                       >
                         <div className="flex flex-col justify-start ">
-                          {image?.src && (
+                          {image?.src ? (
                             <Image
                               src={image?.src}
+                              width="150px"
+                              height="150px"
+                              objectFit="contain"
+                            />
+                          ) : (
+                            <Image
+                              src={producto.image}
                               width="150px"
                               height="150px"
                               objectFit="contain"
