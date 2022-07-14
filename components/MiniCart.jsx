@@ -126,24 +126,18 @@ const MiniCart = (props) => {
                             <span className="miniCartPrice">{price}€</span>
                             <div className="flex flex-row mt-2">
                               <div className="flex flex-col w-1/2">
-                                <span className="label">Talla:</span>
-                                <span className="option">
-                                  {attributes?.map((e) => {
-                                    if (e?.name === "Talla") {
-                                      return e?.option;
-                                    }
-                                  })}
-                                </span>
-                              </div>
-                              <div className="flex flex-col w-1/2">
-                                <span className="label">Color:</span>
-                                <span className="option">
-                                  {attributes?.map((e) => {
-                                    if (e.name === "Color") {
-                                      return e.option;
-                                    }
-                                  })}
-                                </span>
+                                {attributes?.map((e) => {
+                                  if (e?.name === "Botellas") {
+                                    return (
+                                      <>
+                                        <span className="label">Botellas:</span>
+                                        <span className="option">
+                                          {e?.option}
+                                        </span>
+                                      </>
+                                    );
+                                  }
+                                })}
                               </div>
                             </div>
                           </div>
