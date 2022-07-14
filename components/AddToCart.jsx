@@ -52,14 +52,13 @@ const AddToCart = ({ seleccion, lista, producto, opciones }) => {
         transition={{ type: "spring", stiffness: 100 }}
         className="block w-full "
         whileTap={{
-          backgroundColor: opciones.color_boton_hover,
-          color: opciones.color_boton,
-          border: "1px solid",
-          borderColor: opciones.color_boton,
+          backgroundColor: "transparent",
+          color: "black",
+          border: "1px solid black",
         }}
         onClick={() => handleCart()}
       >
-        {isMobile ? <BsCartPlus /> : <span>COMPRAR AHORA</span>}
+        <span>COMPRAR AHORA</span>
       </motion.button>
 
       <style jsx>{`

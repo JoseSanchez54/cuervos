@@ -266,7 +266,6 @@ const SingleProduct = ({
                     </span>
                     <span className="titulo mt-8">{producto.name}</span>
                     <div
-                      className=""
                       dangerouslySetInnerHTML={{
                         __html: producto.short_description,
                       }}
@@ -426,7 +425,7 @@ const SingleProduct = ({
                   </div>
                 </div>
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
-                <div className="flex p-9 flex-row gap-3 w-full justify-start ">
+                <div className="flex p-5 flex-row gap-3 w-full justify-start ">
                   <div className="lg:flex hidden flex-col min-w-[50px]">
                     {" "}
                     <Image
