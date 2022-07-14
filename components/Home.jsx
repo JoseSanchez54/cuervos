@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 const Grid = dynamic(() => import("../components/Grid"));
 const Footer = dynamic(() => import("../components/Footer"));
+import { DefaultSeo } from "next-seo";
 import { AiOutlineArrowRight } from "react-icons/ai";
 const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
   const variablesBoton = {
@@ -21,6 +22,29 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
   };
   return (
     <>
+      <DefaultSeo
+        title={pagina.titulo_pagina}
+        description={pagina.descripcion_de_pagina}
+        canonical={process.env.URLFINAL}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: opciones.favicon_principal,
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_ES",
+          url: process.env.URLFINAL,
+          site_name: opciones.nombre_sitio,
+          description: opciones.descripcion_sitio,
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <Nav categorias={categorias} opciones={opciones} />
       <div className="flex flex-row w-full  alto items-end justify-center">
         <div className="flex flex-col justify-end w-full h-full">

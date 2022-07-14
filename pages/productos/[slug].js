@@ -6,6 +6,7 @@ import Image from "next/image";
 import Nav from "../../components/Nav";
 import useMobile from "../../hooks/useMobile";
 import AddToCart from "../../components/AddToCart";
+import { DefaultSeo } from "next-seo";
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
     (response) => {
@@ -172,6 +173,29 @@ const SingleProduct = ({
 
   return (
     <>
+      <DefaultSeo
+        title={"Cría Cuervos - " + producto.name}
+        description={producto.short_description}
+        canonical={process.env.URLFINAL + "/" + producto.slug}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: options.favicon_principal,
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_ES",
+          url: process.env.URLFINAL,
+          site_name: options.nombre_sitio,
+          description: producto.short_description,
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <Nav categorias={categoriasAll} opciones={options} />
       <div className="flex flex-row w-full justify-center mt-[50px]">
         <div className="flex flex-col w-full max-w-[1920px] items-center">

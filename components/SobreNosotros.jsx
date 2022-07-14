@@ -2,9 +2,33 @@ import dynamic from "next/dynamic";
 const Footer = dynamic(() => import("../components/Footer"));
 const Nav = dynamic(() => import("../components/Nav"));
 const Image = dynamic(() => import("next/image"));
+import { DefaultSeo } from "next-seo";
 const SobreNosotros = ({ opciones, pagina, categorias }) => {
   return (
     <>
+      <DefaultSeo
+        title={pagina.titulo_pagina}
+        description={pagina.descripcion_de_pagina}
+        canonical={process.env.URLFINAL + "/sobre-nosotros"}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: opciones.favicon_principal,
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_ES",
+          url: process.env.URLFINAL,
+          site_name: opciones.nombre_sitio,
+          description: opciones.descripcion_sitio,
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <Nav categorias={categorias} opciones={opciones} />
       <div
         style={{ color: "white" }}

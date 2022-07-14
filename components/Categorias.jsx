@@ -4,9 +4,34 @@ const ShopNav = dynamic(() => import("../components/ShopNav"));
 const SingleGrid = dynamic(() => import("../components/SingleGrid"));
 const Image = dynamic(() => import("next/image"));
 const Footer = dynamic(() => import("../components/Footer"));
-const Categorias = ({ opciones, pagina, categorias, productos }) => {
+import { DefaultSeo } from "next-seo";
+const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
+  console.log(categorias);
   return (
     <>
+      <DefaultSeo
+        title={pagina.titulo_pagina}
+        description={pagina.descripcion_de_pagina}
+        canonical={process.env.URLFINAL + "/" + actual.slug}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: opciones.favicon_principal,
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_ES",
+          url: process.env.URLFINAL,
+          site_name: opciones.nombre_sitio,
+          description: opciones.descripcion_sitio,
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <Nav categorias={categorias} opciones={opciones} />
       <div className="flex flex-row w-full justify-center">
         <div className="flex flex-col w-full items-center  max-w-[1212px] ">
