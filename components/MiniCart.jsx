@@ -97,8 +97,8 @@ const MiniCart = (props) => {
                       <div
                         className={
                           index === 0
-                            ? "flex flex-col justify-around w-full md:flex-row producto1"
-                            : "flex flex-col justify-around w-full md:flex-row producto "
+                            ? "flex flex-col justify-start w-full md:flex-row producto1"
+                            : "flex flex-col justify-start w-full md:flex-row producto "
                         }
                         key={index}
                       >
@@ -122,11 +122,11 @@ const MiniCart = (props) => {
                         <div className="flex flex-row justify-center mt-5 md:flex-row md:mt-0">
                           <div className="flex flex-col justify-center pl-5 mt-5 text-center md:text-start md:mt-0">
                             <span className="miniCartName">
-                              {producto?.nombre}
+                              {producto?.name}
                             </span>
                             <span className="miniCartPrice">{price}€</span>
                             <div className="flex flex-row mt-2">
-                              <div className="flex flex-col w-1/2">
+                              <div className="flex flex-col w-full">
                                 {attributes?.map((e) => {
                                   if (e?.name === "Botellas") {
                                     return (

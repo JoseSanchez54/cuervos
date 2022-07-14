@@ -2,7 +2,7 @@ import { addToCart } from "../utils/addToCart";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { BsCartPlus } from "react-icons/bs";
+
 import useMobile from "../hooks/useMobile";
 
 const AddToCart = ({ seleccion, lista, producto, opciones }) => {
@@ -22,6 +22,10 @@ const AddToCart = ({ seleccion, lista, producto, opciones }) => {
   const handleCart = () => {
     if (variable) {
       const productoAdd = addToCart(seleccion, lista);
+      productoAdd = {
+        ...productoAdd,
+        nombrePadre: producto.nombre,
+      };
       dispatch({
         type: "@AddToCart",
         producto: productoAdd,
