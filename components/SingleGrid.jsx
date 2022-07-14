@@ -60,77 +60,79 @@ const SingleGrid = ({ producto, opciones }) => {
         className="flex flex-col z-[21] w-full h-[508px] max-h-[508px]  max-w-[404px]"
       >
         <Link href={`/productos/${producto?.slug}`} passHref>
-          <>
-            <div className="relative w-full max-h-[508px] h-full max-w-[404px]">
-              <div className="flex flex-col p-7">
-                <Link href={`/productos/${producto?.slug}`}>
-                  <span
-                    style={{
-                      color: cambioImagen ? "#fff" : "#000",
-                      fontFamily: opciones.fuente_global,
-                      textTransform: "uppercase",
-                    }}
-                    className="z-[10]"
-                  >
-                    {producto?.name}
-                  </span>
-                </Link>
-                {!isValidating && (
-                  <Precio
-                    precio={producto?.regular_price}
-                    rebaja={producto?.sale_price}
-                    hover={cambioImagen}
-                    opciones={opciones}
-                    variable={producto.type === "variable"}
-                    variaciones={variacion}
-                  />
-                )}
+          <a>
+            <>
+              <div className="relative w-full max-h-[508px] h-full max-w-[404px]">
+                <div className="flex flex-col p-7">
+                  <Link href={`/productos/${producto?.slug}`}>
+                    <span
+                      style={{
+                        color: cambioImagen ? "#fff" : "#000",
+                        fontFamily: opciones.fuente_global,
+                        textTransform: "uppercase",
+                      }}
+                      className="z-[10]"
+                    >
+                      {producto?.name}
+                    </span>
+                  </Link>
+                  {!isValidating && (
+                    <Precio
+                      precio={producto?.regular_price}
+                      rebaja={producto?.sale_price}
+                      hover={cambioImagen}
+                      opciones={opciones}
+                      variable={producto.type === "variable"}
+                      variaciones={variacion}
+                    />
+                  )}
 
-                <Link
-                  variants={texto}
-                  initial="initial"
-                  whileHover="hover"
-                  href={`/productos/${producto?.slug}`}
-                  passHref
-                >
-                  <motion.a
+                  <Link
                     variants={texto}
                     initial="initial"
                     whileHover="hover"
+                    href={`/productos/${producto?.slug}`}
+                    passHref
                   >
-                    <button
-                      style={{
-                        fontFamily: opciones.fuente_global,
-                        zIndex: "10",
-                        fontSize: "12px",
-                        color: cambioImagen ? "#fff" : "#000",
-                        display: "flex",
-                        border: cambioImagen
-                          ? "1px solid #fff"
-                          : "1px solid #000",
-                        width: "fit-content",
-                        padding: "10px 20px",
-                        marginTop: "10px",
-                        "&:hover": {
-                          backgroundColor: "#000",
-                          color: "#fff",
-                        },
-                      }}
+                    <motion.a
+                      variants={texto}
+                      initial="initial"
+                      whileHover="hover"
                     >
-                      COMPRAR
-                    </button>
-                  </motion.a>
-                </Link>
+                      <button
+                        style={{
+                          fontFamily: opciones.fuente_global,
+                          zIndex: "10",
+                          fontSize: "12px",
+                          color: cambioImagen ? "#fff" : "#000",
+                          display: "flex",
+                          border: cambioImagen
+                            ? "1px solid #fff"
+                            : "1px solid #000",
+                          width: "fit-content",
+                          padding: "10px 20px",
+                          marginTop: "10px",
+                          "&:hover": {
+                            backgroundColor: "#000",
+                            color: "#fff",
+                          },
+                        }}
+                      >
+                        COMPRAR
+                      </button>
+                    </motion.a>
+                  </Link>
+                </div>
+                {hover && (
+                  <Image
+                    objectFit="cover"
+                    layout="fill"
+                    src={!cambioImagen ? producto?.images[0].src : hover}
+                  ></Image>
+                )}
               </div>
-              {hover && (
-                <Image
-                  objectFit="cover"
-                  layout="fill"
-                  src={!cambioImagen ? producto?.images[0].src : hover}
-                ></Image>
-              )}
-            </div>
-          </>
+            </>
+          </a>
         </Link>
       </div>
       <style jsx>{`
