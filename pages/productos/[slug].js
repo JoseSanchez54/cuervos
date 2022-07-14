@@ -831,9 +831,9 @@ const SingleProduct = ({
             </div>
           )}
 
-          <div className="flex flex-row p-5 lg:mt-[100px] w-full lg:justify-start justify-center">
-            <div className="flex flex-col items-center  w-full max-w-[1202px]">
-              <div className="flex flex-row justify-center lg:justify-start w-full">
+          <div className="flex flex-row p-5 lg:mt-[100px] w-full justify-center">
+            <div className="flex flex-col w-full max-w-[1202px]">
+              <div className="flex flex-row w-full lg:justify-start justify-center">
                 <span
                   style={{
                     fontSize: "24px",
@@ -845,7 +845,7 @@ const SingleProduct = ({
                   TAMBIÉN TE PUEDE INTERESAR
                 </span>
               </div>
-              <div className="flex flex-row lg:flex-nowrap flex-wrap w-full  my-9 justify-center lg:justify-start">
+              <div className="flex flex-row lg:flex-nowrap flex-wrap w-full  my-9 lg:justify-start justify-center">
                 {upSells.length > 0 ? (
                   <Grid productos={upSells} opciones={options} max={3} />
                 ) : (
