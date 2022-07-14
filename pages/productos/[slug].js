@@ -128,6 +128,7 @@ const SingleProduct = ({
   const metadata = Object.values(producto.meta_data).map((key) => {
     return key;
   });
+  console.log(metadata);
   function definirVariaciones(p, v) {
     const atributos = p.attributes
       .filter((e, index) => e.variation === true)
@@ -457,6 +458,13 @@ const SingleProduct = ({
                     />
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex mt-[80px] flex-row w-full justify-center">
+            <div className="flex flex-col w-full max-w-[1202px] p-5 items-center">
+              <div className="relative flex w-full min-h-[490px]">
+                <Image src="/vino.png" layout="fill" objectFit="cover"></Image>
               </div>
             </div>
           </div>
