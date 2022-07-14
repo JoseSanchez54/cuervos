@@ -268,15 +268,6 @@ const SingleProduct = ({
                           quality="100"
                           objectFit="cover"
                         />
-                      )}{" "}
-                      {producto.images[0].src && (
-                        <Image
-                          height="798px"
-                          width="553px"
-                          src={producto.images[0].src}
-                          quality="100"
-                          objectFit="cover"
-                        />
                       )}
                     </>
                   )}
