@@ -6,6 +6,7 @@ const MenuLateral = dynamic(() => import("../components/MenuLateral"));
 import useMobile from "../hooks/useMobile";
 import { IoIosCart } from "react-icons/io";
 import { BiUser } from "react-icons/bi";
+import MiniCart from "../components/MiniCart";
 
 const Nav = ({ opciones, categorias }) => {
   const { isMobile } = useMobile();
@@ -42,6 +43,7 @@ const Nav = ({ opciones, categorias }) => {
                 <BiUser size="25px" />
               </Link>
             )}
+            <MiniCart />
             <IoIosCart size="25px" />
           </div>
         </div>
