@@ -216,6 +216,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                               marginTop: "25px",
                               fontSize: "14px",
                               fontFamily: opciones.fuente_titulos,
+                              textTransform: "uppercase",
                             }}
                             whileHover={{
                               backgroundColor: "white",
