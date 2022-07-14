@@ -221,15 +221,64 @@ const SingleProduct = ({
           <div className="flex flex-row gap-9 lg:flex-nowrap flex-wrap w-full justify-center">
             <div className="flex flex-col w-full lg:w-3/5">
               <div className="flex flex-row justify-center w-full">
-                <div className="flex flex-col w-1/2">
-                  {producto.images[0].src && (
-                    <Image
-                      height="798px"
-                      width="553px"
-                      src={producto.images[0].src}
-                      quality="100"
-                      objectFit="cover"
-                    />
+                <div className="flex max-h-[768px] flex-col w-1/2">
+                  {metadata.filter((m) => m.key === "video")[0]?.value ? (
+                    <>
+                      {isMobile ? (
+                        <Image
+                          height="798px"
+                          width="553px"
+                          src={producto.images[0].src}
+                          quality="100"
+                          objectFit="cover"
+                        />
+                      ) : (
+                        <video
+                          preload="auto"
+                          autoPlay={true}
+                          loop
+                          className="video-portada"
+                          muted
+                          playsInline
+                          poster={
+                            producto.images[0].src ? producto.images[0].src : ""
+                          }
+                          style={{
+                            width: "100%",
+                            objectFit: "cover",
+                          }}
+                        >
+                          <source
+                            src={
+                              metadata.filter((m) => m.key === "video")[0]
+                                ?.value
+                            }
+                            type="video/mp4"
+                          />
+                        </video>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {producto.images[0].src && (
+                        <Image
+                          height="798px"
+                          width="553px"
+                          src={producto.images[0].src}
+                          quality="100"
+                          objectFit="cover"
+                        />
+                      )}{" "}
+                      {producto.images[0].src && (
+                        <Image
+                          height="798px"
+                          width="553px"
+                          src={producto.images[0].src}
+                          quality="100"
+                          objectFit="cover"
+                        />
+                      )}
+                    </>
                   )}
                 </div>
                 <div className="lg:flex hidden flex-col w-1/2">
@@ -791,7 +840,7 @@ const SingleProduct = ({
             </div>
           )}
 
-          <div className="flex flex-row lg:mt-[100px] w-full justify-center">
+          <div className="flex flex-row p-5 lg:mt-[100px] w-full justify-center">
             <div className="flex flex-col w-full max-w-[1202px]">
               <div className="flex flex-row w-full">
                 <span
@@ -805,7 +854,7 @@ const SingleProduct = ({
                   TAMBIÉN TE PUEDE INTERESAR
                 </span>
               </div>
-              <div className="flex flex-row w-full my-9 justify-start">
+              <div className="flex flex-row lg:flex-nowrap flex-wrap w-full  my-9 justify-start">
                 {upSells.length > 0 ? (
                   <Grid productos={upSells} opciones={options} max={3} />
                 ) : (
