@@ -12,7 +12,7 @@ const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
       <DefaultSeo
         title={pagina.titulo_pagina}
         description={pagina.descripcion_de_pagina}
-        canonical={process.env.URLFINAL + "/" + actual.slug}
+        canonical={process.env.URLFINAL + "/" + actual?.slug}
         additionalLinkTags={[
           {
             rel: "icon",

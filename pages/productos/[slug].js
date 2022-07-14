@@ -7,6 +7,8 @@ import Nav from "../../components/Nav";
 import useMobile from "../../hooks/useMobile";
 import AddToCart from "../../components/AddToCart";
 import { DefaultSeo } from "next-seo";
+import { motion } from "framer-motion";
+import Link from "next/link";
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
     (response) => {
@@ -264,14 +266,14 @@ const SingleProduct = ({
                     </span>
                     <span className="titulo mt-8">{producto.name}</span>
                     <div
-                      className="mb-8"
+                      className=""
                       dangerouslySetInnerHTML={{
                         __html: producto.short_description,
                       }}
                     />
                   </div>
                 </div>
-                <div className="divider flex flex-row w-full my-6 px-5"></div>
+                <div className="divider flex flex-row w-full my-[30px] px-5"></div>
                 {variaciones.length > 0 && (
                   <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
                     {variaciones.map((e, index) => {
@@ -313,9 +315,9 @@ const SingleProduct = ({
                   />
                 </div>
                 <div className="flex flex-row mt-9 w-full justify-center">
-                  <div className="flex flex-col tems-center min-w-[200px]">
+                  <div className="flex flex-col tems-center p-5 min-w-[200px]">
                     <div
-                      style={{ border: "solid 2px black" }}
+                      style={{ border: "solid 2px black", borderRadius: "6px" }}
                       className="flex flex-row gap-5  lg:flex-nowrap flex-wrap w-full p-8"
                     >
                       {" "}
@@ -355,11 +357,105 @@ const SingleProduct = ({
                               display: "block",
                             }}
                           >
-                            Recibe tu pedido en 48 a 72 hrs.
+                            Envíos gratuitos desde 50€
                           </span>
                         </span>
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div className="flex flex-row mt-9 w-full justify-center">
+                  <div className="flex flex-col w-full max-w-[556px] p-5 items-center">
+                    <div className="flex flex-row flex-wrap lg:flex-nowrap justify-around gap-5 p-5 w-full bg-black">
+                      <div className="flex flex-col w-full lg:w-auto justify-center">
+                        <Image
+                          objectFit="contain"
+                          height="81px"
+                          width="80px"
+                          src="/calendar.png"
+                        />
+                      </div>
+                      <div className="flex flex-col w-full max-w-[220px] lg:w-auto items-center lg:items-start justify-center">
+                        <span
+                          style={{
+                            fontSize: "20px",
+                            color: "#fff",
+                            fontFamily: options.fuente_titulos,
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          Suscripción Cría Cuervos
+                        </span>
+                        <p
+                          style={{
+                            fontSize: "14px",
+                            color: "#fff",
+                            fontFamily: options.fuente_global,
+                            lineHeight: "1.1",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          Recibe periódicamente tus vinos en la comodidad de tu
+                          casa
+                        </p>
+                      </div>
+                      <div className="flex flex-col w-full lg:w-auto  items-center lg:items-start justify-center">
+                        <Link href="/suscripcion" passHref>
+                          <a>
+                            <motion.button
+                              initial={{
+                                backgroundColor: "#fff",
+                                border: "solid 2px #fff",
+                                color: "#000",
+                                padding: "10px 20px",
+                                fontSize: "9px",
+                                textTransform: "uppercase",
+                              }}
+                              whileHover={{
+                                backgroundColor: "transparent",
+                                border: "solid 2px #fff",
+                                color: "#fff",
+                              }}
+                            >
+                              Sucríbete hoy
+                            </motion.button>
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="divider flex flex-row w-full my-[30px] px-5"></div>
+                <div className="flex p-9 flex-row gap-3 w-full justify-start ">
+                  <div className="lg:flex hidden flex-col min-w-[50px]">
+                    {" "}
+                    <Image
+                      objectFit="contain"
+                      height="24px"
+                      width="24px"
+                      src="/plus.png"
+                    />
+                  </div>
+                  <div className="flex w-full flex-col">
+                    <span
+                      style={{
+                        fontSize: "16px",
+                        fontFamily: options.fuente_global,
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      Los detalles de nuestro {producto.name}
+                    </span>
+                    <div
+                      style={{
+                        fontSize: "16px",
+                        fontFamily: options.fuente_global,
+                      }}
+                      className="my-5"
+                      dangerouslySetInnerHTML={{
+                        __html: producto.description,
+                      }}
+                    />
                   </div>
                 </div>
               </div>
