@@ -1,3 +1,3 @@
 export default async (req, res) => {
-  return { de: "a" };
+  return res.status(200).json({ doe: "hola" });
 };
