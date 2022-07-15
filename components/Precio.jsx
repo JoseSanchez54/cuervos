@@ -2,10 +2,11 @@ const Precio = ({ precio, rebaja, hover, opciones, variable, variaciones }) => {
   if (variaciones) {
     variaciones = variaciones.sort((a, b) => a.price - b.price);
   }
+  console.log(variaciones);
 
   return (
     <>
-      {variaciones ? (
+      {variaciones?.length === 0 ? (
         <>
           {rebaja ? (
             <>
