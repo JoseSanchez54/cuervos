@@ -8,6 +8,8 @@ const Select = dynamic(() => import("react-select"), {
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 const datosPaises = require("../utils/data.json");
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 import {
   createRedsysAPI,
   TRANSACTION_TYPES,
@@ -216,6 +218,25 @@ const FormularioCheckout = ({ onAction, tasas }) => {
       e.target.setAttribute("action", "");
     }
   };
+
+  //Stripe
+  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+  const stripePromise = loadStripe(publishableKey);
+  const createCheckOutSession = async () => {
+    const stripe = await stripePromise;
+    const checkoutSession = await axios
+      .post("/api/create-stripe-session", {
+        item: actualCart,
+      })
+      .then((res) => console.log(res));
+    const result = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+    if (result.error) {
+      alert(result.error.message);
+    }
+  };
+
   const optionsPais = datosPaises.map((pais) => {
     return {
       value: pais.countryName,
@@ -451,6 +472,9 @@ const FormularioCheckout = ({ onAction, tasas }) => {
             <input className="botonForm" type="submit" value="Pagar ahora" />
           </div>
         </form>
+        <button className="botonForm" onClick={() => createCheckOutSession()}>
+          Stripe
+        </button>
 
         <div className="flex flex-row justify-center mt-2 mb-9">
           <button className="atras" onClick={onAction}>

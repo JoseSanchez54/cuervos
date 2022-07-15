@@ -12,17 +12,21 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 
 function MyApp({ Component, pageProps }) {
+  const redirectURL =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : process.env.URLFINAL;
   const [cookies, setCookies] = useState(false);
   const store = useStore();
   const dispatch = useDispatch();
-  const tasas = axios.get(process.env.URLFINAL + "/api/taxes").then((e) =>
+  const tasas = axios.get(redirectURL + "/api/taxes").then((e) =>
     dispatch({
       type: "@setTaxes",
       taxes: e.data,
     })
   );
 
-  const envios = axios.get(process.env.URLFINAL + "/api/envios/").then((e) =>
+  const envios = axios.get(redirectURL + "/api/envios/").then((e) =>
     dispatch({
       type: "@setShipping",
       envios: e.data,
