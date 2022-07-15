@@ -1,8 +1,7 @@
 import dynamic from "next/dynamic";
 import Decimal from "decimal.js";
-const WooCommerce = dynamic(() => import("../woocommerce/Woocommerce"), {
-  ssr: false,
-});
+import WooCommerce from "../woocommerce/Woocommerce";
+
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
@@ -114,7 +113,7 @@ const FormularioCheckout = ({ onAction, tasas }) => {
     // amount in smallest currency unit(cents)
     DS_MERCHANT_AMOUNT: redsysAmount,
     DS_MERCHANT_CURRENCY: redsysCurrency,
-    DS_MERCHANT_MERCHANTNAME: "MI COMERCIO",
+    DS_MERCHANT_MERCHANTNAME: "Cría Cuervos",
     DS_MERCHANT_MERCHANTURL: `${endpoint}${notificationPath}`,
     DS_MERCHANT_URLOK: `${endpoint}${successRedirectPath}`,
     DS_MERCHANT_URLKO: `${endpoint}${errorRedirectPath}`,
@@ -149,7 +148,7 @@ const FormularioCheckout = ({ onAction, tasas }) => {
     line_items: actualCart.map((item) => ({
       product_id: item.id,
       quantity: item.cantidad,
-      variation_id: item.variacion.id,
+      variation_id: item?.variacion?.id,
     })),
     shipping_lines: [
       {
