@@ -63,17 +63,19 @@ const SingleGrid = ({ producto, opciones }) => {
             <>
               <div className="relative w-full max-h-[508px] h-full max-w-[404px]">
                 <div className="flex flex-col p-7">
-                  <Link href={`/productos/${producto?.slug}`}>
-                    <span
-                      style={{
-                        color: cambioImagen ? "#fff" : "#000",
-                        fontFamily: opciones.fuente_global,
-                        textTransform: "uppercase",
-                      }}
-                      className="z-[10]"
-                    >
-                      {producto?.name}
-                    </span>
+                  <Link href={`/productos/${producto?.slug}`} passHref>
+                    <a>
+                      <span
+                        style={{
+                          color: cambioImagen ? "#fff" : "#000",
+                          fontFamily: opciones.fuente_global,
+                          textTransform: "uppercase",
+                        }}
+                        className="z-[10]"
+                      >
+                        {producto?.name}
+                      </span>
+                    </a>
                   </Link>
                   {!isValidating && (
                     <Precio
