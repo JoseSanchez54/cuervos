@@ -82,7 +82,7 @@ const FormularioCheckout = ({ onAction, tasas }) => {
   };
 
   const port = 3000;
-  const endpoint = `http://localhost:${port}`;
+  const endpoint = `https://cuervos-rho.vercel.app`;
   const successRedirectPath = "/success";
   const errorRedirectPath = "/error";
   const notificationPath = "/api/notification";
