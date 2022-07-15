@@ -3,8 +3,8 @@ import { SWRConfig } from "swr";
 import fetcher from "../utils/fetcher";
 import { NextUIProvider } from "@nextui-org/react";
 import CookieAd from "../components/generales/CookieAd";
-import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
+
 import { wrapper } from "../store";
 import { PersistGate } from "redux-persist/integration/react";
 import { useStore } from "react-redux";
@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
   const [cookies, setCookies] = useState(false);
   const store = useStore();
   const dispatch = useDispatch();
-  const tasas = axios.get(process.env.URLFINAL + "/api/taxes/").then((e) =>
+  const tasas = axios.get("/api/taxes").then((e) =>
     dispatch({
       type: "@setTaxes",
       taxes: e.data,
