@@ -17,7 +17,7 @@ const ShopNav = ({ pagina, opciones }) => {
         {menuBruto.map((menu, index) => {
           return (
             <div className="flex flex-col" key={index}>
-              <Link href={`${menu.url}`}>
+              <Link href={`/categoria/${menu.url}`}>
                 <a>
                   <button>
                     <span

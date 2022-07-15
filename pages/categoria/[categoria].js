@@ -1,9 +1,9 @@
 import axios from "axios";
-import WooCommerce from "../woocommerce/Woocommerce";
-import { useOptions } from "../hooks/useOptions";
-import { useProducts } from "../hooks/useProducts";
-import Categorias from "../components/Categorias";
-import { usePages } from "../hooks/usePages";
+import WooCommerce from "../../woocommerce/Woocommerce";
+import { useOptions } from "../../hooks/useOptions";
+import { useProducts } from "../../hooks/useProducts";
+import Categorias from "../../components/Categorias";
+import { usePages } from "../../hooks/usePages";
 export const getStaticPaths = async () => {
   const categorias = await WooCommerce.get("products/categories").then(
     (response) => {

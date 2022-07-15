@@ -148,8 +148,13 @@ const MenuLateral = ({ opciones, categorias }) => {
                                     key={index}
                                     style={{ textAlign: "start" }}
                                   >
-                                    <Link key={index} href={"/" + res.slug}>
-                                      <a className="enlaceSup">{res.name}</a>
+                                    <Link
+                                      key={index}
+                                      href={"/categoria/" + res.slug}
+                                    >
+                                      <a className="enlaceSup test">
+                                        {res.name}
+                                      </a>
                                     </Link>
                                   </button>
                                 )}
@@ -300,7 +305,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                                 } else {
                                   return (
                                     <button style={{ textAlign: "start" }}>
-                                      <Link href={"/" + res.slug}>
+                                      <Link href={"/categoria/" + res.slug}>
                                         <a className="enlaceinf uppercase">
                                           {res.name}
                                         </a>
