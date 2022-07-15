@@ -103,7 +103,10 @@ const SingleGrid = ({ producto, opciones }) => {
                     variants={texto}
                     initial="initial"
                     whileHover="hover"
-                    href={`/productos/${producto?.slug}`}
+                    href={{
+                      pathname: "/productos/[slug]",
+                      query: { slug: producto?.slug },
+                    }}
                     passHref
                   >
                     <motion.a
