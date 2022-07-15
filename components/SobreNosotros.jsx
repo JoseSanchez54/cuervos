@@ -32,7 +32,7 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
       <Nav categorias={categorias} opciones={opciones} />
       <div
         style={{ color: "white" }}
-        className="flex p-5 flex-row w-full  alto items-end justify-center"
+        className="flex  flex-row w-full  alto items-end justify-center"
       >
         <div className="flex flex-col justify-center w-full h-full">
           <div className="relative w-full h-full">
