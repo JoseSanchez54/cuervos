@@ -21,7 +21,9 @@ function MyApp({ Component, pageProps }) {
       taxes: e.data,
     })
   ); */
-  const e = axios.get("api/testing").then((e) => console.log(e));
+  const e = axios
+    .get("https://cuervos-rho.vercel.app/api/testing")
+    .then((e) => console.log(e));
   /*   const envios = axios.get("/api/envios/").then((e) =>
     dispatch({
       type: "@setShipping",
