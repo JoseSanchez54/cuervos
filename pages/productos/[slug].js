@@ -99,7 +99,6 @@ const SingleProduct = ({
   upSells,
 }) => {
   const { product } = useProduct(products[0], products[0]?.id);
-  console.log("a", product);
 
   const metadata = Object.values(product.meta_data).map((key) => {
     return key;

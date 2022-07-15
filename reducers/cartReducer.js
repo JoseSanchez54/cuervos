@@ -16,9 +16,10 @@ const cartReducer = (
     case "@RemoveFromCart":
       let totalR = parseInt(state.total) - parseInt(action.precio);
       let cartR = state.cart.filter((item) => item.id !== action.id);
+      const index = state.cart.findIndex((item) => item.id === action.id);
       return {
         ...state,
-        cart: cartR,
+        cart: state.cart.filter((_, i) => i !== index),
         total: totalR.toFixed(2),
       };
 

@@ -24,8 +24,9 @@ const AddToCart = ({ seleccion, lista, producto, opciones }) => {
       const productoAdd = addToCart(seleccion, lista);
       productoAdd = {
         ...productoAdd,
-        nombrePadre: producto.nombre,
+        nombrePadre: producto.name,
       };
+      console.log(productoAdd);
       dispatch({
         type: "@AddToCart",
         producto: productoAdd,

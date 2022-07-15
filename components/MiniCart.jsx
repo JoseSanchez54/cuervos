@@ -32,16 +32,16 @@ const MiniCart = (props) => {
   let claseAltoEmpty = "flex flex-col justify-center alto";
   let claseAltoOut = "flex flex-col justify-start alto";
   const controlDeClases = () => {
-    if (actualCart.length > 0 && !checkout) {
+    if (actualCart?.length > 0 && !checkout) {
       return claseAltoFill;
-    } else if (actualCart.length === 0 && !checkout) {
+    } else if (actualCart?.length === 0 && !checkout) {
       return claseAltoEmpty;
-    } else if (actualCart.length > 0 && checkout) {
+    } else if (actualCart?.length > 0 && checkout) {
       return claseAltoOut;
     }
   };
 
-  const cantidad = actualCart.length;
+  const cantidad = actualCart?.length;
   const handle = () => {
     if (open === true) {
       return clasesEntrada;
@@ -81,14 +81,14 @@ const MiniCart = (props) => {
               />
             </div>
             <div className={controlDeClases()}>
-              {actualCart.length === 0 && !checkout && (
+              {actualCart?.length === 0 && !checkout && (
                 <>
                   <span className="mensajeEnviado">Tu carrito está vacio</span>
                 </>
               )}
 
               <div className="flex flex-col justify-start mt-5 miniCartWrapper">
-                {actualCart.length !== 0 &&
+                {actualCart?.length !== 0 &&
                   actualCart?.map((producto, index) => {
                     const { attributes, id, image, price, sku, sale_price } =
                       producto;
@@ -101,27 +101,11 @@ const MiniCart = (props) => {
                         }
                         key={index}
                       >
-                        <div className="flex flex-col justify-start ">
-                          {image?.src ? (
-                            <Image
-                              src={image?.src}
-                              width="150px"
-                              height="150px"
-                              objectFit="contain"
-                            />
-                          ) : (
-                            <Image
-                              src={producto.image}
-                              width="150px"
-                              height="150px"
-                              objectFit="contain"
-                            />
-                          )}
-                        </div>
-                        <div className="flex flex-row justify-center mt-5 md:flex-row md:mt-0">
+                        <div className="flex flex-row justify-between w-full mt-5 md:flex-row md:mt-0">
                           <div className="flex flex-col justify-center pl-5 mt-5 text-center md:text-start md:mt-0">
                             <span className="miniCartName">
                               {producto?.name}
+                              {producto?.nombrePadre}
                             </span>
                             <span className="miniCartPrice">{price}€</span>
                             <div className="flex flex-row mt-2">
@@ -170,7 +154,7 @@ const MiniCart = (props) => {
                   </>
                 )}
 
-                {actualCart.length !== 0 && !checkout && (
+                {actualCart?.length !== 0 && !checkout && (
                   <>
                     <button onClick={() => vaciarF()} className="vacio">
                       Vaciar carrito
@@ -193,7 +177,7 @@ const MiniCart = (props) => {
                   </>
                 )}
               </div>
-              {!isMobile && actualCart.length !== 0 && !checkout && (
+              {!isMobile && actualCart?.length !== 0 && !checkout && (
                 <div className="flex flex-row justify-center">
                   <div className="flex flex-col">
                     <button
