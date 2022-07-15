@@ -9,12 +9,18 @@ const cartReducer = (
 ) => {
   switch (action.type) {
     case "@AddToCart":
+      let total =
+        parseFloat(state.total) +
+        (parseFloat(action.producto.sale_price)
+          ? parseFloat(action.producto.sale_price)
+          : parseFloat(action.producto.regular_price));
       return {
         ...state,
         cart: [...state.cart, action.producto],
+        total: total.toFixed(2),
       };
     case "@RemoveFromCart":
-      let totalR = parseInt(state.total) - parseInt(action.precio);
+      let totalR = parseFloat(state.total) - parseFloat(action.precio);
       let cartR = state.cart.filter((item) => item.id !== action.id);
       const index = state.cart.findIndex((item) => item.id === action.id);
       return {
