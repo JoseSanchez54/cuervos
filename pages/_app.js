@@ -15,21 +15,21 @@ function MyApp({ Component, pageProps }) {
   const [cookies, setCookies] = useState(false);
   const store = useStore();
   const dispatch = useDispatch();
-  /*   const tasas = axios.get("/api/taxes").then((e) =>
+  const tasas = axios.get(process.env.URLFINAL + "/api/taxes").then((e) =>
     dispatch({
       type: "@setTaxes",
       taxes: e.data,
     })
-  ); */
+  );
   const e = axios
     .get("https://cuervos-rho.vercel.app/api/testing")
     .then((e) => console.log(e));
-  /*   const envios = axios.get("/api/envios/").then((e) =>
+  const envios = axios.get(process.env.URLFINAL + "/api/envios/").then((e) =>
     dispatch({
       type: "@setShipping",
       envios: e.data,
     })
-  ); */
+  );
 
   return (
     <SWRConfig
