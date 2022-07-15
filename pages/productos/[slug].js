@@ -27,7 +27,7 @@ export const getStaticPaths = async () => {
   });
   return {
     paths: paths,
-    fallback: true,
+    fallback: "blocking",
   };
 };
 export async function getStaticProps(context) {
@@ -97,7 +97,6 @@ const SingleProduct = ({
   categoriasAll,
   upSells,
 }) => {
-  console.log(upSells);
   const [producto, setProducto] = useState({
     id: products[0]?.id,
     name: products[0]?.name,
@@ -133,6 +132,7 @@ const SingleProduct = ({
     attributes: products[0]?.attributes,
     downloads: products[0]?.downloads,
   });
+  console.log(products[0]?.id);
 
   const metadata = Object.values(producto.meta_data).map((key) => {
     return key;
