@@ -5,7 +5,7 @@ const Precio = ({ precio, rebaja, hover, opciones, variable, variaciones }) => {
 
   return (
     <>
-      {variaciones.length === 0 ? (
+      {variaciones ? (
         <>
           {rebaja ? (
             <>
