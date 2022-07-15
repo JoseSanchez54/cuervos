@@ -23,7 +23,6 @@ const MiniCart = (props) => {
   const handleCheckout = (checkout) => {
     setCheckout(!checkout);
   };
-  console.log(actualCart);
 
   let clasesEntrada =
     "animate__slideInRight fixed h-full z-50 menu_desplegado animate__animated p-5";

@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Grid from "../../components/Grid";
 import Footer from "../../components/Footer";
+import { useProduct } from "../../hooks/useProduct";
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
     (response) => {
@@ -97,44 +98,10 @@ const SingleProduct = ({
   categoriasAll,
   upSells,
 }) => {
-  const [producto, setProducto] = useState({
-    id: products[0]?.id,
-    name: products[0]?.name,
-    price: products[0]?.price,
-    image: products[0]?.images[0]?.src,
-    description: products[0]?.description,
-    short_description: products[0]?.short_description,
-    stock_quantity: products[0]?.stock_quantity,
-    stock_status: products[0]?.stock_status,
-    sku: products[0]?.sku,
-    slug: products[0]?.slug,
-    regular_price: products[0]?.regular_price,
-    sale_price: products[0]?.sale_price,
-    on_sale: products[0]?.on_sale,
-    total_sales: products[0]?.total_sales,
-    tax_status: products[0]?.tax_status,
-    tax_class: products[0]?.tax_class,
-    backorders_allowed: products[0]?.backorders_allowed,
-    backordered: products[0]?.backordered,
-    shipping_class: products[0]?.shipping_class,
-    shipping_class_id: products[0]?.shipping_class_id,
-    description_html: products[0]?.description_html,
-    menu_order: products[0]?.menu_order,
-    meta_data: products[0]?.meta_data,
-    average_rating: products[0]?.average_rating,
-    rating_count: products[0]?.rating_count,
-    related_ids: products[0]?.related_ids,
-    parent_id: products[0]?.parent_id,
-    purchase_note: products[0]?.purchase_note,
-    categories: products[0]?.categories,
-    tags: products[0]?.tags,
-    images: products[0]?.images,
-    attributes: products[0]?.attributes,
-    downloads: products[0]?.downloads,
-  });
-  console.log(products[0]?.id);
+  const { product } = useProduct(products[0], products[0]?.id);
+  console.log("a", product);
 
-  const metadata = Object.values(producto.meta_data).map((key) => {
+  const metadata = Object.values(product.meta_data).map((key) => {
     return key;
   });
   const imagenBanner = metadata.filter((m) => m.key === "imagen_vinero")[0]
@@ -162,7 +129,7 @@ const SingleProduct = ({
 
     return atributos;
   }
-  const atributos = definirVariaciones(producto, variaciones);
+  const atributos = definirVariaciones(product, variaciones);
 
   let tt = atributos.map((res) => {
     let objeto = {
@@ -193,9 +160,9 @@ const SingleProduct = ({
   return (
     <>
       <DefaultSeo
-        title={"Cría Cuervos - " + producto.name}
-        description={producto.short_description}
-        canonical={process.env.URLFINAL + "/" + producto.slug}
+        title={"Cría Cuervos - " + product.name}
+        description={product.short_description}
+        canonical={process.env.URLFINAL + "/" + product.slug}
         additionalLinkTags={[
           {
             rel: "icon",
@@ -207,7 +174,7 @@ const SingleProduct = ({
           locale: "en_ES",
           url: process.env.URLFINAL,
           site_name: options.nombre_sitio,
-          description: producto.short_description,
+          description: product.short_description,
         }}
         twitter={{
           handle: "@handle",
@@ -228,7 +195,7 @@ const SingleProduct = ({
                         <Image
                           height="798px"
                           width="553px"
-                          src={producto.images[0].src}
+                          src={product.images[0].src}
                           quality="100"
                           objectFit="cover"
                         />
@@ -241,7 +208,7 @@ const SingleProduct = ({
                           muted
                           playsInline
                           poster={
-                            producto.images[0].src ? producto.images[0].src : ""
+                            product.images[0].src ? product.images[0].src : ""
                           }
                           style={{
                             width: "100%",
@@ -260,11 +227,11 @@ const SingleProduct = ({
                     </>
                   ) : (
                     <>
-                      {producto.images[0].src && (
+                      {product.images[0].src && (
                         <Image
                           height="798px"
                           width="553px"
-                          src={producto.images[0].src}
+                          src={product.images[0].src}
                           quality="100"
                           objectFit="cover"
                         />
@@ -273,11 +240,11 @@ const SingleProduct = ({
                   )}
                 </div>
                 <div className="lg:flex hidden flex-col w-1/2">
-                  {producto.images.length > 1 && (
+                  {product.images.length > 1 && (
                     <Image
                       height="798px"
                       width="553px"
-                      src={producto.images[1].src}
+                      src={product.images[1].src}
                       quality="100"
                       objectFit="cover"
                     />
@@ -286,11 +253,11 @@ const SingleProduct = ({
               </div>
               <div className="lg:flex hidden flex-row justify-center w-full">
                 <div className="flex flex-col w-1/2">
-                  {producto.images.length > 2 && (
+                  {product.images.length > 2 && (
                     <Image
                       height="798px"
                       width="553px"
-                      src={producto.images[2].src}
+                      src={product.images[2].src}
                       quality="100"
                       objectFit="cover"
                     />
@@ -298,11 +265,11 @@ const SingleProduct = ({
                 </div>
                 <div className="flex flex-col w-1/2">
                   {" "}
-                  {producto.images.length > 3 && (
+                  {product.images.length > 3 && (
                     <Image
                       height="798px"
                       width="553px"
-                      src={producto.images[3].src}
+                      src={product.images[3].src}
                       quality="100"
                       objectFit="cover"
                     />
@@ -321,10 +288,10 @@ const SingleProduct = ({
                         }
                       })}
                     </span>
-                    <span className="titulo mt-8">{producto.name}</span>
+                    <span className="titulo mt-8">{product.name}</span>
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: producto.short_description,
+                        __html: product.short_description,
                       }}
                     />
                   </div>
@@ -364,7 +331,7 @@ const SingleProduct = ({
                 <div className="flex flex-row mt-7 p-5 w-full">
                   <AddToCart
                     lista={variaciones}
-                    producto={producto}
+                    producto={product}
                     opciones={options}
                     seleccion={seleccion}
                   />
@@ -499,7 +466,7 @@ const SingleProduct = ({
                         textTransform: "uppercase",
                       }}
                     >
-                      Los detalles de nuestro {producto.name}
+                      Los detalles de nuestro {product.name}
                     </span>
                     <div
                       style={{
@@ -508,7 +475,7 @@ const SingleProduct = ({
                       }}
                       className="my-5"
                       dangerouslySetInnerHTML={{
-                        __html: producto.description,
+                        __html: product.description,
                       }}
                     />
                   </div>

@@ -50,7 +50,7 @@ const SingleGrid = ({ producto, opciones }) => {
     initial: { color: cambioImagen ? "#fff" : "#000", zIndex: "10" },
     hover: { color: "#fff" },
   };
-  console.log(producto);
+
   return (
     <AnimatePresence>
       <div
