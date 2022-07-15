@@ -21,12 +21,12 @@ function MyApp({ Component, pageProps }) {
       taxes: e.data,
     })
   );
-  const envios = axios.get("/api/envios/").then((e) =>
+/*   const envios = axios.get("/api/envios/").then((e) =>
     dispatch({
       type: "@setShipping",
       envios: e.data,
     })
-  );
+  ); */
 
   return (
     <SWRConfig
