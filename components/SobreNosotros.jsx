@@ -32,7 +32,7 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
       <Nav categorias={categorias} opciones={opciones} />
       <div
         style={{ color: "white" }}
-        className="flex flex-row w-full  alto items-end justify-center"
+        className="flex p-5 flex-row w-full  alto items-end justify-center"
       >
         <div className="flex flex-col justify-center w-full h-full">
           <div className="relative w-full h-full">
@@ -62,7 +62,7 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
       </div>
       <div
         style={{ color: "black" }}
-        className="flex flex-row w-full justify-center mt-[50px] lg:mt-[100px]"
+        className="flex flex-row p-5 w-full justify-center mt-[50px] lg:mt-[100px]"
       >
         <div className="flex flex-col w-full  max-w-[1212px]">
           <div className="flex flex-row flex-wrap  my-[50px] w-full ">
