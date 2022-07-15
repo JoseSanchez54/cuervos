@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
   const [cookies, setCookies] = useState(false);
   const store = useStore();
   const dispatch = useDispatch();
-  const tasas = axios.get("/api/taxes").then((e) =>
+/*   const tasas = axios.get("/api/taxes").then((e) =>
     dispatch({
       type: "@setTaxes",
       taxes: e.data,
@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }) {
       type: "@setShipping",
       envios: e.data,
     })
-  );
+  ); */
 
   return (
     <SWRConfig
