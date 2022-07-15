@@ -50,6 +50,7 @@ const SingleGrid = ({ producto, opciones }) => {
     initial: { color: cambioImagen ? "#fff" : "#000", zIndex: "10" },
     hover: { color: "#fff" },
   };
+  console.log(producto);
   return (
     <AnimatePresence>
       <div
@@ -64,7 +65,7 @@ const SingleGrid = ({ producto, opciones }) => {
               <div className="relative w-full max-h-[508px] h-full max-w-[404px]">
                 <div className="flex flex-col p-7">
                   <Link href={`/productos/${producto?.slug}`} passHref>
-                    <a>
+                    <a className="z-[20]">
                       <span
                         style={{
                           color: cambioImagen ? "#fff" : "#000",
