@@ -17,6 +17,7 @@ const MiniCart = (props) => {
   const { isMobile } = useMobile();
   const dispatch = useDispatch();
   const actualCart = useSelector((state) => state.cartReducer.cart);
+
   const total = useSelector((state) => state.cartReducer.total);
   const [open, setOpen] = useState(false);
   const [checkout, setCheckout] = useState(false);
