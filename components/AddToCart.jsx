@@ -27,6 +27,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones }) => {
         nombrePadre: producto.name,
         idPadre: producto.id,
         variable: true,
+        img: producto.images[0].src,
       };
 
       dispatch({
@@ -34,6 +35,12 @@ const AddToCart = ({ seleccion, lista, producto, opciones }) => {
         producto: productoAdd,
       });
     } else {
+      producto = {
+        ...producto,
+        nombrePadre: producto.name,
+        idPadre: producto.id,
+        variable: true,
+      };
       dispatch({
         type: "@AddToCart",
         producto: producto,

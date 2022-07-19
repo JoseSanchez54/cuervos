@@ -25,9 +25,9 @@ export default async function handler(req, res) {
       price_data: {
         currency: "EUR",
         unit_amount_decimal:
-          i.sale_price !== "" ? i.sale_price * 1000 : i.regular_price * 100,
+          i.sale_price !== "" ? i.sale_price * 100 : i.regular_price * 100,
         product_data: {
-          name: i?.name !== "" ? i?.name : i?.NombrePadre,
+          name: i.nombrePadre,
           images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
         },
       },
