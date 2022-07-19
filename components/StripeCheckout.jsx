@@ -8,8 +8,9 @@ import { useRouter } from "next/router";
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
-export default function StripeCheckout() {
+export default function StripeCheckout({ formulario }) {
   const actualCart = useSelector((state) => state.cartReducer.cart);
+  console.log(actualCart);
   const router = useRouter();
   React.useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -29,6 +30,7 @@ export default function StripeCheckout() {
     axios
       .post("/api/checkout_sessions", {
         items: actualCart,
+        formulario: formulario,
       })
       .then((session) => {
         router.push(session.data.url);

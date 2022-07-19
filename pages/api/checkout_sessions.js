@@ -1,8 +1,59 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-  const { items } = req.body;
-
+  const { items, formulario } = req.body;
+  const itemsWc = [];
+    items.map((i) => {
+      itemsWc.push({
+        product_id: i.id,
+        quantity: lineItems.length + 1,
+      });
+    });
+  const data = {
+    payment_method: "stripe",
+    payment_method_title: "Stripe",
+    set_paid: false,
+    billing: {
+      first_name: formulario.nombre,
+      last_name: formulario.apellido,
+      address_1: formulario.direccion,
+      address_2: "",
+      city: formulario.ciudad,
+      state: formulario.provincia,
+      postcode: formulario.cp,
+      country: formulario.pais,
+      email: formulario.email,
+      phone: formulario.telefono,
+    },
+    shipping: {
+      first_name: formulario.nombre,
+      last_name: formulario.apellido,
+      address_1: formulario.direccion,
+      address_2: "",
+      city: formulario.ciudad,
+      state: formulario.provincia,
+      postcode: formulario.cp,
+      country: formulario.pais,
+    },
+    line_items: [
+      {
+        product_id: 93,
+        quantity: 2,
+      },
+      {
+        product_id: 22,
+        variation_id: 23,
+        quantity: 1,
+      },
+    ],
+    shipping_lines: [
+      {
+        method_id: "flat_rate",
+        method_title: "Flat Rate",
+        total: "10.00",
+      },
+    ],
+  };
   const lineItems = [];
   items.map((i) => {
     lineItems.push({

@@ -469,7 +469,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
           </div>
 
           <div className="flex flex-row justify-center mt-5">
-            <StripeCheckout />
+            <StripeCheckout formulario={formulario} />
           </div>
         </form>
 
