@@ -16,7 +16,6 @@ const ShopNav = ({ pagina, opciones }) => {
     <>
       <div className="flex flex-row gap-5 justify-between my-9 w-full">
         {menuBruto.map((menu, index) => {
-          console.log(router.query.categoria, menu.url);
           return (
             <div className="flex flex-col" key={index}>
               <Link href={`/categoria/${menu.url}`}>
