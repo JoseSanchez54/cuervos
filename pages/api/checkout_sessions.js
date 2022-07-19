@@ -37,9 +37,9 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     // Create Checkout Sessions from body params.
-    await WooCommerce.post("orders", formulario)
+    const wc = await WooCommerce.post("orders", formulario)
       .then((response) => {
-        console.log(response.data);
+        return response.data;
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       .create({
         line_items: lineItems,
         mode: "payment",
-        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       })
       .then((session) => {
