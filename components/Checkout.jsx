@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import Decimal from "decimal.js";
 import WooCommerce from "../woocommerce/Woocommerce";
 import StripeCheckout from "./StripeCheckout";
 const Select = dynamic(() => import("react-select"), {
@@ -10,22 +9,12 @@ import { useSelector } from "react-redux";
 const datosPaises = require("../utils/data.json");
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import {
-  createRedsysAPI,
-  TRANSACTION_TYPES,
-  randomTransactionId,
-  SANDBOX_URLS,
-  isResponseCodeOk,
-  CURRENCIES,
-} from "redsys-easy";
 const FormularioCheckout = ({ onAction, tasas, opciones }) => {
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
-
   const [estadoP, setEstadoP] = useState(onAction);
   const handleEstado = () => {
     setEstadoP(!estadoP);
   };
-
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
@@ -47,7 +36,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
       const opacity = state.isDisabled ? 0.5 : 1;
       const transition = "opacity 300ms";
       const color = "white";
-
       return { ...provided, opacity, color, transition };
     },
   };
@@ -57,6 +45,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
   const taxes = useSelector((state) => state.cartReducer.taxes);
   const envios = useSelector((state) => state.cartReducer.envios);
   const [pais, setPais] = useState("");
+  const [completo, setCompleto] = useState(false);
   const [formulario, setFormulario] = useState({
     nombre: "",
     apellido: "",
@@ -82,44 +71,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
       });
     }
   };
-
-  const port = 3000;
-  const endpoint = `https://cuervos-rho.vercel.app`;
-  const successRedirectPath = "/success";
-  const errorRedirectPath = "/error";
-  const notificationPath = "/api/notification";
-  const currency = "EUR";
-  const currencyInfo = CURRENCIES[currency];
-  const totalAmount = total;
-  const redsysAmount = new Decimal(totalAmount)
-    .mul(Math.pow(10, currencyInfo.decimals))
-    .round()
-    .toFixed(0);
-  const redsysCurrency = currencyInfo.num;
-  const { createRedirectForm, processRestNotification } = createRedsysAPI({
-    urls: SANDBOX_URLS,
-    secretKey: "sq7HjrUOBfKmC576ILgskD5srU870gJ7",
-  });
-
-  const merchantInfo = {
-    DS_MERCHANT_MERCHANTCODE: "999008881",
-    DS_MERCHANT_TERMINAL: "1",
-  };
-  const orderId = randomTransactionId();
-  const form = createRedirectForm({
-    ...merchantInfo,
-    DS_MERCHANT_MERCHANTCODE: "999008881",
-    DS_MERCHANT_TERMINAL: "1",
-    DS_MERCHANT_TRANSACTIONTYPE: TRANSACTION_TYPES.AUTHORIZATION, // '0'
-    DS_MERCHANT_ORDER: orderId,
-    // amount in smallest currency unit(cents)
-    DS_MERCHANT_AMOUNT: redsysAmount,
-    DS_MERCHANT_CURRENCY: redsysCurrency,
-    DS_MERCHANT_MERCHANTNAME: "Cría Cuervos",
-    DS_MERCHANT_MERCHANTURL: `${endpoint}${notificationPath}`,
-    DS_MERCHANT_URLOK: `${endpoint}${successRedirectPath}`,
-    DS_MERCHANT_URLKO: `${endpoint}${errorRedirectPath}`,
-  });
 
   const data = {
     payment_method: "Redsys Next App",
@@ -211,31 +162,15 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
       formulario.provincia !== "" &&
       formulario.cp !== ""
     ) {
-      e.target.setAttribute("action", form.url);
+      setCompleto(true);
       handleOrder();
-      e.target.submit();
     } else {
+      setCompleto(false);
       e.target.setAttribute("action", "");
     }
   };
 
   //Stripe
-  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-  const stripePromise = loadStripe(publishableKey);
-  const createCheckOutSession = async () => {
-    const stripe = await stripePromise;
-    const checkoutSession = await axios
-      .post("/api/create-stripe-session", {
-        item: actualCart,
-      })
-      .then((res) => console.log(res));
-    const result = await stripe.redirectToCheckout({
-      sessionId: checkoutSession.data.id,
-    });
-    if (result.error) {
-      alert(result.error.message);
-    }
-  };
 
   const optionsPais = datosPaises.map((pais) => {
     return {
@@ -315,25 +250,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
     <>
       <div>
         <form onSubmit={(e) => actionForm(e)} method="post" target="_blank">
-          <input
-            type="hidden"
-            id="Ds_SignatureVersion"
-            name="Ds_SignatureVersion"
-            value={form.body.Ds_SignatureVersion}
-          />
-          <input
-            type="hidden"
-            id="Ds_MerchantParameters"
-            name="Ds_MerchantParameters"
-            value={form.body.Ds_MerchantParameters}
-          />
-          <input
-            type="hidden"
-            id="Ds_Signature"
-            name="Ds_Signature"
-            value={form.body.Ds_Signature}
-          />
-
           <div className="flex flex-row fila">
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <input
@@ -469,7 +385,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
           </div>
 
           <div className="flex flex-row justify-center mt-5">
-            <StripeCheckout formulario={formulario} />
+            {completo ? (
+              <StripeCheckout formulario={formulario} />
+            ) : (
+              <input className="botonForm" type="submit" value="Continuar" />
+            )}
           </div>
         </form>
 

@@ -26,6 +26,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones }) => {
         ...productoAdd,
         nombrePadre: producto.name,
         idPadre: producto.id,
+        variable: true,
       };
 
       dispatch({

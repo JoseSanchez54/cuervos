@@ -1,14 +1,22 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
+import WooCommerce from "../../woocommerce/Woocommerce";
 export default async function handler(req, res) {
   const { items, formulario } = req.body;
   const itemsWc = [];
-    items.map((i) => {
+  items.map((i) => {
+    if (i.variable === false) {
       itemsWc.push({
         product_id: i.id,
-        quantity: lineItems.length + 1,
+        quantity: 1,
       });
-    });
+    } else {
+      itemsWc.push({
+        product_id: i.id,
+        variation_id: i.idPadre,
+        quantity: 1,
+      });
+    }
+  });
   const data = {
     payment_method: "stripe",
     payment_method_title: "Stripe",
@@ -35,17 +43,7 @@ export default async function handler(req, res) {
       postcode: formulario.cp,
       country: formulario.pais,
     },
-    line_items: [
-      {
-        product_id: 93,
-        quantity: 2,
-      },
-      {
-        product_id: 22,
-        variation_id: 23,
-        quantity: 1,
-      },
-    ],
+    line_items: itemsWc,
     shipping_lines: [
       {
         method_id: "flat_rate",
@@ -62,8 +60,8 @@ export default async function handler(req, res) {
         unit_amount_decimal:
           i.sale_price !== "" ? i.sale_price * 1000 : i.regular_price * 100,
         product_data: {
-          name: i.name,
-          images: [i.images[0].src],
+          name: i.name ? i.name : i.NombrePadre,
+          images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
         },
       },
       quantity: lineItems.length + 1,
@@ -72,6 +70,13 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     // Create Checkout Sessions from body params.
+    WooCommerce.post("orders", data)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
     const session = await stripe.checkout.sessions
       .create({
         line_items: lineItems,
