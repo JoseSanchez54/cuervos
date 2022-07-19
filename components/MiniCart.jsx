@@ -6,6 +6,7 @@ import { useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import useMobile from "../hooks/useMobile";
 import { IoIosCart } from "react-icons/io";
+import { motion, AnimatePresence } from "framer-motion";
 const FormularioCheckout = dynamic(() => import("./Checkout"), {
   ssr: false,
 });
@@ -71,128 +72,156 @@ const MiniCart = (props) => {
       </div>
 
       {open && (
-        <div className={handle()}>
-          <div className="flex flex-col md:h-full md:justify-start menucont menuFijo">
-            <div className="w-full">
-              <CgClose
-                onClick={() => handleOpen()}
-                size="50px"
-                color="#fff"
-                className="cursor-pointer"
-              />
-            </div>
-            <div className={controlDeClases()}>
-              {actualCart?.length === 0 && !checkout && (
-                <>
-                  <span className="mensajeEnviado">Tu carrito está vacio</span>
-                </>
-              )}
+        <AnimatePresence>
+          <motion.div
+            initial={{
+              right: "-100%",
+              maxWidth: "100%",
+              width: "430px",
+              backgroundColor: "#21201f",
+              top: 0,
+              zIndex: 9999,
+              overflowY: "hidden",
+            }}
+            animate={{
+              right: 0,
+            }}
+            exit={{
+              right: "-100%",
+            }}
+            transition={{
+              delay: 0.1,
+              duration: 0.5,
+              ease: "easeInOut",
+            }}
+            className={handle()}
+          >
+            <div className="flex flex-col md:h-full md:justify-start menucont menuFijo">
+              <div className="w-full">
+                <CgClose
+                  onClick={() => handleOpen()}
+                  size="50px"
+                  color="#fff"
+                  className="cursor-pointer"
+                />
+              </div>
+              <div className={controlDeClases()}>
+                {actualCart?.length === 0 && !checkout && (
+                  <>
+                    <span className="mensajeEnviado">
+                      Tu carrito está vacio
+                    </span>
+                  </>
+                )}
 
-              <div className="flex flex-col justify-start mt-5 miniCartWrapper">
-                {actualCart?.length !== 0 &&
-                  actualCart?.map((producto, index) => {
-                    const { attributes, id, image, price, sku, sale_price } =
-                      producto;
-                    return (
-                      <div
-                        className={
-                          index === 0
-                            ? "flex flex-col justify-start w-full md:flex-row producto1"
-                            : "flex flex-col justify-start w-full md:flex-row producto "
-                        }
-                        key={index}
-                      >
-                        <div className="flex flex-row justify-between w-full mt-5 md:flex-row md:mt-0">
-                          <div className="flex flex-col justify-center pl-5 mt-5 text-center md:text-start md:mt-0">
-                            <span className="miniCartName">
-                              {producto?.name}
-                              {producto?.nombrePadre}
-                            </span>
-                            <span className="miniCartPrice">{price}€</span>
-                            <div className="flex flex-row mt-2">
-                              <div className="flex flex-col w-full">
-                                {attributes?.map((e) => {
-                                  if (e?.name === "Botellas") {
-                                    return (
-                                      <>
-                                        <span className="label">Botellas:</span>
-                                        <span className="option">
-                                          {e?.option}
-                                        </span>
-                                      </>
-                                    );
-                                  }
-                                })}
+                <div className="flex flex-col justify-start mt-5 miniCartWrapper">
+                  {actualCart?.length !== 0 &&
+                    actualCart?.map((producto, index) => {
+                      const { attributes, id, image, price, sku, sale_price } =
+                        producto;
+                      return (
+                        <div
+                          className={
+                            index === 0
+                              ? "flex flex-col justify-start w-full md:flex-row producto1"
+                              : "flex flex-col justify-start w-full md:flex-row producto "
+                          }
+                          key={index}
+                        >
+                          <div className="flex flex-row justify-between w-full mt-5 md:flex-row md:mt-0">
+                            <div className="flex flex-col justify-center pl-5 mt-5 text-center md:text-start md:mt-0">
+                              <span className="miniCartName">
+                                {producto?.name}
+                                {producto?.nombrePadre}
+                              </span>
+                              <span className="miniCartPrice">{price}€</span>
+                              <div className="flex flex-row mt-2">
+                                <div className="flex flex-col w-full">
+                                  {attributes?.map((e) => {
+                                    if (e?.name === "Botellas") {
+                                      return (
+                                        <>
+                                          <span className="label">
+                                            Botellas:
+                                          </span>
+                                          <span className="option">
+                                            {e?.option}
+                                          </span>
+                                        </>
+                                      );
+                                    }
+                                  })}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div className="flex flex-col items-center justify-start">
-                            {!checkout && (
-                              <BiTrash
-                                onClick={() =>
-                                  dispatch({
-                                    type: "@RemoveFromCart",
-                                    id: producto.id,
-                                    precio: price,
-                                  })
-                                }
-                                size="20px"
-                                color="#fff"
-                                className="cursor-pointer"
-                              />
-                            )}
+                            <div className="flex flex-col items-center justify-start">
+                              {!checkout && (
+                                <BiTrash
+                                  onClick={() =>
+                                    dispatch({
+                                      type: "@RemoveFromCart",
+                                      id: producto.id,
+                                      precio: price,
+                                    })
+                                  }
+                                  size="20px"
+                                  color="#fff"
+                                  className="cursor-pointer"
+                                />
+                              )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                {checkout && (
-                  <>
-                    <FormularioCheckout
-                      tasas={props.tasas}
-                      onAction={handleCheckout}
-                    />
-                  </>
-                )}
+                      );
+                    })}
+                  {checkout && (
+                    <>
+                      <FormularioCheckout
+                        tasas={props.tasas}
+                        onAction={handleCheckout}
+                      />
+                    </>
+                  )}
 
-                {actualCart?.length !== 0 && !checkout && (
-                  <>
-                    <button onClick={() => vaciarF()} className="vacio">
-                      Vaciar carrito
-                    </button>
-                    <span className="mt-5 text-center precioTotal">
-                      Total: {total}€
-                    </span>
-                    {isMobile && (
-                      <div className="flex flex-row justify-center">
-                        <div className="flex flex-col">
-                          <button
-                            onClick={() => handleCheckout(checkout)}
-                            className="mt-2 botonComprar mb-9"
-                          >
-                            Finalizar compra
-                          </button>
+                  {actualCart?.length !== 0 && !checkout && (
+                    <>
+                      <button onClick={() => vaciarF()} className="vacio">
+                        Vaciar carrito
+                      </button>
+                      <span className="mt-5 text-center precioTotal">
+                        Total: {total}€
+                      </span>
+                      {isMobile && (
+                        <div className="flex flex-row justify-center">
+                          <div className="flex flex-col">
+                            <button
+                              onClick={() => handleCheckout(checkout)}
+                              className="mt-2 botonComprar mb-9"
+                            >
+                              Finalizar compra
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </>
+                      )}
+                    </>
+                  )}
+                </div>
+                {!isMobile && actualCart?.length !== 0 && !checkout && (
+                  <div className="flex flex-row justify-center">
+                    <div className="flex flex-col">
+                      <button
+                        onClick={() => handleCheckout(checkout)}
+                        className="mt-2 botonComprar "
+                      >
+                        Finalizar compra
+                      </button>
+                    </div>
+                  </div>
                 )}
               </div>
-              {!isMobile && actualCart?.length !== 0 && !checkout && (
-                <div className="flex flex-row justify-center">
-                  <div className="flex flex-col">
-                    <button
-                      onClick={() => handleCheckout(checkout)}
-                      className="mt-2 botonComprar "
-                    >
-                      Finalizar compra
-                    </button>
-                  </div>
-                </div>
-              )}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </AnimatePresence>
       )}
       <style jsx>{`
         .vacio {
