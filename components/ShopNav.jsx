@@ -5,8 +5,9 @@ const ShopNav = ({ pagina, opciones }) => {
   const router = useRouter();
 
   const [activo, setActivo] = useState("");
+
   useEffect(() => {
-    setActivo(router.asPath);
+    setActivo(router.query.categoria);
   }, [router]);
   const menuBruto = Object.values(pagina.menu_tienda).map((key) => {
     return key;
