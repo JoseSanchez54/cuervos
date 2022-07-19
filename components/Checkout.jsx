@@ -7,8 +7,6 @@ const Select = dynamic(() => import("react-select"), {
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 const datosPaises = require("../utils/data.json");
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
 const FormularioCheckout = ({ onAction, tasas, opciones }) => {
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
   const [estadoP, setEstadoP] = useState(onAction);
@@ -386,7 +384,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
 
           <div className="flex flex-row justify-center mt-5">
             {completo ? (
-              <StripeCheckout formulario={formulario} />
+              <StripeCheckout formulario={data} />
             ) : (
               <input className="botonForm" type="submit" value="Continuar" />
             )}

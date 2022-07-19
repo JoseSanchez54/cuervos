@@ -10,7 +10,6 @@ const stripePromise = loadStripe(
 );
 export default function StripeCheckout({ formulario }) {
   const actualCart = useSelector((state) => state.cartReducer.cart);
-  console.log(actualCart);
   const router = useRouter();
   React.useEffect(() => {
     // Check to see if this is a redirect back from Checkout
