@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       .create({
         line_items: lineItems,
         mode: "payment",
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       })
       .then((session) => {
