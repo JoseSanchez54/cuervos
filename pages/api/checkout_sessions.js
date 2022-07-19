@@ -18,7 +18,6 @@ export default async function handler(req, res) {
       quantity: lineItems.length + 1,
     });
   });
-  console.log("/////////////////////////////", lineItems);
 
   if (req.method === "POST") {
     // Create Checkout Sessions from body params.

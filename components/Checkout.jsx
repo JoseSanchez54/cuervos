@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import Decimal from "decimal.js";
 import WooCommerce from "../woocommerce/Woocommerce";
-
+import StripeCheckout from "./StripeCheckout";
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
@@ -472,9 +472,7 @@ const FormularioCheckout = ({ onAction, tasas }) => {
             <input className="botonForm" type="submit" value="Pagar ahora" />
           </div>
         </form>
-        <button className="botonForm" onClick={() => createCheckOutSession()}>
-          Stripe
-        </button>
+        <StripeCheckout />
 
         <div className="flex flex-row justify-center mt-2 mb-9">
           <button className="atras" onClick={onAction}>
