@@ -14,7 +14,7 @@ const Image = dynamic(() => import("next/image"), {
   ssr: false,
 });
 
-const MiniCart = (props) => {
+const MiniCart = ({ opciones, tasas }) => {
   const { isMobile } = useMobile();
   const dispatch = useDispatch();
   const actualCart = useSelector((state) => state.cartReducer.cart);
@@ -177,7 +177,7 @@ const MiniCart = (props) => {
                   {checkout && (
                     <>
                       <FormularioCheckout
-                        tasas={props.tasas}
+                        tasas={tasas}
                         onAction={handleCheckout}
                       />
                     </>
@@ -238,7 +238,7 @@ const MiniCart = (props) => {
           font-size: 1.5rem;
           font-weight: bold;
           color: #fff;
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
         }
         .overlay {
           width: 100vw;
@@ -260,7 +260,7 @@ const MiniCart = (props) => {
           display: flex !important;
         }
         .mensajeEnviado {
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
           line-height: 1;
           color: white;
           font-weight: bold;
@@ -278,7 +278,7 @@ const MiniCart = (props) => {
           line-height: calc(30px + (102 - 13) * (100vh - 320px) / (2560 - 320));
           margin: 25px 0px;
           display: block;
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
           z-index: 9;
         }
         .cursor-pointer {
@@ -374,7 +374,7 @@ const MiniCart = (props) => {
         }
         .direcciones span {
           display: block;
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
           text-align: end;
           color: rgb(154, 152, 152) !important;
           font-size: 12px;
@@ -382,7 +382,7 @@ const MiniCart = (props) => {
         }
         .tituloContacto {
           color: white;
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
           font-size: calc(42px + (100 - 27) * (100vh - 320px) / (2560 - 320));
           width: 100%;
           font-style: italic;
@@ -399,17 +399,17 @@ const MiniCart = (props) => {
           font-size: 20px;
           font-weight: normal;
           color: #fff;
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
         }
         .miniCartName {
           font-size: 30px;
 
           font-weight: normal;
           color: #fff;
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
         }
         .minicartD {
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
           font-size: 18px;
           font-weight: bold;
           cursor: pointer;
@@ -420,7 +420,7 @@ const MiniCart = (props) => {
           margin-top: 6px;
         }
         .botonComprar {
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
           color: #fff;
           font-size: 25px;
           background-color: black;
@@ -478,7 +478,7 @@ const MiniCart = (props) => {
           position: absolute;
           width: 20px;
           height: 20px;
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
           font-size: 13px;
           top: 19px;
           background-color: #000000;
@@ -493,13 +493,13 @@ const MiniCart = (props) => {
         .label {
           color: #fff;
           font-size: 13px;
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
           font-weight: bold;
         }
         .option {
           color: #fff;
           font-size: 12px;
-          font-family: "Helvetica";
+          font-family: ${opciones.fuente_titulos};
           font-weight: normal;
         }
         @media (max-width: 768px) {

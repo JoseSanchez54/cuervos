@@ -18,7 +18,7 @@ import {
   isResponseCodeOk,
   CURRENCIES,
 } from "redsys-easy";
-const FormularioCheckout = ({ onAction, tasas }) => {
+const FormularioCheckout = ({ onAction, tasas, opciones }) => {
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
 
   const [estadoP, setEstadoP] = useState(onAction);
@@ -469,10 +469,9 @@ const FormularioCheckout = ({ onAction, tasas }) => {
           </div>
 
           <div className="flex flex-row justify-center mt-5">
-            <input className="botonForm" type="submit" value="Pagar ahora" />
+            <StripeCheckout />
           </div>
         </form>
-        <StripeCheckout />
 
         <div className="flex flex-row justify-center mt-2 mb-9">
           <button className="atras" onClick={onAction}>

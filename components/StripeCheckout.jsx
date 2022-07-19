@@ -37,32 +37,24 @@ export default function StripeCheckout() {
 
   return (
     <>
-      <button onClick={(e) => handle(e)}>Checkout</button>
+      <button onClick={(e) => handle(e)}>Pagar</button>
 
       <style jsx>
         {`
-          section {
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-            width: 400px;
-            height: 112px;
-            border-radius: 6px;
-            justify-content: space-between;
-          }
           button {
-            height: 36px;
-            background: #556cd6;
-            border-radius: 4px;
-            color: white;
-            border: 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+            background-color: #000000;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: 1px solid black;
+            text-transform: uppercase;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
           }
           button:hover {
-            opacity: 0.8;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid white;
           }
         `}
       </style>

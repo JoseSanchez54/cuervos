@@ -43,7 +43,7 @@ const Nav = ({ opciones, categorias }) => {
                 <BiUser size="25px" />
               </Link>
             )}
-            <MiniCart />
+            <MiniCart opciones={opciones} />
           </div>
         </div>
       </div>
