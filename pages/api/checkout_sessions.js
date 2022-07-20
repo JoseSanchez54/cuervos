@@ -20,7 +20,6 @@ export default async function handler(req, res) {
 
   const lineItems = [];
   await items.map((i) => {
-
     lineItems.push({
       price_data: {
         currency: "EUR",
@@ -31,7 +30,7 @@ export default async function handler(req, res) {
           images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
         },
       },
-      quantity: lineItems.length + 1,
+      quantity: 1,
     });
   });
 
