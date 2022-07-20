@@ -52,12 +52,14 @@ const cartReducer = (
         metodos: state.metodos,
       };
     case "@setShipping":
+      const envios = Object.values(action.envios[0].envios).map((key) => {
+        return key;
+      });
       return {
         cart: state.cart,
         total: state.total,
         taxes: state.taxes,
-        envios: action.envios,
-        metodos: action.metodos,
+        envios: envios,
       };
     default:
       return state;

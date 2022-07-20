@@ -24,6 +24,14 @@ function MyApp({ Component, pageProps }) {
       taxes: e.data,
     })
   );
+  const envios = axios
+    .get("https://apicuervos.bitmac.es/wp-json/jet-cct/envios")
+    .then((e) =>
+      dispatch({
+        type: "@setShipping",
+        envios: e.data,
+      })
+    );
 
   return (
     <SWRConfig
