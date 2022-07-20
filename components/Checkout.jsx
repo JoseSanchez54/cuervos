@@ -110,15 +110,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
     ],
   };
 
-  const handleOrder = () => {
-    WooCommerce.post("orders", data)
-      .then((response) => {
-        localStorage.setItem("orderId", response.data.id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   const actionForm = (e) => {
     e.preventDefault();
     const {

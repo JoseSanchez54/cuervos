@@ -161,6 +161,7 @@ const MiniCart = ({ opciones, tasas }) => {
                                       type: "@RemoveFromCart",
                                       id: producto.id,
                                       precio: price,
+                                      peso: producto.weight,
                                     })
                                   }
                                   size="20px"
