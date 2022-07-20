@@ -30,7 +30,7 @@ const Nav = ({ opciones, categorias }) => {
         </div>
         <div className="flex flex-col w-1/3 h-auto items-end p-1  justify-center">
           <div className="flex flex-row w-full gap-3 justify-end items-center">
-            {!isMobile ? (
+            {/* {!isMobile ? (
               <Link href="#">
                 <a
                   style={{ color: "black", fontFamily: opciones.fuente_global }}
@@ -42,7 +42,7 @@ const Nav = ({ opciones, categorias }) => {
               <Link href="#">
                 <BiUser size="25px" />
               </Link>
-            )}
+            )} */}
             <MiniCart opciones={opciones} />
           </div>
         </div>
