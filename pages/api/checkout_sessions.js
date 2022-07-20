@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
   const lineItems = [];
   await items.map((i) => {
-    console.log("////////////////////////", i);
+
     lineItems.push({
       price_data: {
         currency: "EUR",
