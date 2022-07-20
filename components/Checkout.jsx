@@ -386,7 +386,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
           </div>
 
           <div className="flex flex-row justify-center mt-5">
-            {completo ? (
+            {completo && tax.error === "" ? (
               <StripeCheckout formulario={data} envio={precioEnvio.precio} />
             ) : (
               <input className="botonForm" type="submit" value="Continuar" />
