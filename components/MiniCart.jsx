@@ -179,6 +179,7 @@ const MiniCart = ({ opciones, tasas }) => {
                       <FormularioCheckout
                         tasas={tasas}
                         onAction={handleCheckout}
+                        checkout={checkout}
                       />
                     </>
                   )}

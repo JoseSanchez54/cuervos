@@ -7,7 +7,7 @@ const Select = dynamic(() => import("react-select"), {
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 const datosPaises = require("../utils/data.json");
-const FormularioCheckout = ({ onAction, tasas, opciones }) => {
+const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
   const [estadoP, setEstadoP] = useState(onAction);
   const handleEstado = () => {
@@ -44,8 +44,10 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
   const envios = useSelector((state) => state.cartReducer.envios);
   const peso = useSelector((state) => state.cartReducer.peso);
   const precioEnvio = envios.find(
-    (e) => parseInt(e.peso_maximo) >= peso && parseInt(e.peso_minimo) <= peso
+    (e) =>
+      parseFloat(e.peso_maximo) >= peso && parseFloat(e.peso_minimo) <= peso
   );
+  console.log(precioEnvio);
 
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
@@ -372,7 +374,12 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
                 </div>
                 <div className="flex flex-col items-end w-1/2">
                   <span className="subtotal">
-                    {parseInt(formulario.total) + parseInt(precioEnvio.precio)}€
+                    {tax.tasa === ""
+                      ? parseFloat(formulario.total).toFixed(2) + "€"
+                      : (
+                          parseFloat(formulario.total) +
+                          parseFloat(precioEnvio.precio)
+                        ).toFixed(2) + "€"}
                   </span>
                 </div>
               </div>
