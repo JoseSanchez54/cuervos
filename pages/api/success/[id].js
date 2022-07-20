@@ -4,11 +4,10 @@ export default async (req, res) => {
   const estado = {
     status: "completed",
   };
-  const wc_order_id = req.query.id;
-  console.log("req", req);
+  const wc_order_id = req.query.id.toString();
   const pedido = await WooCommerce.put("orders/" + wc_order_id, estado)
     .then((response) => {
-      console.log(response.data);
+      return response;
     })
     .catch((error) => {
       console.log(error);
