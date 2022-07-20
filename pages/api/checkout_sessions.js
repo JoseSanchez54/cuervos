@@ -1,7 +1,8 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import WooCommerce from "../../woocommerce/Woocommerce";
 export default async function handler(req, res) {
-  const { items, formulario } = req.body;
+  const { items, formulario, envio } = req.body;
+  console.log("////////////", envio);
   const itemsWc = [];
   items.map((i) => {
     if (i.variable === false) {
@@ -32,6 +33,16 @@ export default async function handler(req, res) {
       },
       quantity: 1,
     });
+  });
+  await lineItems.push({
+    price_data: {
+      currency: "EUR",
+      unit_amount_decimal: envio * 100,
+      product_data: {
+        name: "Envio",
+      },
+    },
+    quantity: 1,
   });
 
   if (req.method === "POST") {

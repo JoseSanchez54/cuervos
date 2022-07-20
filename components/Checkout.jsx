@@ -376,10 +376,9 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                   <span className="subtotal">
                     {tax.tasa === ""
                       ? parseFloat(formulario.total).toFixed(2) + "€"
-                      : (
-                          parseFloat(formulario.total) +
-                          parseFloat(precioEnvio.precio)
-                        ).toFixed(2) + "€"}
+                      : parseFloat(formulario.total) +
+                        parseFloat(precioEnvio.precio) +
+                        "€"}
                   </span>
                 </div>
               </div>
@@ -388,7 +387,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
 
           <div className="flex flex-row justify-center mt-5">
             {completo ? (
-              <StripeCheckout formulario={data} />
+              <StripeCheckout formulario={data} envio={precioEnvio.precio} />
             ) : (
               <input className="botonForm" type="submit" value="Continuar" />
             )}

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
-export default function StripeCheckout({ formulario }) {
+export default function StripeCheckout({ formulario, envio }) {
   const actualCart = useSelector((state) => state.cartReducer.cart);
   const router = useRouter();
   React.useEffect(() => {
@@ -25,6 +25,7 @@ export default function StripeCheckout({ formulario }) {
       .post("/api/checkout_sessions", {
         items: actualCart,
         formulario: formulario,
+        envio: envio,
       })
       .then((session) => {
         router.push(session.data.url);
