@@ -25,18 +25,10 @@ function MyApp({ Component, pageProps }) {
     })
   );
 
-  const envios = axios.get(redirectURL + "/api/envios/").then((e) =>
-    dispatch({
-      type: "@setShipping",
-      envios: e.data,
-    })
-  );
-
   return (
     <SWRConfig
       value={{
         fetcher: fetcher,
-
         refreshInterval: 30,
       }}
     >

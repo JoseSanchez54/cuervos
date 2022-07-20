@@ -161,7 +161,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
       formulario.cp !== ""
     ) {
       setCompleto(true);
-      handleOrder();
     } else {
       setCompleto(false);
       e.target.setAttribute("action", "");

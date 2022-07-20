@@ -131,7 +131,6 @@ const MiniCart = ({ opciones, tasas }) => {
                           <div className="flex flex-row justify-between w-full mt-5 md:flex-row md:mt-0">
                             <div className="flex flex-col justify-center pl-5 mt-5 text-center md:text-start md:mt-0">
                               <span className="miniCartName">
-                                {producto?.name}
                                 {producto?.nombrePadre}
                               </span>
                               <span className="miniCartPrice">{price}€</span>

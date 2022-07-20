@@ -49,6 +49,7 @@ const cartReducer = (
         total: state.total,
         taxes: action.taxes,
         envios: state.envios,
+        metodos: state.metodos,
       };
     case "@setShipping":
       return {
@@ -56,6 +57,7 @@ const cartReducer = (
         total: state.total,
         taxes: state.taxes,
         envios: action.envios,
+        metodos: action.metodos,
       };
     default:
       return state;

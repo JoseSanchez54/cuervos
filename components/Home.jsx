@@ -397,7 +397,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
             <div className="lg:flex hidden flex-col w-2/3">
               <div className="relative w-full h-full">
                 <Image
-                  objectFit="contain"
+                  objectFit="cover"
                   layout="fill"
                   src={pagina.imagen_fondo_banner}
                 ></Image>
