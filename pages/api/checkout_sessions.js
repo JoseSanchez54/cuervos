@@ -40,6 +40,9 @@ export default async function handler(req, res) {
       unit_amount_decimal: envio * 100,
       product_data: {
         name: "Envio",
+        images: [
+          "https://apicuervos.bitmac.es/wp-content/uploads/2022/07/envio.jpg",
+        ],
       },
     },
     quantity: 1,
