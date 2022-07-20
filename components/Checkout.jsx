@@ -42,6 +42,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
   const total = useSelector((state) => state.cartReducer.total);
   const taxes = useSelector((state) => state.cartReducer.taxes);
   const envios = useSelector((state) => state.cartReducer.envios);
+  const peso = useSelector((state) => state.cartReducer.peso);
+  const precioEnvio = envios.find(
+    (e) => parseInt(e.peso_maximo) >= peso && parseInt(e.peso_minimo) <= peso
+  );
+
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
   const [formulario, setFormulario] = useState({
@@ -355,7 +360,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
                       <span className="subtotal">Envío:</span>
                     </div>
                     <div className="flex flex-col items-end w-1/2">
-                      <span className="subtotal">10€</span>
+                      <span className="subtotal">{precioEnvio.precio}€</span>
                     </div>
                   </div>
                 </>
@@ -366,7 +371,9 @@ const FormularioCheckout = ({ onAction, tasas, opciones }) => {
                   <span className="subtotal">Total:</span>
                 </div>
                 <div className="flex flex-col items-end w-1/2">
-                  <span className="subtotal">{formulario.total}€</span>
+                  <span className="subtotal">
+                    {parseInt(formulario.total) + parseInt(precioEnvio.precio)}€
+                  </span>
                 </div>
               </div>
             </div>
