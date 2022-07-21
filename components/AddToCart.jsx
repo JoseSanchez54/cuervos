@@ -8,26 +8,21 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   if (variable) {
     const productoAdd = addToCart(seleccion, lista);
     if (productoAdd.on_sale) {
-      precio({
-        rebaja: productoAdd.sale_price,
-        normal: productoAdd.regular_price,
-      });
+      precio(productoAdd.sale_price);
     } else {
-      precio({
-        rebaja: productoAdd.sale_price,
-        normal: productoAdd.regular_price,
-      });
+      precio(productoAdd.regular_price);
     }
   } else {
     if (producto.on_sale) {
-      precio({ rebaja: producto.sale_price, normal: producto.regular_price });
+      precio(producto.sale_price);
     } else {
-      precio({ rebaja: producto.sale_price, normal: producto.regular_price });
+      precio(producto.regular_price);
     }
   }
 
   const handleCart = () => {
     if (variable) {
+      const productoAdd = addToCart(seleccion, lista);
       productoAdd = {
         ...productoAdd,
         nombrePadre: producto.name,

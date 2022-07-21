@@ -47,7 +47,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     (e) =>
       parseFloat(e.peso_maximo) >= peso && parseFloat(e.peso_minimo) <= peso
   );
-  console.log(precioEnvio);
 
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
@@ -376,8 +375,8 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                   <span className="subtotal">
                     {tax.tasa === ""
                       ? parseFloat(formulario.total).toFixed(2) + "€"
-                      : parseFloat(formulario.total) +
-                        parseFloat(precioEnvio.precio) +
+                      : parseFloat(formulario.total).toFixed(2) +
+                        parseFloat(precioEnvio.precio).toFixed(2) +
                         "€"}
                   </span>
                 </div>

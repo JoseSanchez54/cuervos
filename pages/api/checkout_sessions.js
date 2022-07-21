@@ -2,7 +2,6 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import WooCommerce from "../../woocommerce/Woocommerce";
 export default async function handler(req, res) {
   const { items, formulario, envio } = req.body;
-  console.log("////////////", envio);
   const itemsWc = [];
   items.map((i) => {
     if (i.variable === false) {
@@ -25,7 +24,9 @@ export default async function handler(req, res) {
       price_data: {
         currency: "EUR",
         unit_amount_decimal:
-          i.sale_price !== "" ? i.sale_price * 100 : i.regular_price * 100,
+          i.sale_price !== ""
+            ? i.sale_price.toFixed(2) * 100
+            : i.regular_price.toFixed(2) * 100,
         product_data: {
           name: i.nombrePadre,
           images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
@@ -37,7 +38,7 @@ export default async function handler(req, res) {
   await lineItems.push({
     price_data: {
       currency: "EUR",
-      unit_amount_decimal: envio * 100,
+      unit_amount_decimal: envio.toFixed(2) * 100,
       product_data: {
         name: "Envio",
         images: [
