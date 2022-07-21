@@ -53,9 +53,7 @@ export default async function handler(req, res) {
       .then((response) => {
         return response.data;
       })
-      .catch((error) => {
-    
-      });
+      .catch((error) => {});
     const session = await stripe.checkout.sessions
       .create({
         line_items: lineItems,
