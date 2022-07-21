@@ -361,7 +361,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                       <span className="subtotal">Envío:</span>
                     </div>
                     <div className="flex flex-col items-end w-1/2">
-                      <span className="subtotal">{precioEnvio.precio}€</span>
+                      <span className="subtotal">{precioEnvio?.precio}€</span>
                     </div>
                   </div>
                 </>

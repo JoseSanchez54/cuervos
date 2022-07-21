@@ -6,6 +6,6 @@ export default async (req, res) => {
       return res.status(200).json(response.data);
     })
     .catch((error) => {
-      console.log("err", error);
+   
     });
 };

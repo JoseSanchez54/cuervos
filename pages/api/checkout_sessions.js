@@ -54,7 +54,7 @@ export default async function handler(req, res) {
         return response.data;
       })
       .catch((error) => {
-        console.log(error.response.data);
+    
       });
     const session = await stripe.checkout.sessions
       .create({

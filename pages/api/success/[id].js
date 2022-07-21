@@ -10,7 +10,7 @@ export default async (req, res) => {
       return response;
     })
     .catch((error) => {
-      console.log(error);
+   
     });
 
   return res.status(200).json(pedido);
