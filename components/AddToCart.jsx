@@ -1,27 +1,33 @@
 import { addToCart } from "../utils/addToCart";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 
-import useMobile from "../hooks/useMobile";
-
-const AddToCart = ({ seleccion, lista, producto, opciones }) => {
+const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const variable = producto.attributes.length > 0;
-  const { isMobile } = useMobile();
-  const [valor, setValor] = useState(1);
-  const productoA = () => {
-    if (variable) {
-      return addToCart(seleccion, lista, producto);
-    } else {
-      return producto;
-    }
-  };
-  const newV = productoA();
-
   const dispatch = useDispatch();
+  if (variable) {
+    const productoAdd = addToCart(seleccion, lista);
+    if (productoAdd.on_sale) {
+      precio({
+        rebaja: productoAdd.sale_price,
+        normal: productoAdd.regular_price,
+      });
+    } else {
+      precio({
+        rebaja: productoAdd.sale_price,
+        normal: productoAdd.regular_price,
+      });
+    }
+  } else {
+    if (producto.on_sale) {
+      precio({ rebaja: producto.sale_price, normal: producto.regular_price });
+    } else {
+      precio({ rebaja: producto.sale_price, normal: producto.regular_price });
+    }
+  }
+
   const handleCart = () => {
     if (variable) {
-      const productoAdd = addToCart(seleccion, lista);
       productoAdd = {
         ...productoAdd,
         nombrePadre: producto.name,
@@ -29,6 +35,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones }) => {
         variable: true,
         img: producto.images[0].src,
       };
+      precio("20");
 
       dispatch({
         type: "@AddToCart",

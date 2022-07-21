@@ -99,6 +99,13 @@ const SingleProduct = ({
   upSells,
 }) => {
   const { product } = useProduct(products[0], products[0]?.id);
+  const [precio, setPrecio] = useState({
+    rebaja: product?.sale_price,
+    normal: product?.regular_price,
+  });
+  const handlePrecio = (precio) => {
+    setPrecio(precio);
+  };
 
   const metadata = Object.values(product.meta_data).map((key) => {
     return key;
@@ -146,7 +153,6 @@ const SingleProduct = ({
   });
 
   const [seleccion, setSeleccion] = useState(newTT);
-  const [isActive, setIsActive] = useState(false);
   const handleVariations = (e, tipo) => {
     const resultado = {
       ...seleccion,
@@ -155,7 +161,6 @@ const SingleProduct = ({
     setSeleccion(resultado);
   };
   const { isMobile } = useMobile();
-
   return (
     <>
       <DefaultSeo
@@ -293,6 +298,29 @@ const SingleProduct = ({
                         __html: product.short_description,
                       }}
                     />
+                    <div className="flex gap-2 z-[11] flex-row w-full">
+                      <div className="flex flex-col">
+                        <span
+                          style={{
+                            fontFamily: options.fuente_global,
+                            textDecoration: "line-through",
+                          }}
+                          className="rebaja"
+                        >
+                          {precio.normal}€
+                        </span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span
+                          style={{
+                            fontFamily: options.fuente_global,
+                          }}
+                          className="rebaja"
+                        >
+                          {precio.rebaja}€
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
@@ -333,6 +361,7 @@ const SingleProduct = ({
                     producto={product}
                     opciones={options}
                     seleccion={seleccion}
+                    precio={handlePrecio}
                   />
                 </div>
                 <div className="flex flex-row mt-9 w-full justify-center">
