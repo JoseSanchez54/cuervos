@@ -374,9 +374,9 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 <div className="flex flex-col items-end w-1/2">
                   <span className="subtotal">
                     {tax.tasa === ""
-                      ? parseFloat(formulario.total).toFixed(2) + "€"
-                      : parseFloat(formulario.total).toFixed(2) +
-                        parseFloat(precioEnvio.precio).toFixed(2) +
+                      ? parseFloat(formulario.total) + "€"
+                      : parseFloat(formulario.total) +
+                        parseFloat(precioEnvio.precio) +
                         "€"}
                   </span>
                 </div>
