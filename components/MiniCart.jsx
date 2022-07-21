@@ -140,12 +140,14 @@ const MiniCart = ({ opciones, tasas }) => {
                                       width="100px"
                                       height="100px"
                                       src={image?.src}
+                                      objectFit="cover"
                                     />
                                   ) : (
                                     <Image
                                       width="100px"
                                       height="100px"
                                       src={producto?.images[0].src}
+                                      objectFit="cover"
                                     />
                                   )}
                                 </div>
