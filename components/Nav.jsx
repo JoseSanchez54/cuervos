@@ -14,7 +14,7 @@ const Nav = ({ opciones, categorias }) => {
     <>
       <FranjaPromo opciones={opciones} />
       <div className="flex sticky top-0 bg-white pt-[8px] z-[30] flex-row w-full justify-between  my-4">
-        <div className="flex flex-col w-1/3 h-auto items-start p-1  justify-center">
+        <div className="flex flex-col w-1/3 h-auto items-start py-1 px-5 justify-center">
           <MenuLateral categorias={categorias} opciones={opciones} />
         </div>
         <div className="flex flex-col w-1/3 items-center h-auto">
@@ -28,7 +28,7 @@ const Nav = ({ opciones, categorias }) => {
             </a>
           </Link>
         </div>
-        <div className="flex flex-col w-1/3 h-auto items-end p-1  justify-center">
+        <div className="flex flex-col w-1/3 h-auto items-end py-1 px-5  justify-center">
           <div className="flex flex-row w-full gap-3 justify-end items-center">
             {/* {!isMobile ? (
               <Link href="#">
