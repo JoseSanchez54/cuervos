@@ -99,10 +99,7 @@ const SingleProduct = ({
   upSells,
 }) => {
   const { product } = useProduct(products[0], products[0]?.id);
-  const [precio, setPrecio] = useState({
-    rebaja: product?.sale_price,
-    normal: product?.regular_price,
-  });
+  const [precio, setPrecio] = useState(product?.price);
   const handlePrecio = (precio) => {
     setPrecio(precio);
   };
@@ -298,29 +295,18 @@ const SingleProduct = ({
                         __html: product.short_description,
                       }}
                     />
-                    <div className="flex gap-2 z-[11] flex-row w-full">
-                      <div className="flex flex-col">
-                        <span
-                          style={{
-                            fontFamily: options.fuente_global,
-                            textDecoration: "line-through",
-                          }}
-                          className="rebaja"
-                        >
-                          {precio.normal}€
-                        </span>
-                      </div>
-                      <div className="flex flex-col">
-                        <span
-                          style={{
-                            fontFamily: options.fuente_global,
-                          }}
-                          className="rebaja"
-                        >
-                          {precio.rebaja}€
-                        </span>
-                      </div>
-                    </div>
+                    <span
+                      className="precio"
+                      style={{
+                        color: "black",
+                        fontSize: "1.5rem",
+                        fontWeight: "bold",
+                        marginTop: "10px",
+                        fontFamily: options.fuente_titulo,
+                      }}
+                    >
+                      {precio}€
+                    </span>
                   </div>
                 </div>
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
