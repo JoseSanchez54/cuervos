@@ -64,7 +64,10 @@ const MiniCart = ({ opciones, tasas }) => {
         <span onClick={() => handleOpen()} className="minicartD">
           <IoIosCart size="25px" />
           {cantidad !== 0 && (
-            <span className="bubble animate__animated animate__bounceIn">
+            <span
+              style={{ color: "#fff !important" }}
+              className="bubble animate__animated animate__bounceIn"
+            >
               {cantidad}
             </span>
           )}
@@ -78,7 +81,7 @@ const MiniCart = ({ opciones, tasas }) => {
               right: "-100%",
               maxWidth: "100%",
               width: "430px",
-              backgroundColor: "#21201f",
+              backgroundColor: "#ffffff",
               top: 0,
               zIndex: 9999,
               overflowY: "hidden",
@@ -101,7 +104,7 @@ const MiniCart = ({ opciones, tasas }) => {
                 <CgClose
                   onClick={() => handleOpen()}
                   size="50px"
-                  color="#fff"
+                  color="#000"
                   className="cursor-pointer"
                 />
               </div>
@@ -130,30 +133,47 @@ const MiniCart = ({ opciones, tasas }) => {
                         >
                           <div className="flex flex-row justify-between w-full mt-5 md:flex-row md:mt-0">
                             <div className="flex flex-col justify-center pl-5 mt-5 text-center md:text-start md:mt-0">
-                              <span className="miniCartName">
-                                {producto?.nombrePadre}
-                              </span>
-                              <span className="miniCartPrice">{price}€</span>
-                              <div className="flex flex-row mt-2">
-                                <div className="flex flex-col w-full">
-                                  {attributes?.map((e) => {
-                                    if (e?.name === "Botellas") {
-                                      return (
-                                        <>
-                                          <span className="label">
-                                            Botellas:
-                                          </span>
-                                          <span className="option">
-                                            {e?.option}
-                                          </span>
-                                        </>
-                                      );
-                                    }
-                                  })}
+                              <div className="flex flex-row gap-5 w-full">
+                                <div className="flex w-auto max-w-[100px] justify-center flex-col">
+                                  {image ? (
+                                    <Image
+                                      width="100px"
+                                      height="100px"
+                                      src={image?.src}
+                                    />
+                                  ) : (
+                                    <Image
+                                      width="100px"
+                                      height="100px"
+                                      src={producto?.images[0].src}
+                                    />
+                                  )}
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                  <span className="miniCartName">
+                                    {producto?.nombrePadre}
+                                  </span>
+
+                                  <div className="flex flex-row mt-2">
+                                    <div className="flex flex-col w-full">
+                                      {attributes?.map((e) => {
+                                        if (e?.name === "Botellas") {
+                                          return (
+                                            <>
+                                              <span className="label">
+                                                Botellas: {e?.option}
+                                              </span>
+                                            </>
+                                          );
+                                        }
+                                      })}
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                            <div className="flex flex-col items-center justify-start">
+                            <div className="flex flex-col items-center justify-between">
+                              <span className="miniCartPrice">{price}€</span>
                               {!checkout && (
                                 <BiTrash
                                   onClick={() =>
@@ -165,7 +185,7 @@ const MiniCart = ({ opciones, tasas }) => {
                                     })
                                   }
                                   size="20px"
-                                  color="#fff"
+                                  color="#000"
                                   className="cursor-pointer"
                                 />
                               )}
@@ -226,7 +246,7 @@ const MiniCart = ({ opciones, tasas }) => {
       )}
       <style jsx>{`
         .vacio {
-          color: #fff;
+          color: #000;
           text-decoration: underline;
         }
         .menucont.menu2 {
@@ -234,6 +254,9 @@ const MiniCart = ({ opciones, tasas }) => {
         }
         .alto {
           height: calc(100vh - 160px);
+        }
+        span {
+          color: #000 !important;
         }
         .precioTotal {
           font-size: 1.5rem;
@@ -263,18 +286,18 @@ const MiniCart = ({ opciones, tasas }) => {
         .mensajeEnviado {
           font-family: ${opciones.fuente_titulos};
           line-height: 1;
-          color: white;
+          color: black;
           font-weight: bold;
           font-size: 100px;
         }
         .miniCartWrapper {
           overflow-y: auto;
-          scrollbar-color: red grey;
+          scrollbar-color: black grey;
           scrollbar-width: thin;
         }
         .menuenlace {
           text-decoration: none;
-          color: #fff;
+          color: #000000;
           font-size: calc(38px + (100 - 27) * (100vh - 320px) / (2560 - 320));
           line-height: calc(30px + (102 - 13) * (100vh - 320px) / (2560 - 320));
           margin: 25px 0px;
@@ -303,11 +326,11 @@ const MiniCart = ({ opciones, tasas }) => {
         .producto {
           border-bottom: 1px solid #3a3a3a;
           margin-bottom: 21px;
+          padding-bottom: 21px;
         }
         .producto1 {
-          border-top: 1px solid #3a3a3a;
           border-bottom: 1px solid #3a3a3a;
-          padding-top: 21px;
+          padding-bottom: 21px;
           margin-bottom: 21px;
         }
         @media (max-width: 768px) {
@@ -403,7 +426,7 @@ const MiniCart = ({ opciones, tasas }) => {
           font-family: ${opciones.fuente_titulos};
         }
         .miniCartName {
-          font-size: 30px;
+          font-size: 24px;
 
           font-weight: normal;
           color: #fff;
@@ -483,7 +506,7 @@ const MiniCart = ({ opciones, tasas }) => {
           font-size: 13px;
           top: 19px;
           background-color: #000000;
-          color: #fff;
+          color: #fff !important;
           border-radius: 100%;
           padding: -1px;
           display: block;
