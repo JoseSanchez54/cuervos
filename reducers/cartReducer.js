@@ -24,7 +24,6 @@ const cartReducer = (
       };
     case "@RemoveFromCart":
       let totalR = parseFloat(state.total) - parseFloat(action.precio);
-      let cartR = state.cart.filter((item) => item.id !== action.id);
       const index = state.cart.findIndex((item) => item.id === action.id);
       const pesoR = parseInt(state.peso) - parseInt(action.peso);
       return {
