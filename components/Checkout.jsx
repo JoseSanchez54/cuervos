@@ -17,7 +17,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     option: (provided, state) => ({
       ...provided,
       backgroundColor: state.isFocused && "red",
-      color: state.isFocused && "white",
+      color: state.isFocused && "black",
     }),
     menuList: (provided, state) => ({
       ...provided,
@@ -27,13 +27,13 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     control: () => ({
       // none of react-select's styles are passed to <Control />
       display: "flex",
-      borderBottom: "1px solid white",
-      color: "white",
+      borderBottom: "1px solid black",
+      color: "black",
     }),
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
       const transition = "opacity 300ms";
-      const color = "white";
+      const color = "black";
       return { ...provided, opacity, color, transition };
     },
   };
@@ -384,11 +384,15 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
             </div>
           </div>
 
-          <div className="flex flex-row justify-center mt-5">
+          <div className="flex flex-row w-full justify-center mt-5">
             {completo && !tax.error ? (
               <StripeCheckout formulario={data} envio={precioEnvio.precio} />
             ) : (
-              <input className="botonForm" type="submit" value="Continuar" />
+              <input
+                className="botonForm mt-9"
+                type="submit"
+                value="Continuar"
+              />
             )}
           </div>
         </form>
@@ -407,13 +411,16 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
           font-size: 25px;
           background-color: black;
           padding: 10px 20px;
-          border-radius: 15px;
           cursor: pointer;
           text-align: center;
         }
         .botonForm:hover {
-          color: #fff;
-          background-color: #e00000;
+          color: #000;
+          background-color: #fff;
+          border: 2px solid #000;
+        }
+        span {
+          color: #000;
         }
         .atras {
           color: #fff;

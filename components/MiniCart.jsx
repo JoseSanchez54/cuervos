@@ -149,7 +149,7 @@ const MiniCart = ({ opciones, tasas }) => {
                                     />
                                   )}
                                 </div>
-                                <div className="flex flex-col justify-center">
+                                <div className="flex flex-col ">
                                   <span className="miniCartName">
                                     {producto?.nombrePadre}
                                   </span>
@@ -229,10 +229,10 @@ const MiniCart = ({ opciones, tasas }) => {
                 </div>
                 {!isMobile && actualCart?.length !== 0 && !checkout && (
                   <div className="flex flex-row justify-center">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col w-full">
                       <button
                         onClick={() => handleCheckout(checkout)}
-                        className="mt-2 botonComprar "
+                        className="mt-2 botonComprar block"
                       >
                         Finalizar compra
                       </button>
@@ -449,11 +449,11 @@ const MiniCart = ({ opciones, tasas }) => {
           font-size: 25px;
           background-color: black;
           padding: 10px 20px;
-          border-radius: 15px;
         }
         .botonComprar:hover {
-          color: #fff;
-          background-color: #e00000;
+          color: #000;
+          background-color: #fff;
+          border: solid 2px #000;
         }
         /* width */
         ::-webkit-scrollbar {
