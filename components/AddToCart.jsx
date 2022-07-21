@@ -7,16 +7,16 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const dispatch = useDispatch();
   if (variable) {
     const productoAdd = addToCart(seleccion, lista);
-    if (productoAdd.on_sale) {
-      precio(productoAdd.sale_price);
+    if (productoAdd?.on_sale) {
+      precio(productoAdd?.sale_price);
     } else {
-      precio(productoAdd.regular_price);
+      precio(productoAdd?.regular_price);
     }
   } else {
     if (producto.on_sale) {
-      precio(producto.sale_price);
+      precio(producto?.sale_price);
     } else {
-      precio(producto.regular_price);
+      precio(producto?.regular_price);
     }
   }
 

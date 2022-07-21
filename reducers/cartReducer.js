@@ -41,13 +41,6 @@ const cartReducer = (
         peso: 0,
       };
 
-    //const newCart = state.cart.filter((item) => item.id !== action.id);
-    /*    return {
-        ...state,
-        cart: newCart,
-        total: (parseFloat(state.total) - parseFloat(action.precio)).toFixed(2),
-      }; */
-
     case "@setTaxes":
       return {
         cart: state.cart,
