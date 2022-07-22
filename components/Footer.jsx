@@ -33,7 +33,7 @@ const Footer = ({ options }) => {
         <div className="flex flex-row flex-wrap gap-9 pt-9 w-full">
           <div className="flex flex-col justify-center  w-full ">
             <div className="flex flex-row gap-4 lg:justify-between flex-wrap justify-center  items-center w-full">
-              <Link href="/legal/politica-de-privacidad" passHref>
+              <Link href="/legal/politica_cookies" passHref>
                 <a>
                   <button
                     style={{
