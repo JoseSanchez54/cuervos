@@ -16,8 +16,8 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isFocused && "red",
-      color: state.isFocused && "black",
+      backgroundColor: state.isFocused && "black",
+      color: state.isFocused && "white",
     }),
     menuList: (provided, state) => ({
       ...provided,
