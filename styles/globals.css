@@ -116,7 +116,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 body {
-  line-height: 38px;
+  line-height: 40px !important;
 }
 
 a {
