@@ -1,7 +1,7 @@
 import WooCommerce from "../../woocommerce/Woocommerce";
 import axios from "axios";
 import fetcherWc from "../../utils/fetcherWc";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Nav from "../../components/Nav";
 import useMobile from "../../hooks/useMobile";
@@ -99,6 +99,16 @@ const SingleProduct = ({
   upSells,
 }) => {
   const { product } = useProduct(products[0], products[0]?.id);
+
+  const [isVino, setIsVino] = useState(false);
+  useEffect(() => {
+    product.categories.map((f) => {
+      if (f.name === "Vinos") {
+        setIsVino(true);
+      }
+    });
+  }, []);
+
   const [precio, setPrecio] = useState(product?.price);
   const handlePrecio = (precio) => {
     setPrecio(precio);
@@ -497,319 +507,344 @@ const SingleProduct = ({
               </div>
             </div>
           </div>
-          <div className="flex mt-[80px] flex-row w-full justify-center">
-            <div className="flex flex-col w-full max-w-[1202px] p-5 items-center">
-              <div className="relative flex w-full lg:min-h-[490px] min-h-[290px]  p-[20px] lg:p-[40px]">
-                <div className="flex flex-col md:justify-center lg:justify-start justify-center w-full z-20">
-                  {tituloBanner ? (
-                    <span
-                      className="lg:max-w-[400px] w-full "
-                      style={{
-                        fontSize: "55px",
-                        fontFamily: options.fuente_titulos,
-                        color: "#fff",
-                        lineHeight: "1.1",
-                      }}
-                    >
-                      {tituloBanner}
-                    </span>
-                  ) : (
-                    <span
-                      className="lg:max-w-[400px] w-full "
-                      style={{
-                        fontSize: "55px",
-                        fontFamily: options.fuente_titulos,
-                        color: "#fff",
-                        lineHeight: "1.1",
-                      }}
-                    >
-                      CONOCE PESQUERA DEL DUERO
-                    </span>
-                  )}
-                  {parrafoBanner ? (
-                    <span
-                      className="lg:max-w-[300px] w-full"
-                      style={{
-                        fontSize: "16px",
-                        fontFamily: options.fuente_global,
-                        color: "#fff",
-                        lineHeight: "1.1",
-                        marginTop: "10px",
-                      }}
-                    >
-                      {parrafoBanner}
-                    </span>
-                  ) : (
-                    <span
-                      className="lg:max-w-[300px] w-full"
-                      style={{
-                        fontSize: "16px",
-                        fontFamily: options.fuente_global,
-                        color: "#fff",
-                        lineHeight: "1.1",
-                        marginTop: "10px",
-                      }}
-                    >
-                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                      sed diam nonumy eirmod.
-                    </span>
-                  )}
-                </div>
-
-                {imagenBanner ? (
-                  <Image
-                    src={imagenBanner}
-                    layout="fill"
-                    objectFit="cover"
-                  ></Image>
-                ) : (
-                  <Image
-                    src="/vino.png"
-                    layout="fill"
-                    objectFit="cover"
-                  ></Image>
-                )}
-              </div>
-            </div>
-          </div>
-          {metadata.filter((m) => m.key === "variedad")[0]?.value && (
-            <div
-              style={{
-                background: isMobile
-                  ? "transparent"
-                  : "linear-gradient(90deg, #000 50%, #fff 50%)",
-              }}
-              className="flex flex-row w-full mt-[80px] justify-center"
-            >
-              <div className="flex flex-col w-full max-w-[1202px]">
-                <div className="flex flex-row gap-6 flex-wrap lg:flex-nowrap w-full justify-center">
-                  <div
-                    style={{ background: isMobile ? "black" : "transparent" }}
-                    className="flex flex-col gap-3 pt-9 p-7 w-full "
-                  >
-                    <span
-                      style={{
-                        fontSize: "24px",
-                        fontFamily: options.fuente_titulos,
-                        textTransform: "uppercase",
-                        color: "#fff",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      FICHA TÉCNICA
-                    </span>
-
-                    <div className="flex flex-row gap-2 items-center">
-                      {" "}
-                      <span
-                        style={{
-                          fontSize: "16px",
-                          fontFamily: options.fuente_global,
-                          textTransform: "uppercase",
-                          color: "#fff",
-                        }}
-                      >
-                        Variedad
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontFamily: options.fuente_global,
-                          color: "#fff",
-                        }}
-                      >
-                        {metadata.filter((m) => m.key === "variedad")[0]?.value}
-                      </span>
-                    </div>
-                    <div className="flex flex-row gap-2 items-center">
-                      {" "}
-                      <span
-                        style={{
-                          fontSize: "16px",
-                          fontFamily: options.fuente_global,
-                          textTransform: "uppercase",
-                          color: "#fff",
-                        }}
-                      >
-                        AÑADA
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontFamily: options.fuente_global,
-                          color: "#fff",
-                        }}
-                      >
-                        {metadata.filter((m) => m.key === "anada")[0]?.value}
-                      </span>
-                    </div>
-                    <div className="flex flex-row gap-2 items-center">
-                      {" "}
-                      <span
-                        style={{
-                          fontSize: "16px",
-                          fontFamily: options.fuente_global,
-                          textTransform: "uppercase",
-                          color: "#fff",
-                        }}
-                      >
-                        GRADO ALCOHÓLICO
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontFamily: options.fuente_global,
-                          color: "#fff",
-                        }}
-                      >
-                        {
-                          metadata.filter(
-                            (m) => m.key === "grado-alcoholico"
-                          )[0]?.value
-                        }
-                      </span>
-                    </div>
-                    <div className="flex flex-row gap-2 items-center">
-                      {" "}
-                      <span
-                        style={{
-                          fontSize: "16px",
-                          fontFamily: options.fuente_global,
-                          textTransform: "uppercase",
-                          color: "#fff",
-                        }}
-                      >
-                        LOCALIZACIÓN
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontFamily: options.fuente_global,
-                          color: "#fff",
-                        }}
-                      >
-                        {
-                          metadata.filter((m) => m.key === "localizacion")[0]
-                            ?.value
-                        }
-                      </span>
-                    </div>
-                    <div className="flex flex-row gap-2 items-center">
-                      {" "}
-                      <span
-                        style={{
-                          fontSize: "16px",
-                          fontFamily: options.fuente_global,
-                          textTransform: "uppercase",
-                          color: "#fff",
-                        }}
-                      >
-                        CRIANZA
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontFamily: options.fuente_global,
-                          color: "#fff",
-                        }}
-                      >
-                        {metadata.filter((m) => m.key === "crianza")[0]?.value}
-                      </span>
-                    </div>
-                    <div className="flex flex-row gap-2 items-center">
-                      {" "}
-                      <span
-                        style={{
-                          fontSize: "16px",
-                          fontFamily: options.fuente_global,
-                          textTransform: "uppercase",
-                          color: "#fff",
-                        }}
-                      >
-                        TIPO DE SUELO
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontFamily: options.fuente_global,
-                          color: "#fff",
-                        }}
-                      >
-                        {metadata.filter((m) => m.key === "suelo")[0]?.value}
-                      </span>
-                    </div>
-                    <div className="flex flex-row gap-2 items-center">
-                      {" "}
-                      <span
-                        style={{
-                          fontSize: "16px",
-                          fontFamily: options.fuente_global,
-                          textTransform: "uppercase",
-                          color: "#fff",
-                        }}
-                      >
-                        FORMATO DE BOTELLA
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontFamily: options.fuente_global,
-                          color: "#fff",
-                        }}
-                      >
-                        {metadata.filter((m) => m.key === "formato")[0]?.value}
-                      </span>
-                    </div>
-                    <div className="flex flex-row w-full">
-                      {" "}
-                      {metadata.filter((m) => m.key === "imagen_tecnica")[0]
-                        .value ? (
-                        <Image
-                          height="88px"
-                          width="239px"
-                          src={
-                            metadata.filter(
-                              (m) => m.key === "imagen_tecnica"
-                            )[0].value
-                          }
-                          objectFit="contain"
-                        ></Image>
+          {isVino && (
+            <>
+              {" "}
+              <div className="flex mt-[80px] flex-row w-full justify-center">
+                <div className="flex flex-col w-full max-w-[1202px] p-5 items-center">
+                  <div className="relative flex w-full lg:min-h-[490px] min-h-[290px]  p-[20px] lg:p-[40px]">
+                    <div className="flex flex-col md:justify-center lg:justify-start justify-center w-full z-20">
+                      {tituloBanner ? (
+                        <span
+                          className="lg:max-w-[400px] w-full "
+                          style={{
+                            fontSize: "55px",
+                            fontFamily: options.fuente_titulos,
+                            color: "#fff",
+                            lineHeight: "1.1",
+                          }}
+                        >
+                          {tituloBanner}
+                        </span>
                       ) : (
-                        <Image
-                          height="88px"
-                          width="239px"
-                          src="/duero.png"
-                          objectFit="contain"
-                        ></Image>
+                        <span
+                          className="lg:max-w-[400px] w-full "
+                          style={{
+                            fontSize: "55px",
+                            fontFamily: options.fuente_titulos,
+                            color: "#fff",
+                            lineHeight: "1.1",
+                          }}
+                        >
+                          CONOCE PESQUERA DEL DUERO
+                        </span>
+                      )}
+                      {parrafoBanner ? (
+                        <span
+                          className="lg:max-w-[300px] w-full"
+                          style={{
+                            fontSize: "16px",
+                            fontFamily: options.fuente_global,
+                            color: "#fff",
+                            lineHeight: "1.1",
+                            marginTop: "10px",
+                          }}
+                        >
+                          {parrafoBanner}
+                        </span>
+                      ) : (
+                        <span
+                          className="lg:max-w-[300px] w-full"
+                          style={{
+                            fontSize: "16px",
+                            fontFamily: options.fuente_global,
+                            color: "#fff",
+                            lineHeight: "1.1",
+                            marginTop: "10px",
+                          }}
+                        >
+                          Lorem ipsum dolor sit amet, consetetur sadipscing
+                          elitr, sed diam nonumy eirmod.
+                        </span>
                       )}
                     </div>
-                  </div>
-                  <div className="flex flex-col justify-center pt-9 p-7  w-full">
-                    <span
-                      style={{
-                        fontSize: "27px",
-                        fontFamily: options.fuente_titulos,
-                        textTransform: "uppercase",
-                        color: "#000",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      NOTAS DE CATA
-                    </span>
-                    {metadata.filter((m) => m.key === "notas")[0]?.value && (
+
+                    {imagenBanner ? (
                       <Image
-                        height="300px"
-                        width="443px"
-                        src={
-                          metadata.filter((m) => m.key === "notas")[0]?.value
-                        }
-                        objectFit="contain"
+                        src={imagenBanner}
+                        layout="fill"
+                        objectFit="cover"
+                      ></Image>
+                    ) : (
+                      <Image
+                        src="/vino.png"
+                        layout="fill"
+                        objectFit="cover"
                       ></Image>
                     )}
                   </div>
                 </div>
               </div>
-            </div>
+              {metadata.filter((m) => m.key === "variedad")[0]?.value && (
+                <div
+                  style={{
+                    background: isMobile
+                      ? "transparent"
+                      : "linear-gradient(90deg, #000 50%, #fff 50%)",
+                  }}
+                  className="flex flex-row w-full mt-[80px] justify-center"
+                >
+                  <div className="flex flex-col w-full max-w-[1202px]">
+                    <div className="flex flex-row gap-6 flex-wrap lg:flex-nowrap w-full justify-center">
+                      <div
+                        style={{
+                          background: isMobile ? "black" : "transparent",
+                        }}
+                        className="flex flex-col gap-3 pt-9 p-7 w-full "
+                      >
+                        <span
+                          style={{
+                            fontSize: "24px",
+                            fontFamily: options.fuente_titulos,
+                            textTransform: "uppercase",
+                            color: "#fff",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          FICHA TÉCNICA
+                        </span>
+
+                        <div className="flex flex-row gap-2 items-center">
+                          {" "}
+                          <span
+                            style={{
+                              fontSize: "16px",
+                              fontFamily: options.fuente_global,
+                              textTransform: "uppercase",
+                              color: "#fff",
+                            }}
+                          >
+                            Variedad
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "13px",
+                              fontFamily: options.fuente_global,
+                              color: "#fff",
+                            }}
+                          >
+                            {
+                              metadata.filter((m) => m.key === "variedad")[0]
+                                ?.value
+                            }
+                          </span>
+                        </div>
+                        <div className="flex flex-row gap-2 items-center">
+                          {" "}
+                          <span
+                            style={{
+                              fontSize: "16px",
+                              fontFamily: options.fuente_global,
+                              textTransform: "uppercase",
+                              color: "#fff",
+                            }}
+                          >
+                            AÑADA
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "13px",
+                              fontFamily: options.fuente_global,
+                              color: "#fff",
+                            }}
+                          >
+                            {
+                              metadata.filter((m) => m.key === "anada")[0]
+                                ?.value
+                            }
+                          </span>
+                        </div>
+                        <div className="flex flex-row gap-2 items-center">
+                          {" "}
+                          <span
+                            style={{
+                              fontSize: "16px",
+                              fontFamily: options.fuente_global,
+                              textTransform: "uppercase",
+                              color: "#fff",
+                            }}
+                          >
+                            GRADO ALCOHÓLICO
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "13px",
+                              fontFamily: options.fuente_global,
+                              color: "#fff",
+                            }}
+                          >
+                            {
+                              metadata.filter(
+                                (m) => m.key === "grado-alcoholico"
+                              )[0]?.value
+                            }
+                          </span>
+                        </div>
+                        <div className="flex flex-row gap-2 items-center">
+                          {" "}
+                          <span
+                            style={{
+                              fontSize: "16px",
+                              fontFamily: options.fuente_global,
+                              textTransform: "uppercase",
+                              color: "#fff",
+                            }}
+                          >
+                            LOCALIZACIÓN
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "13px",
+                              fontFamily: options.fuente_global,
+                              color: "#fff",
+                            }}
+                          >
+                            {
+                              metadata.filter(
+                                (m) => m.key === "localizacion"
+                              )[0]?.value
+                            }
+                          </span>
+                        </div>
+                        <div className="flex flex-row gap-2 items-center">
+                          {" "}
+                          <span
+                            style={{
+                              fontSize: "16px",
+                              fontFamily: options.fuente_global,
+                              textTransform: "uppercase",
+                              color: "#fff",
+                            }}
+                          >
+                            CRIANZA
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "13px",
+                              fontFamily: options.fuente_global,
+                              color: "#fff",
+                            }}
+                          >
+                            {
+                              metadata.filter((m) => m.key === "crianza")[0]
+                                ?.value
+                            }
+                          </span>
+                        </div>
+                        <div className="flex flex-row gap-2 items-center">
+                          {" "}
+                          <span
+                            style={{
+                              fontSize: "16px",
+                              fontFamily: options.fuente_global,
+                              textTransform: "uppercase",
+                              color: "#fff",
+                            }}
+                          >
+                            TIPO DE SUELO
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "13px",
+                              fontFamily: options.fuente_global,
+                              color: "#fff",
+                            }}
+                          >
+                            {
+                              metadata.filter((m) => m.key === "suelo")[0]
+                                ?.value
+                            }
+                          </span>
+                        </div>
+                        <div className="flex flex-row gap-2 items-center">
+                          {" "}
+                          <span
+                            style={{
+                              fontSize: "16px",
+                              fontFamily: options.fuente_global,
+                              textTransform: "uppercase",
+                              color: "#fff",
+                            }}
+                          >
+                            FORMATO DE BOTELLA
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "13px",
+                              fontFamily: options.fuente_global,
+                              color: "#fff",
+                            }}
+                          >
+                            {
+                              metadata.filter((m) => m.key === "formato")[0]
+                                ?.value
+                            }
+                          </span>
+                        </div>
+                        <div className="flex flex-row w-full">
+                          {" "}
+                          {metadata.filter((m) => m.key === "imagen_tecnica")[0]
+                            .value ? (
+                            <Image
+                              height="88px"
+                              width="239px"
+                              src={
+                                metadata.filter(
+                                  (m) => m.key === "imagen_tecnica"
+                                )[0].value
+                              }
+                              objectFit="contain"
+                            ></Image>
+                          ) : (
+                            <Image
+                              height="88px"
+                              width="239px"
+                              src="/duero.png"
+                              objectFit="contain"
+                            ></Image>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex flex-col justify-center pt-9 p-7  w-full">
+                        <span
+                          style={{
+                            fontSize: "27px",
+                            fontFamily: options.fuente_titulos,
+                            textTransform: "uppercase",
+                            color: "#000",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          NOTAS DE CATA
+                        </span>
+                        {metadata.filter((m) => m.key === "notas")[0]
+                          ?.value && (
+                          <Image
+                            height="300px"
+                            width="443px"
+                            src={
+                              metadata.filter((m) => m.key === "notas")[0]
+                                ?.value
+                            }
+                            objectFit="contain"
+                          ></Image>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </>
           )}
 
           <div className="flex flex-row p-5 lg:mt-[100px] w-full justify-center">

@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import WooCommerce from "../woocommerce/Woocommerce";
 import StripeCheckout from "./StripeCheckout";
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
@@ -77,8 +76,8 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   };
 
   const data = {
-    payment_method: "Redsys Next App",
-    payment_method_title: "Redsys",
+    payment_method: "Stripe Cría Cuervos",
+    payment_method_title: "Stripe",
     set_paid: false,
     billing: {
       first_name: formulario.nombre,
@@ -111,7 +110,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       {
         method_id: "flat_rate",
         method_title: "Gastos de envio",
-        total: "10.00",
+        total: precioEnvio?.precio,
       },
     ],
   };
