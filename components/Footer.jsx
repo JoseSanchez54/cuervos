@@ -33,7 +33,7 @@ const Footer = ({ options }) => {
         <div className="flex flex-row flex-wrap gap-9 pt-9 w-full">
           <div className="flex flex-col justify-center  w-full ">
             <div className="flex flex-row gap-4 lg:justify-between flex-wrap justify-center  items-center w-full">
-              <Link href="privacidad" passHref>
+              <Link href="/legal/politica-de-privacidad" passHref>
                 <a>
                   <button
                     style={{
@@ -44,11 +44,11 @@ const Footer = ({ options }) => {
                       padding: "0px",
                     }}
                   >
-                    <span>POLÍTICA DE PRIVACIDAD</span>
+                    <span>POLÍTICA DE COOKIES</span>
                   </button>
                 </a>
               </Link>
-              <Link href="privacidad" passHref>
+              <Link href="/legal/aviso_legal" passHref>
                 <a>
                   <button
                     style={{
@@ -58,11 +58,11 @@ const Footer = ({ options }) => {
                       color: "black",
                     }}
                   >
-                    <span>ENVÍOS Y DEVOLUCIONES</span>
+                    <span>Aviso legal</span>
                   </button>
                 </a>
               </Link>
-              <Link href="privacidad" passHref>
+              <Link href="/legal/politica-de-privacidad" passHref>
                 <a>
                   <button
                     style={{
