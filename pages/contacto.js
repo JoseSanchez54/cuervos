@@ -5,12 +5,36 @@ import FormularioContacto from "../components/FormularioContacto";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import WooCommerce from "../woocommerce/Woocommerce";
+import { DefaultSeo } from "next-seo";
 const Contacto = ({ opciones, pagina, categoriasAll }) => {
   const { isLoading, options: optionsSWR } = useOptions(opciones);
   console.log(optionsSWR);
 
   return (
     <>
+      <DefaultSeo
+        title={pagina.titulo_pagina}
+        description={pagina.descripcion_de_pagina}
+        canonical={process.env.URLFINAL}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: opciones.favicon_principal,
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_ES",
+          url: process.env.URLFINAL,
+          site_name: opciones.nombre_sitio,
+          description: opciones.descripcion_sitio,
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <Nav categorias={categoriasAll} opciones={optionsSWR} />
       <div
         style={{ color: "white" }}
