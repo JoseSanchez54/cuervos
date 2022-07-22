@@ -187,7 +187,17 @@ const FormularioContacto = ({ options }) => {
                     </div>
                   )}
                   {mensaje && <span className="error">{mensaje}</span>}{" "}
-                  <button className="enviarform mt-[20px]">Enviar</button>
+                  <button
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      border: "none",
+                      padding: "10px 20px",
+                    }}
+                    className="enviarform mt-[20px]"
+                  >
+                    Enviar
+                  </button>
                 </div>
               </div>
             </form>
