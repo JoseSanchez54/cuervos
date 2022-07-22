@@ -8,7 +8,6 @@ import WooCommerce from "../woocommerce/Woocommerce";
 import { DefaultSeo } from "next-seo";
 const Contacto = ({ opciones, pagina, categoriasAll }) => {
   const { isLoading, options: optionsSWR } = useOptions(opciones);
-  console.log(optionsSWR);
 
   return (
     <>
