@@ -49,7 +49,7 @@ export async function getStaticProps() {
   ).then((response) => {
     return response.data;
   });
-  const vinos = await WooCommerce.get("products?category=89").then(
+  const vinos = await WooCommerce.get("products?category=1430").then(
     (response) => {
       return response.data;
     }

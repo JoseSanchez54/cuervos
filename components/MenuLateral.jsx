@@ -81,7 +81,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                       {padres.map((res, index) => {
                         return (
                           <>
-                            {res.slug !== "todos" && (
+                            {res.slug !== "todos" && res.slug !== "destacados" && (
                               <button
                                 key={index}
                                 style={{ textAlign: "start" }}
@@ -205,7 +205,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                     {padres.map((res, index) => {
                       return (
                         <>
-                          {res.slug !== "todos" && (
+                          {res.slug !== "todos" && res.slug !== "destacados" && (
                             <button
                               key={index}
                               style={{ textAlign: "start" }}
