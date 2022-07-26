@@ -87,8 +87,8 @@ const FormularioContacto = ({ options }) => {
         {enviado === false ? (
           <>
             <form className="w-full" onSubmit={enviar}>
-              <div className="flex flex-row gap-5 flex-wrap w-full lg:flex-nowrap ">
-                <div className="flex flex-col gap-8 lg:gap-9 justify-between max-h-[123px] w-full lg:w-1/2 h-full">
+              <div className="flex flex-row gap-5 flex-wrap w-full lg:flex-nowrap px-3 ">
+                <div className="flex flex-col gap-8 lg:gap-9 justify-between max-h-[123px] w-full lg:w-1/2 h-full ">
                   <Input
                     clearable
                     bordered
@@ -131,46 +131,6 @@ const FormularioContacto = ({ options }) => {
                       },
                     }}
                   />
-                  {!isMobile && (
-                    <>
-                      <div className="form-group form-check">
-                        <input
-                          name="acceptTerms"
-                          type="checkbox"
-                          id="acceptTerms"
-                          required
-                        />
-                        <label
-                          htmlFor="acceptTerms"
-                          className="form-check-label"
-                        >
-                          He leído y acepto la{" "}
-                          <Link passHref href="/privacidad">
-                            <a style={{ color: "black", fontWeight: "bold" }}>
-                              política de privacidad
-                            </a>
-                          </Link>
-                        </label>
-                      </div>
-                      <div
-                        style={{ marginTop: "-20px" }}
-                        className="form-group form-check"
-                      >
-                        <input
-                          name="acceptTerms"
-                          type="checkbox"
-                          id="acceptTerms"
-                          required
-                        />
-                        <label
-                          htmlFor="acceptTerms"
-                          className="form-check-label"
-                        >
-                          Acepto recibir comunicaciones comerciales
-                        </label>
-                      </div>
-                    </>
-                  )}
                 </div>
                 <div className="flex flex-col mt-[25px] lg:mt-[0px] w-full lg:w-1/2 max-h-[250px] items-center lg:items-start lg:justify-start h-full">
                   <Textarea
@@ -197,8 +157,12 @@ const FormularioContacto = ({ options }) => {
                       },
                     }}
                   />
-                  {isMobile && (
-                    <div className="form-group form-check mt-[10px]">
+                </div>
+              </div>
+              <div className="flex flex-row justify-center w-full">
+                <div className="flex flex-col items-center w-full">
+                  <>
+                    <div className="form-group form-check mt-8">
                       <input
                         name="acceptTerms"
                         type="checkbox"
@@ -206,10 +170,32 @@ const FormularioContacto = ({ options }) => {
                         required
                       />
                       <label htmlFor="acceptTerms" className="form-check-label">
-                        He leído y acepto la política de privacidad
+                        He leído y acepto la{" "}
+                        <Link passHref href="/privacidad">
+                          <a style={{ color: "black", fontWeight: "bold" }}>
+                            política de privacidad
+                          </a>
+                        </Link>
                       </label>
                     </div>
-                  )}
+                    <div
+                      style={{ marginTop: "10px" }}
+                      className="form-group form-check"
+                    >
+                      <input
+                        name="acceptTerms2"
+                        type="checkbox"
+                        id="acceptTerms"
+                        required
+                      />
+                      <label
+                        htmlFor="acceptTerms2"
+                        className="form-check-label"
+                      >
+                        Acepto recibir comunicaciones comerciales
+                      </label>
+                    </div>
+                  </>
                   {mensaje && <span className="error">{mensaje}</span>}{" "}
                   <button
                     style={{
@@ -264,6 +250,7 @@ const FormularioContacto = ({ options }) => {
           resize: none;
           margin-bottom: 10px;
           max-height: 113px;
+          height: 100%;
         }
         .form-check-label {
           color: black;
