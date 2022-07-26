@@ -75,29 +75,33 @@ const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
                     />
                   )}
                   {index === 6 && (
-                    <div
-                      key={index + 1}
-                      className="flex flex-row  flex-wrap lg:flex-nowrap  w-full"
-                    >
-                      <div className="flex flex-col min-h-[200px] w-full items-center lg:w-2/3">
-                        <div className="relative p-3 w-full h-full justify-center items-center flex-col flex">
-                          <span className="z-[20] uppercase text-center titulo2">
-                            {pagina?.segundo_titulo_tienda}
-                          </span>
-                          <Image
-                            objectFit="cover"
-                            layout="fill"
-                            src={pagina?.banner_tienda_segundo}
-                          />
+                    <>
+                      {productos[index + 1]?.name && (
+                        <div
+                          key={index + 1}
+                          className="flex flex-row  flex-wrap lg:flex-nowrap  w-full"
+                        >
+                          <div className="flex flex-col min-h-[200px] w-full items-center lg:w-2/3">
+                            <div className="relative p-3 w-full h-full justify-center items-center flex-col flex">
+                              <span className="z-[20] uppercase text-center titulo2">
+                                {pagina?.segundo_titulo_tienda}
+                              </span>
+                              <Image
+                                objectFit="cover"
+                                layout="fill"
+                                src={pagina?.banner_tienda_segundo}
+                              />
+                            </div>
+                          </div>
+                          <div className="flex flex-col w-full items-center lg:w-1/3">
+                            <SingleGrid
+                              opciones={opciones}
+                              producto={productos[index + 1]}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col w-full items-center lg:w-1/3">
-                        <SingleGrid
-                          opciones={opciones}
-                          producto={productos[index + 1]}
-                        />
-                      </div>
-                    </div>
+                      )}
+                    </>
                   )}
                   {index > 7 && (
                     <SingleGrid
