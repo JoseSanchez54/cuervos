@@ -434,12 +434,15 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
         .titulo {
           font-family: ${opciones.fuente_titulos};
           font-size: 120px;
+          line-height: 1.1;
         }
         .tituloPrimera {
           font-family: ${opciones.fuente_titulos};
+          line-height: 1.1;
         }
         .parrafoPrimera {
           font-family: ${opciones.fuente_global};
+          line-height: 1.1;
           font-size: 16px;
         }
         .alto {
@@ -448,6 +451,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
         .tituloseccion {
           font-family: ${opciones.fuente_titulos};
           font-size: 36px;
+          line-height: 1.1;
         }
         @media (max-width: 1022px) {
           .titulo {
