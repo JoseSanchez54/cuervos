@@ -126,8 +126,8 @@ const MiniCart = ({ opciones, tasas }) => {
                         <div
                           className={
                             index === 0
-                              ? "flex flex-col justify-start w-full md:flex-row producto1"
-                              : "flex flex-col justify-start w-full md:flex-row producto "
+                              ? "flex flex-col justify-start w-full md:flex-row producto1 px-[10px]"
+                              : "flex flex-col justify-start w-full md:flex-row producto px-[10px] "
                           }
                           key={index}
                         >
@@ -470,7 +470,7 @@ const MiniCart = ({ opciones, tasas }) => {
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-          background: red;
+          background: black;
           border-radius: 10px;
         }
 

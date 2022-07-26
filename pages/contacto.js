@@ -92,7 +92,7 @@ const Contacto = ({ opciones, pagina, categoriasAll }) => {
         @media (max-width: 1022px) {
           .titulo {
             font-family: ${opciones.fuente_titulos};
-            font-size: 90px;
+            font-size: 70px;
             line-height: 1.1;
           }
         }

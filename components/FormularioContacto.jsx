@@ -132,20 +132,44 @@ const FormularioContacto = ({ options }) => {
                     }}
                   />
                   {!isMobile && (
-                    <div className="form-group form-check">
-                      <input
-                        name="acceptTerms"
-                        type="checkbox"
-                        id="acceptTerms"
-                        required
-                      />
-                      <label htmlFor="acceptTerms" className="form-check-label">
-                        He leído y acepto la{" "}
-                        <Link passHref href="/privacidad">
-                          política de privacidad
-                        </Link>
-                      </label>
-                    </div>
+                    <>
+                      <div className="form-group form-check">
+                        <input
+                          name="acceptTerms"
+                          type="checkbox"
+                          id="acceptTerms"
+                          required
+                        />
+                        <label
+                          htmlFor="acceptTerms"
+                          className="form-check-label"
+                        >
+                          He leído y acepto la{" "}
+                          <Link passHref href="/privacidad">
+                            <a style={{ color: "black", fontWeight: "bold" }}>
+                              política de privacidad
+                            </a>
+                          </Link>
+                        </label>
+                      </div>
+                      <div
+                        style={{ marginTop: "-20px" }}
+                        className="form-group form-check"
+                      >
+                        <input
+                          name="acceptTerms"
+                          type="checkbox"
+                          id="acceptTerms"
+                          required
+                        />
+                        <label
+                          htmlFor="acceptTerms"
+                          className="form-check-label"
+                        >
+                          Acepto recibir comunicaciones comerciales
+                        </label>
+                      </div>
+                    </>
                   )}
                 </div>
                 <div className="flex flex-col mt-[25px] lg:mt-[0px] w-full lg:w-1/2 max-h-[250px] items-center lg:items-start lg:justify-start h-full">
@@ -243,7 +267,7 @@ const FormularioContacto = ({ options }) => {
         }
         .form-check-label {
           color: black;
-          font-family: "Helvetica";
+          font-family: ${options.fuente_global};
           font-size: 12px;
           margin-left: 10px;
         }
@@ -257,7 +281,7 @@ const FormularioContacto = ({ options }) => {
         .aplicar {
           background-color: white;
           color: black;
-          font-family: "Helvetica";
+          font-family: ${options.fuente_global};
           padding: 10px 20px;
           font-size: 18px;
           border-radius: 5px;
@@ -274,20 +298,20 @@ const FormularioContacto = ({ options }) => {
           border: 2px solid white;
         }
         .mensajeEnviado {
-          font-family: "Helvetica";
+          font-family: ${options.fuente_global};
           font-size: 50px;
           color: black;
           font-weight: bold;
         }
         .mensajeEnviado2 {
-          font-family: "Helvetica";
+          font-family: ${options.fuente_global};
           font-size: 40px;
           color: black;
           font-weight: bold;
         }
         .tituloContacto {
           color: white;
-          font-family: "Helvetica";
+          font-family: ${options.fuente_global};
           font-size: calc(42px + (100 - 27) * (100vh - 320px) / (2560 - 320));
           width: 100%;
           font-style: italic;
@@ -301,7 +325,7 @@ const FormularioContacto = ({ options }) => {
         }
         .error {
           color: red;
-          font-family: "Helvetica";
+          font-family: ${options.fuente_global};
           font-size: 12px;
           margin-top: 10px;
         }
