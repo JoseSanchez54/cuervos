@@ -94,7 +94,7 @@ const SingleGrid = ({ producto, opciones }) => {
                       rebaja={producto?.sale_price}
                       hover={cambioImagen}
                       opciones={opciones}
-                      variable={producto.type === "variable"}
+                      variable={producto?.type === "variable"}
                       variaciones={variacion}
                     />
                   )}
