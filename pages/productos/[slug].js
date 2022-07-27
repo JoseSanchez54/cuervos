@@ -117,6 +117,8 @@ const SingleProduct = ({
   const metadata = Object.values(product.meta_data).map((key) => {
     return key;
   });
+  const video = metadata.filter((m) => m.key === "video")[0]?.value;
+
   const imagenBanner = metadata.filter((m) => m.key === "imagen_vinero")[0]
     ?.value;
   const tituloBanner = metadata.filter((m) => m.key === "titulo_banner")[0]
@@ -226,13 +228,7 @@ const SingleProduct = ({
                             objectFit: "cover",
                           }}
                         >
-                          <source
-                            src={
-                              metadata.filter((m) => m.key === "video")[0]
-                                ?.value
-                            }
-                            type="video/mp4"
-                          />
+                          <source src={video} type="video/mp4" />
                         </video>
                       )}
                     </>
