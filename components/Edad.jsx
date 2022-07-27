@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 const Edad = ({ options }) => {
   const [activo, setActivo] = useState(false);
   const handleActivo = () => {
@@ -41,19 +42,20 @@ const Edad = ({ options }) => {
                   <span>Beba con responsabilidad</span>
                   <span>
                     Al entrar aceptas los{" "}
-                    <a
-                      style={{ color: "black", fontWeight: "bold" }}
-                      href="/legal/aviso_legal"
-                    >
-                      términos y condiciones
-                    </a>{" "}
+                    <Link href="/legal/aviso_legal">
+                      <a
+                        style={{ color: "black", fontWeight: "bold" }}
+                        href="/legal/aviso_legal"
+                      >
+                        términos y condiciones
+                      </a>
+                    </Link>{" "}
                     y la{" "}
-                    <a
-                      style={{ color: "black", fontWeight: "bold" }}
-                      href="/legal/politica-de-privacidad"
-                    >
-                      politica de cookies
-                    </a>
+                    <Link href="/legal/politica-de-privacidad">
+                      <a style={{ color: "black", fontWeight: "bold" }}>
+                        politica de cookies
+                      </a>
+                    </Link>
                   </span>
                 </div>
               </div>
