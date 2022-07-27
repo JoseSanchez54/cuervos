@@ -304,6 +304,7 @@ const SingleProduct = ({
                     />
                     <span
                       className="precio"
+                      key={product.id}
                       style={{
                         color: "black",
                         fontSize: "1.5rem",
