@@ -214,7 +214,7 @@ const SingleProduct = ({
                         />
                       ) : (
                         <video
-                          key={product.id}
+                          key={video}
                           preload="auto"
                           autoPlay={true}
                           loop
