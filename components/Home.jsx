@@ -156,7 +156,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                                 color: "black",
                               }}
                             >
-                              Encuentra tu Nuevo vino favorito
+                              Compra tu pack de vinos
                             </motion.button>
                           </Link>
                         )}
