@@ -42,16 +42,13 @@ const Edad = ({ options }) => {
                   <span>Beba con responsabilidad</span>
                   <span>
                     Al entrar aceptas los{" "}
-                    <Link href="/legal/aviso_legal">
-                      <a
-                        style={{ color: "black", fontWeight: "bold" }}
-                        href="/legal/aviso_legal"
-                      >
+                    <Link href="/legal/aviso_legal" passHref>
+                      <a style={{ color: "black", fontWeight: "bold" }}>
                         términos y condiciones
                       </a>
                     </Link>{" "}
                     y la{" "}
-                    <Link href="/legal/politica-de-privacidad">
+                    <Link href="/legal/politica-de-privacidad" passHref>
                       <a style={{ color: "black", fontWeight: "bold" }}>
                         politica de cookies
                       </a>
