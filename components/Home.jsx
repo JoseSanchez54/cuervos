@@ -7,7 +7,9 @@ const Grid = dynamic(() => import("../components/Grid"));
 const Footer = dynamic(() => import("../components/Footer"));
 import { DefaultSeo } from "next-seo";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import useMobile from "../hooks/useMobile";
 const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
+  const { isMobile } = useMobile();
   const variablesBoton = {
     initial: {
       display: "flex",
@@ -49,9 +51,9 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
       <div className="flex flex-row w-full  alto items-end justify-center">
         <div className="flex flex-col justify-end w-full h-full">
           <div className="relative w-full h-full">
-            <div className="flex flex-col justify-end w-full h-full">
+            <div className="flex flex-col lg:justify-end justify-start items-center lg:items-start w-full h-full">
               <div className="p-9 z-[10]">
-                <span className="z-[10] uppercase titulo lg:ml-[40px]">
+                <span className="z-[10] uppercase w-full text-center lg:text-left block titulo lg:ml-[40px]">
                   {pagina.titulo}
                 </span>
               </div>
@@ -72,7 +74,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
             <div className="flex flex-col h-full w-full lg:w-2/3">
               <div className="relative w-full h-full">
                 <div className="flex flex-col items-center w-full h-full">
-                  <div className="p-9 text-center z-[10]">
+                  <div className="p-9 lg:text-center z-[10]">
                     <span
                       style={{
                         fontSize: "55px",
@@ -82,6 +84,29 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                       {pagina.segunda_primer_titulo}
                     </span>
                     <p>{pagina.segunda_primer_parrafo}</p>
+                    {isMobile && (
+                      <Link href={pagina.primer_enlace}>
+                        <motion.button
+                          initial={{
+                            border: "2px solid black",
+                            color: "black",
+                            backgroundColor: "transparent",
+                            zIndex: "10",
+                            padding: "20px 20px",
+                            marginTop: "25px",
+                            fontSize: "14px",
+                            fontFamily: opciones.fuente_titulos,
+                            textTransform: "uppercase",
+                          }}
+                          whileHover={{
+                            backgroundColor: "black",
+                            color: "black",
+                          }}
+                        >
+                          Encuentra tu Nuevo vino favorito
+                        </motion.button>
+                      </Link>
+                    )}
                   </div>
                   {pagina.segunda_primera_imagen_fondo && (
                     <Image
@@ -101,8 +126,8 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
               <div className="flex flex-col  h-full w-full">
                 <div className="flex flex-row h-1/2">
                   <div className="relative w-full h-full">
-                    <div className="flex flex-col items-center w-full h-full">
-                      <div className="p-9 text-center z-[10]">
+                    <div className="flex flex-col items-center justify-end lg:justify-start w-full h-full">
+                      <div className="p-9 lg:text-center z-[10]">
                         <span
                           style={{
                             fontSize: "40px",
@@ -112,6 +137,29 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           {pagina.segunda_segundo_titulo}
                         </span>
                         <p>{pagina.segunda_segundo_parrafo}</p>
+                        {isMobile && (
+                          <Link href={pagina.primer_enlace}>
+                            <motion.button
+                              initial={{
+                                border: "2px solid white",
+                                color: "white",
+                                backgroundColor: "transparent",
+                                zIndex: "10",
+                                padding: "20px 20px",
+                                marginTop: "25px",
+                                fontSize: "14px",
+                                fontFamily: opciones.fuente_titulos,
+                                textTransform: "uppercase",
+                              }}
+                              whileHover={{
+                                backgroundColor: "white",
+                                color: "black",
+                              }}
+                            >
+                              Encuentra tu Nuevo vino favorito
+                            </motion.button>
+                          </Link>
+                        )}
                       </div>
                       {pagina.segunda_segunda_imagen_fondo && (
                         <Image
@@ -457,6 +505,16 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           .titulo {
             font-family: ${opciones.fuente_titulos};
             font-size: 90px;
+            line-height: 1.1;
+          }
+          .flex-col {
+            min-height: 500px;
+          }
+        }
+        @media (max-width: 768px) {
+          .titulo {
+            font-family: ${opciones.fuente_titulos};
+            font-size: 55px;
             line-height: 1.1;
           }
           .flex-col {
