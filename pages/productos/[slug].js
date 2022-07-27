@@ -289,14 +289,16 @@ const SingleProduct = ({
               <div className="w-full flex flex-col self-start top-[90px]">
                 <div className="flex flex-row w-full">
                   <div className="flex p-5 flex-col">
-                    <span className="etiqueta">
+                    <span key={product.id} className="etiqueta">
                       {metadata.map((e, index) => {
                         if (e.key === "etiqueta") {
                           return e.value;
                         }
                       })}
                     </span>
-                    <span className="titulo mt-8">{product.name}</span>
+                    <span key={product.id} className="titulo mt-8">
+                      {product.name}
+                    </span>
                     <div
                       dangerouslySetInnerHTML={{
                         __html: product.short_description,
