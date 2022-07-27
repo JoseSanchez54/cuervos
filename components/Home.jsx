@@ -8,6 +8,7 @@ const Footer = dynamic(() => import("../components/Footer"));
 import { DefaultSeo } from "next-seo";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import useMobile from "../hooks/useMobile";
+import Edad from "./Edad";
 const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
   const { isMobile } = useMobile();
   const variablesBoton = {
@@ -531,6 +532,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           }
         }
       `}</style>
+      <Edad options={opciones} />
     </>
   );
 };
