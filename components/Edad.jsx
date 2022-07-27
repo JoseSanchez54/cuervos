@@ -96,7 +96,6 @@ const Edad = ({ options }) => {
               .boton {
                 background-color: transparent;
                 color: black;
-                padding: 20px 60px;
                 border: 1px solid black;
                 font-family: ${options.fuente_titulos};
                 font-size: 24px;
