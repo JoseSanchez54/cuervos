@@ -1,7 +1,7 @@
 import WooCommerce from "../../woocommerce/Woocommerce";
 import axios from "axios";
 import fetcherWc from "../../utils/fetcherWc";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Nav from "../../components/Nav";
 import useMobile from "../../hooks/useMobile";
@@ -117,8 +117,10 @@ const SingleProduct = ({
   const metadata = Object.values(product.meta_data).map((key) => {
     return key;
   });
-  const video = metadata.filter((m) => m.key === "video")[0]?.value;
 
+  const video = useCallback(() => {
+    metadata.filter((m) => m.key === "video")[0]?.value;
+  }, [product]);
   const imagenBanner = metadata.filter((m) => m.key === "imagen_vinero")[0]
     ?.value;
   const tituloBanner = metadata.filter((m) => m.key === "titulo_banner")[0]
