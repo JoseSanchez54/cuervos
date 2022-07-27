@@ -36,8 +36,8 @@ const Edad = ({ options }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex mb-9 flex-row justify-center w-full">
-                <div className="flex flex-col items-center w-full">
+              <div className="flex mb-9 p-2 flex-row justify-center w-full">
+                <div className="flex flex-col text-center items-center w-full">
                   <span>Beba con responsabilidad</span>
                   <span>
                     Al entrar aceptas los{" "}
@@ -93,6 +93,14 @@ const Edad = ({ options }) => {
               .titulo2 {
                 font-family: ${options.fuente_titulos};
                 font-size: 36px;
+              }
+              .boton {
+                background-color: transparent;
+                color: black;
+                padding: 20px 60px;
+                border: 1px solid black;
+                font-family: ${options.fuente_titulos};
+                font-size: 24px;
               }
             }
           `}</style>

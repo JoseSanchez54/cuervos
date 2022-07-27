@@ -2,6 +2,7 @@ import { useOptions } from "../../hooks/useOptions";
 import dynamic from "next/dynamic";
 import WooCommerce from "../../woocommerce/Woocommerce";
 import axios from "axios";
+
 const Head = dynamic(() => import("next/head"), { ssr: false });
 const Link = dynamic(() => import("next/link"), { ssr: false });
 const Footer = dynamic(() => import("../../components/Footer"), { ssr: false });

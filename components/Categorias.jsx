@@ -4,6 +4,7 @@ const ShopNav = dynamic(() => import("../components/ShopNav"));
 const SingleGrid = dynamic(() => import("../components/SingleGrid"));
 const Image = dynamic(() => import("next/image"));
 const Footer = dynamic(() => import("../components/Footer"));
+import Edad from "./Edad";
 import { DefaultSeo } from "next-seo";
 const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
   return (
@@ -140,6 +141,7 @@ const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
           }
         }
       `}</style>
+      <Edad options={opciones} />
     </>
   );
 };

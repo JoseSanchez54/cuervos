@@ -12,6 +12,7 @@ import Link from "next/link";
 import Grid from "../../components/Grid";
 import Footer from "../../components/Footer";
 import { useProduct } from "../../hooks/useProduct";
+import Edad from "../../components/Edad";
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
     (response) => {
@@ -912,6 +913,7 @@ const SingleProduct = ({
           }
         }
       `}</style>
+      <Edad options={options} />
     </>
   );
 };

@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 const Footer = dynamic(() => import("../components/Footer"));
 const Nav = dynamic(() => import("../components/Nav"));
 const Image = dynamic(() => import("next/image"));
+import Edad from "./Edad";
 import { DefaultSeo } from "next-seo";
 const SobreNosotros = ({ opciones, pagina, categorias }) => {
   return (
@@ -163,6 +164,7 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
           }
         }
       `}</style>
+      <Edad options={opciones} />
     </>
   );
 };

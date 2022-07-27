@@ -5,6 +5,7 @@ import FormularioContacto from "../components/FormularioContacto";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import WooCommerce from "../woocommerce/Woocommerce";
+import Edad from "../components/Edad";
 import { DefaultSeo } from "next-seo";
 const Contacto = ({ opciones, pagina, categoriasAll }) => {
   const { isLoading, options: optionsSWR } = useOptions(opciones);
@@ -97,6 +98,7 @@ const Contacto = ({ opciones, pagina, categoriasAll }) => {
           }
         }
       `}</style>
+      <Edad options={opciones} />
     </>
   );
 };
