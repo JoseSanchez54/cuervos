@@ -171,224 +171,233 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-row h-1/2">
-                  <div className="relative w-full h-full">
-                    <div className="flex flex-col items-center justify-center w-full h-full">
-                      <div className="p-9 text-center z-[10]">
-                        <span
-                          style={{
-                            fontSize: "36px",
-                          }}
-                          className="tituloPrimera uppercase z-[10]"
-                        >
-                          {pagina.segunda_tercer_titulo}
-                        </span>
-                        <p>{pagina.segunda_tercer_parrafo}</p>
+                {!isMobile && (
+                  <>
+                    <div className="flex flex-row h-1/2">
+                      <div className="relative w-full h-full">
+                        <div className="flex flex-col items-center justify-center w-full h-full">
+                          <div className="p-9 text-center z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_tercer_titulo}
+                            </span>
+                            <p>{pagina.segunda_tercer_parrafo}</p>
+                          </div>
+                          {pagina.segunda_tercera_imagen_fondo && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_tercera_imagen_fondo}
+                            ></Image>
+                          )}
+                        </div>
                       </div>
-                      {pagina.segunda_tercera_imagen_fondo && (
-                        <Image
-                          objectFit="cover"
-                          layout="fill"
-                          src={pagina.segunda_tercera_imagen_fondo}
-                        ></Image>
-                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {!isMobile && (
+        <>
+          <div className="flex flex-row  w-full justify-center">
+            <div className="flex flex-col w-full h-full max-w-[1212px]">
+              <div className="flex flex-row h-[508px] flex-wrap  w-full">
+                <div className="flex flex-col w-full lg:w-2/3">
+                  <div className="flex flex-row min-h-[500px] lg:min-h-[508px] h-full w-full">
+                    <div
+                      style={{ color: "black" }}
+                      className="flex flex-col h-full w-full"
+                    >
+                      <div className="relative w-full h-full">
+                        <div className="flex flex-col lg:items-end items-center justify-start w-full h-full">
+                          <div className="p-9 text-center z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                                maxWidth: "260px",
+                                display: "block",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_cuarto_titulo}
+                            </span>
+                            <p>{pagina.segunda_cuarto_parrafo}</p>
+                          </div>
+                          {pagina.segunda_cuarta_imagen_fondo_ && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_cuarta_imagen_fondo_}
+                            ></Image>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col w-full h-full lg:w-1/3">
+                  <div className="flex flex-row min-h-[500px] h-full w-full">
+                    <div
+                      style={{ color: "white" }}
+                      className="flex flex-col w-full h-full"
+                    >
+                      <div className="relative w-full h-full">
+                        <div className="flex flex-col items-center justify-start w-full h-full">
+                          <div className="p-9 text-center h-full z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_quinto_titulo}
+                            </span>
+                            <Link href={pagina.quinto_enlace}>
+                              <motion.button
+                                initial={{
+                                  border: "2px solid white",
+                                  color: "white",
+                                  backgroundColor: "transparent",
+                                  zIndex: "10",
+                                  padding: "20px 20px",
+                                  marginTop: "25px",
+                                  fontSize: "14px",
+                                  fontFamily: opciones.fuente_titulos,
+                                  textTransform: "uppercase",
+                                }}
+                                whileHover={{
+                                  backgroundColor: "white",
+                                  color: "black",
+                                }}
+                              >
+                                Encuentra tu Nuevo lugar favorito
+                              </motion.button>
+                            </Link>
+                          </div>
+                          {pagina.segunda_quinta_imagen_fondo && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_quinta_imagen_fondo}
+                            ></Image>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="flex flex-row  w-full justify-center">
-        <div className="flex flex-col w-full h-full max-w-[1212px]">
-          <div className="flex flex-row h-[508px] flex-wrap  w-full">
-            <div className="flex flex-col w-full lg:w-2/3">
-              <div className="flex flex-row min-h-[500px] lg:min-h-[508px] h-full w-full">
-                <div
-                  style={{ color: "black" }}
-                  className="flex flex-col h-full w-full"
-                >
-                  <div className="relative w-full h-full">
-                    <div className="flex flex-col lg:items-end items-center justify-start w-full h-full">
-                      <div className="p-9 text-center z-[10]">
-                        <span
-                          style={{
-                            fontSize: "36px",
-                            maxWidth: "260px",
-                            display: "block",
-                          }}
-                          className="tituloPrimera uppercase z-[10]"
-                        >
-                          {pagina.segunda_cuarto_titulo}
-                        </span>
-                        <p>{pagina.segunda_cuarto_parrafo}</p>
+          <div className="flex flex-row  w-full justify-center">
+            <div className="flex flex-col w-full h-full max-w-[1212px]">
+              <div className="lg:flex hidden flex-row flex-wrap h-[508px]  w-full">
+                <div className="flex flex-col w-full lg:w-1/3">
+                  <div className="flex flex-row min-h-[500px] lg:min-h-[508px] h-full w-full">
+                    <div
+                      style={{ color: "black" }}
+                      className="flex flex-col h-full w-full"
+                    >
+                      <div className="relative bg-[#F9F8F4] w-full h-full">
+                        <div className="flex flex-col items-center justify-center w-full h-full">
+                          <div className="p-9 text-center z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                                maxWidth: "260px",
+                                display: "block",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_sexta_titulo}
+                            </span>
+                            <p>{pagina.segunda_sexto_parrafo}</p>
+                          </div>
+                          {pagina.segunda_sexta_imagen_fondo && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_sexta_imagen_fondo}
+                            ></Image>
+                          )}
+                        </div>
                       </div>
-                      {pagina.segunda_cuarta_imagen_fondo_ && (
-                        <Image
-                          objectFit="cover"
-                          layout="fill"
-                          src={pagina.segunda_cuarta_imagen_fondo_}
-                        ></Image>
-                      )}
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="flex flex-col w-full h-full lg:w-1/3">
-              <div className="flex flex-row min-h-[500px] h-full w-full">
-                <div
-                  style={{ color: "white" }}
-                  className="flex flex-col w-full h-full"
-                >
-                  <div className="relative w-full h-full">
-                    <div className="flex flex-col items-center justify-start w-full h-full">
-                      <div className="p-9 text-center h-full z-[10]">
-                        <span
-                          style={{
-                            fontSize: "36px",
-                          }}
-                          className="tituloPrimera uppercase z-[10]"
-                        >
-                          {pagina.segunda_quinto_titulo}
-                        </span>
-                        <Link href={pagina.quinto_enlace}>
-                          <motion.button
-                            initial={{
-                              border: "2px solid white",
-                              color: "white",
-                              backgroundColor: "transparent",
-                              zIndex: "10",
-                              padding: "20px 20px",
-                              marginTop: "25px",
-                              fontSize: "14px",
-                              fontFamily: opciones.fuente_titulos,
-                              textTransform: "uppercase",
-                            }}
-                            whileHover={{
-                              backgroundColor: "white",
-                              color: "black",
-                            }}
-                          >
-                            Encuentra tu Nuevo lugar favorito
-                          </motion.button>
-                        </Link>
+                <div className="flex flex-col w-full h-full lg:w-1/3">
+                  <div className="flex flex-row min-h-[500px] h-full w-full">
+                    <div
+                      style={{ color: "white" }}
+                      className="flex flex-col w-full h-full"
+                    >
+                      <div className="relative w-full h-full">
+                        <div className="flex flex-col items-center justify-start w-full h-full">
+                          <div className="p-9 text-center h-full z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_septima_titulo}
+                            </span>
+                          </div>
+                          {pagina.segunda_septima_imagen_fondo && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_septima_imagen_fondo}
+                            ></Image>
+                          )}
+                        </div>
                       </div>
-                      {pagina.segunda_quinta_imagen_fondo && (
-                        <Image
-                          objectFit="cover"
-                          layout="fill"
-                          src={pagina.segunda_quinta_imagen_fondo}
-                        ></Image>
-                      )}
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-row  w-full justify-center">
-        <div className="flex flex-col w-full h-full max-w-[1212px]">
-          <div className="lg:flex hidden flex-row flex-wrap h-[508px]  w-full">
-            <div className="flex flex-col w-full lg:w-1/3">
-              <div className="flex flex-row min-h-[500px] lg:min-h-[508px] h-full w-full">
-                <div
-                  style={{ color: "black" }}
-                  className="flex flex-col h-full w-full"
-                >
-                  <div className="relative bg-[#F9F8F4] w-full h-full">
-                    <div className="flex flex-col items-center justify-center w-full h-full">
-                      <div className="p-9 text-center z-[10]">
-                        <span
-                          style={{
-                            fontSize: "36px",
-                            maxWidth: "260px",
-                            display: "block",
-                          }}
-                          className="tituloPrimera uppercase z-[10]"
-                        >
-                          {pagina.segunda_sexta_titulo}
-                        </span>
-                        <p>{pagina.segunda_sexto_parrafo}</p>
+                <div className="flex flex-col w-full h-full lg:w-1/3">
+                  <div className="flex flex-row min-h-[500px] h-full w-full">
+                    <div
+                      style={{ color: "white" }}
+                      className="flex flex-col w-full h-full"
+                    >
+                      <div className="relative w-full h-full">
+                        <div className="flex flex-col items-center justify-center w-full h-full">
+                          <div className="p-9 text-center  z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_octava_titulo}
+                            </span>
+                          </div>
+                          {pagina.segunda_octava_imagen_fondo && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_octava_imagen_fondo}
+                            ></Image>
+                          )}
+                        </div>
                       </div>
-                      {pagina.segunda_sexta_imagen_fondo && (
-                        <Image
-                          objectFit="cover"
-                          layout="fill"
-                          src={pagina.segunda_sexta_imagen_fondo}
-                        ></Image>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col w-full h-full lg:w-1/3">
-              <div className="flex flex-row min-h-[500px] h-full w-full">
-                <div
-                  style={{ color: "white" }}
-                  className="flex flex-col w-full h-full"
-                >
-                  <div className="relative w-full h-full">
-                    <div className="flex flex-col items-center justify-start w-full h-full">
-                      <div className="p-9 text-center h-full z-[10]">
-                        <span
-                          style={{
-                            fontSize: "36px",
-                          }}
-                          className="tituloPrimera uppercase z-[10]"
-                        >
-                          {pagina.segunda_septima_titulo}
-                        </span>
-                      </div>
-                      {pagina.segunda_septima_imagen_fondo && (
-                        <Image
-                          objectFit="cover"
-                          layout="fill"
-                          src={pagina.segunda_septima_imagen_fondo}
-                        ></Image>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col w-full h-full lg:w-1/3">
-              <div className="flex flex-row min-h-[500px] h-full w-full">
-                <div
-                  style={{ color: "white" }}
-                  className="flex flex-col w-full h-full"
-                >
-                  <div className="relative w-full h-full">
-                    <div className="flex flex-col items-center justify-center w-full h-full">
-                      <div className="p-9 text-center  z-[10]">
-                        <span
-                          style={{
-                            fontSize: "36px",
-                          }}
-                          className="tituloPrimera uppercase z-[10]"
-                        >
-                          {pagina.segunda_octava_titulo}
-                        </span>
-                      </div>
-                      {pagina.segunda_octava_imagen_fondo && (
-                        <Image
-                          objectFit="cover"
-                          layout="fill"
-                          src={pagina.segunda_octava_imagen_fondo}
-                        ></Image>
-                      )}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
+
       <div className="flex flex-row w-full justify-center mt-[40px] lg:mt-[100px]">
         <div className="flex flex-col w-full h-full max-w-[1200px]">
           <div className="flex flex-row w-full">
