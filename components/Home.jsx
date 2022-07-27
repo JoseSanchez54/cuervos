@@ -138,7 +138,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                         </span>
                         <p>{pagina.segunda_segundo_parrafo}</p>
                         {isMobile && (
-                          <Link href={pagina.primer_enlace}>
+                          <Link href={pagina.segundo_enlace}>
                             <motion.button
                               initial={{
                                 border: "2px solid white",
