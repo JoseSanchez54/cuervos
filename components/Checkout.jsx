@@ -109,7 +109,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     shipping_lines: [
       {
         method_id: 6,
-        method_title: "Gastos de envio",
+        method_title: "Paq Premium Domicilio",
         total: precioEnvio?.precio,
       },
     ],
