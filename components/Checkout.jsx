@@ -96,9 +96,9 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       last_name: formulario.apellido,
       address_1: formulario.direccion,
       city: formulario.ciudad,
-      state: formulario.provincia,
+      state: "M",
       postcode: formulario.codigoPostal,
-      country: formulario.pais,
+      country: "ES",
     },
 
     line_items: actualCart.map((item) => ({
