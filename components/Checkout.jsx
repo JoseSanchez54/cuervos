@@ -85,9 +85,9 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       address_1: formulario.direccion,
       address_2: formulario.direccion,
       city: formulario.ciudad,
-      state: formulario.provincia,
+      state: "M",
       postcode: formulario.cp,
-      country: formulario.pais,
+      country: "ES",
       email: formulario.email,
       phone: formulario.telefono,
     },
@@ -96,9 +96,9 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       last_name: formulario.apellido,
       address_1: formulario.direccion,
       city: formulario.ciudad,
-      state: formulario.provincia,
+      state: "M",
       postcode: formulario.codigoPostal,
-      country: formulario.pais,
+      country: "ES",
     },
 
     line_items: actualCart.map((item) => ({
@@ -106,13 +106,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       quantity: item.cantidad,
       variation_id: item?.variacion?.id,
     })),
-    shipping_lines: [
-      {
-        method_id: 6,
-        method_title: "Paq Premium Domicilio",
-        total: precioEnvio?.precio,
-      },
-    ],
   };
 
   const actionForm = (e) => {
@@ -167,7 +160,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
 
   const optionsPais = datosPaises.map((pais) => {
     return {
-      value: pais.countryShortCode,
+      value: pais.countryName,
       label: pais.countryName,
       shortCode: pais.countryShortCode,
     };
