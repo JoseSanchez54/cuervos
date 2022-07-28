@@ -174,7 +174,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   });
   let arrt = [];
   const optionsProvinciaT = datosPaises.filter(
-    (p) => p.countryName === pais.valor
+    (p) => p.countryShortCode === pais.valor
   );
   const optionsProvincia = optionsProvinciaT.map((provincia) => {
     provincia.regions.map((p) => {
