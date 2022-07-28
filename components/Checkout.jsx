@@ -179,12 +179,12 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const optionsProvincia = optionsProvinciaT.map((provincia) => {
     provincia.regions.map((p) => {
       arrt.push({
-        value: p.shortCode,
+        value: p.name,
         label: p.name,
         shortcode: p.shortCode,
       });
       return {
-        value: p.shortCode,
+        value: p.name,
         label: p.name,
         shortcode: p.shortCode,
       };
