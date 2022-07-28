@@ -6,17 +6,10 @@ import { useOptions } from "../hooks/useOptions";
 import { useProducts } from "../hooks/useProducts";
 import { usePages } from "../hooks/usePages";
 
-export default function Home({
-  options,
-  categorias,
-  pagesNew,
-  vinos,
-  pedidos,
-}) {
+export default function Home({ options, categorias, pagesNew, vinos }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { data, isValidating } = usePages(pagesNew, "Principal");
   const { products: productosSWR } = useProducts(vinos);
-  console.log(pedidos);
 
   return (
     <>
@@ -61,13 +54,6 @@ export async function getStaticProps() {
       return response.data;
     }
   );
-  const pedidos = await WooCommerce.get("shipping/zones/1/methods")
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error.response.data);
-    });
 
   return {
     props: {
@@ -78,7 +64,6 @@ export async function getStaticProps() {
       internos: internos,
       categorias,
       vinos,
-      pedidos,
     },
     revalidate: 10,
   };
