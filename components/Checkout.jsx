@@ -108,7 +108,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     })),
     shipping_lines: [
       {
-        method_id: "flat_rate",
+        method_id: 6,
         method_title: "Gastos de envio",
         total: precioEnvio?.precio,
       },
