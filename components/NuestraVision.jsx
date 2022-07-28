@@ -40,19 +40,19 @@ const NuestraVision = ({ opciones, pagina, categorias }) => {
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="p-9 z-[10] flex flex-col justify-center items-center">
                 <span className="z-[10] uppercase text-center tituloPrimera ">
-                  {pagina.pretitulo_nosotros}
+                  {pagina.pretitulo_vision}
                 </span>
                 <span className="z-[10] uppercase text-center titulo ">
-                  {pagina.titulo_nosotros}
+                  {pagina.titulo_vision}
                 </span>
                 <p className="uppercase parrafoPrimera max-w-[350px] text-center">
-                  {pagina.parrafo_nosotros}
+                  {pagina.parrafo_vision}
                 </p>
               </div>
 
               <Image
                 objectFit="cover"
-                src={pagina.primera_imagen_nosotros}
+                src={pagina.primera_imagen_vision}
                 layout="fill"
                 priority="high"
                 quality={100}
@@ -69,27 +69,27 @@ const NuestraVision = ({ opciones, pagina, categorias }) => {
           <div className="flex flex-row flex-wrap  my-[50px] w-full ">
             <div className="flex flex-col items-center w-full">
               <span className="z-[10] uppercase text-center tituloPrimera ">
-                {pagina.segunda_primer_titulo_nosotros}
+                {pagina.segunda_primer_titulo_vision}
               </span>
               <p className="uppercase parrafoPrimera mt-[20px]  max-w-[350px] text-center">
-                {pagina.segunda_primer_parrafo_nosotros}
+                {pagina.segunda_primer_parrafo_vision}
               </p>
             </div>
           </div>
           <div className="flex gap-9 flex-row my-[50px] flex-wrap lg:flex-nowrap w-full justify-center">
             <div className="flex flex-col lg:w-1/2 w-full justify-center">
               <span className="z-[10] uppercase text-center mb-9 tituloPrimera ">
-                {pagina.titulo_tercera_nosotros}
+                {pagina.titulo_tercera_vision}
               </span>
               <p className="uppercase parrafoPrimera  text-center">
-                {pagina.parrafo_tercera_nosotros}
+                {pagina.parrafo_tercera_vision}
               </p>
             </div>
             <div className="flex flex-col lg:w-1/2 w-full">
               <Image
                 width="658px"
                 height="747px"
-                src={pagina.imagen_tercera_nosotros}
+                src={pagina.imagen_tercera_vision}
               />
             </div>
           </div>
@@ -98,37 +98,37 @@ const NuestraVision = ({ opciones, pagina, categorias }) => {
               <Image
                 width="658px"
                 height="747px"
-                src={pagina.imagen_cuarta_nosotros}
+                src={pagina.imagen_cuarta_vision}
               />
             </div>
             <div className="flex flex-col lg:w-1/2 w-full justify-center">
               <span className="z-[10] uppercase text-center mb-9 tituloPrimera ">
-                {pagina.titulo_cuarta_nosotros}
+                {pagina.titulo_cuarta_vision}
               </span>
               <p className="uppercase parrafoPrimera  text-center">
-                {pagina.parrafo_cuarta_nosotros}
+                {pagina.parrafo_cuarta_vision}
               </p>
             </div>
           </div>
           <div className="flex flex-row w-full justify-center">
             <div className="relative w-full min-h-[587px]">
-              <Image layout="fill" src={pagina.imagen_quinta_nosotros} />
+              <Image layout="fill" src={pagina.imagen_quinta_vision} />
             </div>
           </div>
           <div className="flex gap-9 flex-row my-[50px] flex-wrap-reverse lg:flex-nowrap w-full justify-center">
             <div className="flex flex-col lg:w-1/2 w-full justify-center">
               <span className="z-[10] uppercase text-center mb-9 tituloPrimera ">
-                {pagina.titulo_sexta_nosotros}
+                {pagina.titulo_sexta_vision}
               </span>
               <p className="uppercase parrafoPrimera  text-center">
-                {pagina.parrafo_sexta_nosotros}
+                {pagina.parrafo_sexta_vision}
               </p>
             </div>
             <div className="flex flex-col lg:w-1/2 w-full">
               <Image
                 width="658px"
                 height="747px"
-                src={pagina.imagen_sexta_nosotros}
+                src={pagina.imagen_sexta_vision}
               />
             </div>
           </div>
