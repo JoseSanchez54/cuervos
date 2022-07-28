@@ -83,7 +83,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       first_name: formulario.nombre,
       last_name: formulario.apellido,
       address_1: formulario.direccion,
-      address_2: formulario.numeroCalle,
+      address_2: formulario.direccion,
       city: formulario.ciudad,
       state: formulario.provincia,
       postcode: formulario.cp,
@@ -167,24 +167,24 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
 
   const optionsPais = datosPaises.map((pais) => {
     return {
-      value: pais.countryName,
+      value: pais.countryShortCode,
       label: pais.countryName,
       shortCode: pais.countryShortCode,
     };
   });
   let arrt = [];
   const optionsProvinciaT = datosPaises.filter(
-    (p) => p.countryName === pais.valor
+    (p) => p.countryShortCode === pais.valor
   );
   const optionsProvincia = optionsProvinciaT.map((provincia) => {
     provincia.regions.map((p) => {
       arrt.push({
-        value: p.name,
+        value: p.shortCode,
         label: p.name,
         shortcode: p.shortCode,
       });
       return {
-        value: p.name,
+        value: p.shortCode,
         label: p.name,
         shortcode: p.shortCode,
       };
