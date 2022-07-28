@@ -343,6 +343,7 @@ const SingleProduct = ({
                               width="101px"
                               height="108px"
                               src={e.image.src}
+                              quality="100"
                             />
                           </button>
                         </div>
@@ -372,6 +373,7 @@ const SingleProduct = ({
                           height="25px"
                           width="31px"
                           src="/truck.png"
+                          quality="100"
                         ></Image>
                         <span
                           style={{
@@ -391,6 +393,7 @@ const SingleProduct = ({
                           height="25px"
                           width="31px"
                           src="/shop.png"
+                          quality="100"
                         ></Image>
                         <span>
                           <span
@@ -418,6 +421,7 @@ const SingleProduct = ({
                           height="81px"
                           width="80px"
                           src="/calendar.png"
+                          quality="100"
                         />
                       </div>
                       <div className="flex flex-col w-full max-w-[220px] lg:w-auto items-center lg:items-start justify-center">
@@ -479,6 +483,7 @@ const SingleProduct = ({
                       height="24px"
                       width="24px"
                       src="/plus.png"
+                      quality="100"
                     />
                   </div>
                   <div className="flex w-full flex-col">
@@ -573,12 +578,14 @@ const SingleProduct = ({
                         src={imagenBanner}
                         layout="fill"
                         objectFit="cover"
+                        quality="100"
                       ></Image>
                     ) : (
                       <Image
                         src="/vino.png"
                         layout="fill"
                         objectFit="cover"
+                        quality="100"
                       ></Image>
                     )}
                   </div>
@@ -803,6 +810,7 @@ const SingleProduct = ({
                                 )[0].value
                               }
                               objectFit="contain"
+                              quality="100"
                             ></Image>
                           ) : (
                             <Image
@@ -810,6 +818,7 @@ const SingleProduct = ({
                               width="239px"
                               src="/duero.png"
                               objectFit="contain"
+                              quality="100"
                             ></Image>
                           )}
                         </div>
@@ -831,6 +840,7 @@ const SingleProduct = ({
                           <Image
                             height="300px"
                             width="443px"
+                            quality="100"
                             src={
                               metadata.filter((m) => m.key === "notas")[0]
                                 ?.value
