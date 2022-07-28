@@ -61,7 +61,7 @@ export async function getStaticProps() {
       return response.data;
     }
   );
-  const pedidos = await WooCommerce.get("shipping/zones/1/methods")
+  const pedidos = await WooCommerce.get("orders")
     .then((response) => {
       return response.data;
     })

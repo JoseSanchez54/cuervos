@@ -106,13 +106,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       quantity: item.cantidad,
       variation_id: item?.variacion?.id,
     })),
-    shipping_lines: [
-      {
-        method_id: 6,
-        method_title: "Paq Premium Domicilio",
-        total: precioEnvio?.precio,
-      },
-    ],
   };
 
   const actionForm = (e) => {
