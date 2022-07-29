@@ -80,7 +80,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                       style={{
                         fontSize: "55px",
                       }}
-                      className="tituloPrimera  uppercase z-[10]"
+                      className="tituloPrimera   uppercase z-[10]"
                     >
                       {pagina.segunda_primer_titulo}
                     </span>
@@ -89,6 +89,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                         fontFamily: opciones.fuente_global,
                         textTransform: "uppercase",
                         fontWeight: "bold",
+                        marginTop: "20px",
                       }}
                     >
                       {pagina.segunda_primer_parrafo}
