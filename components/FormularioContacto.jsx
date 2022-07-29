@@ -83,93 +83,90 @@ const FormularioContacto = ({ options }) => {
 
   return (
     <>
-      <div id="contacto" className="flex flex-row w-full h-full">
-        {enviado === false ? (
-          <>
-            <form className="w-full" onSubmit={enviar}>
-              <div className="flex flex-row gap-5 flex-wrap w-full lg:flex-nowrap px-3 ">
-                <div className="flex flex-col gap-8 lg:gap-9 justify-between max-h-[123px] w-full lg:w-1/2 h-full ">
-                  <Input
-                    clearable
-                    bordered
-                    labelPlaceholder="Nombre"
-                    initialValue="Nombre"
-                    onChange={(e) => handleForm(e)}
-                    name="nombre"
-                    value={form.nombre}
-                    required
-                    css={{
-                      backgroundColor: "white",
+      {enviado === false ? (
+        <>
+          <form className="w-full h-max" onSubmit={enviar}>
+            <div className="flex flex-row gap-5 flex-wrap w-full lg:flex-nowrap px-3 ">
+              <div className="flex flex-col gap-8 lg:gap-9 justify-between max-h-[123px] w-full lg:w-1/2 h-full ">
+                <Input
+                  clearable
+                  bordered
+                  labelPlaceholder="Nombre"
+                  initialValue="Nombre"
+                  onChange={(e) => handleForm(e)}
+                  name="nombre"
+                  value={form.nombre}
+                  required
+                  css={{
+                    backgroundColor: "white",
+                    borderColor: "#7e8085",
+                    label: {
+                      color: "#7e8085",
+                      zIndex: "1",
+                    },
+                    input: {
                       borderColor: "#7e8085",
-                      label: {
-                        color: "#7e8085",
-                        zIndex: "1",
-                      },
-                      input: {
-                        borderColor: "#7e8085",
-                      },
-                    }}
-                  />
-                  <Input
-                    clearable
-                    bordered
-                    labelPlaceholder="Email"
-                    onChange={(e) => handleForm(e)}
-                    name="email"
-                    value={form.email}
-                    type="email"
-                    required
-                    css={{
-                      backgroundColor: "white",
+                    },
+                  }}
+                />
+                <Input
+                  clearable
+                  bordered
+                  labelPlaceholder="Email"
+                  onChange={(e) => handleForm(e)}
+                  name="email"
+                  value={form.email}
+                  type="email"
+                  required
+                  css={{
+                    backgroundColor: "white",
+                    borderColor: "#7e8085",
+                    label: {
+                      color: "#7e8085",
+                      zIndex: "1",
+                    },
+                    input: {
                       borderColor: "#7e8085",
-                      label: {
-                        color: "#7e8085",
-                        zIndex: "1",
-                      },
-                      input: {
-                        borderColor: "#7e8085",
-                      },
-                    }}
-                  />
-                </div>
-                <div className="flex flex-col mt-[25px] lg:mt-[0px] w-full lg:w-1/2 max-h-[250px] items-center lg:items-start lg:justify-start h-full">
-                  <Textarea
-                    bordered
-                    className="w-full"
-                    color="grey"
-                    labelPlaceholder="Escribe tu mensaje"
-                    onChange={(e) => handleForm(e)}
-                    name="mensaje"
-                    rows="5"
-                    placeholder="Escribe tu mensaje"
-                    value={form.mensaje}
-                    required
-                    css={{
-                      width: "100%",
-                      backgroundColor: "white",
+                    },
+                  }}
+                />
+                <Textarea
+                  bordered
+                  className="w-full"
+                  color="grey"
+                  labelPlaceholder="Escribe tu mensaje"
+                  onChange={(e) => handleForm(e)}
+                  name="mensaje"
+                  rows="5"
+                  placeholder="Escribe tu mensaje"
+                  value={form.mensaje}
+                  required
+                  css={{
+                    width: "100%",
+                    backgroundColor: "white",
+                    borderColor: "#7e8085",
+                    label: {
+                      color: "#7e8085",
+                      zIndex: "1",
+                    },
+                    input: {
                       borderColor: "#7e8085",
-                      label: {
-                        color: "#7e8085",
-                        zIndex: "1",
-                      },
-                      input: {
-                        borderColor: "#7e8085",
-                      },
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="flex flex-row justify-center w-full">
-                <div className="flex flex-col items-center w-full">
-                  <>
-                    <div className="form-group form-check mt-8">
+                    },
+                  }}
+                />
+                <>
+                  <div className="form-group flex flex-col gap-3 form-check ">
+                    <div className="flex flex-row">
                       <input
                         name="acceptTerms"
                         type="checkbox"
                         id="acceptTerms"
                         required
                       />
-                      <label htmlFor="acceptTerms" className="form-check-label">
+                      <label
+                        htmlFor="acceptTerms"
+                        className="form-check-label w-full"
+                      >
                         He leído y acepto la{" "}
                         <Link passHref href="/privacidad">
                           <a style={{ color: "black", fontWeight: "bold" }}>
@@ -178,10 +175,8 @@ const FormularioContacto = ({ options }) => {
                         </Link>
                       </label>
                     </div>
-                    <div
-                      style={{ marginTop: "10px" }}
-                      className="form-group form-check"
-                    >
+                    <div className="flex flex-row">
+                      {" "}
                       <input
                         name="acceptTerms2"
                         type="checkbox"
@@ -195,36 +190,37 @@ const FormularioContacto = ({ options }) => {
                         Acepto recibir comunicaciones comerciales
                       </label>
                     </div>
-                  </>
-                  {mensaje && <span className="error">{mensaje}</span>}{" "}
-                  <button
-                    style={{
-                      backgroundColor: "black",
-                      color: "white",
-                      border: "none",
-                      padding: "10px 20px",
-                    }}
-                    className="enviarform mt-[20px]"
-                  >
-                    Enviar
-                  </button>
-                </div>
+                  </div>
+                </>
+                {mensaje && <span className="error">{mensaje}</span>}{" "}
+                <button
+                  style={{
+                    backgroundColor: "black",
+                    color: "white",
+                    border: "none",
+                    padding: "10px 20px",
+                  }}
+                  className="enviarform"
+                >
+                  Enviar
+                </button>
               </div>
-            </form>
-          </>
-        ) : (
-          <>
-            <div className="flex flex-col justify-center mensajeContenedor">
-              <span className="mensajeEnviado">
-                ¡Gracias por contactar con nosotros!
-              </span>
-              <span className="mensajeEnviado2">
-                Pronto nos pondremos en contacto contigo
-              </span>
             </div>
-          </>
-        )}
-      </div>
+          </form>
+        </>
+      ) : (
+        <>
+          <div className="flex flex-col justify-center mensajeContenedor">
+            <span className="mensajeEnviado">
+              ¡Gracias por contactar con nosotros!
+            </span>
+            <span className="mensajeEnviado2">
+              Pronto nos pondremos en contacto contigo
+            </span>
+          </div>
+        </>
+      )}
+
       <style jsx>{`
         .formulario {
           display: flex;

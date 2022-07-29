@@ -36,26 +36,25 @@ const Contacto = ({ opciones, pagina, categoriasAll }) => {
         }}
       />
       <Nav categorias={categoriasAll} opciones={optionsSWR} />
-      <div
-        style={{ color: "white" }}
-        className="flex  flex-row w-full  alto items-end justify-center"
-      >
-        <div className="flex flex-col justify-center w-full h-full">
-          <div className="relative w-full h-full">
-            <div className="flex flex-col justify-center items-center w-full h-full">
-              <div className="p-9 z-[10] flex flex-col justify-center items-center">
-                <span className="z-[10] uppercase text-center titulo ">
-                  {pagina.titulo_contacto}
-                </span>
-                <p className="uppercase parrafoPrimera max-w-[350px] text-center">
-                  {pagina.parrafo_contacto}
-                </p>
-              </div>
 
+      <div className="flex flex-row alto w-full lg:items-center  items-start justify-center">
+        <div className="flex flex-col h-full  max-w-[1600px] justify-start lg:justify-center w-full items-center">
+          <div className="flex flex-row  items-start w-full justify-center">
+            <div className="flex flex-col justify-center  lg:justify-start w-full p-7 lg:w-1/2 items-center lg:items-start">
+              <span className="z-[10] uppercase text-center lg:text-start titulo ">
+                {pagina.titulo_contacto}
+              </span>
+              <p className="uppercase parrafoPrimera mb-8 max-w-[350px] text-center lg:text-start">
+                {pagina.parrafo_contacto}
+              </p>
+              <FormularioContacto options={optionsSWR} />
+            </div>
+            <div className="lg:flex hidden flex-col  justify-center w-full p-7 lg:w-1/2 items-center">
               <Image
-                objectFit="cover"
+                objectFit="contain"
                 src={pagina.fondo_contacto}
-                layout="fill"
+                height="700px"
+                width="700px"
                 priority="high"
                 quality={100}
               ></Image>
@@ -63,16 +62,11 @@ const Contacto = ({ opciones, pagina, categoriasAll }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row w-full justify-center my-[100px]">
-        <div className="flex flex-col w-full max-w-[1000px]">
-          <FormularioContacto options={optionsSWR} />
-        </div>
-      </div>
       <Footer options={optionsSWR}></Footer>
       <style jsx>{`
         .titulo {
           font-family: ${opciones.fuente_titulos};
-          font-size: 120px;
+          font-size: 60px;
         }
         .tituloPrimera {
           font-family: ${opciones.fuente_titulos};
@@ -83,8 +77,7 @@ const Contacto = ({ opciones, pagina, categoriasAll }) => {
           font-size: 16px;
         }
         .alto {
-          height: calc(100vh - 144px);
-          max-height: 600px;
+          height: calc(100vh - 309px);
         }
         .tituloseccion {
           font-family: ${opciones.fuente_titulos};
@@ -95,6 +88,9 @@ const Contacto = ({ opciones, pagina, categoriasAll }) => {
             font-family: ${opciones.fuente_titulos};
             font-size: 70px;
             line-height: 1.1;
+          }
+          .alto {
+            height: 100vh;
           }
         }
       `}</style>
