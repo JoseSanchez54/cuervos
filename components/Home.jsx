@@ -476,7 +476,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row p-5 w-full justify-center mt-[40px] lg:mt-[100px]">
+      {/*     <div className="flex flex-row p-5 w-full justify-center mt-[40px] lg:mt-[100px]">
         <div className="flex flex-col w-full max-w-[1200px]">
           <span
             style={{
@@ -497,7 +497,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
             ESOS MOMENTOS QUE nos hacen ser diferentes
           </p>
         </div>
-      </div>
+      </div> */}
       <Footer options={opciones}></Footer>
 
       <style jsx>{`
