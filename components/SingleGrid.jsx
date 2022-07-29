@@ -75,7 +75,7 @@ const SingleGrid = ({ producto, opciones }) => {
                       query: { slug: producto?.slug },
                     }}
                   >
-                    <a className="z-[20]">
+                    <a className="z-[20] mb-3">
                       <span
                         style={{
                           color: cambioImagen ? "#fff" : "#000",
