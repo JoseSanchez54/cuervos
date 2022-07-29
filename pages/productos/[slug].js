@@ -298,7 +298,7 @@ const SingleProduct = ({
                       })}
                     </span>
                     <span className="titulo mt-8">{product.name}</span>
-                    <div
+                    <p
                       className="inyectado"
                       style={{
                         fontFamily: options.fuente_global,
