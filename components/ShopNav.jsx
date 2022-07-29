@@ -18,22 +18,20 @@ const ShopNav = ({ pagina, opciones }) => {
         {menuBruto.map((menu, index) => {
           return (
             <div className="flex flex-col" key={index}>
-              <Link href={`/categoria${menu.url}`}>
+              <Link href={`/categoria${menu.url}`} passHref>
                 <a>
-                  <button>
-                    <span
-                      className="uppercase"
-                      style={{
-                        fontFamily: opciones.fuente_global,
-                        fontSize: "16px",
-                        color: "black",
-                        textDecoration:
-                          "/" + activo === menu.url ? "underline" : "none",
-                      }}
-                    >
-                      {menu.etiqueta}
-                    </span>
-                  </button>
+                  <span
+                    className="uppercase"
+                    style={{
+                      fontFamily: opciones.fuente_global,
+                      fontSize: "16px",
+                      color: "black",
+                      textDecoration:
+                        "/" + activo === menu.url ? "underline" : "none",
+                    }}
+                  >
+                    {menu.etiqueta}
+                  </span>
                 </a>
               </Link>
             </div>
