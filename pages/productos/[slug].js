@@ -299,6 +299,7 @@ const SingleProduct = ({
                     </span>
                     <span className="titulo mt-8">{product.name}</span>
                     <div
+                      className="inyectado"
                       style={{
                         fontFamily: options.fuente_global,
                         fontWeight: "bold",
@@ -325,7 +326,6 @@ const SingleProduct = ({
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
                 {variaciones.length > 0 && (
                   <>
-                  
                     <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
                       {variaciones.map((e, index) => {
                         return (
@@ -895,6 +895,10 @@ const SingleProduct = ({
           font-family: ${options.fuente_titulos};
           font-size: 36px;
           text-transform: uppercase;
+        }
+        .inyectado p {
+          font-family: ${options.fuente_global};
+          font-weight: bold;
         }
         .tituloPrimera {
           font-family: ${options.fuente_titulos};
