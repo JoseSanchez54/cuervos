@@ -262,7 +262,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                                 {opciones.titulo_promocion}
                               </span>
                               <button className="buyNow">
-                                <Link href="/tienda">
+                                <Link href="/categoria/tinto">
                                   <a>Comprar ahora</a>
                                 </Link>
                               </button>
