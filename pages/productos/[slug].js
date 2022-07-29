@@ -299,7 +299,10 @@ const SingleProduct = ({
                     </span>
                     <span className="titulo mt-8">{product.name}</span>
                     <div
-                      style={{ fontFamily: options .fuente_global}}
+                      style={{
+                        fontFamily: options.fuente_global,
+                        fontWeight: "bold",
+                      }}
                       dangerouslySetInnerHTML={{
                         __html: product.short_description,
                       }}
@@ -321,36 +324,39 @@ const SingleProduct = ({
                 </div>
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
                 {variaciones.length > 0 && (
-                  <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
-                    {variaciones.map((e, index) => {
-                      return (
-                        <div key={index} className="flex flex-col w-auto">
-                          <button
-                            style={{
-                              border:
-                                seleccion.Botellas === e.attributes[0].option
-                                  ? "solid 2px #000"
-                                  : "none",
-                              height: isMobile ? "76px" : "112px",
-                              borderRadius: "6px",
-                            }}
-                            className="botonVaria"
-                            value={e.attributes[0].option}
-                            onClick={(r) =>
-                              handleVariations(r, e.attributes[0].name)
-                            }
-                          >
-                            <Image
-                              width="101px"
-                              height="108px"
-                              src={e.image.src}
-                              quality="100"
-                            />
-                          </button>
-                        </div>
-                      );
-                    })}
-                  </div>
+                  <>
+                  
+                    <div className="flex flex-row-reverse gap-5 w-full p-5 justify-center">
+                      {variaciones.map((e, index) => {
+                        return (
+                          <div key={index} className="flex flex-col w-auto">
+                            <button
+                              style={{
+                                border:
+                                  seleccion.Botellas === e.attributes[0].option
+                                    ? "solid 2px #000"
+                                    : "none",
+                                height: isMobile ? "76px" : "112px",
+                                borderRadius: "6px",
+                              }}
+                              className="botonVaria"
+                              value={e.attributes[0].option}
+                              onClick={(r) =>
+                                handleVariations(r, e.attributes[0].name)
+                              }
+                            >
+                              <Image
+                                width="101px"
+                                height="108px"
+                                src={e.image.src}
+                                quality="100"
+                              />
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </>
                 )}
                 <div className="flex flex-row mt-7 p-5 w-full">
                   <AddToCart
