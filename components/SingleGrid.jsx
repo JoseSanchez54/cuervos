@@ -81,6 +81,7 @@ const SingleGrid = ({ producto, opciones }) => {
                           color: cambioImagen ? "#fff" : "#000",
                           fontFamily: opciones.fuente_global,
                           textTransform: "uppercase",
+                          fontWeight: "bold",
                         }}
                         className="z-[10]"
                       >
