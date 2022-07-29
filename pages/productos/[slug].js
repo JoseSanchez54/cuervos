@@ -298,15 +298,11 @@ const SingleProduct = ({
                       })}
                     </span>
                     <span className="titulo mt-8">{product.name}</span>
-                    <p
-                      className="inyectado"
+                    <span
                       dangerouslySetInnerHTML={{
                         __html: product.short_description,
                       }}
-                      style={{
-                        fontFamily: options.fuente_global,
-                        fontWeight: "bold",
-                      }}
+                      className="inyectado"
                     />
                     <span
                       className="precio"
@@ -896,7 +892,7 @@ const SingleProduct = ({
           font-size: 36px;
           text-transform: uppercase;
         }
-        .inyectado * {
+        .inyectado {
           font-family: ${options.fuente_global};
           font-weight: bold;
         }
