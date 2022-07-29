@@ -456,6 +456,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                   color: "white",
                   fontFamily: opciones.fuente_global,
                   fontSize: "14px",
+                  textTransform: "uppercase",
                 }}
               >
                 {pagina.parrafo_banner}
