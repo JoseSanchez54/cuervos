@@ -87,7 +87,7 @@ const FormularioContacto = ({ options }) => {
         <>
           <form className="w-full h-max" onSubmit={enviar}>
             <div className="flex flex-row gap-5 flex-wrap w-full lg:flex-nowrap px-3 ">
-              <div className="flex flex-col gap-8 lg:gap-9 justify-between max-h-[123px] w-full lg:w-1/2 h-full ">
+              <div className="flex flex-col gap-8 lg:gap-9 justify-between max-h-[123px] w-full  h-full ">
                 <Input
                   clearable
                   bordered
