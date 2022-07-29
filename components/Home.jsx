@@ -88,7 +88,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                       style={{
                         fontFamily: opciones.fuente_global,
                         textTransform: "uppercase",
-                        fontWeight: "bold",
+
                         marginTop: "20px",
                       }}
                     >
