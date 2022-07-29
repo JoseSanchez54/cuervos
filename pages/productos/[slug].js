@@ -300,12 +300,12 @@ const SingleProduct = ({
                     <span className="titulo mt-8">{product.name}</span>
                     <p
                       className="inyectado"
+                      dangerouslySetInnerHTML={{
+                        __html: product.short_description,
+                      }}
                       style={{
                         fontFamily: options.fuente_global,
                         fontWeight: "bold",
-                      }}
-                      dangerouslySetInnerHTML={{
-                        __html: product.short_description,
                       }}
                     />
                     <span
