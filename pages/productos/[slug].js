@@ -896,7 +896,7 @@ const SingleProduct = ({
           font-size: 36px;
           text-transform: uppercase;
         }
-        .inyectado p {
+        .inyectado * {
           font-family: ${options.fuente_global};
           font-weight: bold;
         }
