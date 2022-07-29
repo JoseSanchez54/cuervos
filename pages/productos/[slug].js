@@ -100,6 +100,15 @@ const SingleProduct = ({
   upSells,
 }) => {
   const { product } = useProduct(products[0], products[0]?.id);
+  function removeTags(str) {
+    if (str === null || str === "") return false;
+    else str = str.toString();
+
+    // Regular expression to identify HTML tags in
+    // the input string. Replacing the identified
+    // HTML tag with a null string.
+    return str.replace(/(<([^>]+)>)/gi, "");
+  }
 
   const [isVino, setIsVino] = useState(false);
   useEffect(() => {
@@ -297,13 +306,10 @@ const SingleProduct = ({
                         }
                       })}
                     </span>
-                    <span className="titulo mt-8">{product.name}</span>
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: product.short_description,
-                      }}
-                      className="inyectado"
-                    />
+                    <span className="titulo my-6">{product.name}</span>
+                    <span className="inyectado mb-6">
+                      {removeTags(product.short_description)}
+                    </span>
                     <span
                       className="precio"
                       key={product.id}
@@ -499,16 +505,9 @@ const SingleProduct = ({
                     >
                       Los detalles de nuestro {product.name}
                     </span>
-                    <div
-                      style={{
-                        fontSize: "16px",
-                        fontFamily: options.fuente_global,
-                      }}
-                      className="my-5"
-                      dangerouslySetInnerHTML={{
-                        __html: product.description,
-                      }}
-                    />
+                    <span className="inyectado2 mt-6">
+                      {removeTags(product.description)}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -546,7 +545,7 @@ const SingleProduct = ({
                           CONOCE PESQUERA DEL DUERO
                         </span>
                       )}
-                      {parrafoBanner ? (
+                      {parrafoBanner && (
                         <span
                           className="lg:max-w-[300px] w-full"
                           style={{
@@ -558,20 +557,6 @@ const SingleProduct = ({
                           }}
                         >
                           {parrafoBanner}
-                        </span>
-                      ) : (
-                        <span
-                          className="lg:max-w-[300px] w-full"
-                          style={{
-                            fontSize: "16px",
-                            fontFamily: options.fuente_global,
-                            color: "#fff",
-                            lineHeight: "1.1",
-                            marginTop: "10px",
-                          }}
-                        >
-                          Lorem ipsum dolor sit amet, consetetur sadipscing
-                          elitr, sed diam nonumy eirmod.
                         </span>
                       )}
                     </div>
@@ -895,6 +880,13 @@ const SingleProduct = ({
         .inyectado {
           font-family: ${options.fuente_global};
           font-weight: bold;
+          font-size: 16px;
+          line-height: 1.3;
+        }
+        .inyectado2 {
+          font-family: ${options.fuente_global};
+          font-size: 16px;
+          line-height: 1.3;
         }
         .tituloPrimera {
           font-family: ${options.fuente_titulos};

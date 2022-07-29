@@ -19,6 +19,7 @@ const Footer = ({ options }) => {
                           fontSize: "12px",
                           textTransform: "uppercase",
                           color: "black",
+                          fontWeight: "bold",
                         }}
                       >
                         <span>{e.label}</span>
@@ -42,6 +43,7 @@ const Footer = ({ options }) => {
                       textTransform: "uppercase",
                       color: "black",
                       padding: "0px",
+                      fontWeight: "bold",
                     }}
                   >
                     <span>POLÍTICA DE COOKIES</span>
@@ -56,6 +58,7 @@ const Footer = ({ options }) => {
                       fontSize: "12px",
                       textTransform: "uppercase",
                       color: "black",
+                      fontWeight: "bold",
                     }}
                   >
                     <span>Aviso legal</span>
@@ -70,6 +73,7 @@ const Footer = ({ options }) => {
                       fontSize: "12px",
                       textTransform: "uppercase",
                       color: "black",
+                      fontWeight: "bold",
                     }}
                   >
                     <span>POLÍTICA DE PRIVACIDAD</span>
@@ -81,8 +85,9 @@ const Footer = ({ options }) => {
                   fontFamily: options.fuente_global,
                   fontSize: "12px",
                   textTransform: "uppercase",
-                  color: "black",
+                  color: "grey",
                   textAlign: "center",
+                  fontWeight: "bold",
                 }}
               >
                 {"@" +
