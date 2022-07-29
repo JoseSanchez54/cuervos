@@ -75,16 +75,24 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
             <div className="flex flex-col h-full w-full lg:w-2/3">
               <div className="relative w-full h-full">
                 <div className="flex flex-col items-center w-full h-full">
-                  <div className="p-9 lg:text-center z-[10]">
+                  <div className="lg:p-[100px] p-9 max-w-[560px]  lg:text-center z-[10]">
                     <span
                       style={{
                         fontSize: "55px",
                       }}
-                      className="tituloPrimera uppercase z-[10]"
+                      className="tituloPrimera  uppercase z-[10]"
                     >
                       {pagina.segunda_primer_titulo}
                     </span>
-                    <p>{pagina.segunda_primer_parrafo}</p>
+                    <p
+                      style={{
+                        fontFamily: opciones.fuente_global,
+                        textTransform: "uppercase",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {pagina.segunda_primer_parrafo}
+                    </p>
                     {isMobile && (
                       <Link href={pagina.primer_enlace}>
                         <motion.button

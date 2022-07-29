@@ -391,6 +391,7 @@ const SingleProduct = ({
                             fontFamily: options.fuente_titulos,
                             marginTop: "10px",
                             display: "block",
+                            fontWeight: "bold",
                           }}
                         >
                           Recibe tu pedido en 48 a 72 hrs.
@@ -412,6 +413,7 @@ const SingleProduct = ({
                               fontFamily: options.fuente_titulos,
                               marginTop: "10px",
                               display: "block",
+                              fontWeight: "bold",
                             }}
                           >
                             Envíos gratuitos desde 50€
