@@ -299,6 +299,7 @@ const SingleProduct = ({
                     </span>
                     <span className="titulo mt-8">{product.name}</span>
                     <div
+                      style={{ fontFamily: options .fuente_global}}
                       dangerouslySetInnerHTML={{
                         __html: product.short_description,
                       }}
