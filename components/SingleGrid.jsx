@@ -7,7 +7,7 @@ const Precio = dynamic(() => import("../components/Precio"));
 import { useDispatch } from "react-redux";
 import { useVariations } from "../hooks/useVariations";
 
-const SingleGrid = ({ producto, opciones }) => {
+const SingleGrid = ({ producto, opciones, key }) => {
   const { variacion, isValidating } = useVariations(producto?.id);
 
   const [cambioImagen, setCambioImagen] = useState(false);
@@ -54,6 +54,7 @@ const SingleGrid = ({ producto, opciones }) => {
   return (
     <AnimatePresence>
       <div
+        key={producto?.id}
         style={{ cursor: "pointer" }}
         onMouseOver={(e) => setCambioImagen(true)}
         onMouseLeave={(e) => setCambioImagen(false)}
