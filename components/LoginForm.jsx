@@ -228,6 +228,7 @@ const LoginForm = ({ opciones, login, set }) => {
                         Cambiar contraseña
                       </button>
                       <button
+                        className="mt-5"
                         onClick={() => {
                           handleOlvidar();
                           handleCode();
@@ -287,7 +288,7 @@ const LoginForm = ({ opciones, login, set }) => {
                       >
                         Enviar
                       </button>
-                      <button onClick={() => handleCode()}>
+                      <button className="mt-5" onClick={() => handleCode()}>
                         He recibido el codigo de verificacion
                       </button>
                     </>
@@ -380,7 +381,10 @@ const LoginForm = ({ opciones, login, set }) => {
                           >
                             Login
                           </button>
-                          <button onClick={() => handleOlvidar()}>
+                          <button
+                            className="mt-5"
+                            onClick={() => handleOlvidar()}
+                          >
                             He olvidado mi contraseña
                           </button>
                         </>
