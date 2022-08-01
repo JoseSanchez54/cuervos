@@ -6,7 +6,7 @@ const MenuLateral = dynamic(() => import("../components/MenuLateral"));
 import useMobile from "../hooks/useMobile";
 import { BiUser } from "react-icons/bi";
 import MiniCart from "../components/MiniCart";
-import LoginForm from "./LoginForm";
+/* import LoginForm from "./LoginForm"; */
 import { useState } from "react";
 
 const Nav = ({ opciones, categorias }) => {
@@ -46,7 +46,7 @@ const Nav = ({ opciones, categorias }) => {
           </div>
         </div>
       </div>
-      <LoginForm set={setLogin} login={login} opciones={opciones} />
+      {/*    <LoginForm set={setLogin} login={login} opciones={opciones} /> */}
     </>
   );
 };
