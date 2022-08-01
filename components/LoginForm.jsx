@@ -24,16 +24,11 @@ const LoginForm = ({ opciones, login, set }) => {
       username: form.username,
       password: form.password,
     };
-    const res = await axios
-      .post("/api/login", data)
-      .then(
-        (response) =>
-          (document.cookie =
-            "session=" +
-            response.data.token +
-            "; expires=" +
-            response.data.expires)
-      );
+    const res = await axios.post("/api/login", data).then((response) => {
+      document.cookie =
+        "session=" + response.data.token + "; expires=" + response.data.expires;
+      window.location.reload();
+    });
   };
   return (
     <>
