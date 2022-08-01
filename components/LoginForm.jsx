@@ -3,7 +3,7 @@ import { GrClose } from "react-icons/gr/";
 import axios from "axios";
 import { Input } from "@nextui-org/react";
 import { useState } from "react";
-import md5 from "md5";
+
 const LoginForm = ({ opciones, login, set }) => {
   const handleActivo = () => {
     set(false);
@@ -22,13 +22,18 @@ const LoginForm = ({ opciones, login, set }) => {
   const SendLogin = async () => {
     const data = {
       username: form.username,
-      password: md5(form.password),
+      password: form.password,
     };
-    const res = await axios.post("/api/login", data);
-    if (res.data.status === "ok") {
-      console.log(res.data);
-      localStorage.setItem("token", res.data.token);
-    }
+    const res = await axios
+      .post("/api/login", data)
+      .then(
+        (response) =>
+          (document.cookie =
+            "session=" +
+            response.data.token +
+            "; expires=" +
+            response.data.expires)
+      );
   };
   return (
     <>

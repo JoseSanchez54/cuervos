@@ -1,10 +1,12 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { createWrapper } from "next-redux-wrapper";
 import cartReducer from "../reducers/cartReducer";
+import userReducer from "../reducers/userReducer";
 import thunkMiddleware from "redux-thunk";
 
 const combinedReducer = combineReducers({
   cartReducer,
+  userReducer,
 });
 const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== "production") {
