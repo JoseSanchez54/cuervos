@@ -126,15 +126,17 @@ const LoginForm = ({ opciones, login, set }) => {
                 </button>
               </>
             )}
-            <span
-              className="mt-7"
-              style={{
-                fontFamily: opciones?.fuente_global,
-                fontSize: "18px",
-              }}
-            >
-              {error}
-            </span>
+            {!loading && (
+              <span
+                className="mt-7"
+                style={{
+                  fontFamily: opciones?.fuente_global,
+                  fontSize: "18px",
+                }}
+              >
+                {error}
+              </span>
+            )}
           </div>
         </div>
       )}
