@@ -41,7 +41,15 @@ const Nav = ({ opciones, categorias }) => {
             {!loguin ? (
               <>
                 {!isMobile ? (
-                  <button onClick={() => handleLogin()}>Tu cuenta</button>
+                  <button
+                    style={{
+                      fontFamily: opciones.fuente_global,
+                      color: "black",
+                    }}
+                    onClick={() => handleLogin()}
+                  >
+                    Tu cuenta
+                  </button>
                 ) : (
                   <button onClick={() => handleLogin()}>
                     <BiUser size="25px" />
@@ -49,7 +57,16 @@ const Nav = ({ opciones, categorias }) => {
                 )}
               </>
             ) : (
-              <button onClick={() => handleLogin()}>Mi cuenta</button>
+              <Link href="/mi-cuenta" passHref>
+                <a
+                  style={{
+                    fontFamily: opciones.fuente_global,
+                    color: "black",
+                  }}
+                >
+                  Mi cuenta
+                </a>
+              </Link>
             )}
 
             <MiniCart opciones={opciones} />
