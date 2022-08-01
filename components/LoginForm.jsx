@@ -76,6 +76,7 @@ const LoginForm = ({ opciones, login, set }) => {
       .then((res) => {
         setCode(false);
         setOlvidar(false);
+        setLoading(false);
         setError("Se ha restablecido la contraseña");
       })
       .catch((err) => setError("El código no es correcto"));
@@ -198,7 +199,7 @@ const LoginForm = ({ opciones, login, set }) => {
                           initialValue="Codigo"
                           onChange={(e) => handleForm(e)}
                           name="code"
-                          value={form.password}
+                          value={form.code}
                           required
                           css={{
                             backgroundColor: "white",
