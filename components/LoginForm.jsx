@@ -46,29 +46,30 @@ const LoginForm = ({ opciones, login, set }) => {
   };
   return (
     <>
-      {login && (
-        <div className="flex z-[100]  fixed top-0 flex-row w-screen h-screen bg-white justify-center items-center">
-          <GrClose
-            onClick={() => handleActivo()}
-            size="30px"
-            className="absolute cursor-pointer top-9 right-9"
-          />
-          <div className="flex flex-col max-w-[1000px] items-center justify-center w-full">
-            <Image
-              src={opciones.logo_principal}
-              height="200px"
-              width="200px"
-              objectFit="contain"
-            ></Image>
+      <AnimatePresence>
+        {login && (
+          <div className="flex z-[100]  fixed top-0 flex-row w-screen h-screen bg-white justify-center items-center">
+            <GrClose
+              onClick={() => handleActivo()}
+              size="30px"
+              className="absolute cursor-pointer top-9 right-9"
+            />
+            <div className="flex flex-col max-w-[1000px] items-center justify-center w-full">
+              <Image
+                src={opciones.logo_principal}
+                height="200px"
+                width="200px"
+                objectFit="contain"
+              ></Image>
 
-            {loading ? (
-              <>
-                <SyncLoader color="#000" />
-              </>
-            ) : (
-              <>
-                <AnimatePresence>
+              {loading ? (
+                <>
+                  <SyncLoader color="#000" />
+                </>
+              ) : (
+                <>
                   <motion.div
+                    key="init"
                     exit={{
                       opacity: 0,
                     }}
@@ -102,7 +103,19 @@ const LoginForm = ({ opciones, login, set }) => {
                       }}
                     />
                   </motion.div>
-                  <div className="mt-9">
+                  <motion.div
+                    key="init2"
+                    exit={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                    }}
+                    initial={{
+                      opacity: 0,
+                    }}
+                    className="mt-9"
+                  >
                     <Input
                       clearable
                       bordered
@@ -124,7 +137,7 @@ const LoginForm = ({ opciones, login, set }) => {
                         },
                       }}
                     />
-                  </div>
+                  </motion.div>
                   <button
                     onClick={() => SendLogin()}
                     className="mt-9"
@@ -137,23 +150,23 @@ const LoginForm = ({ opciones, login, set }) => {
                   >
                     Login
                   </button>
-                </AnimatePresence>
-              </>
-            )}
-            {!loading && (
-              <span
-                className="mt-7"
-                style={{
-                  fontFamily: opciones?.fuente_global,
-                  fontSize: "18px",
-                }}
-              >
-                {error}
-              </span>
-            )}
+                </>
+              )}
+              {!loading && (
+                <span
+                  className="mt-7"
+                  style={{
+                    fontFamily: opciones?.fuente_global,
+                    fontSize: "18px",
+                  }}
+                >
+                  {error}
+                </span>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 };
