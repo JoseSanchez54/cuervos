@@ -2,10 +2,7 @@ import useSWR from "swr";
 
 export const useVariations = (id) => {
   const { data, error, isValidating, mutate } = useSWR(
-    "/api/variaciones?id=" + id,
-    {
-      refreshInterval: 10000,
-    }
+    "/api/variaciones?id=" + id
   );
 
   return {

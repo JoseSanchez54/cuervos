@@ -4,7 +4,6 @@ export const useProduct = (initialdata, id) => {
   const { data, error, isValidating, mutate } = useSWR("/api/producto", {
     fallbackData: initialdata,
     id: id,
-    refreshInterval: 10000,
   });
 
   return {

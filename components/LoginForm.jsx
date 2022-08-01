@@ -18,25 +18,8 @@ const LoginForm = ({ opciones, login, set }) => {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(
-    process.env.URLBASE +
-      "/wp-json/custom-plugin/login?username=" +
-      form.email +
-      "&password=" +
-      form.password
-  );
-  const SendLogin = async () => {
-    const responde = axios
-      .post(process.env.URLBASE, {
-        params: {
-          ID: 12345,
-        },
-      })
-      .then((res) => {
-        const token = md5(res.data.data);
-        localStorage.setItem("pixel", token);
-      });
-  };
+
+  const SendLogin = async () => {};
   return (
     <>
       {login && (
