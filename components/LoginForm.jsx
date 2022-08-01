@@ -9,7 +9,7 @@ const LoginForm = ({ opciones, login, set }) => {
     set(false);
   };
   const [form, setForm] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const handleForm = (e) => {
@@ -19,7 +19,17 @@ const LoginForm = ({ opciones, login, set }) => {
     });
   };
 
-  const SendLogin = async () => {};
+  const SendLogin = async () => {
+    const data = {
+      username: form.username,
+      password: md5(form.password),
+    };
+    const res = await axios.post("/api/login", data);
+    if (res.data.status === "ok") {
+      console.log(res.data);
+      localStorage.setItem("token", res.data.token);
+    }
+  };
   return (
     <>
       {login && (
@@ -41,11 +51,11 @@ const LoginForm = ({ opciones, login, set }) => {
               <Input
                 clearable
                 bordered
-                labelPlaceholder="Email"
-                initialValue="Email"
+                labelPlaceholder="Nombre de usuario"
+                initialValue="Nombre de usuario"
                 onChange={(e) => handleForm(e)}
-                name="email"
-                value={form.email}
+                name="username"
+                value={form.username}
                 required
                 css={{
                   backgroundColor: "white",
