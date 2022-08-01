@@ -4,6 +4,7 @@ import axios from "axios";
 import { Input } from "@nextui-org/react";
 import { useState } from "react";
 import SyncLoader from "react-spinners/SyncLoader";
+import { motion, AnimatePresence } from "framer-motion";
 
 const LoginForm = ({ opciones, login, set }) => {
   const [loading, setLoading] = useState(false);
@@ -66,64 +67,77 @@ const LoginForm = ({ opciones, login, set }) => {
               </>
             ) : (
               <>
-                <div className="mt-5">
-                  <Input
-                    clearable
-                    bordered
-                    labelPlaceholder="Nombre de usuario"
-                    initialValue="Nombre de usuario"
-                    onChange={(e) => handleForm(e)}
-                    name="username"
-                    value={form.username}
-                    required
-                    css={{
-                      backgroundColor: "white",
-                      borderColor: "#7e8085",
-                      label: {
-                        color: "#7e8085",
-                        zIndex: "1",
-                      },
-                      input: {
-                        borderColor: "#7e8085",
-                      },
+                <AnimatePresence>
+                  <motion.div
+                    exit={{
+                      opacity: 0,
                     }}
-                  />
-                </div>
-                <div className="mt-9">
-                  <Input
-                    clearable
-                    bordered
-                    labelPlaceholder="Contraseña"
-                    initialValue="password"
-                    onChange={(e) => handleForm(e)}
-                    name="password"
-                    value={form.password}
-                    required
-                    css={{
-                      backgroundColor: "white",
-                      borderColor: "#7e8085",
-                      label: {
-                        color: "#7e8085",
-                        zIndex: "1",
-                      },
-                      input: {
-                        borderColor: "#7e8085",
-                      },
+                    animate={{
+                      opacity: 1,
                     }}
-                  />
-                </div>
-                <button
-                  onClick={() => SendLogin()}
-                  className="mt-9"
-                  style={{
-                    backgroundColor: "black",
-                    color: "white",
-                    border: "none",
-                    padding: "10px 20px",
-                  }}
-                >
-                  Login
-                </button>
+                    initial={{
+                      opacity: 0,
+                    }}
+                    className="mt-5"
+                  >
+                    <Input
+                      clearable
+                      bordered
+                      labelPlaceholder="Nombre de usuario"
+                      initialValue="Nombre de usuario"
+                      onChange={(e) => handleForm(e)}
+                      name="username"
+                      value={form.username}
+                      required
+                      css={{
+                        backgroundColor: "white",
+                        borderColor: "#7e8085",
+                        label: {
+                          color: "#7e8085",
+                          zIndex: "1",
+                        },
+                        input: {
+                          borderColor: "#7e8085",
+                        },
+                      }}
+                    />
+                  </motion.div>
+                  <div className="mt-9">
+                    <Input
+                      clearable
+                      bordered
+                      labelPlaceholder="Contraseña"
+                      initialValue="password"
+                      onChange={(e) => handleForm(e)}
+                      name="password"
+                      value={form.password}
+                      required
+                      css={{
+                        backgroundColor: "white",
+                        borderColor: "#7e8085",
+                        label: {
+                          color: "#7e8085",
+                          zIndex: "1",
+                        },
+                        input: {
+                          borderColor: "#7e8085",
+                        },
+                      }}
+                    />
+                  </div>
+                  <button
+                    onClick={() => SendLogin()}
+                    className="mt-9"
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      border: "none",
+                      padding: "10px 20px",
+                    }}
+                  >
+                    Login
+                  </button>
+                </AnimatePresence>
               </>
             )}
             {!loading && (
