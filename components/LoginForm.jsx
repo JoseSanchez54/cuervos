@@ -7,6 +7,7 @@ import SyncLoader from "react-spinners/SyncLoader";
 
 const LoginForm = ({ opciones, login, set }) => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const handleActivo = () => {
     set(false);
   };
@@ -37,7 +38,10 @@ const LoginForm = ({ opciones, login, set }) => {
           response.data.expires;
         window.location.reload();
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        setError("El login es incorrecto");
+        setLoading(false);
+      });
   };
   return (
     <>
@@ -122,6 +126,15 @@ const LoginForm = ({ opciones, login, set }) => {
                 </button>
               </>
             )}
+            <span
+              className="mt-7"
+              style={{
+                fontFamily: opciones?.fuente_global,
+                fontSize: "18px",
+              }}
+            >
+              {error}
+            </span>
           </div>
         </div>
       )}
