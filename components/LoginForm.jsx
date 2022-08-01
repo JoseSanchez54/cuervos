@@ -66,7 +66,7 @@ const LoginForm = ({ opciones, login, set }) => {
               </>
             ) : (
               <>
-                <div>
+                <div className="mt-5">
                   <Input
                     clearable
                     bordered
