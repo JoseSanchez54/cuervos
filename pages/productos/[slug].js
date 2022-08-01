@@ -206,7 +206,7 @@ const SingleProduct = ({
         }}
       />
       <Nav categorias={categoriasAll} opciones={options} />
-      {isValidating && (
+      {!isValidating && (
         <div className="flex flex-row w-full justify-center mt-[50px]">
           <div className="flex flex-col w-full max-w-[1920px] items-center">
             <div className="flex flex-row gap-9 lg:flex-nowrap flex-wrap w-full justify-center">
