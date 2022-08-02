@@ -38,7 +38,7 @@ const Nav = ({ opciones, categorias }) => {
         </div>
         <div className="flex flex-col w-1/3 h-auto items-end py-1 px-5  justify-center">
           <div className="flex flex-row w-full gap-3 justify-end items-center">
-            {!loguin ? (
+            {!login ? (
               <>
                 {!isMobile ? (
                   <button
