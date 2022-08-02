@@ -41,9 +41,52 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
         }}
       />
       <Nav categorias={categorias} opciones={optionsSWR} />
-      <div className="flex flex-row w-full justify-center items-center">
-        <div className="flex flex-col w-full max-w-[1600px] items-center"></div>
+      <div className="flex flex-row mt-9 w-full  justify-center ">
+        <div className="flex flex-col w-full max-w-[1600px]  items-center">
+          <div className="flex flex-row w-full justify-around ">
+            <div className="flex flex-col items-center justify-center">
+              <span className="encabezado">ID</span>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <span className="encabezado">Total</span>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <span className="encabezado">Estado</span>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <span className="encabezado">Calle</span>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <span className="encabezado">Ciudad</span>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <span className="encabezado">CP</span>
+            </div>
+          </div>
+          {userOrders?.map((order) => {
+            return (
+              <div className="flex flex-row w-full justify-around">
+                <div className="flex flex-col items-center justify-center">
+                  <span className="dato">{order?.id}</span>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <span className="dato">{order?.total}</span>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <span className="dato">{order?.status}</span>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <span className="dato">{order?.billing?.address_1}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
+      <style jsx>{`
+        @media (max-width: 1022px) {
+        }
+      `}</style>
     </>
   );
 }
