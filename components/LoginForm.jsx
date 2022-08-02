@@ -138,7 +138,7 @@ const LoginForm = ({ opciones, login, set }) => {
           password: "",
           olvidado: "",
           code: "",
-          email: "",
+          email: form.email,
         });
         setError("Cuenta creada correctamente");
         setRegistro(false);
@@ -553,13 +553,17 @@ const LoginForm = ({ opciones, login, set }) => {
                             className="mt-5"
                           >
                             <Input
+                              {...bindings}
                               clearable
                               bordered
                               labelPlaceholder="Email"
                               initialValue="Email"
-                              onChange={(e) => handleForm(e)}
-                              name="username"
-                              value={form.email}
+                              name="email"
+                              onClearClick={reset}
+                              status={helperMail.color}
+                              color={helperMail.color}
+                              helperColor={helperMail.color}
+                              helperText={helperMail.text}
                               required
                               css={{
                                 backgroundColor: "white",
