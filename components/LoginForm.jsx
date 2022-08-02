@@ -155,7 +155,7 @@ const LoginForm = ({ opciones, login, set }) => {
         color: "",
       };
     const isValid = validateEmail(value);
-    if (isValid) setForm({ email: value });
+    if (isValid) setForm({ ...form, email: value });
     return {
       text: isValid ? "" : "Enter a valid email",
       color: isValid ? "success" : "error",
