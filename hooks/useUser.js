@@ -20,8 +20,6 @@ export const useUser = async () => {
       setLogueado(false);
       dispatch({
         type: "@Remove",
-        token: "",
-        login: false,
       });
     }
   }, []);
