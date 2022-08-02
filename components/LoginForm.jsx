@@ -132,11 +132,12 @@ const LoginForm = ({ opciones, login, set }) => {
           code: "",
           email: "",
         });
-        setError("Se ha restablecido la contraseña");
+        setError("Cuenta creada correctamente");
+        setRegistro(false);
       })
       .catch((err) => {
         setLoading(false);
-        setError("El código no es correcto");
+        setError("No se ha podido crear la cuenta");
       });
   };
   return (
