@@ -12,7 +12,9 @@ import { useUser } from "../hooks/useUser";
 import { useSelector } from "react-redux";
 
 const Nav = ({ opciones, categorias }) => {
+  const user = useUser();
   const loguin = useSelector((state) => state.userReducer.login);
+  console.log(loguin);
 
   const [login, setLogin] = useState(false);
   const handleLogin = () => {
