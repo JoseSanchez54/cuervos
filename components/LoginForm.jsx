@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { GrClose } from "react-icons/gr/";
 import axios from "axios";
-import { Input } from "@nextui-org/react";
-import { useState } from "react";
+import { Input, useInput } from "@nextui-org/react";
+import { useState, useMemo } from "react";
 import SyncLoader from "react-spinners/SyncLoader";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -78,7 +78,7 @@ const LoginForm = ({ opciones, login, set }) => {
     setLoading(true);
     const res = await axios
       .post(process.env.URLBASE + "wp-json/bdpwr/v1/reset-password", {
-        email: form.olvidado,
+        email: form.email,
       })
       .then((res) => {
         setError("Se ha enviado un correo para restablecer la contraseña");
@@ -93,7 +93,7 @@ const LoginForm = ({ opciones, login, set }) => {
     axios
       .post(process.env.URLBASE + "wp-json/bdpwr/v1/set-password", {
         code: form.code,
-        email: form.olvidado,
+        email: form.email,
         password: form.password,
       })
       .then((res) => {
@@ -140,6 +140,26 @@ const LoginForm = ({ opciones, login, set }) => {
         setError("No se ha podido crear la cuenta");
       });
   };
+  const { value, reset, bindings, currentRef } = useInput("");
+
+  const validateEmail = (value) => {
+    return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
+  };
+
+  const helperMail = useMemo(() => {
+    if (!value)
+      return {
+        text: "",
+        color: "",
+      };
+    const isValid = validateEmail(value);
+    if (isValid) setForm({ email: value });
+    return {
+      text: isValid ? "Correct email" : "Enter a valid email",
+      color: isValid ? "success" : "error",
+    };
+  }, [value]);
+
   return (
     <>
       <AnimatePresence>
@@ -180,13 +200,17 @@ const LoginForm = ({ opciones, login, set }) => {
                         className="mt-5"
                       >
                         <Input
+                          {...bindings}
                           clearable
                           bordered
                           labelPlaceholder="Email"
                           initialValue="Email"
-                          onChange={(e) => handleForm(e)}
-                          name="username"
-                          value={form.username}
+                          name="email"
+                          onClearClick={reset}
+                          status={helperMail.color}
+                          color={helperMail.color}
+                          helperColor={helperMail.color}
+                          helperText={helperMail.text}
                           required
                           css={{
                             backgroundColor: "white",
@@ -291,9 +315,14 @@ const LoginForm = ({ opciones, login, set }) => {
 
                       <button
                         className="mt-5"
+                        style={{
+                          fontFamily: opciones?.fuente_global,
+                          fontSize: "18px",
+                        }}
                         onClick={() => {
-                          handleOlvidar();
-                          handleCode();
+                          setOlvidar(false);
+                          setCode(false);
+                          setRegistro(false);
                         }}
                       >
                         Atras
@@ -316,13 +345,17 @@ const LoginForm = ({ opciones, login, set }) => {
                         className="mt-5"
                       >
                         <Input
+                          {...bindings}
                           clearable
                           bordered
                           labelPlaceholder="Email"
                           initialValue="Email"
-                          onChange={(e) => handleForm(e)}
-                          name="olvidado"
-                          value={form.olvidado}
+                          name="email"
+                          onClearClick={reset}
+                          status={helperMail.color}
+                          color={helperMail.color}
+                          helperColor={helperMail.color}
+                          helperText={helperMail.text}
                           required
                           css={{
                             backgroundColor: "white",
@@ -361,10 +394,24 @@ const LoginForm = ({ opciones, login, set }) => {
                       >
                         He recibido el codigo de verificacion
                       </button>
+                      <button
+                        style={{
+                          fontFamily: opciones?.fuente_global,
+                          fontSize: "18px",
+                        }}
+                        className="mt-5"
+                        onClick={() => {
+                          setOlvidar(false);
+                          setCode(false);
+                          setRegistro(false);
+                        }}
+                      >
+                        Atras
+                      </button>
                     </>
                   ) : (
                     <>
-                      {registro && (
+                      {registro && !code && (
                         <>
                           {" "}
                           <motion.div
@@ -417,13 +464,17 @@ const LoginForm = ({ opciones, login, set }) => {
                             className="mt-9"
                           >
                             <Input
+                              {...bindings}
                               clearable
                               bordered
                               labelPlaceholder="Email"
                               initialValue="Email"
-                              onChange={(e) => handleForm(e)}
                               name="email"
-                              value={form.email}
+                              onClearClick={reset}
+                              status={helperMail.color}
+                              color={helperMail.color}
+                              helperColor={helperMail.color}
+                              helperText={helperMail.text}
                               required
                               css={{
                                 backgroundColor: "white",
@@ -497,6 +548,20 @@ const LoginForm = ({ opciones, login, set }) => {
                             onClick={() => handleOlvidar()}
                           >
                             He olvidado mi contraseña
+                          </button>
+                          <button
+                            style={{
+                              fontFamily: opciones?.fuente_global,
+                              fontSize: "18px",
+                            }}
+                            className="mt-5"
+                            onClick={() => {
+                              setOlvidar(false);
+                              setCode(false);
+                              setRegistro(false);
+                            }}
+                          >
+                            Atras
                           </button>
                         </>
                       )}
