@@ -9,8 +9,10 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { orders, isValidating } = useOrders(pedidos);
   const username = useSelector((state) => state.userReducer.username);
-  const usuario = usuarios.filter((e) => e.name === username)[0];
-  console.log(usuario);
+  const userOrders = orders?.filter(
+    (order) => order?.billing?.email === username
+  );
+  console.log(userOrders);
 
   return (
     <>
