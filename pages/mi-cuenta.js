@@ -4,6 +4,7 @@ import { useOptions } from "../hooks/useOptions";
 import { useOrders } from "../hooks/useOrders";
 import Nav from "../components/Nav";
 import { useSelector } from "react-redux";
+import { DefaultSeo } from "next-seo";
 
 export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
@@ -16,6 +17,29 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
 
   return (
     <>
+      <DefaultSeo
+        title="Mi cuenta"
+        description="PAgina de mi cuenta"
+        canonical={process.env.URLFINAL + "/mi-cuenta"}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: options.favicon_principal,
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_ES",
+          url: process.env.URLFINAL + "/mi-cuenta",
+          site_name: options.nombre_sitio,
+          description: options.descripcion_sitio,
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <Nav categorias={categorias} opciones={optionsSWR} />
     </>
   );
