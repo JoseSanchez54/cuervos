@@ -73,7 +73,7 @@ const LoginForm = ({ opciones, login, set }) => {
           response.data.token +
           "; expires=" +
           response.data.expires;
-
+        set(false);
         window.location.reload();
       })
       .catch((error) => {
