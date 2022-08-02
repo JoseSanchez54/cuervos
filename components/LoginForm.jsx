@@ -66,7 +66,7 @@ const LoginForm = ({ opciones, login, set }) => {
       .then((response) => {
         dispatch({
           type: "@Username",
-          username: form.email,
+          email: form.email,
         });
         document.cookie =
           "session=" +
