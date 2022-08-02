@@ -78,7 +78,10 @@ const LoginForm = ({ opciones, login, set }) => {
         setLoading(false);
         setError("Se ha restablecido la contraseña");
       })
-      .catch((err) => setError("El código no es correcto"));
+      .catch((err) => {
+        setLoading(false);
+        setError("El código no es correcto");
+      });
   };
   return (
     <>
