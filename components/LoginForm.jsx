@@ -5,8 +5,10 @@ import { Input, useInput } from "@nextui-org/react";
 import { useState, useMemo } from "react";
 import SyncLoader from "react-spinners/SyncLoader";
 import { motion, AnimatePresence } from "framer-motion";
+import { useDispatch } from "react-redux";
 
 const LoginForm = ({ opciones, login, set }) => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [registro, setRegistro] = useState(false);
   const [form, setForm] = useState({
@@ -62,11 +64,16 @@ const LoginForm = ({ opciones, login, set }) => {
     const res = await axios
       .post("/api/login", data)
       .then((response) => {
+        dispatch({
+          type: "@Username",
+          username: form.username,
+        });
         document.cookie =
           "session=" +
           response.data.token +
           "; expires=" +
           response.data.expires;
+
         window.location.reload();
       })
       .catch((error) => {
@@ -119,7 +126,6 @@ const LoginForm = ({ opciones, login, set }) => {
     setLoading(true);
     axios
       .post(process.env.URLBASE + "wp-json/wp/v2/users/register", {
-        username: form.username,
         email: form.email,
         password: form.password,
       })
@@ -415,43 +421,6 @@ const LoginForm = ({ opciones, login, set }) => {
                     <>
                       {registro && !code && (
                         <>
-                          {" "}
-                          <motion.div
-                            key="initd"
-                            exit={{
-                              opacity: 0,
-                            }}
-                            animate={{
-                              opacity: 1,
-                            }}
-                            initial={{
-                              opacity: 0,
-                            }}
-                            className="mt-9"
-                          >
-                            <Input
-                              clearable
-                              bordered
-                              labelPlaceholder="Nombre de usuario"
-                              initialValue="Nombre de usuario"
-                              onChange={(e) => handleForm(e)}
-                              name="username"
-                              value={form.username}
-                              required
-                              css={{
-                                backgroundColor: "white",
-                                borderColor: "#7e8085",
-                                fontFamily: opciones.fuente_global,
-                                label: {
-                                  color: "#7e8085",
-                                  zIndex: "1",
-                                },
-                                input: {
-                                  borderColor: "#7e8085",
-                                },
-                              }}
-                            />
-                          </motion.div>
                           <motion.div
                             key="initd"
                             exit={{
@@ -586,11 +555,11 @@ const LoginForm = ({ opciones, login, set }) => {
                             <Input
                               clearable
                               bordered
-                              labelPlaceholder="Nombre de usuario"
-                              initialValue="Nombre de usuario"
+                              labelPlaceholder="Email"
+                              initialValue="Email"
                               onChange={(e) => handleForm(e)}
                               name="username"
-                              value={form.username}
+                              value={form.email}
                               required
                               css={{
                                 backgroundColor: "white",

@@ -27,7 +27,7 @@ const makeStore = ({ isServer }) => {
 
     const persistConfig = {
       key: "nextjs",
-      whitelist: ["cartReducer"], // que reducer tiene persistencia
+      whitelist: ["cartReducer", "userReducer"], // que reducer tiene persistencia
       storage, // donde guarda la persistencia
     };
 

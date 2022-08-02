@@ -3,6 +3,8 @@ import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
 import { useOptions } from "../hooks/useOptions";
 import { usePages } from "../hooks/usePages";
+import { useSelector } from "react-redux";
+
 
 const Nosotros = ({ opciones, pagina, categorias }) => {
   const { isLoading, options: optionsSWR } = useOptions(opciones);
