@@ -19,7 +19,7 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
     <>
       <DefaultSeo
         title="Mi cuenta"
-        description="PAgina de mi cuenta"
+        description="Página de mi cuenta"
         canonical={process.env.URLFINAL + "/mi-cuenta"}
         additionalLinkTags={[
           {
@@ -41,6 +41,9 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
         }}
       />
       <Nav categorias={categorias} opciones={optionsSWR} />
+      <div className="flex flex-row w-full justify-center items-center">
+        <div className="flex flex-col w-full max-w-[1600px] items-center"></div>
+      </div>
     </>
   );
 }
