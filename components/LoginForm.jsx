@@ -127,130 +127,129 @@ const LoginForm = ({ opciones, login, set }) => {
                 <>
                   {code && (
                     <>
-                      <form>
-                        <motion.div
-                          key="initee"
-                          exit={{
-                            opacity: 0,
-                          }}
-                          animate={{
-                            opacity: 1,
-                          }}
-                          initial={{
-                            opacity: 0,
-                          }}
-                          className="mt-5"
-                        >
-                          <Input
-                            clearable
-                            bordered
-                            labelPlaceholder="Email"
-                            initialValue="Email"
-                            onChange={(e) => handleForm(e)}
-                            name="username"
-                            value={form.username}
-                            required
-                            css={{
-                              backgroundColor: "white",
+                      <motion.div
+                        key="initee"
+                        exit={{
+                          opacity: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                        }}
+                        initial={{
+                          opacity: 0,
+                        }}
+                        className="mt-5"
+                      >
+                        <Input
+                          clearable
+                          bordered
+                          labelPlaceholder="Email"
+                          initialValue="Email"
+                          onChange={(e) => handleForm(e)}
+                          name="username"
+                          value={form.username}
+                          required
+                          css={{
+                            backgroundColor: "white",
+                            borderColor: "#7e8085",
+                            fontFamily: opciones.fuente_global,
+                            label: {
+                              color: "#7e8085",
+                              zIndex: "1",
+                            },
+                            input: {
                               borderColor: "#7e8085",
-                              fontFamily: opciones.fuente_global,
-                              label: {
-                                color: "#7e8085",
-                                zIndex: "1",
-                              },
-                              input: {
-                                borderColor: "#7e8085",
-                              },
-                            }}
-                          />
-                        </motion.div>
-                        <motion.div
-                          key="init2"
-                          exit={{
-                            opacity: 0,
+                            },
                           }}
-                          animate={{
-                            opacity: 1,
-                          }}
-                          initial={{
-                            opacity: 0,
-                          }}
-                          className="mt-9"
-                        >
-                          <Input
-                            clearable
-                            bordered
-                            labelPlaceholder="Introduce tu nueva contraseña"
-                            initialValue="password"
-                            onChange={(e) => handleForm(e)}
-                            name="password"
-                            value={form.password}
-                            type="password"
-                            required
-                            css={{
-                              backgroundColor: "white",
+                        />
+                      </motion.div>
+                      <motion.div
+                        key="init2"
+                        exit={{
+                          opacity: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                        }}
+                        initial={{
+                          opacity: 0,
+                        }}
+                        className="mt-9"
+                      >
+                        <Input
+                          clearable
+                          bordered
+                          labelPlaceholder="Introduce tu nueva contraseña"
+                          initialValue="password"
+                          onChange={(e) => handleForm(e)}
+                          name="password"
+                          value={form.password}
+                          type="password"
+                          required
+                          css={{
+                            backgroundColor: "white",
+                            borderColor: "#7e8085",
+                            fontFamily: opciones.fuente_global,
+                            label: {
+                              color: "#7e8085",
+                              zIndex: "1",
+                            },
+                            input: {
                               borderColor: "#7e8085",
-                              fontFamily: opciones.fuente_global,
-                              label: {
-                                color: "#7e8085",
-                                zIndex: "1",
-                              },
-                              input: {
-                                borderColor: "#7e8085",
-                              },
-                            }}
-                          />
-                        </motion.div>
-                        <motion.div
-                          key="init3"
-                          exit={{
-                            opacity: 0,
+                            },
                           }}
-                          animate={{
-                            opacity: 1,
-                          }}
-                          initial={{
-                            opacity: 0,
-                          }}
-                          className="mt-9"
-                        >
-                          <Input
-                            clearable
-                            bordered
-                            labelPlaceholder="Codigo"
-                            initialValue="Codigo"
-                            onChange={(e) => handleForm(e)}
-                            name="code"
-                            value={form.code}
-                            type="password"
-                            required
-                            css={{
-                              backgroundColor: "white",
+                        />
+                      </motion.div>
+                      <motion.div
+                        key="init3"
+                        exit={{
+                          opacity: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                        }}
+                        initial={{
+                          opacity: 0,
+                        }}
+                        className="mt-9"
+                      >
+                        <Input
+                          clearable
+                          bordered
+                          labelPlaceholder="Codigo"
+                          initialValue="Codigo"
+                          onChange={(e) => handleForm(e)}
+                          name="code"
+                          value={form.code}
+                          type="password"
+                          required
+                          css={{
+                            backgroundColor: "white",
+                            borderColor: "#7e8085",
+                            fontFamily: opciones.fuente_global,
+                            label: {
+                              color: "#7e8085",
+                              zIndex: "1",
+                            },
+                            input: {
                               borderColor: "#7e8085",
-                              fontFamily: opciones.fuente_global,
-                              label: {
-                                color: "#7e8085",
-                                zIndex: "1",
-                              },
-                              input: {
-                                borderColor: "#7e8085",
-                              },
-                            }}
-                          />
-                        </motion.div>
-                        <button
-                          onClick={() => SendCode()}
-                          className="mt-9"
-                          style={{
-                            backgroundColor: "black",
-                            color: "white",
-                            border: "none",
-                            padding: "10px 20px",
+                            },
                           }}
-                        >
-                          Cambiar contraseña
-                        </button>
-                      </form>
+                        />
+                      </motion.div>
+                      <button
+                        onClick={() => SendCode()}
+                        className="mt-9"
+                        style={{
+                          backgroundColor: "black",
+                          color: "white",
+                          border: "none",
+                          padding: "10px 20px",
+                        }}
+                      >
+                        Cambiar contraseña
+                      </button>
+
                       <button
                         className="mt-5"
                         onClick={() => {
@@ -264,57 +263,55 @@ const LoginForm = ({ opciones, login, set }) => {
                   )}
                   {olvidar && !code ? (
                     <>
-                      <form>
-                        <motion.div
-                          key="init"
-                          exit={{
-                            opacity: 0,
-                          }}
-                          animate={{
-                            opacity: 1,
-                          }}
-                          initial={{
-                            opacity: 0,
-                          }}
-                          className="mt-5"
-                        >
-                          <Input
-                            clearable
-                            bordered
-                            labelPlaceholder="Email"
-                            initialValue="Email"
-                            onChange={(e) => handleForm(e)}
-                            name="olvidado"
-                            value={form.olvidado}
-                            required
-                            css={{
-                              backgroundColor: "white",
+                      <motion.div
+                        key="init"
+                        exit={{
+                          opacity: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                        }}
+                        initial={{
+                          opacity: 0,
+                        }}
+                        className="mt-5"
+                      >
+                        <Input
+                          clearable
+                          bordered
+                          labelPlaceholder="Email"
+                          initialValue="Email"
+                          onChange={(e) => handleForm(e)}
+                          name="olvidado"
+                          value={form.olvidado}
+                          required
+                          css={{
+                            backgroundColor: "white",
+                            borderColor: "#7e8085",
+                            fontFamily: opciones.fuente_global,
+                            label: {
+                              color: "#7e8085",
+                              zIndex: "1",
+                            },
+                            input: {
                               borderColor: "#7e8085",
-                              fontFamily: opciones.fuente_global,
-                              label: {
-                                color: "#7e8085",
-                                zIndex: "1",
-                              },
-                              input: {
-                                borderColor: "#7e8085",
-                              },
-                            }}
-                          />
-                        </motion.div>
-                        <input
-                          onClick={() => SendOlvidar()}
-                          className="mt-9"
-                          type={"submit"}
-                          style={{
-                            backgroundColor: "black",
-                            color: "white",
-                            border: "none",
-                            padding: "10px 20px",
+                            },
                           }}
-                        >
-                          Enviar
-                        </input>
-                      </form>
+                        />
+                      </motion.div>
+                      <button
+                        onClick={() => SendOlvidar()}
+                        className="mt-9"
+                        style={{
+                          backgroundColor: "black",
+                          color: "white",
+                          border: "none",
+                          padding: "10px 20px",
+                        }}
+                      >
+                        Enviar
+                      </button>
+
                       <button
                         style={{
                           fontFamily: opciones?.fuente_global,
