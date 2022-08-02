@@ -8,6 +8,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const LoginForm = ({ opciones, login, set }) => {
   const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+    olvidado: "",
+    code: "",
+  });
   const [olvidar, setOlvidar] = useState(false);
   const [code, setCode] = useState(false);
   const [error, setError] = useState("");
@@ -21,12 +27,7 @@ const LoginForm = ({ opciones, login, set }) => {
       code: "",
     });
   };
-  const [form, setForm] = useState({
-    username: "",
-    password: "",
-    olvidado: "",
-    code: "",
-  });
+
   const handleForm = (e) => {
     setForm({
       ...form,
