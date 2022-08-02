@@ -19,7 +19,7 @@ export const useUser = async () => {
     } else {
       setLogueado(false);
       dispatch({
-        type: "@Add",
+        type: "@Remove",
         token: "",
         login: false,
       });

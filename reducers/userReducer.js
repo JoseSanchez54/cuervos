@@ -16,7 +16,12 @@ const userReducer = (
       };
 
     case "@Remove":
-      return { token: "" };
+      return {
+        token: "",
+        login: false,
+        email: "",
+        username: "",
+      };
     case "@Email":
       return {
         ...state,
@@ -25,7 +30,7 @@ const userReducer = (
     case "@Username":
       return {
         ...state,
-        username: action.username,
+        username: action.email,
       };
     default:
       return state;
