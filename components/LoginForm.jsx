@@ -143,7 +143,7 @@ const LoginForm = ({ opciones, login, set }) => {
   const { value, reset, bindings, currentRef } = useInput("");
 
   const validateEmail = (value) => {
-    return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
+    return value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
   };
 
   const helperMail = useMemo(() => {
