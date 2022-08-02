@@ -9,9 +9,10 @@ import MiniCart from "../components/MiniCart";
 import LoginForm from "./LoginForm";
 import { useState } from "react";
 import { useUser } from "../hooks/useUser";
+import { useSelector } from "react-redux";
 
 const Nav = ({ opciones, categorias }) => {
-  const loguin = useUser();
+  const loguin = useSelector((state) => state.userReducer.login);
 
   const [login, setLogin] = useState(false);
   const handleLogin = () => {
