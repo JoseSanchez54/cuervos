@@ -60,8 +60,13 @@ const LoginForm = ({ opciones, login, set }) => {
         email: form.olvidado,
       })
       .then((res) => {
-        setOlvidar(false);
         setError("Se ha enviado un correo para restablecer la contraseña");
+        setForm({
+          username: "",
+          password: "",
+          olvidado: "",
+          code: "",
+        });
       })
       .catch((err) => setError("El correo no existe"));
   };
@@ -78,6 +83,12 @@ const LoginForm = ({ opciones, login, set }) => {
         setOlvidar(false);
         setLoading(false);
         setError("Se ha restablecido la contraseña");
+        setForm({
+          username: "",
+          password: "",
+          olvidado: "",
+          code: "",
+        });
       })
       .catch((err) => setError("El código no es correcto"));
   };
@@ -164,6 +175,7 @@ const LoginForm = ({ opciones, login, set }) => {
                           onChange={(e) => handleForm(e)}
                           name="password"
                           value={form.password}
+                          type="password"
                           required
                           css={{
                             backgroundColor: "white",
@@ -200,6 +212,7 @@ const LoginForm = ({ opciones, login, set }) => {
                           onChange={(e) => handleForm(e)}
                           name="code"
                           value={form.code}
+                          type="password"
                           required
                           css={{
                             backgroundColor: "white",
@@ -288,7 +301,14 @@ const LoginForm = ({ opciones, login, set }) => {
                       >
                         Enviar
                       </button>
-                      <button className="mt-5" onClick={() => handleCode()}>
+                      <button
+                        style={{
+                          fontFamily: opciones?.fuente_global,
+                          fontSize: "18px",
+                        }}
+                        className="mt-5"
+                        onClick={() => handleCode()}
+                      >
                         He recibido el codigo de verificacion
                       </button>
                     </>
@@ -354,6 +374,7 @@ const LoginForm = ({ opciones, login, set }) => {
                               onChange={(e) => handleForm(e)}
                               name="password"
                               value={form.password}
+                              type="password"
                               required
                               css={{
                                 backgroundColor: "white",
@@ -382,6 +403,10 @@ const LoginForm = ({ opciones, login, set }) => {
                             Login
                           </button>
                           <button
+                            style={{
+                              fontFamily: opciones?.fuente_global,
+                              fontSize: "18px",
+                            }}
                             className="mt-5"
                             onClick={() => handleOlvidar()}
                           >
