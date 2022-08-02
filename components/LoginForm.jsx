@@ -13,6 +13,13 @@ const LoginForm = ({ opciones, login, set }) => {
   const [error, setError] = useState("");
   const handleActivo = () => {
     set(false);
+    setError("");
+    setForm({
+      username: "",
+      password: "",
+      olvidado: "",
+      code: "",
+    });
   };
   const [form, setForm] = useState({
     username: "",
@@ -55,6 +62,7 @@ const LoginForm = ({ opciones, login, set }) => {
       });
   };
   const SendOlvidar = async () => {
+    setLoading(true);
     const res = await axios
       .post(process.env.URLBASE + "wp-json/bdpwr/v1/reset-password", {
         email: form.olvidado,
@@ -62,7 +70,10 @@ const LoginForm = ({ opciones, login, set }) => {
       .then((res) => {
         setError("Se ha enviado un correo para restablecer la contraseña");
       })
-      .catch((err) => setError("El correo no existe"));
+      .catch((err) => {
+        setError("El correo no existe");
+        setLoading(false);
+      });
   };
   const SendCode = () => {
     setLoading(true);
