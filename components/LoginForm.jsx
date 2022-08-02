@@ -81,6 +81,7 @@ const LoginForm = ({ opciones, login, set }) => {
         email: form.email,
       })
       .then((res) => {
+        setLoading(false);
         setError("Se ha enviado un correo para restablecer la contraseña");
       })
       .catch((err) => {
