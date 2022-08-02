@@ -63,9 +63,10 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
               <span className="encabezado">CP</span>
             </div>
           </div>
+
           {userOrders?.map((order) => {
             return (
-              <div className="flex flex-row w-full justify-around">
+              <div className="flex flex-row w-full justify-around ">
                 <div className="flex flex-col items-center justify-center">
                   <span className="dato">{order?.id}</span>
                 </div>
@@ -77,6 +78,12 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
                 </div>
                 <div className="flex flex-col items-center justify-center">
                   <span className="dato">{order?.billing?.address_1}</span>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <span className="encabezado">Ciudad</span>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <span className="encabezado">CP</span>
                 </div>
               </div>
             );
