@@ -8,11 +8,13 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const LoginForm = ({ opciones, login, set }) => {
   const [loading, setLoading] = useState(false);
+  const [registro, setRegistro] = useState(false);
   const [form, setForm] = useState({
     username: "",
     password: "",
     olvidado: "",
     code: "",
+    email: "",
   });
   const [olvidar, setOlvidar] = useState(false);
   const [code, setCode] = useState(false);
@@ -25,9 +27,19 @@ const LoginForm = ({ opciones, login, set }) => {
       password: "",
       olvidado: "",
       code: "",
+      email: "",
     });
   };
-
+  const handleRegistro = () => {
+    setRegistro(!registro);
+    setForm({
+      username: "",
+      password: "",
+      olvidado: "",
+      code: "",
+      email: "",
+    });
+  };
   const handleForm = (e) => {
     setForm({
       ...form,
@@ -93,6 +105,32 @@ const LoginForm = ({ opciones, login, set }) => {
           password: "",
           olvidado: "",
           code: "",
+        });
+        setError("Se ha restablecido la contraseña");
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError("El código no es correcto");
+      });
+  };
+  const SendRegister = () => {
+    setLoading(true);
+    axios
+      .post(process.env.URLBASE + "wp-json/wp-json/wp/v2/users/register", {
+        username: form.username,
+        email: form.email,
+        password: form.password,
+      })
+      .then((res) => {
+        setCode(false);
+        setOlvidar(false);
+        setLoading(false);
+        setForm({
+          username: "",
+          password: "",
+          olvidado: "",
+          code: "",
+          email: "",
         });
         setError("Se ha restablecido la contraseña");
       })
@@ -325,7 +363,143 @@ const LoginForm = ({ opciones, login, set }) => {
                     </>
                   ) : (
                     <>
-                      {!code && (
+                      {registro && (
+                        <>
+                          {" "}
+                          <motion.div
+                            key="initd"
+                            exit={{
+                              opacity: 0,
+                            }}
+                            animate={{
+                              opacity: 1,
+                            }}
+                            initial={{
+                              opacity: 0,
+                            }}
+                            className="mt-5"
+                          >
+                            <Input
+                              clearable
+                              bordered
+                              labelPlaceholder="Nombre de usuario"
+                              initialValue="Nombre de usuario"
+                              onChange={(e) => handleForm(e)}
+                              name="username"
+                              value={form.username}
+                              required
+                              css={{
+                                backgroundColor: "white",
+                                borderColor: "#7e8085",
+                                fontFamily: opciones.fuente_global,
+                                label: {
+                                  color: "#7e8085",
+                                  zIndex: "1",
+                                },
+                                input: {
+                                  borderColor: "#7e8085",
+                                },
+                              }}
+                            />
+                          </motion.div>
+                          <motion.div
+                            key="initd"
+                            exit={{
+                              opacity: 0,
+                            }}
+                            animate={{
+                              opacity: 1,
+                            }}
+                            initial={{
+                              opacity: 0,
+                            }}
+                            className="mt-5"
+                          >
+                            <Input
+                              clearable
+                              bordered
+                              labelPlaceholder="Email"
+                              initialValue="Email"
+                              onChange={(e) => handleForm(e)}
+                              name="Email"
+                              value={form.email}
+                              required
+                              css={{
+                                backgroundColor: "white",
+                                borderColor: "#7e8085",
+                                fontFamily: opciones.fuente_global,
+                                label: {
+                                  color: "#7e8085",
+                                  zIndex: "1",
+                                },
+                                input: {
+                                  borderColor: "#7e8085",
+                                },
+                              }}
+                            />
+                          </motion.div>
+                          <motion.div
+                            key="init4"
+                            exit={{
+                              opacity: 0,
+                            }}
+                            animate={{
+                              opacity: 1,
+                            }}
+                            initial={{
+                              opacity: 0,
+                            }}
+                            className="mt-9"
+                          >
+                            <Input
+                              clearable
+                              bordered
+                              labelPlaceholder="Contraseña"
+                              initialValue="password"
+                              onChange={(e) => handleForm(e)}
+                              name="password"
+                              value={form.password}
+                              type="password"
+                              required
+                              css={{
+                                backgroundColor: "white",
+                                borderColor: "#7e8085",
+                                fontFamily: opciones.fuente_global,
+                                label: {
+                                  color: "#7e8085",
+                                  zIndex: "1",
+                                },
+                                input: {
+                                  borderColor: "#7e8085",
+                                },
+                              }}
+                            />
+                          </motion.div>
+                          <button
+                            onClick={() => SendRegister()}
+                            className="mt-9"
+                            style={{
+                              backgroundColor: "black",
+                              color: "white",
+                              border: "none",
+                              padding: "10px 20px",
+                            }}
+                          >
+                            Login
+                          </button>
+                          <button
+                            style={{
+                              fontFamily: opciones?.fuente_global,
+                              fontSize: "18px",
+                            }}
+                            className="mt-5"
+                            onClick={() => handleOlvidar()}
+                          >
+                            He olvidado mi contraseña
+                          </button>
+                        </>
+                      )}
+                      {!code && !registro && (
                         <>
                           {" "}
                           <motion.div
@@ -422,6 +596,16 @@ const LoginForm = ({ opciones, login, set }) => {
                             onClick={() => handleOlvidar()}
                           >
                             He olvidado mi contraseña
+                          </button>
+                          <button
+                            style={{
+                              fontFamily: opciones?.fuente_global,
+                              fontSize: "18px",
+                            }}
+                            className="mt-5"
+                            onClick={() => handleRegistro()}
+                          >
+                            ¿Aun no tienes cuenta? ¡Registrate ya!
                           </button>
                         </>
                       )}
