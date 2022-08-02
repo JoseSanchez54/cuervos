@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 
 export const useUser = async () => {
-  const username = useSelector((state) => state.userReducer.username);
   const dispatch = useDispatch();
   const name = "session";
   const [logueado, setLogueado] = useState(false);
@@ -17,6 +15,13 @@ export const useUser = async () => {
         type: "@Add",
         token: token[2],
         login: token[2] ? true : false,
+      });
+    } else {
+      setLogueado(false);
+      dispatch({
+        type: "@Add",
+        token: "",
+        login: false,
       });
     }
   }, []);

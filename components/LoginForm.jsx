@@ -57,7 +57,7 @@ const LoginForm = ({ opciones, login, set }) => {
 
   const SendLogin = async () => {
     const data = {
-      username: form.username,
+      username: form.email,
       password: form.password,
     };
     setLoading(true);
@@ -66,7 +66,7 @@ const LoginForm = ({ opciones, login, set }) => {
       .then((response) => {
         dispatch({
           type: "@Username",
-          username: form.username,
+          username: form.email,
         });
         document.cookie =
           "session=" +
