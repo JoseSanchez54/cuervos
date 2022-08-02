@@ -13,7 +13,7 @@ import { useUser } from "../hooks/useUser";
 const Nav = ({ opciones, categorias }) => {
   const loguin = useUser();
 
-  const [login, setLogin] = useState(loguin);
+  const [login, setLogin] = useState(false);
   const handleLogin = () => {
     setLogin(!login);
   };
@@ -38,7 +38,7 @@ const Nav = ({ opciones, categorias }) => {
         </div>
         <div className="flex flex-col w-1/3 h-auto items-end py-1 px-5  justify-center">
           <div className="flex flex-row w-full gap-3 justify-end items-center">
-            {!login ? (
+            {!loguin ? (
               <>
                 {!isMobile ? (
                   <button
