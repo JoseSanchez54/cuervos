@@ -106,6 +106,7 @@ const LoginForm = ({ opciones, login, set }) => {
           password: "",
           olvidado: "",
           code: "",
+          email: "",
         });
         setError("Se ha restablecido la contraseña");
       })
@@ -156,7 +157,7 @@ const LoginForm = ({ opciones, login, set }) => {
     const isValid = validateEmail(value);
     if (isValid) setForm({ email: value });
     return {
-      text: isValid ? "Correct email" : "Enter a valid email",
+      text: isValid ? "" : "Enter a valid email",
       color: isValid ? "success" : "error",
     };
   }, [value]);
