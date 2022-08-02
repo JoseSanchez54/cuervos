@@ -61,12 +61,6 @@ const LoginForm = ({ opciones, login, set }) => {
       })
       .then((res) => {
         setError("Se ha enviado un correo para restablecer la contraseña");
-        setForm({
-          username: "",
-          password: "",
-          olvidado: "",
-          code: "",
-        });
       })
       .catch((err) => setError("El correo no existe"));
   };
@@ -83,12 +77,6 @@ const LoginForm = ({ opciones, login, set }) => {
         setOlvidar(false);
         setLoading(false);
         setError("Se ha restablecido la contraseña");
-        setForm({
-          username: "",
-          password: "",
-          olvidado: "",
-          code: "",
-        });
       })
       .catch((err) => setError("El código no es correcto"));
   };
