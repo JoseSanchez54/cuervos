@@ -377,7 +377,7 @@ const LoginForm = ({ opciones, login, set }) => {
                             initial={{
                               opacity: 0,
                             }}
-                            className="mt-5"
+                            className="mt-9"
                           >
                             <Input
                               clearable
@@ -413,7 +413,7 @@ const LoginForm = ({ opciones, login, set }) => {
                             initial={{
                               opacity: 0,
                             }}
-                            className="mt-5"
+                            className="mt-9"
                           >
                             <Input
                               clearable
