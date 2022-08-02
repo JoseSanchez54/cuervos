@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { orders, isValidating } = useOrders(pedidos);
-  const username = useSelector((state) => state.userReducer.email);
+  const username = useSelector((state) => state.userReducer.username);
   const userOrders = orders?.filter(
     (order) => order?.billing?.email === username
   );
