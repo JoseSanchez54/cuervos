@@ -116,7 +116,7 @@ const LoginForm = ({ opciones, login, set }) => {
   const SendRegister = () => {
     setLoading(true);
     axios
-      .post(process.env.URLBASE + "wp-json/wp-json/wp/v2/users/register", {
+      .post(process.env.URLBASE + "wp-json/wp/v2/users/register", {
         username: form.username,
         email: form.email,
         password: form.password,
@@ -421,7 +421,7 @@ const LoginForm = ({ opciones, login, set }) => {
                               labelPlaceholder="Email"
                               initialValue="Email"
                               onChange={(e) => handleForm(e)}
-                              name="Email"
+                              name="email"
                               value={form.email}
                               required
                               css={{
@@ -485,7 +485,7 @@ const LoginForm = ({ opciones, login, set }) => {
                               padding: "10px 20px",
                             }}
                           >
-                            Login
+                            Crear cuenta
                           </button>
                           <button
                             style={{
