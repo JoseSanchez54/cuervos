@@ -8,6 +8,7 @@ export const useProduct = (initialdata, id) => {
     {
       fallbackData: initialdata,
       id: id,
+      refreshInterval: 1000,
     }
   );
 
