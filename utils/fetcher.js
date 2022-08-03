@@ -1,6 +1,6 @@
-import cacheData from "memory-cache";
-async function fetcher(url, options) {
-  const value = cacheData.get(url);
+/* import cacheData from "memory-cache"; */
+function fetcher(url, options) {
+  /*   const value = cacheData.get(url);
   if (value) {
     return value;
   } else {
@@ -9,7 +9,8 @@ async function fetcher(url, options) {
     const data = await res.json();
     cacheData.put(url, data, hours * 1000 * 60 * 60);
     return data;
-  }
+  } */
+  fetch(url).then((r) => r.json());
 }
 
 export default fetcher;
