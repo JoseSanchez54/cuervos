@@ -131,7 +131,8 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
           padding: 0.3rem 0.6rem;
           border-radius: 0.25rem;
         }
-        .cancelled {
+        .cancelled,
+        .pending {
           color: #777;
           background: #e5e5e5;
           padding: 0.3rem 0.6rem;
