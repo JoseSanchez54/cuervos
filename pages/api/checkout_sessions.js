@@ -50,6 +50,9 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const wcForm = {
       first_name: formulario.billing.first_name,
+      email: formulario.billing.email,
+      username: formulario.billing.email,
+      last_name: formulario.billing.last_name,
       billing: {
         first_name: formulario.billing.first_name,
         last_name: formulario.billing.last_name,
@@ -60,6 +63,7 @@ export default async function handler(req, res) {
         postcode: formulario.billing.postcode,
         country: formulario.billing.country,
         email: formulario.billing.email,
+        phone: formulario.billing.phone,
       },
       shipping: {
         first_name: formulario.billing.first_name,
@@ -71,6 +75,7 @@ export default async function handler(req, res) {
         postcode: formulario.billing.postcode,
         country: formulario.billing.country,
         email: formulario.billing.email,
+        phone: formulario.billing.phone,
       },
     };
     const cs = await WooCommerce.get(
