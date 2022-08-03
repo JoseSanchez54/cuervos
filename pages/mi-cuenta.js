@@ -5,11 +5,11 @@ import { useOrders } from "../hooks/useOrders";
 import Nav from "../components/Nav";
 import { useSelector } from "react-redux";
 import { DefaultSeo } from "next-seo";
-
+import Image from "next/image";
 import fetcherWc from "../utils/fetcherWc";
 import useSWR from "swr";
 
-export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
+export default function MiCuenta({ options, pedidos, categorias, pagina }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { orders, isValidating } = useOrders(pedidos);
   const pedidos1 = useSWR("orders", fetcherWc);
@@ -18,7 +18,7 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
   const userOrders = pedidos1?.data?.filter(
     (order) => order?.billing?.email === username
   );
-
+  console.log(pagina);
   return (
     <>
       <DefaultSeo
@@ -45,6 +45,24 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
         }}
       />
       <Nav categorias={categorias} opciones={optionsSWR} />
+      <div
+        style={{ color: "white" }}
+        className="flex  flex-row w-full  alto items-end justify-center"
+      >
+        <div className="flex flex-col justify-center w-full h-full">
+          <div className="relative w-full h-full">
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <Image
+                objectFit="cover"
+                src={pagina.fondo_contacto}
+                layout="fill"
+                priority="high"
+                quality={100}
+              ></Image>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="flex flex-row mt-9 w-full  justify-center ">
         <div className="flex flex-col w-full max-w-[1600px]  items-center">
           <span className="titulo my-6">Pedidos</span>
@@ -165,16 +183,19 @@ export async function getStaticProps() {
   ).then((response) => {
     return response.data;
   });
-  const usuarios = await axios
-    .get(process.env.URLBASE + "wp-json/wp/v2/users")
-    .then((res) => res.data);
 
+  const pagesNew = await axios.get(
+    process.env.URLBASE + "/wp-json/jet-cct/paginas"
+  );
+  const pagina = await pagesNew.data.find(
+    (page) => page.pagina_asociada === "area"
+  );
   return {
     props: {
       options: options.data[0],
       pedidos,
       categorias,
-      usuarios,
+      pagina,
     },
     revalidate: 10,
   };
