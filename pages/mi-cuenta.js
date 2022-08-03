@@ -43,47 +43,63 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
       <Nav categorias={categorias} opciones={optionsSWR} />
       <div className="flex flex-row mt-9 w-full  justify-center ">
         <div className="flex flex-col w-full max-w-[1600px]  items-center">
-          <div className="flex flex-row w-full justify-around ">
-            <div className="flex flex-col items-center justify-center">
+          <div className="grid w-full grid-cols-6 gap-4 ">
+            <div className="text-center">
               <span className="encabezado">ID</span>
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="text-center">
               <span className="encabezado">Total</span>
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="text-center">
               <span className="encabezado">Estado</span>
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="text-center">
               <span className="encabezado">Calle</span>
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="text-center">
               <span className="encabezado">Ciudad</span>
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="text-center">
               <span className="encabezado">CP</span>
             </div>
           </div>
 
           {userOrders?.map((order, index) => {
             return (
-              <div key={index} className="flex flex-row w-full justify-around ">
-                <div className="flex flex-col items-center justify-center">
+              <div
+                key={index}
+                className={
+                  index % 2 === 0
+                    ? "grid w-full grid-cols-6 gap-4 py-5"
+                    : "grid w-full grid-cols-6 gap-4 py-5 bg-[#f7f7f7]"
+                }
+              >
+                <div className="text-center">
                   <span className="dato">{order?.id}</span>
                 </div>
-                <div className="flex flex-col items-center justify-center">
-                  <span className="dato">{order?.total}</span>
+                <div className="text-center">
+                  <span className="dato">{order?.total}€</span>
                 </div>
-                <div className="flex flex-col items-center justify-center">
-                  <span className="dato">{order?.status}</span>
+                <div className="text-center">
+                  <span
+                    className={
+                      (order?.status === "processing" && "dato processing") ||
+                      (order?.status === "completed" && "dato completed") ||
+                      (order?.status === "cancelled" && "dato cancelled") ||
+                      (order?.status === "pending" && "dato pending")
+                    }
+                  >
+                    {order?.status}
+                  </span>
                 </div>
-                <div className="flex flex-col items-center justify-center">
+                <div className="text-center">
                   <span className="dato">{order?.billing?.address_1}</span>
                 </div>
-                <div className="flex flex-col items-center justify-center">
-                  <span className="encabezado">Ciudad</span>
+                <div className="text-center">
+                  <span className="dato">{order?.billing?.city}</span>
                 </div>
-                <div className="flex flex-col items-center justify-center">
-                  <span className="encabezado">CP</span>
+                <div className="text-center">
+                  <span className="dato">{order?.billing?.postcode}</span>
                 </div>
               </div>
             );
@@ -91,6 +107,30 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
         </div>
       </div>
       <style jsx>{`
+        .encabezado {
+          font-family: ${optionsSWR?.fuente_global};
+          font-weight: bold;
+          font-size: 1.2rem;
+        }
+        .dato {
+          font-family: ${optionsSWR?.fuente_global};
+          font-weight: normal;
+          font-size: 15px;
+          text-transform: capitalize;
+        }
+        .processing,
+        .completed {
+          color: #5b841b;
+          background-color: #c6e1c6;
+          padding: 0.3rem 0.6rem;
+          border-radius: 0.25rem;
+        }
+        .cancelled {
+          color: #777;
+          background: #e5e5e5;
+          padding: 0.3rem 0.6rem;
+          border-radius: 0.25rem;
+        }
         @media (max-width: 1022px) {
         }
       `}</style>
