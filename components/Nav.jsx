@@ -64,7 +64,7 @@ const Nav = ({ opciones, categorias }) => {
                     color: "black",
                   }}
                 >
-                  Mi cuenta
+                  <BiUser size="25px" />
                 </a>
               </Link>
             )}

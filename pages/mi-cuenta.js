@@ -43,8 +43,9 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
       <Nav categorias={categorias} opciones={optionsSWR} />
       <div className="flex flex-row mt-9 w-full  justify-center ">
         <div className="flex flex-col w-full max-w-[1600px]  items-center">
-          <div className="grid w-full grid-cols-6 gap-4 ">
-            <div className="text-center">
+          <span className="titulo my-6">Pedidos</span>
+          <div className="grid w-full lg:grid-cols-6 grid-cols-4 gap-4 ">
+            <div className="lg:block hidden text-center">
               <span className="encabezado">ID</span>
             </div>
             <div className="text-center">
@@ -59,7 +60,7 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
             <div className="text-center">
               <span className="encabezado">Ciudad</span>
             </div>
-            <div className="text-center">
+            <div className="text-center lg:block hidden">
               <span className="encabezado">CP</span>
             </div>
           </div>
@@ -70,11 +71,11 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
                 key={index}
                 className={
                   index % 2 === 0
-                    ? "grid w-full grid-cols-6 gap-4 py-5"
-                    : "grid w-full grid-cols-6 gap-4 py-5 bg-[#f7f7f7]"
+                    ? "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5"
+                    : "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5 bg-[#f7f7f7]"
                 }
               >
-                <div className="text-center">
+                <div className=" lg:block hidden text-center">
                   <span className="dato">{order?.id}</span>
                 </div>
                 <div className="text-center">
@@ -98,7 +99,7 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
                 <div className="text-center">
                   <span className="dato">{order?.billing?.city}</span>
                 </div>
-                <div className="text-center">
+                <div className="text-center lg:block hidden">
                   <span className="dato">{order?.billing?.postcode}</span>
                 </div>
               </div>
@@ -117,6 +118,11 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
           font-weight: normal;
           font-size: 15px;
           text-transform: capitalize;
+        }
+        .titulo {
+          font-family: ${optionsSWR?.fuente_global};
+          font-weight: bold;
+          font-size: 31px;
         }
         .processing,
         .completed {
