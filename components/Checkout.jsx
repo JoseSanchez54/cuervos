@@ -439,7 +439,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
           background-color: transparent;
           border-bottom: 1px solid white;
           margin: 10px 0px;
-          color: white;
+          color: black;
         }
         .individualTax {
           color: white;
