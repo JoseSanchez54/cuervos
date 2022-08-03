@@ -124,17 +124,17 @@ const LoginForm = ({ opciones, login, set }) => {
         setError("El código no es correcto");
       });
   };
-  const SendRegister = () => {
+  const SendRegister = async () => {
     setLoading(true);
     const wcForm = {
       email: form.email,
     };
-    const wcCustomer = WooCommerce.post("customers", wcForm)
+    const wcCustomer = await WooCommerce.post("customers", wcForm)
       .then((response) => {
         return response.data;
       })
       .catch((error) => {
-        return error.response.data;
+        console.log(error);
       });
     axios
       .post(process.env.URLBASE + "wp-json/wp/v2/users/register", {

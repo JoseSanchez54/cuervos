@@ -9,13 +9,7 @@ import Image from "next/image";
 import fetcherWc from "../utils/fetcherWc";
 import useSWR from "swr";
 
-export default function MiCuenta({
-  options,
-  pedidos,
-  categorias,
-  pagina,
-  customers,
-}) {
+export default function MiCuenta({ options, pedidos, categorias, pagina }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { orders, isValidating } = useOrders(pedidos);
   const pedidos1 = useSWR("orders", fetcherWc);
