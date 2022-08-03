@@ -9,6 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { useStore } from "react-redux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import Washapp from "../components/Washapp";
 
 function MyApp({ Component, pageProps }) {
   const redirectURL =
@@ -43,6 +44,7 @@ function MyApp({ Component, pageProps }) {
       <PersistGate persistor={store.__persistor}>
         <NextUIProvider>
           <Component {...pageProps} />
+          <Washapp />
         </NextUIProvider>
       </PersistGate>
     </SWRConfig>
