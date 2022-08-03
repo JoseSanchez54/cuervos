@@ -49,12 +49,45 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     const wcForm = {
-      email: formulario.email,
-      first_name: formulario.first_name,
-      last_name: formulario.last_name,
-      username: formulario.email,
-      formulario,
+      first_name: formulario.billing.first_name,
+      billing: {
+        first_name: formulario.billing.first_name,
+        address_1: formulario.billing.address_1,
+        address_2: formulario.billing.address_2,
+        city: formulario.billing.city,
+        state: formulario.billing.state,
+        postcode: formulario.billing.postcode,
+        country: formulario.billing.country,
+        email: formulario.billing.email,
+      },
+      shipping: {
+        first_name: formulario.billing.first_name,
+        address_1: formulario.billing.address_1,
+        address_2: formulario.billing.address_2,
+        city: formulario.billing.city,
+        state: formulario.billing.state,
+        postcode: formulario.billing.postcode,
+        country: formulario.billing.country,
+        email: formulario.billing.email,
+      },
     };
+    const cs = await WooCommerce.get(
+      "customers?email=" + formulario.billing.email
+    )
+      .then((response) => {
+        console.log(response);
+        WooCommerce.put("customers/" + response.data[0].id, wcForm)
+          .then((response) => {
+            return response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+
     // Create Checkout Sessions from body params.
     const wc = await WooCommerce.post("orders", formulario)
       .then((response) => {
