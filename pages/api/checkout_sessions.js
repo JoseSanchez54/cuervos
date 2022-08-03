@@ -48,12 +48,26 @@ export default async function handler(req, res) {
   });
 
   if (req.method === "POST") {
+    const wcForm = {
+      email: formulario.email,
+      first_name: formulario.first_name,
+      last_name: formulario.last_name,
+      username: formulario.email,
+      formulario,
+    };
     // Create Checkout Sessions from body params.
     const wc = await WooCommerce.post("orders", formulario)
       .then((response) => {
         return response.data;
       })
       .catch((error) => {});
+    const wcCustomer = WooCommerce.post("customers", wcForm)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
     const session = await stripe.checkout.sessions
       .create({
         line_items: lineItems,
