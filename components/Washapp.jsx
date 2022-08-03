@@ -5,7 +5,7 @@ const Washapp = () => {
   const { options } = useOptions();
   return (
     <>
-      <button className="fixed bottom-1 right-1">
+      <button className="fixed bottom-2 right-2">
         <a
           target="_blank"
           href={"https://api.whatsapp.com/send?phone=" + options?.washapp}
