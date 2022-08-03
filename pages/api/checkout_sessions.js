@@ -77,26 +77,22 @@ export default async function handler(req, res) {
       "customers?email=" + formulario.billing.email
     )
       .then((response) => {
-        if (response.data.length > 0) {
-          WooCommerce.post("customers", wcForm)
-            .then((response) => {
-              return response.data;
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        } else {
-          WooCommerce.put("customers/" + response.data[0].id, wcForm)
-            .then((response) => {
-              return response.data;
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
+        WooCommerce.put("customers/" + response.data[0].id, wcForm)
+          .then((response) => {
+            return response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
-        console.log(error.response.data);
+        WooCommerce.post("customers", wcForm)
+          .then((response) => {
+            return response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       });
 
     // Create Checkout Sessions from body params.
