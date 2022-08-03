@@ -19,9 +19,12 @@ export default function MiCuenta({
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { orders, isValidating } = useOrders(pedidos);
   const pedidos1 = useSWR("orders", fetcherWc);
-  console.log(pedidos1);
+  const customers = useSWR("customers", fetcherWc);
   const username = useSelector((state) => state.userReducer.email);
   const userOrders = pedidos1?.data?.filter(
+    (order) => order?.billing?.email === username
+  );
+  const userCustomer = customers?.data?.filter(
     (order) => order?.billing?.email === username
   );
   console.log(customers);

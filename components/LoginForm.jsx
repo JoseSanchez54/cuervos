@@ -125,6 +125,16 @@ const LoginForm = ({ opciones, login, set }) => {
   };
   const SendRegister = () => {
     setLoading(true);
+    const wcForm = {
+      email: form.email,
+    };
+    const wcCustomer = WooCommerce.post("customers", wcForm)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
     axios
       .post(process.env.URLBASE + "wp-json/wp/v2/users/register", {
         email: form.email,
