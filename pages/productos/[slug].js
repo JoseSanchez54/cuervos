@@ -13,6 +13,7 @@ import Grid from "../../components/Grid";
 import Footer from "../../components/Footer";
 import { useProduct } from "../../hooks/useProduct";
 import Edad from "../../components/Edad";
+import useSWR from "swr";
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
     (response) => {
@@ -85,7 +86,7 @@ export async function getStaticProps(context) {
       categoriasAll,
       upSells,
     },
-    revalidate: 1,
+    revalidate: 1000,
   };
 }
 const SingleProduct = ({
@@ -100,6 +101,13 @@ const SingleProduct = ({
   upSells,
 }) => {
   const { product, isValidating } = useProduct(products[0], products[0]?.id);
+  const fetcher = (url) => fetch(url).then((r) => r.json());
+  const { data, error, mutate } = useSWR("/api/producto", fetcher, {
+    fallbackData: products[0],
+    id: products[0]?.id,
+    refreshInterval: 1000,
+  });
+  console.log(data);
   function removeTags(str) {
     if (str === null || str === "") return false;
     else str = str.toString();
