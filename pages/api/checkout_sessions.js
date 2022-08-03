@@ -52,6 +52,7 @@ export default async function handler(req, res) {
       first_name: formulario.billing.first_name,
       billing: {
         first_name: formulario.billing.first_name,
+        last_name: formulario.billing.last_name,
         address_1: formulario.billing.address_1,
         address_2: formulario.billing.address_2,
         city: formulario.billing.city,
@@ -62,6 +63,7 @@ export default async function handler(req, res) {
       },
       shipping: {
         first_name: formulario.billing.first_name,
+        last_name: formulario.billing.last_name,
         address_1: formulario.billing.address_1,
         address_2: formulario.billing.address_2,
         city: formulario.billing.city,
@@ -75,14 +77,23 @@ export default async function handler(req, res) {
       "customers?email=" + formulario.billing.email
     )
       .then((response) => {
-        console.log(response);
-        WooCommerce.put("customers/" + response.data[0].id, wcForm)
-          .then((response) => {
-            return response.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        if (response.data.length > 0) {
+          WooCommerce.post("customers", wcForm)
+            .then((response) => {
+              return response.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          WooCommerce.put("customers/" + response.data[0].id, wcForm)
+            .then((response) => {
+              return response.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       })
       .catch((error) => {
         console.log(error.response.data);
