@@ -6,6 +6,9 @@ export default async (req, res) => {
     username,
     password,
   };
+  const wcForm = {
+    email: username,
+  };
   const resWP = await axios
     .post(
       process.env.URLBASE +
@@ -15,7 +18,14 @@ export default async (req, res) => {
         password
     )
     .then((e) => e.data.data);
-  await console.log(resWP);
+  const wcCustomer = WooCommerce.post("customers", wcForm)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+
   const response = await axios
     .post(process.env.URLBASE + "wp-json/api/v1/token", data)
     .then((re) =>
