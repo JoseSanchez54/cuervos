@@ -50,8 +50,12 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
         className="flex  flex-row w-full  alto items-end justify-center"
       >
         <div className="flex flex-col justify-center w-full h-full">
-          <div className="relative w-full h-full">
-            <div className="flex flex-col justify-center items-center w-full h-full">
+          <div className="relative w-full justify-center flex h-full">
+            <div className="flex p-5 flex-col justify-center max-w-[1600px] items-start w-full h-full">
+              <span className="z-[10] uppercase text-start tituloPrimera ">
+                Bienvenido,
+                <br /> {username}
+              </span>
               <Image
                 objectFit="cover"
                 src={pagina.fondo_contacto}
@@ -135,6 +139,10 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
           font-weight: bold;
           font-size: 1.2rem;
         }
+        .tituloPrimera {
+          font-family: ${optionsSWR?.fuente_global};
+          font-size: 45px;
+        }
         .dato {
           font-family: ${optionsSWR?.fuente_global};
           font-weight: normal;
@@ -145,6 +153,9 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
           font-family: ${optionsSWR?.fuente_global};
           font-weight: bold;
           font-size: 31px;
+        }
+        .alto {
+          height: 500px;
         }
         .processing,
         .completed {
@@ -161,6 +172,13 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
           border-radius: 0.25rem;
         }
         @media (max-width: 1022px) {
+          .alto {
+            height: 200px;
+          }
+          .tituloPrimera {
+            font-family: ${optionsSWR?.fuente_global};
+            font-size: 25px;
+          }
         }
       `}</style>
     </>
