@@ -9,7 +9,13 @@ import Image from "next/image";
 import fetcherWc from "../utils/fetcherWc";
 import useSWR from "swr";
 
-export default function MiCuenta({ options, pedidos, categorias, pagina }) {
+export default function MiCuenta({
+  options,
+  pedidos,
+  categorias,
+  pagina,
+  customers,
+}) {
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { orders, isValidating } = useOrders(pedidos);
   const pedidos1 = useSWR("orders", fetcherWc);
@@ -18,7 +24,7 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
   const userOrders = pedidos1?.data?.filter(
     (order) => order?.billing?.email === username
   );
-  console.log(pagina);
+  console.log(customers);
   return (
     <>
       <DefaultSeo
@@ -208,12 +214,20 @@ export async function getStaticProps() {
   const pagina = await pagesNew.data.find(
     (page) => page.pagina_asociada === "area"
   );
+  const customers = await WooCommerce.get("customers")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
   return {
     props: {
       options: options.data[0],
       pedidos,
       categorias,
       pagina,
+      customers,
     },
     revalidate: 10,
   };

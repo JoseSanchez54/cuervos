@@ -53,7 +53,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const [formulario, setFormulario] = useState({
     nombre: "",
     apellido: "",
-    email: "",
+    email: usuario?.email ? usuario.email : "",
     telefono: "",
     direccion: "",
     ciudad: "",
@@ -89,7 +89,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       state: formulario.provincia,
       postcode: formulario.cp,
       country: formulario.pais,
-      email: usuario?.email ? usuario?.email : formulario.email,
+      email: formulario.email,
       phone: formulario.telefono,
     },
     shipping: {
@@ -267,7 +267,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="email"
                 name="email"
-                value={usuario?.email ? usuario?.email : "Email"}
+                value={usuario?.email ? formulario?.email : "Email"}
                 placeholder={usuario?.email ? usuario?.email : "Email"}
                 onChange={(e) => handleFormulario(e)}
               />
