@@ -18,7 +18,6 @@ export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
   const userOrders = pedidos1?.data?.filter(
     (order) => order?.billing?.email === username
   );
-  console.log(userOrders);
 
   return (
     <>

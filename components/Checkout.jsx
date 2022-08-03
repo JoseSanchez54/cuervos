@@ -42,6 +42,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const taxes = useSelector((state) => state.cartReducer.taxes);
   const envios = useSelector((state) => state.cartReducer.envios);
   const peso = useSelector((state) => state.cartReducer.peso);
+  const usuario = useSelector((state) => state.userReducer);
   const precioEnvio = envios.find(
     (e) =>
       parseFloat(e.peso_maximo) >= peso && parseFloat(e.peso_minimo) <= peso
@@ -88,7 +89,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       state: formulario.provincia,
       postcode: formulario.cp,
       country: formulario.pais,
-      email: formulario.email,
+      email: usuario?.email ? usuario?.email : formulario.email,
       phone: formulario.telefono,
     },
     shipping: {
@@ -266,7 +267,8 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                value={usuario?.email ? usuario?.email : "Email"}
+                placeholder={usuario?.email ? usuario?.email : "Email"}
                 onChange={(e) => handleFormulario(e)}
               />
             </div>
