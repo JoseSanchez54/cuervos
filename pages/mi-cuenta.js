@@ -1,7 +1,6 @@
 import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
 import { useOptions } from "../hooks/useOptions";
-import { useOrders } from "../hooks/useOrders";
 import Nav from "../components/Nav";
 import { useSelector } from "react-redux";
 import { DefaultSeo } from "next-seo";
@@ -11,7 +10,6 @@ import useSWR from "swr";
 
 export default function MiCuenta({ options, pedidos, categorias, pagina }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
-  const { orders, isValidating } = useOrders(pedidos);
   const pedidos1 = useSWR("orders", fetcherWc);
   const customers = useSWR("customers", fetcherWc);
   const username = useSelector((state) => state.userReducer.email);

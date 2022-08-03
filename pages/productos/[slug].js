@@ -100,14 +100,18 @@ const SingleProduct = ({
   categoriasAll,
   upSells,
 }) => {
-  const { product, isValidating } = useProduct(products[0], products[0]?.id);
+  //const { product, isValidating } = useProduct(products[0], products[0]?.id);
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error, mutate } = useSWR("/api/producto", fetcher, {
-    fallbackData: products[0],
     id: products[0]?.id,
     refreshInterval: 1000,
   });
-  console.log(data);
+  const pedidos1 = useSWR("products/" + products[0]?.id, fetcherWc, {
+    refreshInterval: 1000,
+    fallbackData: products[0],
+  });
+  const product = pedidos1.data;
+  console.log(pedidos1);
   function removeTags(str) {
     if (str === null || str === "") return false;
     else str = str.toString();
@@ -120,7 +124,7 @@ const SingleProduct = ({
 
   const [isVino, setIsVino] = useState(false);
   useEffect(() => {
-    product.categories.map((f) => {
+    product?.categories.map((f) => {
       if (f.name === "Vinos") {
         setIsVino(true);
       }
@@ -132,10 +136,10 @@ const SingleProduct = ({
     setPrecio(precio);
   };
 
-  const metadata = Object.values(product.meta_data).map((key) => {
+  const metadata = Object?.values(product?.meta_data).map((key) => {
     return key;
   });
-  const video = metadata.filter((m) => m.key === "video")[0]?.value;
+  const video = metadata?.filter((m) => m.key === "video")[0]?.value;
 
   const imagenBanner = metadata.filter((m) => m.key === "imagen_vinero")[0]
     ?.value;
@@ -191,9 +195,9 @@ const SingleProduct = ({
   return (
     <>
       <DefaultSeo
-        title={"Cría Cuervos - " + product.name}
-        description={product.short_description}
-        canonical={process.env.URLFINAL + "/" + product.slug}
+        title={"Cría Cuervos - " + product?.name}
+        description={product?.short_description}
+        canonical={process.env.URLFINAL + "/" + product?.slug}
         additionalLinkTags={[
           {
             rel: "icon",
@@ -205,7 +209,7 @@ const SingleProduct = ({
           locale: "en_ES",
           url: process.env.URLFINAL,
           site_name: options.nombre_sitio,
-          description: product.short_description,
+          description: product?.short_description,
         }}
         twitter={{
           handle: "@handle",
@@ -227,7 +231,7 @@ const SingleProduct = ({
                         <Image
                           height="798px"
                           width="553px"
-                          src={product.images[0].src}
+                          src={product?.images[0].src}
                           quality="100"
                           objectFit="cover"
                         />
@@ -241,7 +245,7 @@ const SingleProduct = ({
                           muted
                           playsInline
                           poster={
-                            product.images[0].src ? product.images[0].src : ""
+                            product?.images[0].src ? product?.images[0].src : ""
                           }
                           style={{
                             width: "100%",
@@ -254,11 +258,11 @@ const SingleProduct = ({
                     </>
                   ) : (
                     <>
-                      {product.images[0].src && (
+                      {product?.images[0].src && (
                         <Image
                           height="798px"
                           width="553px"
-                          src={product.images[0].src}
+                          src={product?.images[0].src}
                           quality="100"
                           objectFit="cover"
                         />
@@ -267,11 +271,11 @@ const SingleProduct = ({
                   )}
                 </div>
                 <div className="lg:flex hidden flex-col w-1/2">
-                  {product.images.length > 1 && (
+                  {product?.images.length > 1 && (
                     <Image
                       height="798px"
                       width="553px"
-                      src={product.images[1].src}
+                      src={product?.images[1].src}
                       quality="100"
                       objectFit="cover"
                     />
@@ -280,11 +284,11 @@ const SingleProduct = ({
               </div>
               <div className="lg:flex hidden flex-row justify-center w-full">
                 <div className="flex flex-col w-1/2">
-                  {product.images.length > 2 && (
+                  {product?.images.length > 2 && (
                     <Image
                       height="798px"
                       width="553px"
-                      src={product.images[2].src}
+                      src={product?.images[2].src}
                       quality="100"
                       objectFit="cover"
                     />
@@ -292,11 +296,11 @@ const SingleProduct = ({
                 </div>
                 <div className="flex flex-col w-1/2">
                   {" "}
-                  {product.images.length > 3 && (
+                  {product?.images.length > 3 && (
                     <Image
                       height="798px"
                       width="553px"
-                      src={product.images[3].src}
+                      src={product?.images[3].src}
                       quality="100"
                       objectFit="cover"
                     />
@@ -315,13 +319,13 @@ const SingleProduct = ({
                         }
                       })}
                     </span>
-                    <span className="titulo my-6">{product.name}</span>
+                    <span className="titulo my-6">{product?.name}</span>
                     <span className="inyectado mb-6">
-                      {removeTags(product.short_description)}
+                      {removeTags(product?.short_description)}
                     </span>
                     <span
                       className="precio"
-                      key={product.id}
+                      key={product?.id}
                       style={{
                         color: "black",
                         fontSize: "1.5rem",
@@ -517,10 +521,10 @@ const SingleProduct = ({
                         textTransform: "uppercase",
                       }}
                     >
-                      Los detalles de nuestro {product.name}
+                      Los detalles de nuestro {product?.name}
                     </span>
                     <span className="inyectado2 mt-6">
-                      {removeTags(product.description)}
+                      {removeTags(product?.description)}
                     </span>
                   </div>
                 </div>
