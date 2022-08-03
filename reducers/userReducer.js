@@ -12,7 +12,8 @@ const userReducer = (
       return {
         ...state,
         token: action.token,
-        login: action.login,
+        login: true,
+        email: action.email,
       };
 
     case "@Remove":

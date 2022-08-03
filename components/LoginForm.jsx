@@ -65,7 +65,8 @@ const LoginForm = ({ opciones, login, set }) => {
       .post("/api/login", data)
       .then((response) => {
         dispatch({
-          type: "@Username",
+          type: "@Add",
+          token: response.data.token,
           email: form.email,
         });
         document.cookie =
