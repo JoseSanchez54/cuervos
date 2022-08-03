@@ -9,7 +9,7 @@ import { DefaultSeo } from "next-seo";
 export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { orders, isValidating } = useOrders(pedidos);
-  const username = useSelector((state) => state.userReducer.username);
+  const username = useSelector((state) => state.userReducer.email);
   const userOrders = orders?.filter(
     (order) => order?.billing?.email === username
   );
