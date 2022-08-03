@@ -6,13 +6,14 @@ import Nav from "../components/Nav";
 import { useSelector } from "react-redux";
 import { DefaultSeo } from "next-seo";
 //import fetcher from "../utils/fetcher";
+import fetcherWc from "../utils/fetcherWc";
 import useSWR from "swr";
 
 export default function MiCuenta({ options, pedidos, categorias, usuarios }) {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { orders, isValidating } = useOrders(pedidos);
-  const pedidos1 = useSWR("/api/orders", fetcher);
+  const pedidos1 = useSWR("orders", fetcherWc);
   console.log(pedidos1);
   const username = useSelector((state) => state.userReducer.email);
   const userOrders = pedidos1?.data?.filter(
