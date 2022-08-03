@@ -1,10 +1,15 @@
 import useSWR from "swr";
 
 export const useProduct = (initialdata, id) => {
-  const { data, error, isValidating, mutate } = useSWR("/api/producto", {
-    fallbackData: initialdata,
-    id: id,
-  });
+  const fetcher = (url) => fetch(url).then((r) => r.json());
+  const { data, error, isValidating, mutate } = useSWR(
+    "/api/producto",
+    fetcher,
+    {
+      fallbackData: initialdata,
+      id: id,
+    }
+  );
 
   return {
     isLoading: !error && !data,
