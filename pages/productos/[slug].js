@@ -468,7 +468,7 @@ const SingleProduct = ({
                           <a>
                             <motion.button
                               initial={{
-                                backgroundColor: "#fff",
+                                backgroundColor: "white",
                                 border: "solid 2px #fff",
                                 color: "#000",
                                 padding: "10px 20px",
