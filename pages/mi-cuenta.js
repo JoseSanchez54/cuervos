@@ -7,6 +7,7 @@ import { DefaultSeo } from "next-seo";
 import Image from "next/image";
 import fetcherWc from "../utils/fetcherWc";
 import useSWR from "swr";
+import Footer from "../components/Footer";
 
 export default function MiCuenta({ options, pedidos, categorias, pagina }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
@@ -134,6 +135,7 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
           })}
         </div>
       </div>
+      <Footer opciones={optionsSWR} />
       <style jsx>{`
         .encabezado {
           font-family: ${optionsSWR?.fuente_global};
