@@ -94,7 +94,7 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
             </div>
           </div>
           {pedidos1.isValidating ? (
-            <div className="my-9">
+            <div className="my-9 h-full pt-9 justify-center flex w-full">
               <SyncLoader />
             </div>
           ) : (
