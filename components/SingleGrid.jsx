@@ -90,16 +90,15 @@ const SingleGrid = ({ producto, opciones, key }) => {
                       </span>
                     </a>
                   </Link>
-                  {!isValidating && (
-                    <Precio
-                      precio={producto?.regular_price}
-                      rebaja={producto?.sale_price}
-                      hover={cambioImagen}
-                      opciones={opciones}
-                      variable={producto?.type === "variable"}
-                      variaciones={variacion}
-                    />
-                  )}
+
+                  <Precio
+                    precio={producto?.regular_price}
+                    rebaja={producto?.sale_price}
+                    hover={cambioImagen}
+                    opciones={opciones}
+                    variable={producto?.type === "variable"}
+                    variaciones={variacion}
+                  />
 
                   <Link
                     variants={texto}
