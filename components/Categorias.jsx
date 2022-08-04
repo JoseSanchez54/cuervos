@@ -33,7 +33,7 @@ const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
         }}
       />
       <Nav categorias={categorias} opciones={opciones} />
-      <div className="flex flex-row w-full justify-center">
+      <div className="flex flex-row w-full lg:min-h-[76vh] justify-center">
         <div className="flex flex-col w-full items-center  max-w-[1212px] ">
           <div className="flex flex-row p-5 w-full">
             <span className="titulo uppercase">Tienda Online</span>
