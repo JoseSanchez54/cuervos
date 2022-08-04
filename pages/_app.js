@@ -11,9 +11,21 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import Washapp from "../components/Washapp";
 import Script from "next/script";
+import { gtmVirtualPageView } from "../utils/gtm";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }) {
-  
+  const router = useRouter();
+  useEffect(() => {
+    const mainDataLayer = {
+      pageTypeName: pageProps.page || null,
+      url: router.pathname,
+    };
+
+    gtmVirtualPageView(mainDataLayer);
+  }, [pageProps]);
+
   const redirectURL =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
