@@ -38,7 +38,7 @@ const Contacto = ({ opciones, pagina, categoriasAll }) => {
       <Nav categorias={categoriasAll} opciones={optionsSWR} />
 
       <div className="flex flex-row alto w-full lg:items-center  items-start justify-center">
-        <div className="flex flex-col h-full  max-w-[1600px] justify-start lg:justify-center w-full items-center">
+        <div className="flex flex-col max-w-[1600px] justify-start lg:justify-center w-full items-center">
           <div className="flex flex-row  items-start w-full justify-center">
             <div className="flex flex-col justify-center h-full  lg:justify-start w-full p-7 lg:w-1/3 items-center lg:items-start">
               <span className="z-[10] uppercase text-center lg:text-start titulo ">
@@ -77,7 +77,7 @@ const Contacto = ({ opciones, pagina, categoriasAll }) => {
           font-size: 16px;
         }
         .alto {
-          height: calc(100vh - 309px);
+          min-height: calc(100vh - 309px);
         }
         .tituloseccion {
           font-family: ${opciones.fuente_titulos};
