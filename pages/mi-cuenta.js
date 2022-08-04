@@ -69,7 +69,7 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
           </div>
         </div>
       </div>
-      <div className="flex flex-row mt-9 w-full  justify-center ">
+      <div className="flex flex-row my-9 w-full  justify-center ">
         <div className="flex flex-col w-full max-w-[1600px]  items-center">
           <span className="titulo my-6">Pedidos</span>
           <div className="grid w-full lg:grid-cols-6 grid-cols-4 gap-4 ">
