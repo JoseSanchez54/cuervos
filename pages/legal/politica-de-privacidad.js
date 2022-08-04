@@ -24,7 +24,6 @@ export async function getStaticProps(context) {
 }
 export default function PoliticaDePrivacidad(props) {
   const { options: optionsSWR, isLoading } = useOptions(props.options);
-  console.log(optionsSWR);
 
   let nombre = optionsSWR?.nombre_legal;
 

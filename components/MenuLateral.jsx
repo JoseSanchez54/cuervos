@@ -20,8 +20,6 @@ const MenuLateral = ({ opciones, categorias }) => {
       fallbackData: categorias,
     }
   ).data;
-
-  console.log(categories);
   const { isMobile } = useMobile();
   const [abrir, setAbrir] = useState(false);
   const [seccion, setSeccion] = useState(null);
@@ -43,7 +41,7 @@ const MenuLateral = ({ opciones, categorias }) => {
   });
   const padres = categories?.filter((res) => res.parent === 0);
   const hijos = categories?.filter((res) => res.parent === seccion);
-  console.log(categorias);
+  
 
   return (
     <>

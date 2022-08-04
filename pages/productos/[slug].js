@@ -111,7 +111,6 @@ const SingleProduct = ({
     fallbackData: products[0],
   });
   const product = pedidos1.data;
-  console.log(pedidos1);
   function removeTags(str) {
     if (str === null || str === "") return false;
     else str = str.toString();

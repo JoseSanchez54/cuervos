@@ -19,7 +19,7 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
   const userCustomer = customers?.data?.filter(
     (order) => order?.billing?.email === username
   );
-  console.log(customers);
+
   return (
     <>
       <DefaultSeo
