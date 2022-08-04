@@ -1,6 +1,5 @@
 import fs from "fs";
 import fetcherSWR from "../utils/fetcherSWR";
-import fetcher from "../utils/fetcher";
 import WooCommerce from "../woocommerce/Woocommerce";
 
 const Sitemap = (props) => {
