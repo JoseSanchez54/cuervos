@@ -8,9 +8,20 @@ import { GrClose } from "react-icons/gr/";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { useOptions } from "../hooks/useOptions";
+import useSWR from "swr";
+import fetcherWc from "../utils/fetcherWc";
 const MenuLateral = ({ opciones, categorias }) => {
   const { options } = useOptions(opciones);
-  console.log(options);
+  const categories = useSWR(
+    "products/categories?order=desc&per_page=100&per_page=100",
+    fetcherWc,
+    {
+      refreshInterval: 1000,
+      fallbackData: categorias,
+    }
+  ).data;
+
+  console.log(categories);
   const { isMobile } = useMobile();
   const [abrir, setAbrir] = useState(false);
   const [seccion, setSeccion] = useState(null);
@@ -30,8 +41,8 @@ const MenuLateral = ({ opciones, categorias }) => {
   const menuBruto = Object?.values(options?.menu_rep).map((key) => {
     return key;
   });
-  const padres = categorias.filter((res) => res.parent === 0);
-  const hijos = categorias.filter((res) => res.parent === seccion);
+  const padres = categories?.filter((res) => res.parent === 0);
+  const hijos = categories?.filter((res) => res.parent === seccion);
   console.log(categorias);
 
   return (
