@@ -20,10 +20,7 @@ export async function getStaticProps() {
     .then((res) => res?.data);
 
   const options = await axios.get(
-    process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/",
-    {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    }
+    process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const categorias = await WooCommerce.get(
     "products/categories?order=desc&per_page=100"

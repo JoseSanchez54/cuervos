@@ -102,26 +102,17 @@ export default Contacto;
 
 export async function getStaticProps() {
   const pagesNew = await axios.get(
-    process.env.URLBASE + "/wp-json/jet-cct/paginas",
-    {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    }
+    process.env.URLBASE + "/wp-json/jet-cct/paginas"
   );
   const home2 = await pagesNew.data.find(
     (page) => page.pagina_asociada === "Contacto"
   );
 
   const options = await axios.get(
-    process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/",
-    {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    }
+    process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const categoriasAll = await WooCommerce.get(
-    "products/categories?order=desc&per_page=100",
-    {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    }
+    "products/categories?order=desc&per_page=100"
   ).then((response) => {
     return response.data;
   });

@@ -199,10 +199,7 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
 
 export async function getStaticProps() {
   const options = await axios.get(
-    process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/",
-    {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    }
+    process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const pedidos = await WooCommerce.get("orders")
     .then((response) => {
@@ -218,10 +215,7 @@ export async function getStaticProps() {
   });
 
   const pagesNew = await axios.get(
-    process.env.URLBASE + "/wp-json/jet-cct/paginas",
-    {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    }
+    process.env.URLBASE + "/wp-json/jet-cct/paginas"
   );
   const pagina = await pagesNew.data.find(
     (page) => page.pagina_asociada === "area"

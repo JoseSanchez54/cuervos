@@ -36,10 +36,7 @@ export async function getStaticProps(props) {
     .then((res) => res?.data);
 
   const pagesNew = await axios.get(
-    process.env.URLBASE + "/wp-json/jet-cct/paginas",
-    {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    }
+    process.env.URLBASE + "/wp-json/jet-cct/paginas"
   );
   const home2 = await pagesNew.data.find(
     (page) => page.pagina_asociada === "tienda"
@@ -54,10 +51,7 @@ export async function getStaticProps(props) {
   );
 
   const options = await axios.get(
-    process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/",
-    {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    }
+    process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const productos = await WooCommerce.get(
     "products?per_page=99&category=" + categoriaActual?.id
