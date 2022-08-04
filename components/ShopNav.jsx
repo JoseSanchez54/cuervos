@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useOptions } from "../hooks/useOptions";
 const ShopNav = ({ pagina, opciones }) => {
+  const { options } = useOptions(opciones);
   const router = useRouter();
 
   const [activo, setActivo] = useState("");
@@ -23,7 +25,7 @@ const ShopNav = ({ pagina, opciones }) => {
                   <span
                     className="uppercase"
                     style={{
-                      fontFamily: opciones.fuente_global,
+                      fontFamily: options?.fuente_global,
                       fontSize: "16px",
                       color: "black",
                       textDecoration:
