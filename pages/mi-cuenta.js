@@ -135,7 +135,7 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
           })}
         </div>
       </div>
-      <Footer opciones={optionsSWR} />
+      <Footer options={optionsSWR} />
       <style jsx>{`
         .encabezado {
           font-family: ${optionsSWR?.fuente_global};
