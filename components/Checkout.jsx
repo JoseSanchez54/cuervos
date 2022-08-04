@@ -20,13 +20,8 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       .catch((error) => {
         console.log(error);
       });
-    console.log(cupones);
+
     const cupon = await cupones.find((c) => c.code === codigo);
-    console.log(Date(cupon?.date_expires));
-    if (Date(cupon?.date_expires) > fechaHoy) {
-      console.log(true);
-    }
-    setCupon(cupon);
   };
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
   const [estadoP, setEstadoP] = useState(onAction);
@@ -350,7 +345,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               />
             </div>
           </div>
-          <div className="flex flex-row fila">
+          {/* <div className="flex flex-row fila">
             <div className="flex flex-col w-full mx-2">
               <input
                 type="text"
@@ -359,7 +354,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 onChange={(e) => getCupones(e)}
               />
             </div>
-          </div>
+          </div> */}
 
           <div className="flex flex-row taxes">
             <div className="flex flex-col w-full mx-2 scroll">
