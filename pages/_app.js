@@ -74,6 +74,7 @@ function MyApp({ Component, pageProps }) {
           </Script>
           <Component {...pageProps} />
           <Washapp />
+          <CookieAd />
         </NextUIProvider>
       </PersistGate>
     </SWRConfig>
