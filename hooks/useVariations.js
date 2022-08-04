@@ -1,8 +1,10 @@
 import useSWR from "swr";
 
 export const useVariations = (id) => {
+  const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error, isValidating, mutate } = useSWR(
-    "/api/variaciones?id=" + id
+    "/api/variaciones?id=" + id,
+    fetcher
   );
 
   return {
