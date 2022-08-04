@@ -10,19 +10,13 @@ import { useDispatch } from "react-redux";
 import Link from "next/link";
 export async function getStaticProps() {
   const template = await axios
-    .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/", {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    })
+    .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
     .then((res) => res.data[0].plantilla);
   const internos = await axios
-    .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/", {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    })
+    .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
     .then((res) => res.data);
   const posts = await axios
-    .get(process.env.URLBASE + "wp-json/wp/v2/allposts", {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    })
+    .get(process.env.URLBASE + "wp-json/wp/v2/allposts")
     .then((res) => res?.data);
 
   const options = await axios.get(

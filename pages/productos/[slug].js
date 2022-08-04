@@ -49,9 +49,7 @@ export async function getStaticProps(context) {
     const getting = fetcherWc("products/" + e).then((d) => upSells.push(d));
   });
   const paquete = await axios
-    .get(process.env.URLBASE + "wp-json/jet-cct/ajustes_internos/", {
-      headers: { "User-Agent": "Axios 0.21.1" },
-    })
+    .get(process.env.URLBASE + "wp-json/jet-cct/ajustes_internos/")
     .then((res) => res.data[0].paquete);
   const options = await axios.get(
     process.env.URLBASE + "wp-json/jet-cct/opciones_generales/",
