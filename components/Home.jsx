@@ -420,7 +420,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row w-full max-h-[63px] justify-center mt-[40px] lg:mt-[100px]">
+      <div className="flex flex-row w-full mb-7 max-h-[63px] justify-center mt-[40px] lg:mt-[100px]">
         <div className="flex flex-col w-full max-w-[1200px]">
           <div className="flex flex-row justify-center w-full">
             <Link href="/categoria/todos">
