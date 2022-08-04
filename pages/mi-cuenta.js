@@ -92,47 +92,53 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
               <span className="encabezado">CP</span>
             </div>
           </div>
-
-          {userOrders?.map((order, index) => {
-            return (
-              <div
-                key={index}
-                className={
-                  index % 2 === 0
-                    ? "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5"
-                    : "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5 bg-[#f7f7f7]"
-                }
-              >
-                <div className=" lg:block hidden text-center">
-                  <span className="dato">{order?.id}</span>
-                </div>
-                <div className="text-center">
-                  <span className="dato">{order?.total}€</span>
-                </div>
-                <div className="text-center">
-                  <span
+          {pedidos1.isValidating ? (
+            <div>Cargando...</div>
+          ) : (
+            <>
+              {userOrders?.map((order, index) => {
+                return (
+                  <div
+                    key={index}
                     className={
-                      (order?.status === "processing" && "dato processing") ||
-                      (order?.status === "completed" && "dato completed") ||
-                      (order?.status === "cancelled" && "dato cancelled") ||
-                      (order?.status === "pending" && "dato pending")
+                      index % 2 === 0
+                        ? "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5"
+                        : "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5 bg-[#f7f7f7]"
                     }
                   >
-                    {order?.status}
-                  </span>
-                </div>
-                <div className="text-center">
-                  <span className="dato">{order?.billing?.address_1}</span>
-                </div>
-                <div className="text-center">
-                  <span className="dato">{order?.billing?.city}</span>
-                </div>
-                <div className="text-center lg:block hidden">
-                  <span className="dato">{order?.billing?.postcode}</span>
-                </div>
-              </div>
-            );
-          })}
+                    <div className=" lg:block hidden text-center">
+                      <span className="dato">{order?.id}</span>
+                    </div>
+                    <div className="text-center">
+                      <span className="dato">{order?.total}€</span>
+                    </div>
+                    <div className="text-center">
+                      <span
+                        className={
+                          (order?.status === "processing" &&
+                            "dato processing") ||
+                          (order?.status === "completed" && "dato completed") ||
+                          (order?.status === "cancelled" && "dato cancelled") ||
+                          (order?.status === "pending" && "dato pending")
+                        }
+                      >
+                        {order?.status}
+                      </span>
+                    </div>
+                    <div className="text-center">
+                      <span className="dato">{order?.billing?.address_1}</span>
+                    </div>
+                    <div className="text-center">
+                      <span className="dato">{order?.billing?.city}</span>
+                    </div>
+                    <div className="text-center lg:block hidden">
+                      <span className="dato">{order?.billing?.postcode}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
       <Footer options={optionsSWR} />
