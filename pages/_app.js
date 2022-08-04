@@ -33,14 +33,20 @@ function MyApp({ Component, pageProps }) {
   const [cookies, setCookies] = useState(false);
   const store = useStore();
   const dispatch = useDispatch();
-  const tasas = axios.get(redirectURL + "/api/taxes").then((e) =>
-    dispatch({
-      type: "@setTaxes",
-      taxes: e.data,
+  const tasas = axios
+    .get(redirectURL + "/api/taxes", {
+      headers: { "User-Agent": "Axios 0.21.1" },
     })
-  );
+    .then((e) =>
+      dispatch({
+        type: "@setTaxes",
+        taxes: e.data,
+      })
+    );
   const envios = axios
-    .get(process.env.URLBASE + "wp-json/jet-cct/envios")
+    .get(process.env.URLBASE + "wp-json/jet-cct/envios", {
+      headers: { "User-Agent": "Axios 0.21.1" },
+    })
     .then((e) =>
       dispatch({
         type: "@setShipping",

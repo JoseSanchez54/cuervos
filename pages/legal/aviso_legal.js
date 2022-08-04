@@ -9,7 +9,10 @@ const Footer = dynamic(() => import("../../components/Footer"), { ssr: false });
 const Nav = dynamic(() => import("../../components/Nav"), { ssr: false });
 export async function getStaticProps(context) {
   const options = await axios.get(
-    process.env.URLBASE + "wp-json/jet-cct/opciones_generales/"
+    process.env.URLBASE + "wp-json/jet-cct/opciones_generales/",
+    {
+      headers: { "User-Agent": "Axios 0.21.1" },
+    }
   );
   const categoriasAll = await WooCommerce.get(
     "products/categories?order=desc&per_page=100"

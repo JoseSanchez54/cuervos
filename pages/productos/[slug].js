@@ -49,10 +49,15 @@ export async function getStaticProps(context) {
     const getting = fetcherWc("products/" + e).then((d) => upSells.push(d));
   });
   const paquete = await axios
-    .get(process.env.URLBASE + "wp-json/jet-cct/ajustes_internos/")
+    .get(process.env.URLBASE + "wp-json/jet-cct/ajustes_internos/", {
+      headers: { "User-Agent": "Axios 0.21.1" },
+    })
     .then((res) => res.data[0].paquete);
   const options = await axios.get(
-    process.env.URLBASE + "wp-json/jet-cct/opciones_generales/"
+    process.env.URLBASE + "wp-json/jet-cct/opciones_generales/",
+    {
+      headers: { "User-Agent": "Axios 0.21.1" },
+    }
   );
   const categorias = await WooCommerce.get("products/categories").then(
     (response) => {
@@ -104,10 +109,10 @@ const SingleProduct = ({
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error, mutate } = useSWR("/api/producto", fetcher, {
     id: products[0]?.id,
-    refreshInterval: 1000,
+    refreshInterval: 10000,
   });
   const pedidos1 = useSWR("products/" + products[0]?.id, fetcherWc, {
-    refreshInterval: 1000,
+    refreshInterval: 10000,
     fallbackData: products[0],
   });
   const product = pedidos1.data;
