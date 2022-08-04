@@ -22,17 +22,6 @@ export async function getServerSideProps({ res }) {
     }
   );
 
-  const allposts = await fetcherSWR(
-    "https://api.mwlb.es/wp-json/wp/v2/allposts/"
-  );
-  const allcategories = await fetcherSWR(
-    "https://api.mwlb.es/wp-json/wp/v2/categories?per_page=100"
-  );
-
-  const alltags = await fetcherSWR(
-    "https://api.mwlb.es/wp-json/wp/v2/alltags/"
-  );
-
   const YOUR_URL = checkDomain("vinoscriacuervos.com");
   const baseUrl = {
     development: YOUR_URL,
