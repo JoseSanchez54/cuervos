@@ -13,15 +13,15 @@ const CookieAd = ({ funcion }) => {
 
   const valuesBoton = {
     hover: {
-      backgroundColor: options[0]?.color_boton_cookies_copy,
+      backgroundColor: options?.color_boton_cookies_copy,
       color: "#fff",
     },
     initial: {
-      backgroundColor: options[0]?.color_boton_cookies,
+      backgroundColor: options?.color_boton_cookies,
       color: "#000",
       borderRadius: "28px",
       fontWeight: "bold",
-      fontFamily: options[0]?.fuente_global,
+      fontFamily: options?.fuente_global,
       fontSize: "12px",
       padding: "5px 10px",
     },
@@ -48,7 +48,7 @@ const CookieAd = ({ funcion }) => {
     <>
       {!isMobile ? (
         <>
-          {!isLoading && options[0]?.activo_cookies === "si" && (
+          {!isLoading && options?.activo_cookies === "si" && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -87,11 +87,11 @@ const CookieAd = ({ funcion }) => {
 
                   <span
                     style={{
-                      fontFamily: options[0]?.fuente_global,
+                      fontFamily: options?.fuente_global,
                       fontSize: "14px",
                     }}
                   >
-                    {options[0]?.texto_cookies}
+                    {options?.texto_cookies}
                   </span>
                 </div>
                 <motion.button
@@ -100,7 +100,7 @@ const CookieAd = ({ funcion }) => {
                   whileHover="hover"
                   onClick={() => handleClick()}
                 >
-                  <span style={{ fontFamily: options[0]?.fuente_global }}>
+                  <span style={{ fontFamily: options?.fuente_global }}>
                     Aceptar
                   </span>
                 </motion.button>
@@ -142,12 +142,12 @@ const CookieAd = ({ funcion }) => {
                 </motion.div>
                 <span
                   style={{
-                    fontFamily: options[0]?.fuente_global,
+                    fontFamily: options?.fuente_global,
                     fontSize: "14px",
                     textAlign: "center",
                   }}
                 >
-                  {options[0]?.texto_cookies}
+                  {options?.texto_cookies}
                 </span>
                 <motion.button
                   variants={valuesBoton}
@@ -156,7 +156,7 @@ const CookieAd = ({ funcion }) => {
                   className="mt-4"
                   onClick={() => handleClick()}
                 >
-                  <span style={{ fontFamily: options[0]?.fuente_global }}>
+                  <span style={{ fontFamily: options?.fuente_global }}>
                     Aceptar
                   </span>
                 </motion.button>

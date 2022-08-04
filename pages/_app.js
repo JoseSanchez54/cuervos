@@ -74,7 +74,7 @@ function MyApp({ Component, pageProps }) {
           </Script>
           <Component {...pageProps} />
           <Washapp />
-          <CookieAd />
+          {cookies === "false" && <CookieAd funcion={setCookies} />}
         </NextUIProvider>
       </PersistGate>
     </SWRConfig>

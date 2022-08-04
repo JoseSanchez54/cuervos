@@ -8,6 +8,7 @@ import Image from "next/image";
 import fetcherWc from "../utils/fetcherWc";
 import useSWR from "swr";
 import Footer from "../components/Footer";
+import SyncLoader from "react-spinners/SyncLoader";
 
 export default function MiCuenta({ options, pedidos, categorias, pagina }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
@@ -69,7 +70,7 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
           </div>
         </div>
       </div>
-      <div className="flex flex-row my-9 w-full  justify-center ">
+      <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
         <div className="flex flex-col w-full max-w-[1600px]  items-center">
           <span className="titulo my-6">Pedidos</span>
           <div className="grid w-full lg:grid-cols-6 grid-cols-4 gap-4 ">
@@ -93,7 +94,9 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
             </div>
           </div>
           {pedidos1.isValidating ? (
-            <div>Cargando...</div>
+            <div className="my-9">
+              <SyncLoader />
+            </div>
           ) : (
             <>
               {userOrders?.map((order, index) => {
