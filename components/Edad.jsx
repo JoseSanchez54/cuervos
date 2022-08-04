@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 const Edad = ({ options }) => {
-  const [activo, setActivo] = useState(false);
+  const [activo, setActivo] = useState(true);
   const handleActivo = () => {
     setActivo(true);
     localStorage.setItem("edad", "true");
@@ -10,6 +10,8 @@ const Edad = ({ options }) => {
   useEffect(() => {
     if (localStorage.getItem("edad") === "true") {
       setActivo(true);
+    } else {
+      setActivo(false);
     }
   }, []);
   return (
