@@ -441,7 +441,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row w-full justify-center mt-[40px] lg:mt-[100px]">
+      {/*  <div className="flex flex-row w-full justify-center mt-[40px] lg:mt-[100px]">
         <div className="flex flex-col w-full max-w-[1200px]">
           <div className="flex flex-row min-h-[339px] my-9 w-full bg-black">
             <div className="flex flex-col justify-center p-5 w-full lg:w-1/3">
@@ -475,7 +475,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/*     <div className="flex flex-row p-5 w-full justify-center mt-[40px] lg:mt-[100px]">
         <div className="flex flex-col w-full max-w-[1200px]">
           <span

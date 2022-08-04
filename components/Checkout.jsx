@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import StripeCheckout from "./StripeCheckout";
+import WooCommerce from "../woocommerce/Woocommerce";
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
@@ -7,6 +8,26 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 const datosPaises = require("../utils/data.json");
 const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
+  const [cupon, setCupon] = useState("");
+  const getCupones = async (e) => {
+    const fechaHoy = new Date();
+    const codigo = e.target.value;
+    handleFormulario(e);
+    const cupones = await WooCommerce.get("coupons")
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log(cupones);
+    const cupon = await cupones.find((c) => c.code === codigo);
+    console.log(Date(cupon?.date_expires));
+    if (Date(cupon?.date_expires) > fechaHoy) {
+      console.log(true);
+    }
+    setCupon(cupon);
+  };
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
   const [estadoP, setEstadoP] = useState(onAction);
   const handleEstado = () => {
@@ -326,6 +347,16 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 name="cp"
                 placeholder="CP"
                 onChange={(e) => handleFormulario(e)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row fila">
+            <div className="flex flex-col w-full mx-2">
+              <input
+                type="text"
+                name="cupon"
+                placeholder="Cupon"
+                onChange={(e) => getCupones(e)}
               />
             </div>
           </div>

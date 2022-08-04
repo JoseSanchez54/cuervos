@@ -439,7 +439,7 @@ const SingleProduct = ({
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-row mt-9 w-full justify-center">
+                {/*             <div className="flex flex-row mt-9 w-full justify-center">
                   <div className="flex flex-col w-full max-w-[556px] p-5 items-center">
                     <div className="flex flex-row flex-wrap lg:flex-nowrap justify-around gap-5 p-5 w-full bg-black">
                       <div className="flex flex-col w-full lg:w-auto justify-center">
@@ -500,7 +500,7 @@ const SingleProduct = ({
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
                 <div className="flex p-5 flex-row gap-3 w-full justify-start ">
                   <div className="lg:flex hidden flex-col min-w-[50px]">
