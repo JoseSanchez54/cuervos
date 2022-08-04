@@ -40,7 +40,7 @@ export async function getStaticProps() {
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const categorias = await WooCommerce.get(
-    "products/categories?order=desc"
+    "products/categories?order=desc&per_page=100"
   ).then((response) => {
     return response.data;
   });

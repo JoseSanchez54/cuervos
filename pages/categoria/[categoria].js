@@ -42,7 +42,7 @@ export async function getStaticProps(props) {
     (page) => page.pagina_asociada === "tienda"
   );
   const categorias = await WooCommerce.get(
-    "products/categories?order=desc"
+    "products/categories?order=desc&per_page=100"
   ).then((response) => {
     return response.data;
   });

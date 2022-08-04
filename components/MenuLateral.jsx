@@ -7,7 +7,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GrClose } from "react-icons/gr/";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useRouter } from "next/router";
+import { useOptions } from "../hooks/useOptions";
 const MenuLateral = ({ opciones, categorias }) => {
+  const { options } = useOptions(opciones);
+  console.log(options);
   const { isMobile } = useMobile();
   const [abrir, setAbrir] = useState(false);
   const [seccion, setSeccion] = useState(null);
@@ -24,11 +27,12 @@ const MenuLateral = ({ opciones, categorias }) => {
   const handleAbrir = () => {
     setAbrir(!abrir);
   };
-  const menuBruto = Object.values(opciones.menu_rep).map((key) => {
+  const menuBruto = Object?.values(options?.menu_rep).map((key) => {
     return key;
   });
   const padres = categorias.filter((res) => res.parent === 0);
   const hijos = categorias.filter((res) => res.parent === seccion);
+  console.log(categorias);
 
   return (
     <>
@@ -68,7 +72,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                         <Image
                           width="85px"
                           height="63px"
-                          src={opciones.logo_principal}
+                          src={options?.logo_principal}
                         ></Image>
                       </a>
                     </Link>
@@ -97,7 +101,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                   </div>
                   <div className="flex flex-row p-9 w-full">
                     <div className="flex flex-col gap-3 w-full">
-                      {menuBruto.map((e, index) => {
+                      {menuBruto?.map((e, index) => {
                         return (
                           <Link key={index} href={e.enlace}>
                             <a className="enlaceBot uppercase">{e.label}</a>
@@ -116,7 +120,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                           <Image
                             width="85px"
                             height="63px"
-                            src={opciones.logo_principal}
+                            src={options?.logo_principal}
                           ></Image>
                         </a>
                       </Link>
@@ -137,7 +141,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                         }}
                         className="flex flex-col w-full gap-5 justify-between"
                       >
-                        {hijos.map((res, index) => {
+                        {hijos?.map((res, index) => {
                           if (hijos.length === 0) {
                             return <span>No hay más subcategorías</span>;
                           } else {
@@ -186,7 +190,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                       <Image
                         width="85px"
                         height="63px"
-                        src={opciones.logo_principal}
+                        src={options?.logo_principal}
                       ></Image>
                     </a>
                   </Link>
@@ -255,11 +259,11 @@ const MenuLateral = ({ opciones, categorias }) => {
                       className="lg:flex flex-col lg:w-1/2 w-full hidden"
                     >
                       <div className="relative h-screen w-full">
-                        {opciones.imagen_promocion && (
+                        {options?.imagen_promocion && (
                           <>
                             <div className="flex flex-col justify-end h-full">
                               <span className="promoTitle">
-                                {opciones.titulo_promocion}
+                                {options?.titulo_promocion}
                               </span>
                               <button className="buyNow">
                                 <Link href="/categoria/tinto">
@@ -270,7 +274,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                               <Image
                                 objectFit="cover"
                                 layout="fill"
-                                src={opciones.imagen_promocion}
+                                src={options?.imagen_promocion}
                               />
                             </div>
                           </>
@@ -296,7 +300,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                       className="lg:flex flex-col lg:w-1/2 w-full hidden"
                     >
                       <div className="relative h-screen w-full">
-                        {opciones.imagen_promocion && (
+                        {options?.imagen_promocion && (
                           <>
                             <div className="flex flex-col justify-start gap-5 p-5 mt-[150px] h-full">
                               {hijos.map((res) => {
@@ -346,8 +350,8 @@ const MenuLateral = ({ opciones, categorias }) => {
           border-top: 1px solid #e0e0e0;
         }
         a.enlaceSup {
-          font-family: ${opciones.fuente_global};
-          color: ${opciones.color_texto_header};
+          font-family: ${options?.fuente_global};
+          color: ${options?.color_texto_header};
           font-size: 2em;
           font-weight: bold;
           background-position: 0% 100%;
@@ -357,19 +361,19 @@ const MenuLateral = ({ opciones, categorias }) => {
           text-transform: uppercase;
         }
         .enlaceBot {
-          font-family: ${opciones.fuente_global};
-          color: ${opciones.color_texto_header};
+          font-family: ${options?.fuente_global};
+          color: ${options?.color_texto_header};
           font-size: 1.1em;
           text-transform: uppercase;
         }
         .enlaceinf {
-          font-family: ${opciones.fuente_global};
-          color: ${opciones.color_texto_header};
+          font-family: ${options?.fuente_global};
+          color: ${options?.color_texto_header};
           font-size: 1.1em;
           text-transform: uppercase;
         }
         a:hover {
-          color: ${opciones.color_texto_header_hover};
+          color: ${options?.color_texto_header_hover};
           background-size: 100% 2px;
         }
         .overlay {
@@ -377,14 +381,14 @@ const MenuLateral = ({ opciones, categorias }) => {
           z-index: 2;
         }
         .promoTitle {
-          font-family: ${opciones.fuente_global};
+          font-family: ${options?.fuente_global};
           color: white;
           font-size: 2em;
           z-index: 3;
           padding-left: 20px;
         }
         .buyNow {
-          font-family: ${opciones.fuente_global};
+          font-family: ${options?.fuente_global};
           z-index: 3;
           display: flex;
           padding-left: 20px;

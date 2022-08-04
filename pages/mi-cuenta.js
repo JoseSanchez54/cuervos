@@ -198,7 +198,7 @@ export async function getStaticProps() {
       return error;
     });
   const categorias = await WooCommerce.get(
-    "products/categories?order=desc"
+    "products/categories?order=desc&per_page=100"
   ).then((response) => {
     return response.data;
   });

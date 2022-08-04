@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import { useMemo } from "react";
 
 export const useOptions = (initialdata) => {
   const fetcher = (url) => fetch(url).then((r) => r.json());

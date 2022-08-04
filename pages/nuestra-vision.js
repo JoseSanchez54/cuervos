@@ -5,7 +5,6 @@ import { useOptions } from "../hooks/useOptions";
 import { usePages } from "../hooks/usePages";
 import { useSelector } from "react-redux";
 
-
 const Nosotros = ({ opciones, pagina, categorias }) => {
   const { isLoading, options: optionsSWR } = useOptions(opciones);
   const { data, isValidating } = usePages(pagina, "vision");
@@ -46,7 +45,7 @@ export async function getStaticProps() {
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const categorias = await WooCommerce.get(
-    "products/categories?order=desc"
+    "products/categories?order=desc&per_page=100"
   ).then((response) => {
     return response.data;
   });
