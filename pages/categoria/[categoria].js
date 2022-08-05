@@ -87,15 +87,13 @@ export default function Tienda({
 
   return (
     <>
-      {!isValidating && (
-        <Categorias
-          pagina={data}
-          categorias={categorias}
-          opciones={optionsSWR}
-          productos={productosSWR}
-          actual={categoriaActual}
-        />
-      )}
+      <Categorias
+        pagina={data}
+        categorias={categorias}
+        opciones={optionsSWR}
+        productos={productosSWR}
+        actual={categoriaActual}
+      />
     </>
   );
 }
