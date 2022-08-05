@@ -401,7 +401,6 @@ const SingleProduct = ({
                     <div
                       style={{
                         border: "solid 2px black",
-                        borderRadius: "6px",
                       }}
                       className="flex flex-row gap-5  lg:flex-nowrap flex-wrap w-full p-8"
                     >
@@ -952,7 +951,7 @@ const SingleProduct = ({
         }
         .activoVariacion {
           border: solid black 2px;
-          border-radius: 7px;
+          border-radius: 0px;
         }
         @media (max-width: 1022px) {
           .titulo {
