@@ -421,7 +421,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
         </div>
       </div>
       <div className="flex flex-row w-full mb-7 max-h-[63px] justify-center mt-[40px] lg:mt-[100px]">
-        <div className="flex flex-col w-full max-w-[1200px]">
+        <div className="flex flex-col lt w-full max-w-[1200px]">
           <div className="flex flex-row justify-center w-full">
             <Link href="/categoria/todos">
               <a>
@@ -541,6 +541,9 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           }
           .flex-col {
             min-height: 500px;
+          }
+          .flex-col.lt {
+            min-height: fit-content;
           }
         }
       `}</style>
