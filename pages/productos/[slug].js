@@ -321,7 +321,7 @@ const SingleProduct = ({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col pt-5 lg:h-[1600px] w-full lg:w-2/5">
+            <div className="flex flex-col pt-5 xl:min-h-[1600px]  w-full lg:w-2/5">
               <div className="w-full flex flex-col self-start top-[90px]">
                 <div className="flex flex-row w-full">
                   <div className="flex p-5 flex-col">
