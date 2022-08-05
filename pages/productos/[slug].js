@@ -106,6 +106,15 @@ const SingleProduct = ({
     id: products[0]?.id,
     refreshInterval: 10000,
   });
+  const variations = useSWR(
+    "products/" + products[0]?.id + "variations",
+    fetcherWc,
+    {
+      fallbackData: variaciones,
+      refreshInterval: 10000,
+    }
+  );
+  console.log(variations);
   const pedidos1 = useSWR("products/" + products[0]?.id, fetcherWc, {
     refreshInterval: 10000,
     fallbackData: products[0],

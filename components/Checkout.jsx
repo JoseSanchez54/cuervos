@@ -8,10 +8,14 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 const datosPaises = require("../utils/data.json");
 const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
-  const [cupon, setCupon] = useState("");
+  const [cupon, setCupon] = useState(null);
   const getCupones = async (e) => {
     const fechaHoy = new Date();
     const codigo = e.target.value;
+    if (e.target.value === "") {
+      setCupon(null);
+      return;
+    }
     handleFormulario(e);
     const cupones = await WooCommerce.get("coupons")
       .then((response) => {
@@ -22,7 +26,24 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       });
 
     const cupon = await cupones.find((c) => c.code === codigo);
-    console.log(cupon);
+    const expira = await new Date(cupon?.date_expires);
+    if (fechaHoy > expira) {
+      setCupon(null);
+    } else {
+      if (cupon?.discount_type === "percent") {
+        setCupon({
+          ...cupon,
+          descuento: cupon?.amount / 100,
+          tipo: "porcentaje",
+        });
+      } else if (cupon?.discount_type === "fixed_cart") {
+        setCupon({
+          ...cupon,
+          descuento: cupon?.amount,
+          tipo: "fijo",
+        });
+      }
+    }
   };
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
   const [estadoP, setEstadoP] = useState(onAction);
@@ -77,6 +98,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     pais: "",
     cp: "",
     total: total,
+    cupon: "",
   });
   const handleFormulario = (e) => {
     if (e.target.value === "") {
@@ -108,6 +130,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       country: formulario.pais,
       email: formulario.email,
       phone: formulario.telefono,
+      coupon: cupon,
     },
     shipping: {
       first_name: formulario.nombre,
@@ -384,6 +407,25 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                       <span className="subtotal">{iva}€</span>
                     </div>
                   </div>
+                  {cupon && (
+                    <>
+                      <div
+                        key="cupones"
+                        className="flex flex-row w-full pb-2 mt-5 border-b-2 individualTax"
+                      >
+                        <div className="flex flex-col w-1/2">
+                          <span className="subtotal">Cupon</span>
+                        </div>
+                        <div className="flex flex-col items-end w-1/2">
+                          <span className="subtotal">
+                            {cupon?.tipo === "porcentaje"
+                              ? "-" + cupon.descuento + "%"
+                              : "-" + cupon.descuento + "€"}
+                          </span>
+                        </div>
+                      </div>
+                    </>
+                  )}
                   <div className="flex flex-row w-full pb-2 mt-5 border-b-2 individualTax">
                     <div className="flex flex-col w-1/2">
                       <span className="subtotal">Envío:</span>
