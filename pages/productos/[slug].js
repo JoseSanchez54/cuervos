@@ -114,7 +114,7 @@ const SingleProduct = ({
       refreshInterval: 100,
     }
   );
-  console.log();
+  console.log(variations.data);
 
   const pedidos1 = useSWR("products/" + products[0]?.id, fetcherWc, {
     refreshInterval: 10000,
