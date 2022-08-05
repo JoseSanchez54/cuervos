@@ -133,7 +133,7 @@ const SingleProduct = ({
   const [isVino, setIsVino] = useState(false);
   useEffect(() => {
     product?.categories.map((f) => {
-      if (f.name === "Vinos") {
+      if (f.slug === "destacados") {
         setIsVino(true);
       }
     });
