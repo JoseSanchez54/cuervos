@@ -111,9 +111,10 @@ const SingleProduct = ({
     fetcherWc,
     {
       fallbackData: variaciones,
-      refreshInterval: 10000,
+      refreshInterval: 100,
     }
   );
+  console.log();
 
   const pedidos1 = useSWR("products/" + products[0]?.id, fetcherWc, {
     refreshInterval: 10000,
