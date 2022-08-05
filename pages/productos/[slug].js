@@ -367,7 +367,7 @@ const SingleProduct = ({
 
                                 borderRadius: "10px",
                               }}
-                              className="botonVaria relative w-[101px] h-[108px]"
+                              className="botonVaria relative h-[70px] w-[70px] lg:w-[101px] lg:h-[108px]"
                               value={e.attributes[0].option}
                               onClick={(r) =>
                                 handleVariations(r, e.attributes[0].name)
