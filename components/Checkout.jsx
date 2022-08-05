@@ -15,7 +15,8 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     const fechaHoy = new Date();
     const codigo = e.target.value;
     if (e.target.value === "") {
-      await setCupon(null);
+      setCupon(null);
+      setErrorCupon(null);
     } else {
       handleFormulario(e);
       const cupones = await WooCommerce.get("coupons")
@@ -28,15 +29,16 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
 
       const cupon1 = await cupones.find((c) => c.code === codigo);
       const expira = await new Date(cupon1?.date_expires);
-      if (!cupon) {
-        await setErrorCupon("Cupón no encontrado");
-        await setCupon(null);
+      if (!cupon1) {
+        setErrorCupon("Cupón no encontrado");
+        setCupon(null);
       } else {
-        await setErrorCupon(null);
+        setErrorCupon(null);
+        setCupon(cupon1);
       }
       if (fechaHoy > expira) {
-        await setCupon(null);
-        await setErrorCupon("El cupón ha expirado");
+        setCupon(null);
+        setErrorCupon("El cupón ha expirado");
       } else {
         if (cupon1?.discount_type === "percent") {
           setCupon({
@@ -386,7 +388,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 placeholder="Cupon"
                 onChange={(e) => getCupones(e)}
               />
-              {errorCupon !== null && (
+              {cupon === null && errorCupon !== null && (
                 <span
                   style={{
                     fontFamily: opciones?.fuente_global,
