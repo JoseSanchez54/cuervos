@@ -364,8 +364,6 @@ const SingleProduct = ({
                                   seleccion.botellas === e.attributes[0].option
                                     ? "solid 2px #000"
                                     : "none",
-
-                                borderRadius: "10px",
                               }}
                               className="botonVaria relative w-[101px] h-[108px]"
                               value={e.attributes[0].option}
@@ -951,7 +949,6 @@ const SingleProduct = ({
         }
         .activoVariacion {
           border: solid black 2px;
-          border-radius: 0px;
         }
         @media (max-width: 1022px) {
           .titulo {
