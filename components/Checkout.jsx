@@ -10,39 +10,47 @@ const datosPaises = require("../utils/data.json");
 const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const dispatch = useDispatch();
   const [cupon, setCupon] = useState(null);
+  const [errorCupon, setErrorCupon] = useState(null);
   const getCupones = async (e) => {
     const fechaHoy = new Date();
     const codigo = e.target.value;
     if (e.target.value === "") {
-      setCupon(null);
-      return;
-    }
-    handleFormulario(e);
-    const cupones = await WooCommerce.get("coupons")
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    const cupon = await cupones.find((c) => c.code === codigo);
-    const expira = await new Date(cupon?.date_expires);
-    if (fechaHoy > expira) {
-      setCupon(null);
+      await setCupon(null);
     } else {
-      if (cupon?.discount_type === "percent") {
-        setCupon({
-          ...cupon,
-          descuento: cupon?.amount / 100,
-          tipo: "porcentaje",
+      handleFormulario(e);
+      const cupones = await WooCommerce.get("coupons")
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      } else if (cupon?.discount_type === "fixed_cart") {
-        setCupon({
-          ...cupon,
-          descuento: cupon?.amount,
-          tipo: "fijo",
-        });
+
+      const cupon1 = await cupones.find((c) => c.code === codigo);
+      const expira = await new Date(cupon1?.date_expires);
+      if (!cupon) {
+        await setErrorCupon("Cupón no encontrado");
+        await setCupon(null);
+      } else {
+        await setErrorCupon(null);
+      }
+      if (fechaHoy > expira) {
+        await setCupon(null);
+        await setErrorCupon("El cupón ha expirado");
+      } else {
+        if (cupon1?.discount_type === "percent") {
+          setCupon({
+            ...cupon1,
+            descuento: cupon1?.amount / 100,
+            tipo: "porcentaje",
+          });
+        } else if (cupon1?.discount_type === "fixed_cart") {
+          setCupon({
+            ...cupon1,
+            descuento: cupon1?.amount,
+            tipo: "fijo",
+          });
+        }
       }
     }
   };
@@ -378,6 +386,17 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 placeholder="Cupon"
                 onChange={(e) => getCupones(e)}
               />
+              {errorCupon !== null && (
+                <span
+                  style={{
+                    fontFamily: opciones?.fuente_global,
+                    color: "red",
+                  }}
+                  className="error"
+                >
+                  {errorCupon}
+                </span>
+              )}
             </div>
           </div>
 
@@ -405,7 +424,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                       </span>
                     </div>
                     <div className="flex flex-col items-end w-1/2">
-                      <span className="subtotal">{iva}€</span>
+                      <span className="subtotal">+{iva}€</span>
                     </div>
                   </div>
                   {cupon && (
@@ -432,7 +451,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                       <span className="subtotal">Envío:</span>
                     </div>
                     <div className="flex flex-col items-end w-1/2">
-                      <span className="subtotal">{precioEnvio?.precio}€</span>
+                      <span className="subtotal">+{precioEnvio?.precio}€</span>
                     </div>
                   </div>
                 </>
@@ -444,32 +463,41 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 </div>
                 <div className="flex flex-col items-end w-1/2">
                   <span className="subtotal">
-                    {cupon && cupon?.tipo === "porcentaje" ? (
+                    {cupon ? (
                       <>
-                        {tax.tasa === ""
-                          ? parseFloat(formulario.total) * cupon?.descuento +
-                            "€"
-                          : parseFloat(formulario.total) * cupon?.descuento +
-                            parseFloat(precioEnvio.precio) +
-                            "€"}
+                        {cupon?.tipo === "porcentaje" ? (
+                          <>
+                            {tax.tasa === ""
+                              ? parseFloat(formulario.total) *
+                                  parseFloat(cupon?.descuento) +
+                                "€"
+                              : parseFloat(formulario.total) *
+                                  parseFloat(cupon?.descuento) +
+                                parseFloat(precioEnvio.precio) +
+                                "€"}
+                          </>
+                        ) : (
+                          <>
+                            {cupon && tax.tasa === ""
+                              ? parseFloat(formulario.total) -
+                                parseInt(cupon?.descuento) +
+                                "€"
+                              : parseFloat(formulario.total) -
+                                parseInt(cupon?.descuento) +
+                                parseFloat(precioEnvio.precio) +
+                                "€"}
+                          </>
+                        )}
                       </>
                     ) : (
                       <>
-                        {cupon && tax.tasa === ""
-                          ? parseFloat(formulario.total) -
-                            parseFloat(cupon?.descuento) +
-                            "€"
-                          : parseFloat(formulario.total) -
-                            parseFloat(cupon?.descuento) +
+                        {tax.tasa === ""
+                          ? parseFloat(formulario.total) + "€"
+                          : parseFloat(formulario.total) +
                             parseFloat(precioEnvio.precio) +
                             "€"}
                       </>
                     )}
-                    {tax.tasa === ""
-                      ? parseFloat(formulario.total) + "€"
-                      : parseFloat(formulario.total) +
-                        parseFloat(precioEnvio.precio) +
-                        "€"}
                   </span>
                 </div>
               </div>
