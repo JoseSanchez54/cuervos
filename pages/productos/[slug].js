@@ -352,7 +352,7 @@ const SingleProduct = ({
                   </div>
                 </div>
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
-                {variaciones.length > 0 && (
+                {variations.data.length > 0 && (
                   <>
                     <div className="flex lg:flex-row-reverse  gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center">
                       {variations.data.map((e, index) => {
@@ -389,7 +389,7 @@ const SingleProduct = ({
                 )}
                 <div className="flex flex-row mt-7 p-5 w-full">
                   <AddToCart
-                    lista={variaciones}
+                    lista={variations.data}
                     producto={product}
                     opciones={options}
                     seleccion={seleccion}
