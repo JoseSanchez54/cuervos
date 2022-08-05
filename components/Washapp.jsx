@@ -5,7 +5,7 @@ const Washapp = () => {
   const { options } = useOptions();
   return (
     <>
-      <button className="fixed bottom-2 right-2">
+      <button className="fixed z-[99] bottom-2 right-2">
         <a
           target="_blank"
           rel="noreferrer"
