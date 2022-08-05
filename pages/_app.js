@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps }) {
     <SWRConfig
       value={{
         fetcher: fetcher,
-        refreshInterval: 100000,
+        refreshInterval: 1000000,
       }}
     >
       <PersistGate persistor={store.__persistor}>
