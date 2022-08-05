@@ -9,8 +9,10 @@ import fetcherWc from "../utils/fetcherWc";
 import useSWR from "swr";
 import Footer from "../components/Footer";
 import SyncLoader from "react-spinners/SyncLoader";
+import { usePages } from "../hooks/usePages";
 
 export default function MiCuenta({ options, pedidos, categorias, pagina }) {
+  const { data } = usePages(pagina, "area");
   const { isLoading, options: optionsSWR } = useOptions(options);
   const pedidos1 = useSWR("orders", fetcherWc);
   const customers = useSWR("customers", fetcherWc);
@@ -18,9 +20,23 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
   const userOrders = pedidos1?.data?.filter(
     (order) => order?.billing?.email === username
   );
-  const userCustomer = customers?.data?.filter(
+  const userCustomer = customers?.data?.find(
     (order) => order?.billing?.email === username
   );
+  const usuario = {
+    nombre: userCustomer?.billing?.first_name,
+    apellido: userCustomer?.billing?.last_name,
+    nombreCompleto:
+      userCustomer?.billing?.first_name +
+      " " +
+      userCustomer?.billing?.last_name,
+    email: userCustomer?.billing?.email,
+    telefono: userCustomer?.billing?.phone,
+    direccion: userCustomer?.billing?.address_1,
+    ciudad: userCustomer?.billing?.city,
+    pais: userCustomer?.billing?.country,
+    codigoPostal: userCustomer?.billing?.postcode,
+  };
 
   return (
     <>
@@ -57,11 +73,12 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
             <div className="flex p-5 flex-col justify-center max-w-[1600px] items-start w-full h-full">
               <span className="z-[10] uppercase text-start tituloPrimera ">
                 Bienvenido,
-                <br /> {username}
+                <br />{" "}
+                {usuario?.nombreCompleto ? usuario?.nombreCompleto : username}
               </span>
               <Image
                 objectFit="cover"
-                src={pagina.fondo_contacto}
+                src={data?.fondo_contacto}
                 layout="fill"
                 priority="high"
                 quality={100}
