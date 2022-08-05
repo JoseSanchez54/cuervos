@@ -54,7 +54,7 @@ export async function getStaticProps(props) {
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const productos = await WooCommerce.get(
-    "products?per_page=99&category=" + categoriaActual?.id
+    "products?per_page=99&status=publish&category=" + categoriaActual?.id
   ).then((response) => {
     return response.data;
   });
