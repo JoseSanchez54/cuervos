@@ -174,7 +174,7 @@ const SingleProduct = ({
 
     return atributos;
   }
-  const atributos = definirVariaciones(product, variaciones);
+  const atributos = definirVariaciones(product, variations.data);
 
   let tt = atributos.map((res) => {
     let objeto = {
@@ -355,7 +355,7 @@ const SingleProduct = ({
                 {variaciones.length > 0 && (
                   <>
                     <div className="flex lg:flex-row-reverse  gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center">
-                      {variaciones.map((e, index) => {
+                      {variations.data.map((e, index) => {
                         return (
                           <div key={index} className="flex flex-col w-auto">
                             <button
