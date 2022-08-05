@@ -193,10 +193,15 @@ const SingleProduct = ({
 
   const [seleccion, setSeleccion] = useState(newTT);
   const handleVariations = (e, tipo) => {
+    document
+      .getElementsByClassName("activoVariacion")[0]
+      ?.classList.remove("activoVariacion");
+
     const resultado = {
       ...seleccion,
       [tipo]: e.currentTarget.value,
     };
+    e.target.classList.add("activoVariacion");
     setSeleccion(resultado);
   };
   const { isMobile } = useMobile();
@@ -356,13 +361,13 @@ const SingleProduct = ({
                             <button
                               style={{
                                 border:
-                                  seleccion.Botellas === e.attributes[0].option
+                                  seleccion.botellas === e.attributes[0].option
                                     ? "solid 2px #000"
                                     : "none",
-                                height: isMobile ? "76px" : "112px",
-                                borderRadius: "6px",
+
+                                borderRadius: "10px",
                               }}
-                              className="botonVaria"
+                              className="botonVaria relative w-[101px] h-[108px]"
                               value={e.attributes[0].option}
                               onClick={(r) =>
                                 handleVariations(r, e.attributes[0].name)
@@ -371,6 +376,7 @@ const SingleProduct = ({
                               <Image
                                 width="101px"
                                 height="108px"
+                                layout="fill"
                                 src={e.image.src}
                                 quality="100"
                               />
@@ -939,6 +945,10 @@ const SingleProduct = ({
         }
         .divider {
           border-bottom: 1px solid black;
+        }
+        .activoVariacion {
+          border: solid black 2px;
+          border-radius: 7px;
         }
         @media (max-width: 1022px) {
           .titulo {
