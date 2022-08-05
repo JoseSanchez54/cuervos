@@ -73,7 +73,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
         <div className="flex flex-col w-full h-full max-w-[1212px]">
           <div className="flex flex-row flex-wrap lg:min-h-[1016px]  w-full lg:h-[1016px]">
             <div className="flex flex-col h-full w-full lg:w-2/3">
-              <div className="relative w-full h-full">
+              <div className="relative w-full min min-h-[776px] h-full">
                 <div className="flex flex-col items-center w-full h-full">
                   <div className="lg:p-[100px] p-9 max-w-[560px]  lg:text-center z-[10]">
                     <span
@@ -84,16 +84,19 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                     >
                       {pagina.segunda_primer_titulo}
                     </span>
-                    <p
-                      style={{
-                        fontFamily: opciones.fuente_global,
-                        textTransform: "uppercase",
+                    {!isMobile && (
+                      <p
+                        style={{
+                          fontFamily: opciones.fuente_global,
+                          textTransform: "uppercase",
 
-                        marginTop: "20px",
-                      }}
-                    >
-                      {pagina.segunda_primer_parrafo}
-                    </p>
+                          marginTop: "20px",
+                        }}
+                      >
+                        {pagina.segunda_primer_parrafo}
+                      </p>
+                    )}
+
                     {isMobile && (
                       <Link href={pagina.primer_enlace}>
                         <motion.button
@@ -544,6 +547,9 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           }
           .flex-col.lt {
             min-height: fit-content;
+          }
+          .flex-col.min {
+            min-height: 790px;
           }
         }
       `}</style>
