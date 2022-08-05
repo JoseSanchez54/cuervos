@@ -110,7 +110,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           }}
                           whileHover={{
                             backgroundColor: "black",
-                            color: "black",
+                            color: "white",
                           }}
                         >
                           Encuentra tu Nuevo vino favorito
