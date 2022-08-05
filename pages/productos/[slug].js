@@ -767,31 +767,35 @@ const SingleProduct = ({
                             }
                           </span>
                         </div>
-                        {/*   <div className="flex flex-row gap-2 items-center">
-                          {" "}
-                          <span
-                            style={{
-                              fontSize: "16px",
-                              fontFamily: options.fuente_global,
-                              textTransform: "uppercase",
-                              color: "#fff",
-                            }}
-                          >
-                            TIPO DE SUELO
-                          </span>
-                          <span
-                            style={{
-                              fontSize: "13px",
-                              fontFamily: options.fuente_global,
-                              color: "#fff",
-                            }}
-                          >
-                            {
-                              metadata.filter((m) => m.key === "suelo")[0]
-                                ?.value
-                            }
-                          </span>
-                        </div> */}
+                        {metadata.filter((m) => m.key === "suelo")[0]
+                          ?.value && (
+                          <div className="flex flex-row gap-2 items-center">
+                            {" "}
+                            <span
+                              style={{
+                                fontSize: "16px",
+                                fontFamily: options.fuente_global,
+                                textTransform: "uppercase",
+                                color: "#fff",
+                              }}
+                            >
+                              TIPO DE SUELO
+                            </span>
+                            <span
+                              style={{
+                                fontSize: "13px",
+                                fontFamily: options.fuente_global,
+                                color: "#fff",
+                              }}
+                            >
+                              {
+                                metadata.filter((m) => m.key === "suelo")[0]
+                                  ?.value
+                              }
+                            </span>
+                          </div>
+                        )}
+
                         <div className="flex flex-row gap-2 items-center">
                           {" "}
                           <span
