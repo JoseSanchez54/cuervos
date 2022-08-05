@@ -380,7 +380,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               />
             </div>
           </div>
-          <div className="flex flex-row fila">
+          {/* <div className="flex flex-row fila">
             <div className="flex flex-col w-full mx-2">
               <input
                 type="text"
@@ -401,7 +401,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               )}
             </div>
           </div>
-
+ */}
           <div className="flex flex-row taxes">
             <div className="flex flex-col w-full mx-2 scroll">
               {pais.valor && (
