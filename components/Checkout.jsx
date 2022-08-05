@@ -5,9 +5,10 @@ const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 const datosPaises = require("../utils/data.json");
 const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
+  const dispatch = useDispatch();
   const [cupon, setCupon] = useState(null);
   const getCupones = async (e) => {
     const fechaHoy = new Date();
@@ -419,7 +420,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                         <div className="flex flex-col items-end w-1/2">
                           <span className="subtotal">
                             {cupon?.tipo === "porcentaje"
-                              ? "-" + cupon.descuento + "%"
+                              ? "-" + cupon.descuento * 100 + "%"
                               : "-" + cupon.descuento + "€"}
                           </span>
                         </div>
@@ -443,6 +444,27 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 </div>
                 <div className="flex flex-col items-end w-1/2">
                   <span className="subtotal">
+                    {cupon && cupon?.tipo === "porcentaje" ? (
+                      <>
+                        {tax.tasa === ""
+                          ? parseFloat(formulario.total) * cupon?.descuento +
+                            "€"
+                          : parseFloat(formulario.total) * cupon?.descuento +
+                            parseFloat(precioEnvio.precio) +
+                            "€"}
+                      </>
+                    ) : (
+                      <>
+                        {cupon && tax.tasa === ""
+                          ? parseFloat(formulario.total) -
+                            parseFloat(cupon?.descuento) +
+                            "€"
+                          : parseFloat(formulario.total) -
+                            parseFloat(cupon?.descuento) +
+                            parseFloat(precioEnvio.precio) +
+                            "€"}
+                      </>
+                    )}
                     {tax.tasa === ""
                       ? parseFloat(formulario.total) + "€"
                       : parseFloat(formulario.total) +

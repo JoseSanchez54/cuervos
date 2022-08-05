@@ -767,7 +767,7 @@ const SingleProduct = ({
                             }
                           </span>
                         </div>
-                        <div className="flex flex-row gap-2 items-center">
+                        {/*   <div className="flex flex-row gap-2 items-center">
                           {" "}
                           <span
                             style={{
@@ -791,7 +791,7 @@ const SingleProduct = ({
                                 ?.value
                             }
                           </span>
-                        </div>
+                        </div> */}
                         <div className="flex flex-row gap-2 items-center">
                           {" "}
                           <span
