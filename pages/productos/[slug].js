@@ -148,6 +148,8 @@ const SingleProduct = ({
     return key;
   });
   const video = metadata?.filter((m) => m.key === "video")[0]?.value;
+  const colorFondo = metadata?.filter((m) => m.key === "color-de-fondo")[0]
+    ?.value;
 
   const imagenBanner = metadata.filter((m) => m.key === "imagen_vinero")[0]
     ?.value;
@@ -628,7 +630,9 @@ const SingleProduct = ({
                   style={{
                     background: isMobile
                       ? "transparent"
-                      : "linear-gradient(90deg, #000 50%, #fff 50%)",
+                      : "linear-gradient(90deg," +
+                        colorFondo +
+                        "50%, #fff 50%)",
                   }}
                   className="flex flex-row w-full mt-[80px] justify-center"
                 >
@@ -636,7 +640,7 @@ const SingleProduct = ({
                     <div className="flex flex-row gap-6 flex-wrap lg:flex-nowrap w-full justify-center">
                       <div
                         style={{
-                          background: isMobile ? "black" : "transparent",
+                          background: isMobile ? colorFondo : "transparent",
                         }}
                         className="flex flex-col gap-3 pt-9 p-7 w-full "
                       >
