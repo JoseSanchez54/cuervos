@@ -8,8 +8,10 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 const datosPaises = require("../utils/data.json");
 const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
+  console.log(opciones);
   const dispatch = useDispatch();
   const [cupon, setCupon] = useState(null);
+  const [listo, setListo] = useState(false);
   const [error, setError] = useState(null);
   const [errorCupon, setErrorCupon] = useState(null);
   const getCupones = async (e) => {
@@ -62,6 +64,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const handleEstado = () => {
     setEstadoP(!estadoP);
   };
+
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
@@ -106,6 +109,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   }
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
+  console.log(completo);
   const [formulario, setFormulario] = useState({
     nombre: "",
     apellido: "",
@@ -119,7 +123,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     cupon: "",
   });
   const handleFormulario = (e) => {
-    console.log(validarEmail(e.target.value));
     if (e.target.name === "email") {
       if (validarEmail(e.target.value)) {
         setFormulario({ ...formulario, [e.target.name]: e.target.value });
@@ -320,6 +323,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 name="nombre"
                 placeholder="Nombre"
                 onChange={(e) => handleFormulario(e)}
+                disabled={completo}
               />
             </div>
             <div className="flex flex-col w-full mx-2 md:w-1/2">
@@ -328,6 +332,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 name="apellido"
                 placeholder="Apellidos"
                 onChange={(e) => handleFormulario(e)}
+                disabled={completo}
               />
             </div>
           </div>
@@ -338,6 +343,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 name="email"
                 placeholder={usuario?.email ? usuario?.email : "Email"}
                 onChange={(e) => handleFormulario(e)}
+                disabled={completo}
               />
             </div>
             <div className="flex flex-col w-full mx-2 md:w-1/2">
@@ -346,6 +352,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 name="telefono"
                 placeholder="Teléfono"
                 onChange={(e) => handleFormulario(e)}
+                disabled={completo}
               />
             </div>
           </div>
@@ -356,6 +363,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 name="direccion"
                 placeholder="Dirección"
                 onChange={(e) => handleFormulario(e)}
+                disabled={completo}
               />
             </div>
           </div>
@@ -386,6 +394,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 name="ciudad"
                 placeholder="Ciudad"
                 onChange={(e) => handleFormulario(e)}
+                disabled={completo}
               />
             </div>
             <div className="flex flex-col w-full mx-2 md:w-1/2">
@@ -394,6 +403,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 name="cp"
                 placeholder="CP"
                 onChange={(e) => handleFormulario(e)}
+                disabled={completo}
               />
             </div>
           </div>
@@ -539,7 +549,25 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
 
           <div className="flex flex-row w-full justify-center mt-5">
             {completo && !tax.error ? (
-              <StripeCheckout formulario={data} envio={precioEnvio.precio} />
+              <>
+                <div className="flex items-center flex-col">
+                  {" "}
+                  <StripeCheckout
+                    formulario={data}
+                    envio={precioEnvio.precio}
+                  />
+                  <button
+                    style={{
+                      fontFamily: opciones?.fuente_global,
+                      textDecoration: "underline",
+                    }}
+                    className="mt-6"
+                    onClick={() => setCompleto(false)}
+                  >
+                    Volver a editar los datos
+                  </button>
+                </div>
+              </>
             ) : (
               <input
                 className="botonForm mt-9"

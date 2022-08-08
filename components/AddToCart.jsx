@@ -30,6 +30,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         variable: true,
         img: producto.images[0].src,
       };
+      console.log(productoAdd);
 
       dispatch({
         type: "@AddToCart",
