@@ -351,7 +351,17 @@ const SingleProduct = ({
                     </span>
                   </div>
                 </div>
+
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
+                <span
+                  style={{
+                    color: "black",
+                    fontFamily: options.fuente_global,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Selecciona cantidad
+                </span>
                 {variations.data.length > 0 && (
                   <>
                     <div className="flex lg:flex-row-reverse  gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center">
@@ -419,6 +429,7 @@ const SingleProduct = ({
                             marginTop: "10px",
                             display: "block",
                             fontWeight: "bold",
+                            textTransform: "uppercase",
                           }}
                         >
                           Recibe tu pedido en 48 a 72 hrs.
@@ -441,6 +452,7 @@ const SingleProduct = ({
                               marginTop: "10px",
                               display: "block",
                               fontWeight: "bold",
+                              textTransform: "uppercase",
                             }}
                           >
                             Envíos gratuitos desde 50€
