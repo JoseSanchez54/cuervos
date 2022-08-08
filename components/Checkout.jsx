@@ -413,6 +413,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 name="cupon"
                 placeholder="Cupon"
                 onChange={(e) => getCupones(e)}
+                disabled={completo}
               />
               {cupon === null && errorCupon !== null && (
                 <span
