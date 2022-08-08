@@ -48,7 +48,7 @@ const Nav = ({ opciones, categorias }) => {
                     }}
                     onClick={() => handleLogin()}
                   >
-                    Conectarse
+                    Mi cuenta
                   </button>
                 ) : (
                   <button onClick={() => handleLogin()}>
