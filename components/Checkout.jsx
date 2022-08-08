@@ -479,7 +479,10 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                     </div>
                     <div className="flex flex-col items-end w-1/2">
                       <span className="subtotal">
-                        +{total > 50 ? 0 : precioEnvio?.precio}€
+                        +
+                        {total > 50
+                          ? "0€ (Envio gratuito)"
+                          : precioEnvio?.precio + "€"}
                       </span>
                     </div>
                   </div>
