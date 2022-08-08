@@ -222,7 +222,6 @@ const LoginForm = ({ opciones, login, set }) => {
                         <Input
                           {...bindings}
                           clearable
-                          bordered
                           labelPlaceholder="Email"
                           initialValue="Email"
                           name="email"
@@ -261,7 +260,6 @@ const LoginForm = ({ opciones, login, set }) => {
                       >
                         <Input
                           clearable
-                          bordered
                           labelPlaceholder="Introduce tu nueva contraseña"
                           initialValue="password"
                           onChange={(e) => handleForm(e)}
@@ -298,7 +296,6 @@ const LoginForm = ({ opciones, login, set }) => {
                       >
                         <Input
                           clearable
-                          bordered
                           labelPlaceholder="Codigo"
                           initialValue="Codigo"
                           onChange={(e) => handleForm(e)}
@@ -367,7 +364,6 @@ const LoginForm = ({ opciones, login, set }) => {
                         <Input
                           {...bindings}
                           clearable
-                          bordered
                           labelPlaceholder="Email"
                           initialValue="Email"
                           name="email"
@@ -449,7 +445,6 @@ const LoginForm = ({ opciones, login, set }) => {
                             <Input
                               {...bindings}
                               clearable
-                              bordered
                               labelPlaceholder="Email"
                               initialValue="Email"
                               name="email"
@@ -488,7 +483,6 @@ const LoginForm = ({ opciones, login, set }) => {
                           >
                             <Input
                               clearable
-                              bordered
                               labelPlaceholder="Contraseña"
                               initialValue="password"
                               onChange={(e) => handleForm(e)}
@@ -567,7 +561,6 @@ const LoginForm = ({ opciones, login, set }) => {
                             <Input
                               {...bindings}
                               clearable
-                              bordered
                               labelPlaceholder="Email"
                               initialValue="Email"
                               name="email"
@@ -606,7 +599,6 @@ const LoginForm = ({ opciones, login, set }) => {
                           >
                             <Input
                               clearable
-                              bordered
                               labelPlaceholder="Contraseña"
                               initialValue="password"
                               onChange={(e) => handleForm(e)}

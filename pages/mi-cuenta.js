@@ -71,17 +71,6 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
         <div className="flex flex-col justify-center w-full h-full">
           <div className="relative w-full justify-center flex h-full">
             <div className="flex p-5 flex-col justify-center max-w-[1600px] items-start w-full h-full">
-              <div className="flex flex-row w-full">
-                <button
-                  style={{
-                    backgroundColor: "black",
-                    fontFamily: optionsSWR?.fuenta_global,
-                    color: "white",
-                  }}
-                >
-                  Desconectarse
-                </button>
-              </div>
               <span className="z-[10] uppercase text-start tituloPrimera ">
                 Bienvenido,
                 <br />{" "}
@@ -100,6 +89,17 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
       </div>
       <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
         <div className="flex flex-col w-full max-w-[1600px]  items-center">
+          <div className="flex flex-row w-full my-5">
+            <button
+              style={{
+                backgroundColor: "black",
+                fontFamily: optionsSWR?.fuenta_global,
+                color: "white",
+              }}
+            >
+              Desconectarse
+            </button>
+          </div>
           <span className="titulo my-6">Pedidos</span>
           <div className="grid w-full lg:grid-cols-6 grid-cols-4 gap-4 ">
             <div className="lg:block hidden text-center">

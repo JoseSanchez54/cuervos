@@ -90,7 +90,6 @@ const FormularioContacto = ({ options }) => {
               <div className="flex flex-col gap-8 lg:gap-9 justify-between max-h-[123px] w-full  h-full ">
                 <Input
                   clearable
-                  bordered
                   labelPlaceholder="Nombre"
                   initialValue="Nombre"
                   onChange={(e) => handleForm(e)}
@@ -111,7 +110,6 @@ const FormularioContacto = ({ options }) => {
                 />
                 <Input
                   clearable
-                  bordered
                   labelPlaceholder="Email"
                   onChange={(e) => handleForm(e)}
                   name="email"
@@ -131,7 +129,6 @@ const FormularioContacto = ({ options }) => {
                   }}
                 />
                 <Textarea
-                  bordered
                   className="w-full"
                   color="grey"
                   labelPlaceholder="Escribe tu mensaje"
