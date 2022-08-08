@@ -1,13 +1,13 @@
 import dynamic from "next/dynamic";
 const Image = dynamic(() => import("next/image"));
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 const Precio = dynamic(() => import("../components/Precio"));
 import { useDispatch } from "react-redux";
 import { useVariations } from "../hooks/useVariations";
 
-const SingleGrid = ({ producto, opciones, key }) => {
+const SingleGrid = ({ producto, opciones }) => {
   const { variacion, isValidating } = useVariations(producto?.id);
 
   const [cambioImagen, setCambioImagen] = useState(false);
@@ -90,15 +90,26 @@ const SingleGrid = ({ producto, opciones, key }) => {
                       </span>
                     </a>
                   </Link>
-
-                  <Precio
-                    precio={producto?.regular_price}
-                    rebaja={producto?.sale_price}
-                    hover={cambioImagen}
-                    opciones={opciones}
-                    variable={producto?.type === "variable"}
-                    variaciones={variacion}
-                  />
+                  {producto?.categories[0]?.slug === "destacados" ? (
+                    <Precio
+                      precio={producto?.regular_price}
+                      rebaja={producto?.sale_price}
+                      hover={cambioImagen}
+                      opciones={opciones}
+                      variable={producto?.type === "variable"}
+                      variaciones={variacion}
+                      cat="destacados"
+                    />
+                  ) : (
+                    <Precio
+                      precio={producto?.regular_price}
+                      rebaja={producto?.sale_price}
+                      hover={cambioImagen}
+                      opciones={opciones}
+                      variable={producto?.type === "variable"}
+                      variaciones={variacion}
+                    />
+                  )}
 
                   <Link
                     variants={texto}

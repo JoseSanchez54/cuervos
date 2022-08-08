@@ -7,11 +7,8 @@ import Nav from "../../components/Nav";
 import useMobile from "../../hooks/useMobile";
 import AddToCart from "../../components/AddToCart";
 import { DefaultSeo } from "next-seo";
-import { motion } from "framer-motion";
-import Link from "next/link";
 import Grid from "../../components/Grid";
 import Footer from "../../components/Footer";
-import { useProduct } from "../../hooks/useProduct";
 import Edad from "../../components/Edad";
 import useSWR from "swr";
 export const getStaticPaths = async () => {
@@ -323,7 +320,7 @@ const SingleProduct = ({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col pt-5 x  w-full lg:w-2/5">
+            <div className="flex flex-col pt-5 x   w-full lg:w-2/5">
               <div className="w-full flex flex-col self-start top-[90px]">
                 <div className="flex flex-row w-full">
                   <div className="flex p-5 flex-col">
@@ -356,7 +353,7 @@ const SingleProduct = ({
 
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
                 <span
-                  className="mb-7"
+                  className="mb-7 px-5 lg:px-0"
                   style={{
                     color: "black",
                     fontFamily: options.fuente_titulos,
