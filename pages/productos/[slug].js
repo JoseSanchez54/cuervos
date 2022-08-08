@@ -366,7 +366,13 @@ const SingleProduct = ({
                 </span>
                 {variations.data.length > 0 && (
                   <>
-                    <div className="flex lg:flex-row-reverse  gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center">
+                    <div
+                      className={
+                        variations.data.length > 3
+                          ? "flex lg:flex-row-reverse  gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center"
+                          : "flex lg:flex-row-reverse flex-row  gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center"
+                      }
+                    >
                       {variations.data.map((e, index) => {
                         return (
                           <div key={index} className="flex flex-col w-auto">
