@@ -96,7 +96,13 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     (e) =>
       parseFloat(e.peso_maximo) >= peso && parseFloat(e.peso_minimo) <= peso
   );
-
+  function validarEmail(valor) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(valor)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
   const [formulario, setFormulario] = useState({
@@ -112,17 +118,25 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     cupon: "",
   });
   const handleFormulario = (e) => {
-    if (e.target.value === "") {
-      e.target.classList.add("error");
-      setFormulario({
-        ...formulario,
-        [e.target.name]: e.target.value,
-      });
+    if (e.target.name === "email") {
+      if (validarEmail(e.target.value)) {
+        setFormulario({ ...formulario, [e.target.name]: e.target.value });
+      } else {
+        e.target.classList.add("error");
+      }
     } else {
-      setFormulario({
-        ...formulario,
-        [e.target.name]: e.target.value,
-      });
+      if (e.target.value === "") {
+        e.target.classList.add("error");
+        setFormulario({
+          ...formulario,
+          [e.target.name]: e.target.value,
+        });
+      } else {
+        setFormulario({
+          ...formulario,
+          [e.target.name]: e.target.value,
+        });
+      }
     }
   };
 
