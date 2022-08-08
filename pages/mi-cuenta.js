@@ -10,9 +10,15 @@ import useSWR from "swr";
 import Footer from "../components/Footer";
 import SyncLoader from "react-spinners/SyncLoader";
 import { usePages } from "../hooks/usePages";
+import { useDispatch } from "react-redux";
 
 export default function MiCuenta({ options, pedidos, categorias, pagina }) {
   const { data } = usePages(pagina, "area");
+  const dispatch = useDispatch();
+  const handleConnect = async () => {
+    await dispatch({ type: "@Remove" });
+    window.location.href = "/";
+  };
   const { isLoading, options: optionsSWR } = useOptions(options);
   const pedidos1 = useSWR("orders", fetcherWc);
   const customers = useSWR("customers", fetcherWc);
@@ -89,14 +95,17 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
       </div>
       <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
         <div className="flex flex-col w-full max-w-[1600px]  items-center">
-          <div className="flex flex-row w-full my-5">
+          <div className="flex flex-row justify-end w-full my-5">
             <button
+              onClick={() => handleConnect()}
               style={{
                 backgroundColor: "black",
                 fontFamily: optionsSWR?.fuenta_global,
                 color: "white",
+                padding: "20px 30px",
               }}
             >
+              {" "}
               Desconectarse
             </button>
           </div>
