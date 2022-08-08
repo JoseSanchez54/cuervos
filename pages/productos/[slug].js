@@ -325,15 +325,15 @@ const SingleProduct = ({
               <div className="w-full flex flex-col self-start top-[90px]">
                 <div className="flex flex-row w-full">
                   <div className="flex p-5 flex-col">
-                    <span className="etiqueta">
+                    <span className="etiqueta">{product?.name}</span>
+                    <span className="titulo my-6">
                       {metadata.map((e, index) => {
                         if (e.key === "etiqueta") {
                           return e.value;
                         }
                       })}
                     </span>
-                    <span className="titulo my-6">{product?.name}</span>
-                    <span className="inyectado mb-6">
+                    <span className="inyectado uppercase mb-6">
                       {removeTags(product?.short_description)}
                     </span>
                     <span
