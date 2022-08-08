@@ -356,8 +356,10 @@ const SingleProduct = ({
                 <span
                   style={{
                     color: "black",
-                    fontFamily: options.fuente_global,
+                    fontFamily: options.fuente_titulos,
                     textTransform: "uppercase",
+
+                    fontSize: "18px",
                   }}
                 >
                   Selecciona cantidad
