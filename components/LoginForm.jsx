@@ -190,7 +190,7 @@ const LoginForm = ({ opciones, login, set }) => {
               size="30px"
               className="absolute cursor-pointer top-9 right-9"
             />
-            <div className="flex flex-col max-w-[1000px] items-center justify-center w-full">
+            <div className="flex flex-col max-w-[1200px] items-center justify-center w-full">
               <Image
                 src={opciones.logo_principal}
                 height="200px"
@@ -217,7 +217,7 @@ const LoginForm = ({ opciones, login, set }) => {
                         initial={{
                           opacity: 0,
                         }}
-                        className="mt-5"
+                        className="mt-5 text-center w-full"
                       >
                         <Input
                           {...bindings}
@@ -337,7 +337,7 @@ const LoginForm = ({ opciones, login, set }) => {
                       </button>
 
                       <button
-                        className="mt-5"
+                        className="mt-5 text-center w-full"
                         style={{
                           fontFamily: opciones?.fuente_global,
                           fontSize: "18px",
@@ -365,7 +365,7 @@ const LoginForm = ({ opciones, login, set }) => {
                         initial={{
                           opacity: 0,
                         }}
-                        className="mt-5"
+                        className="mt-5 text-center w-full"
                       >
                         <Input
                           {...bindings}
@@ -413,7 +413,7 @@ const LoginForm = ({ opciones, login, set }) => {
                           fontFamily: opciones?.fuente_global,
                           fontSize: "18px",
                         }}
-                        className="mt-5"
+                        className="mt-5 text-center w-full"
                         onClick={() => handleCode()}
                       >
                         He recibido el codigo de verificacion
@@ -423,7 +423,7 @@ const LoginForm = ({ opciones, login, set }) => {
                           fontFamily: opciones?.fuente_global,
                           fontSize: "18px",
                         }}
-                        className="mt-5"
+                        className="mt-5 text-center w-full"
                         onClick={() => {
                           setOlvidar(false);
                           setCode(false);
@@ -533,7 +533,7 @@ const LoginForm = ({ opciones, login, set }) => {
                               fontFamily: opciones?.fuente_global,
                               fontSize: "18px",
                             }}
-                            className="mt-5"
+                            className="mt-5 text-center w-full"
                             onClick={() => handleOlvidar()}
                           >
                             He olvidado mi contraseña
@@ -543,7 +543,7 @@ const LoginForm = ({ opciones, login, set }) => {
                               fontFamily: opciones?.fuente_global,
                               fontSize: "18px",
                             }}
-                            className="mt-5"
+                            className="mt-5 text-center w-full"
                             onClick={() => {
                               setOlvidar(false);
                               setCode(false);
@@ -568,7 +568,7 @@ const LoginForm = ({ opciones, login, set }) => {
                             initial={{
                               opacity: 0,
                             }}
-                            className="mt-5"
+                            className="mt-5 text-center w-full"
                           >
                             <Input
                               {...bindings}
@@ -653,7 +653,7 @@ const LoginForm = ({ opciones, login, set }) => {
                               fontFamily: opciones?.fuente_global,
                               fontSize: "18px",
                             }}
-                            className="mt-5"
+                            className="mt-5 text-center w-full"
                             onClick={() => handleOlvidar()}
                           >
                             He olvidado mi contraseña
@@ -663,7 +663,7 @@ const LoginForm = ({ opciones, login, set }) => {
                               fontFamily: opciones?.fuente_global,
                               fontSize: "18px",
                             }}
-                            className="mt-5"
+                            className="mt-5 text-center w-full"
                             onClick={() => handleRegistro()}
                           >
                             ¿Aún no tienes cuenta? ¡Regístrate ya!
