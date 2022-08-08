@@ -146,7 +146,7 @@ const NuestraVision = ({ opciones, pagina, categorias }) => {
           font-size: 38px;
         }
         .parrafoPrimera {
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones.fuente_global};
           font-size: 16px;
         }
         .alto {
