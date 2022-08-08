@@ -415,7 +415,7 @@ const SingleProduct = ({
                           style={{
                             fontSize: "14px",
                             textAlign: "center",
-                            fontFamily: options.fuente_titulos,
+                            fontFamily: options.fuente_global,
                             marginTop: "10px",
                             display: "block",
                             fontWeight: "bold",
@@ -437,7 +437,7 @@ const SingleProduct = ({
                             style={{
                               fontSize: "14px",
                               textAlign: "center",
-                              fontFamily: options.fuente_titulos,
+                              fontFamily: options.fuente_global,
                               marginTop: "10px",
                               display: "block",
                               fontWeight: "bold",
