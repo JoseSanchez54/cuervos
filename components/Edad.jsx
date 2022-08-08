@@ -31,7 +31,7 @@ const Edad = ({ options }) => {
                   <span className="titulo">¿Eres mayor de edad?</span>
                   <div className="flex flex-row mt-9 gap-5 justify-center w-full">
                     <button onClick={() => handleActivo()} className="boton">
-                      Si
+                      Sí
                     </button>
                     <a href="https://google.com">
                       <button className="boton">No</button>

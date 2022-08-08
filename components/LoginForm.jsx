@@ -650,7 +650,7 @@ const LoginForm = ({ opciones, login, set }) => {
                             className="mt-5"
                             onClick={() => handleRegistro()}
                           >
-                            ¿Aun no tienes cuenta? ¡Registrate ya!
+                            ¿Aún no tienes cuenta? ¡Regístrate ya!
                           </button>
                         </>
                       )}
