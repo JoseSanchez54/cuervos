@@ -126,29 +126,28 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                           {pagina.segunda_segundo_titulo}
                         </span>
                         <p>{pagina.segunda_segundo_parrafo}</p>
-                        {isMobile && (
-                          <Link href={pagina.segundo_enlace}>
-                            <motion.button
-                              initial={{
-                                border: "2px solid white",
-                                color: "white",
-                                backgroundColor: "transparent",
-                                zIndex: "10",
-                                padding: "20px 20px",
-                                marginTop: "25px",
-                                fontSize: "14px",
-                                fontFamily: opciones.fuente_titulos,
-                                textTransform: "uppercase",
-                              }}
-                              whileHover={{
-                                backgroundColor: "white",
-                                color: "black",
-                              }}
-                            >
-                              Compra tu pack de vinos
-                            </motion.button>
-                          </Link>
-                        )}
+
+                        <Link href={pagina.segundo_enlace}>
+                          <motion.button
+                            initial={{
+                              border: "2px solid white",
+                              color: "white",
+                              backgroundColor: "transparent",
+                              zIndex: "10",
+                              padding: "20px 20px",
+                              marginTop: "25px",
+                              fontSize: "14px",
+                              fontFamily: opciones.fuente_titulos,
+                              textTransform: "uppercase",
+                            }}
+                            whileHover={{
+                              backgroundColor: "white",
+                              color: "black",
+                            }}
+                          >
+                            Compra tu pack de vinos
+                          </motion.button>
+                        </Link>
                       </div>
                       {pagina.segunda_segunda_imagen_fondo && (
                         <Image
