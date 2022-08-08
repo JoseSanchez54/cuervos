@@ -58,6 +58,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       }
     }
   };
+  console.log(cupon);
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
   const [estadoP, setEstadoP] = useState(onAction);
   const handleEstado = () => {
@@ -405,7 +406,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               />
             </div>
           </div>
-          {/* <div className="flex flex-row fila">
+          <div className="flex flex-row fila">
             <div className="flex flex-col w-full mx-2">
               <input
                 type="text"
@@ -426,7 +427,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               )}
             </div>
           </div>
- */}
+
           <div className="flex flex-row taxes">
             <div className="flex flex-col w-full mx-2 scroll">
               {pais.valor && (
@@ -558,6 +559,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                   <StripeCheckout
                     formulario={data}
                     envio={total > 50 ? "0" : precioEnvio.precio}
+                    cupon={cupon}
                   />
                   <button
                     style={{

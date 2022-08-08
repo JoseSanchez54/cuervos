@@ -1,7 +1,8 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import WooCommerce from "../../woocommerce/Woocommerce";
 export default async function handler(req, res) {
-  const { items, formulario, envio } = req.body;
+  const { items, formulario, envio, cupon } = req.body;
+
   const itemsWc = [];
   items.map((i) => {
     if (i.variable === false) {
@@ -46,6 +47,21 @@ export default async function handler(req, res) {
     },
     quantity: 1,
   });
+  let cup = {};
+  if (cupon) {
+    if (cupon?.discount_type === "percent") {
+      await stripe.coupons
+        .create({
+          percent_off: cupon?.amount,
+          duration: "once",
+        })
+        .then((res) => (cup = res));
+    } else if (cupon?.discount_type === "amount") {
+      await stripe.coupons
+        .create({ amount_off: cupon?.amount, duration: "once" })
+        .then((res) => (cup = res));
+    }
+  }
 
   if (req.method === "POST") {
     const wcForm = {
@@ -119,6 +135,11 @@ export default async function handler(req, res) {
         mode: "payment",
         success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
+        discounts: [
+          {
+            coupon: cup?.id,
+          },
+        ],
       })
       .then((session) => {
         return session;
