@@ -10,6 +10,7 @@ const datosPaises = require("../utils/data.json");
 const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const dispatch = useDispatch();
   const [cupon, setCupon] = useState(null);
+  const [error, setError] = useState(null);
   const [errorCupon, setErrorCupon] = useState(null);
   const getCupones = async (e) => {
     const fechaHoy = new Date();
@@ -96,12 +97,12 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     (e) =>
       parseFloat(e.peso_maximo) >= peso && parseFloat(e.peso_minimo) <= peso
   );
-  function validarEmail(valor) {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(valor)) {
-      return true;
-    } else {
-      return false;
-    }
+  function validarEmail(email) {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
   }
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
@@ -118,6 +119,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     cupon: "",
   });
   const handleFormulario = (e) => {
+    console.log(validarEmail(e.target.value));
     if (e.target.name === "email") {
       if (validarEmail(e.target.value)) {
         setFormulario({ ...formulario, [e.target.name]: e.target.value });
@@ -216,6 +218,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       formulario.nombre !== "" &&
       formulario.apellido !== "" &&
       formulario.email !== "" &&
+      validarEmail(formulario.email) &&
       formulario.telefono !== "" &&
       formulario.direccion !== "" &&
       formulario.ciudad !== "" &&
@@ -225,6 +228,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       setCompleto(true);
     } else {
       setCompleto(false);
+      setError("Por favor compruebe todos los campos");
       e.target.setAttribute("action", "");
     }
   };
@@ -332,7 +336,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="email"
                 name="email"
-                value={usuario?.email ? formulario?.email : "Email"}
                 placeholder={usuario?.email ? usuario?.email : "Email"}
                 onChange={(e) => handleFormulario(e)}
               />
@@ -517,6 +520,20 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                   </span>
                 </div>
               </div>
+              {error && (
+                <>
+                  {" "}
+                  <span
+                    style={{
+                      fontFamily: opciones?.fuente_global,
+                      color: "red",
+                    }}
+                    className="error"
+                  >
+                    {error}
+                  </span>
+                </>
+              )}
             </div>
           </div>
 
