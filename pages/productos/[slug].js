@@ -204,7 +204,7 @@ const SingleProduct = ({
     setSeleccion(resultado);
   };
   const { isMobile } = useMobile();
-  console.log(variations.data.length);
+
   return (
     <>
       <DefaultSeo
@@ -353,20 +353,21 @@ const SingleProduct = ({
                 </div>
 
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
-                <span
-                  className="mb-7 px-5 lg:px-0"
-                  style={{
-                    color: "black",
-                    fontFamily: options.fuente_titulos,
-                    textTransform: "uppercase",
 
-                    fontSize: "18px",
-                  }}
-                >
-                  Selecciona cantidad
-                </span>
                 {variations.data.length > 0 && (
                   <>
+                     <span
+                          className="mb-7 px-5 lg:px-0"
+                          style={{
+                            color: "black",
+                            fontFamily: options.fuente_titulos,
+                            textTransform: "uppercase",
+
+                            fontSize: "18px",
+                          }}
+                        >
+                          Selecciona cantidad
+                        </span>
                     <div
                       className={
                         variations.data.length > 3
