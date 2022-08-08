@@ -235,14 +235,14 @@ const LoginForm = ({ opciones, login, set }) => {
                             backgroundColor: "white",
                             borderColor: "#7e8085",
                             fontFamily: opciones.fuente_global,
-                            borderRadius: "0px",
+                            borderRadius: "0",
                             label: {
                               color: "#7e8085",
                               zIndex: "1",
                             },
                             input: {
                               borderColor: "#7e8085",
-                              borderRadius: "0px",
+                              borderRadius: "0",
                             },
                           }}
                         />
@@ -273,14 +273,14 @@ const LoginForm = ({ opciones, login, set }) => {
                             backgroundColor: "white",
                             borderColor: "#7e8085",
                             fontFamily: opciones.fuente_global,
-                            borderRadius: "0px",
+                            borderRadius: "0",
                             label: {
                               color: "#7e8085",
                               zIndex: "1",
                             },
                             input: {
                               borderColor: "#7e8085",
-                              borderRadius: "0px",
+                              borderRadius: "0",
                             },
                           }}
                         />
@@ -311,14 +311,14 @@ const LoginForm = ({ opciones, login, set }) => {
                             backgroundColor: "white",
                             borderColor: "#7e8085",
                             fontFamily: opciones.fuente_global,
-                            borderRadius: "0px",
+                            borderRadius: "0",
                             label: {
                               color: "#7e8085",
                               zIndex: "1",
                             },
                             input: {
                               borderColor: "#7e8085",
-                              borderRadius: "0px",
+                              borderRadius: "0",
                             },
                           }}
                         />
@@ -383,14 +383,14 @@ const LoginForm = ({ opciones, login, set }) => {
                             backgroundColor: "white",
                             borderColor: "#7e8085",
                             fontFamily: opciones.fuente_global,
-                            borderRadius: "0px",
+                            borderRadius: "0",
                             label: {
                               color: "#7e8085",
                               zIndex: "1",
                             },
                             input: {
                               borderColor: "#7e8085",
-                              borderRadius: "0px",
+                              borderRadius: "0",
                             },
                           }}
                         />
@@ -466,14 +466,17 @@ const LoginForm = ({ opciones, login, set }) => {
                                 backgroundColor: "white",
                                 borderColor: "#7e8085",
                                 fontFamily: opciones.fuente_global,
-                                borderRadius: "0px",
+                                borderRadius: "0",
                                 label: {
                                   color: "#7e8085",
                                   zIndex: "1",
                                 },
                                 input: {
                                   borderColor: "#7e8085",
-                                  borderRadius: "0px",
+                                  borderRadius: "0",
+                                },
+                                div: {
+                                  borderRadius: "0",
                                 },
                               }}
                             />
@@ -504,14 +507,17 @@ const LoginForm = ({ opciones, login, set }) => {
                                 backgroundColor: "white",
                                 borderColor: "#7e8085",
                                 fontFamily: opciones.fuente_global,
-                                borderRadius: "0px",
+                                borderRadius: "0",
                                 label: {
                                   color: "#7e8085",
                                   zIndex: "1",
                                 },
                                 input: {
                                   borderColor: "#7e8085",
-                                  borderRadius: "0px",
+                                  borderRadius: "0",
+                                },
+                                div: {
+                                  borderRadius: "0",
                                 },
                               }}
                             />
@@ -586,14 +592,18 @@ const LoginForm = ({ opciones, login, set }) => {
                                 backgroundColor: "white",
                                 borderColor: "#7e8085",
                                 fontFamily: opciones.fuente_global,
-                                borderRadius: "0px",
+                                borderRadius: "0",
                                 label: {
                                   color: "#7e8085",
                                   zIndex: "1",
+                                  borderRadius: "0",
                                 },
                                 input: {
                                   borderColor: "#7e8085",
-                                  borderRadius: "0px",
+                                  borderRadius: "0",
+                                },
+                                div: {
+                                  borderRadius: "0",
                                 },
                               }}
                             />
@@ -624,14 +634,17 @@ const LoginForm = ({ opciones, login, set }) => {
                                 backgroundColor: "white",
                                 borderColor: "#7e8085",
                                 fontFamily: opciones.fuente_global,
-                                borderRadius: "0px",
+                                borderRadius: "0",
                                 label: {
                                   color: "#7e8085",
                                   zIndex: "1",
                                 },
                                 input: {
                                   borderColor: "#7e8085",
-                                  borderRadius: "0px",
+                                  borderRadius: "0",
+                                },
+                                div: {
+                                  borderRadius: "0",
                                 },
                               }}
                             />
