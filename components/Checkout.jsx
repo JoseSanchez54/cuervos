@@ -557,7 +557,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                   {" "}
                   <StripeCheckout
                     formulario={data}
-                    envio={precioEnvio.precio}
+                    envio={total > 50 ? "0" : precioEnvio.precio}
                   />
                   <button
                     style={{
