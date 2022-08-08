@@ -354,6 +354,7 @@ const SingleProduct = ({
 
                 <div className="divider flex flex-row w-full my-[30px] px-5"></div>
                 <span
+                  className="mb-7"
                   style={{
                     color: "black",
                     fontFamily: options.fuente_titulos,
