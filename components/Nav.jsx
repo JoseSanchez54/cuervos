@@ -8,7 +8,7 @@ import { BiUser } from "react-icons/bi";
 import MiniCart from "../components/MiniCart";
 import LoginForm from "./LoginForm";
 import { useState } from "react";
-import { useUser } from "../hooks/useUser";
+import { Dropdown } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 
 const Nav = ({ opciones, categorias }) => {

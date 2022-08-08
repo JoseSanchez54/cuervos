@@ -71,6 +71,17 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
         <div className="flex flex-col justify-center w-full h-full">
           <div className="relative w-full justify-center flex h-full">
             <div className="flex p-5 flex-col justify-center max-w-[1600px] items-start w-full h-full">
+              <div className="flex flex-row w-full">
+                <button
+                  style={{
+                    backgroundColor: "black",
+                    fontFamily: optionsSWR?.fuenta_global,
+                    color: "white",
+                  }}
+                >
+                  Desconectarse
+                </button>
+              </div>
               <span className="z-[10] uppercase text-start tituloPrimera ">
                 Bienvenido,
                 <br />{" "}

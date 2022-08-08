@@ -96,30 +96,6 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                         {pagina.segunda_primer_parrafo}
                       </p>
                     )}
-
-                    {isMobile && (
-                      <Link href={pagina.primer_enlace}>
-                        <motion.button
-                          initial={{
-                            border: "2px solid black",
-                            color: "black",
-                            backgroundColor: "transparent",
-                            zIndex: "10",
-                            padding: "20px 20px",
-                            marginTop: "25px",
-                            fontSize: "14px",
-                            fontFamily: opciones.fuente_titulos,
-                            textTransform: "uppercase",
-                          }}
-                          whileHover={{
-                            backgroundColor: "black",
-                            color: "white",
-                          }}
-                        >
-                          Encuentra tu Nuevo vino favorito
-                        </motion.button>
-                      </Link>
-                    )}
                   </div>
                   {pagina.segunda_primera_imagen_fondo && (
                     <Image
