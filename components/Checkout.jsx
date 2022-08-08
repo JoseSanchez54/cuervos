@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 const datosPaises = require("../utils/data.json");
 const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
-  console.log(opciones);
   const dispatch = useDispatch();
   const [cupon, setCupon] = useState(null);
   const [listo, setListo] = useState(false);
@@ -109,7 +108,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   }
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
-  console.log(completo);
   const [formulario, setFormulario] = useState({
     nombre: "",
     apellido: "",
