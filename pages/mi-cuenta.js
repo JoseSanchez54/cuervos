@@ -241,9 +241,9 @@ export default function MiCuenta({
                         className={
                           (order?.status === "processing" &&
                             "dato processing") ||
-                          (order?.status === "completed" && "dato completed") ||
+                          (order?.status === "procesing" && "dato completed") ||
                           (order?.status === "cancelled" && "dato cancelled") ||
-                          (order?.status === "pending" && "dato pending")
+                          (order?.status === "on-hold" && "dato pending")
                         }
                       >
                         {order?.status}
