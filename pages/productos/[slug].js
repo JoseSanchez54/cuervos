@@ -635,16 +635,7 @@ const SingleProduct = ({
                 </div>
               </div>
               {metadata.filter((m) => m.key === "variedad")[0]?.value && (
-                <div
-                  style={{
-                    background: isMobile
-                      ? "transparent"
-                      : "linear-gradient(90deg," +
-                        colorFondo +
-                        "50%, #fff 50%)",
-                  }}
-                  className="flex flex-row w-full mt-[80px] justify-center"
-                >
+                <div className="flex flex-row w-full fondo mt-[80px] justify-center">
                   <div className="flex flex-col w-full max-w-[1202px]">
                     <div className="flex flex-row gap-6 flex-wrap lg:flex-nowrap w-full justify-center">
                       <div
@@ -872,7 +863,7 @@ const SingleProduct = ({
                           )}
                         </div>
                       </div>
-                      <div className="flex flex-col justify-center pt-9 p-7  w-full">
+                      <div className="flex bg-white flex-col justify-center pt-9 p-7  w-full">
                         <span
                           style={{
                             fontSize: "27px",
@@ -937,6 +928,13 @@ const SingleProduct = ({
           font-family: ${options.fuente_titulos};
           font-size: 36px;
           text-transform: uppercase;
+        }
+        .fondo {
+          background: linear-gradient(
+            90deg,
+            ${colorFondo} 50%,
+            transparent 50%
+          );
         }
         .inyectado {
           font-family: ${options.fuente_global};
