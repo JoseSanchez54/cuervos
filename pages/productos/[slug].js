@@ -66,7 +66,10 @@ export async function getStaticProps(context) {
   });
 
   const variaciones = await WooCommerce.get(
-    "products/" + products[0]?.id + "/variations" + "?per_page=50"
+    "products/" +
+      products[0]?.id +
+      "/variations" +
+      "?per_page=50&orderby=id&order=asc"
   ).then((response) => {
     return response.data;
   });
@@ -104,13 +107,14 @@ const SingleProduct = ({
     refreshInterval: 10000,
   });
   const variations = useSWR(
-    "products/" + products[0]?.id + "variations",
+    "products/" + products[0]?.id + "variations?orderby=id&order=asc",
     fetcherWc,
     {
       fallbackData: variaciones,
       refreshInterval: 100,
     }
   );
+  console.log(variations.data);
 
   const pedidos1 = useSWR("products/" + products[0]?.id, fetcherWc, {
     refreshInterval: 10000,
@@ -356,22 +360,22 @@ const SingleProduct = ({
 
                 {variations.data.length > 0 && (
                   <>
-                     <span
-                          className="mb-7 px-5 lg:px-0"
-                          style={{
-                            color: "black",
-                            fontFamily: options.fuente_titulos,
-                            textTransform: "uppercase",
+                    <span
+                      className="mb-7 px-5 lg:px-0"
+                      style={{
+                        color: "black",
+                        fontFamily: options.fuente_titulos,
+                        textTransform: "uppercase",
 
-                            fontSize: "18px",
-                          }}
-                        >
-                          Selecciona cantidad
-                        </span>
+                        fontSize: "18px",
+                      }}
+                    >
+                      Selecciona cantidad
+                    </span>
                     <div
                       className={
                         variations.data.length > 3
-                          ? "flex lg:flex-row-reverse  gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center"
+                          ? "flex lg:flex-row  gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center"
                           : "flex lg:flex-row-reverse flex-row-reverse gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center"
                       }
                     >
