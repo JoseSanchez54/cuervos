@@ -21,20 +21,49 @@ export default async function handler(req, res) {
 
   const lineItems = [];
   await items.map((i) => {
-    lineItems.push({
-      price_data: {
-        currency: "EUR",
-        unit_amount_decimal:
-          i.sale_price !== "" ? i.sale_price * 100 : i.regular_price * 100,
-        product_data: {
-          name: i.nombrePadre,
-          images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
-        },
-      },
-      quantity: 1,
+    const metadata = Object?.values(i?.meta_data).map((key) => {
+      return key;
     });
+    const periodico = metadata?.filter(
+      (m) => m.key === "_subscription_period"
+    )[0]?.value;
+    const intervalo = metadata?.filter(
+      (m) => m.key === "_subscription_period_interval"
+    )[0]?.value;
+    console.log(periodico);
+    if (i.type === "subscription") {
+      lineItems.push({
+        price_data: {
+          currency: "EUR",
+          recurring: {
+            interval: periodico,
+            interval_count: intervalo,
+          },
+          unit_amount_decimal:
+            i.sale_price !== "" ? i.sale_price * 100 : i.regular_price * 100,
+          product_data: {
+            name: i.nombrePadre,
+            images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
+          },
+        },
+        quantity: 1,
+      });
+    } else {
+      lineItems.push({
+        price_data: {
+          currency: "EUR",
+          unit_amount_decimal:
+            i.sale_price !== "" ? i.sale_price * 100 : i.regular_price * 100,
+          product_data: {
+            name: i.nombrePadre,
+            images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
+          },
+        },
+        quantity: 1,
+      });
+    }
   });
-  await lineItems.push({
+  lineItems.push({
     price_data: {
       currency: "EUR",
       unit_amount_decimal: envio * 100,
@@ -47,6 +76,7 @@ export default async function handler(req, res) {
     },
     quantity: 1,
   });
+
   let cup = {};
   if (cupon) {
     if (cupon?.discount_type === "percent") {
@@ -129,10 +159,31 @@ export default async function handler(req, res) {
       .catch((error) => {
         return error.response.data;
       });
+    const customer = await stripe.customers.create({
+      email: formulario.billing.email,
+      name: formulario.billing.first_name,
+      shipping: {
+        address: {
+          city: formulario.billing.city,
+          country: formulario.billing.country,
+          line1: formulario.billing.address_1,
+          postal_code: formulario.billing.postcode,
+          state: formulario.billing.state,
+        },
+        name: formulario.billing.first_name,
+      },
+      address: {
+        city: formulario.billing.city,
+        country: formulario.billing.country,
+        line1: formulario.billing.address_1,
+        postal_code: formulario.billing.postcode,
+        state: formulario.billing.state,
+      },
+    });
     const session = await stripe.checkout.sessions
       .create({
         line_items: lineItems,
-        mode: "payment",
+        mode: "subscription",
         success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
         discounts: [
@@ -140,6 +191,7 @@ export default async function handler(req, res) {
             coupon: cup?.id,
           },
         ],
+        customer: customer.id,
       })
       .then((session) => {
         return session;

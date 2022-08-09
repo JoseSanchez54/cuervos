@@ -58,7 +58,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       }
     }
   };
-  console.log(cupon);
+
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
   const [estadoP, setEstadoP] = useState(onAction);
   const handleEstado = () => {

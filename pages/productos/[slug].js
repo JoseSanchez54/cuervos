@@ -100,12 +100,6 @@ const SingleProduct = ({
   categoriasAll,
   upSells,
 }) => {
-  //const { product, isValidating } = useProduct(products[0], products[0]?.id);
-  const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data, error, mutate } = useSWR("/api/producto", fetcher, {
-    id: products[0]?.id,
-    refreshInterval: 10000,
-  });
   const variations = useSWR(
     "products/" + products[0]?.id + "variations?orderby=id&order=asc",
     fetcherWc,
@@ -114,7 +108,7 @@ const SingleProduct = ({
       refreshInterval: 100,
     }
   );
-  console.log(variations.data);
+  console.log(products);
 
   const pedidos1 = useSWR("products/" + products[0]?.id, fetcherWc, {
     refreshInterval: 10000,
