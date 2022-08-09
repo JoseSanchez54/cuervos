@@ -89,6 +89,7 @@ const Success = ({ categorias, opciones }) => {
   const { wc_order_id, session_id } = query;
   const { data: dataWC } = useSWR(() => `/api/success/${wc_order_id}`);
   const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
+  console.log(dataWC);
 
   const canvasStyles = {
     position: "fixed",

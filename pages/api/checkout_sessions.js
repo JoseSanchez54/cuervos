@@ -20,6 +20,7 @@ export default async function handler(req, res) {
   });
 
   const lineItems = [];
+  let sus = false;
   await items.map((i) => {
     const metadata = Object?.values(i?.meta_data).map((key) => {
       return key;
@@ -30,8 +31,9 @@ export default async function handler(req, res) {
     const intervalo = metadata?.filter(
       (m) => m.key === "_subscription_period_interval"
     )[0]?.value;
-    console.log(periodico);
+
     if (i.type === "subscription") {
+      sus = true;
       lineItems.push({
         price_data: {
           currency: "EUR",
@@ -183,7 +185,7 @@ export default async function handler(req, res) {
     const session = await stripe.checkout.sessions
       .create({
         line_items: lineItems,
-        mode: "subscription",
+        mode: sus ? "subscription" : "payment",
         success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
         discounts: [
