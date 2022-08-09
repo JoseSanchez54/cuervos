@@ -12,7 +12,14 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { usePages } from "../hooks/usePages";
 import { useDispatch } from "react-redux";
 
-export default function MiCuenta({ options, pedidos, categorias, pagina }) {
+export default function MiCuenta({
+  options,
+  pedidos,
+  categorias,
+  pagina,
+  suscriptions,
+}) {
+  const username = useSelector((state) => state.userReducer.email);
   const { data } = usePages(pagina, "area");
   const dispatch = useDispatch();
   const handleConnect = async () => {
@@ -22,7 +29,10 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
   const pedidos1 = useSWR("orders", fetcherWc);
   const customers = useSWR("customers", fetcherWc);
-  const username = useSelector((state) => state.userReducer.email);
+  const { data: sus } = useSWR("subscriptions", fetcherWc);
+
+  const userSus = sus?.filter((rel) => rel?.billing?.email === username);
+  console.log(userSus);
   const userOrders = pedidos1?.data?.filter(
     (order) => order?.billing?.email === username
   );
@@ -181,6 +191,81 @@ export default function MiCuenta({ options, pedidos, categorias, pagina }) {
           )}
         </div>
       </div>
+      <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
+        <div className="flex flex-col w-full max-w-[1600px]  items-center">
+          <span className="titulo my-6">Suscripciones</span>
+          <div className="grid w-full lg:grid-cols-6 grid-cols-4 gap-4 ">
+            <div className="lg:block hidden text-center">
+              <span className="encabezado">ID</span>
+            </div>
+            <div className="text-center">
+              <span className="encabezado">Total</span>
+            </div>
+            <div className="text-center">
+              <span className="encabezado">Estado</span>
+            </div>
+            <div className="text-center">
+              <span className="encabezado">Calle</span>
+            </div>
+            <div className="text-center">
+              <span className="encabezado">Ciudad</span>
+            </div>
+            <div className="text-center lg:block hidden">
+              <span className="encabezado">CP</span>
+            </div>
+          </div>
+          {pedidos1.isValidating ? (
+            <div className="my-9 h-full pt-9 justify-center flex w-full">
+              <SyncLoader />
+            </div>
+          ) : (
+            <>
+              {userSus?.map((order, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={
+                      index % 2 === 0
+                        ? "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5"
+                        : "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5 bg-[#f7f7f7]"
+                    }
+                  >
+                    <div className=" lg:block hidden text-center">
+                      <span className="dato">{order?.id}</span>
+                    </div>
+                    <div className="text-center">
+                      <span className="dato">{order?.total}€</span>
+                    </div>
+                    <div className="text-center">
+                      <span
+                        className={
+                          (order?.status === "processing" &&
+                            "dato processing") ||
+                          (order?.status === "completed" && "dato completed") ||
+                          (order?.status === "cancelled" && "dato cancelled") ||
+                          (order?.status === "pending" && "dato pending")
+                        }
+                      >
+                        {order?.status}
+                      </span>
+                    </div>
+                    <div className="text-center">
+                      <span className="dato">{order?.billing?.address_1}</span>
+                    </div>
+                    <div className="text-center">
+                      <span className="dato">{order?.billing?.city}</span>
+                    </div>
+                    <div className="text-center lg:block hidden">
+                      <span className="dato">{order?.billing?.postcode}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          )}
+        </div>
+      </div>
+
       <Footer options={optionsSWR} />
       <style jsx>{`
         .encabezado {
@@ -245,6 +330,9 @@ export async function getStaticProps() {
     .catch((error) => {
       return error;
     });
+  const suscriptions = await WooCommerce.get("subscriptions").then(
+    (res) => res.data
+  );
   const categorias = await WooCommerce.get(
     "products/categories?order=desc&per_page=100"
   ).then((response) => {
@@ -271,6 +359,7 @@ export async function getStaticProps() {
       categorias,
       pagina,
       customers,
+      suscriptions,
     },
     revalidate: 10,
   };
