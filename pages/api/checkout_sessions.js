@@ -18,17 +18,19 @@ export default async function handler(req, res) {
       });
     }
   });
+  let periodico = "";
+  let intervalo = "";
 
   const lineItems = [];
+  const lineItemsWC = [];
   let sus = false;
   await items.map((i) => {
     const metadata = Object?.values(i?.meta_data).map((key) => {
       return key;
     });
-    const periodico = metadata?.filter(
-      (m) => m.key === "_subscription_period"
-    )[0]?.value;
-    const intervalo = metadata?.filter(
+    periodico = metadata?.filter((m) => m.key === "_subscription_period")[0]
+      ?.value;
+    intervalo = metadata?.filter(
       (m) => m.key === "_subscription_period_interval"
     )[0]?.value;
 
@@ -78,6 +80,36 @@ export default async function handler(req, res) {
     },
     quantity: 1,
   });
+  await items.map((i) => {
+    const metadata = Object?.values(i?.meta_data).map((key) => {
+      return key;
+    });
+    periodico = metadata?.filter((m) => m.key === "_subscription_period")[0]
+      ?.value;
+    intervalo = metadata?.filter(
+      (m) => m.key === "_subscription_period_interval"
+    )[0]?.value;
+
+    if (i.type === "subscription") {
+      lineItemsWC.push({
+        product_id: i.id,
+        price_data: {
+          currency: "EUR",
+          recurring: {
+            interval: periodico,
+            interval_count: intervalo,
+          },
+          unit_amount_decimal:
+            i.sale_price !== "" ? i.sale_price * 100 : i.regular_price * 100,
+          product_data: {
+            name: i.nombrePadre,
+            images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
+          },
+        },
+        quantity: 1,
+      });
+    }
+  });
 
   let cup = {};
   if (cupon) {
@@ -126,6 +158,7 @@ export default async function handler(req, res) {
         phone: formulario.billing.phone,
       },
     };
+
     const cs = await WooCommerce.get(
       "customers?email=" + formulario.billing.email
     )
@@ -182,11 +215,42 @@ export default async function handler(req, res) {
         state: formulario.billing.state,
       },
     });
+    function addDaysToDate(date, days) {
+      var res = new Date(date);
+      res.setDate(res.getDate() + days);
+      return res;
+    }
+    var data = {
+      customer_id: wcCustomer.id,
+      parent_id: wc.id,
+      status: "on-hold",
+      billing_period: periodico,
+      billing_interval: intervalo,
+      start_date: "2021-04-23 10:45:00",
+      next_payment_date: "2022-04-23 10:45:00",
+      payment_method: "stripe",
+      payment_details: {
+        post_meta: {
+          _stripe_customer_id: customer.id,
+        },
+      },
+      billing: wcForm.billing,
+      shipping: wcForm.shipping,
+      line_items: lineItemsWC,
+      shipping_lines: wcForm.shipping_lines,
+    };
+
+    const suscripcion = await WooCommerce.post("subscriptions", data).then(
+      (res) => res.data
+    );
+
     const session = await stripe.checkout.sessions
       .create({
         line_items: lineItems,
         mode: sus ? "subscription" : "payment",
-        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
+        success_url: sus
+          ? `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}&suscripcion=${suscripcion.id}`
+          : `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
         discounts: [
           {

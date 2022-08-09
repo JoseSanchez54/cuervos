@@ -86,10 +86,14 @@ const Success = ({ categorias, opciones }) => {
     });
   }, [makeShot]);
   const { query } = useRouter();
-  const { wc_order_id, session_id } = query;
-  const { data: dataWC } = useSWR(() => `/api/success/${wc_order_id}`);
+  const { wc_order_id, session_id, suscripcion } = query;
+  const { data: dataWC } = useSWR(
+    () => `/api/success/${wc_order_id}?sus=${suscripcion}`,
+    {
+      susID: suscripcion,
+    }
+  );
   const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
-  console.log(dataWC);
 
   const canvasStyles = {
     position: "fixed",
