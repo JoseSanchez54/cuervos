@@ -376,7 +376,7 @@ const SingleProduct = ({
                       className={
                         variations.data.length > 3
                           ? "flex lg:flex-row  gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center"
-                          : "flex lg:flex-row-reverse flex-row-reverse gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center"
+                          : "flex flex-row  gap-5 w-full p-5 lg:flex-nowrap flex-wrap justify-center"
                       }
                     >
                       {variations.data.map((e, index) => {
