@@ -226,151 +226,164 @@ export default function MiCuenta({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full  items-center">
-              <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
-                <div className="flex flex-col w-full max-w-[1600px]  items-center">
-                  <span className="titulo my-9 uppercase">Suscripciones</span>
-                  <div className="grid w-full lg:grid-cols-6 grid-cols-4 gap-4 ">
-                    <div className="lg:block hidden text-center">
-                      <span className="encabezado">ID</span>
-                    </div>
-                    <div className="text-center">
-                      <span className="encabezado">Total</span>
-                    </div>
-                    <div className="text-center">
-                      <span className="encabezado">Estado</span>
-                    </div>
-                    <div className="text-center">
-                      <span className="encabezado">Siguiente pago</span>
-                    </div>
-                    <div className="text-center lg:block hidden">
-                      <span className="encabezado">Último pago</span>
-                    </div>
-                    <div className="text-center lg:block hidden"></div>
-                  </div>
-                  {pedidos1.isValidating && validando ? (
-                    <div className="my-9 h-full pt-9 justify-center flex w-full">
-                      <SyncLoader />
-                    </div>
-                  ) : (
-                    <>
-                      {userSus?.map((order, index) => {
-                        const session_id = order?.meta_data?.find(
-                          (meta) => meta?.key === "_stripe_session_id"
-                        )?.value;
-                        const customer_id = order?.meta_data?.find(
-                          (meta) => meta?.key === "_stripe_customer_id"
-                        )?.value;
-                        const sesionesSub = sesionesSWR?.data.find(
-                          (res) => res.metadata.sus_id === order?.id.toString()
-                        );
+            {userSus.length > 0 && (
+              <>
+                {" "}
+                <div className="flex flex-col w-full  items-center">
+                  <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
+                    <div className="flex flex-col w-full max-w-[1600px]  items-center">
+                      <span className="titulo my-9 uppercase">
+                        Suscripciones
+                      </span>
+                      <div className="grid w-full lg:grid-cols-6 grid-cols-4 gap-4 ">
+                        <div className="lg:block hidden text-center">
+                          <span className="encabezado">ID</span>
+                        </div>
+                        <div className="text-center">
+                          <span className="encabezado">Total</span>
+                        </div>
+                        <div className="text-center">
+                          <span className="encabezado">Estado</span>
+                        </div>
+                        <div className="text-center">
+                          <span className="encabezado">Siguiente pago</span>
+                        </div>
+                        <div className="text-center lg:block hidden">
+                          <span className="encabezado">Último pago</span>
+                        </div>
+                        <div className="text-center lg:block hidden"></div>
+                      </div>
+                      {pedidos1.isValidating && validando ? (
+                        <div className="my-9 h-full pt-9 justify-center flex w-full">
+                          <SyncLoader />
+                        </div>
+                      ) : (
+                        <>
+                          {userSus?.map((order, index) => {
+                            const session_id = order?.meta_data?.find(
+                              (meta) => meta?.key === "_stripe_session_id"
+                            )?.value;
+                            const customer_id = order?.meta_data?.find(
+                              (meta) => meta?.key === "_stripe_customer_id"
+                            )?.value;
+                            const sesionesSub = sesionesSWR?.data.find(
+                              (res) =>
+                                res.metadata.sus_id === order?.id.toString()
+                            );
 
-                        return (
-                          <div
-                            key={index}
-                            className={
-                              index % 2 === 0
-                                ? "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5"
-                                : "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5 bg-[#f7f7f7]"
-                            }
-                          >
-                            <div className=" hidden text-center lg:flex items-center justify-center">
-                              <span className="dato">{order?.id}</span>
-                            </div>
-                            <div className="text-center flex items-center justify-center">
-                              <span className="dato">{order?.total}€</span>
-                            </div>
-                            <div className="text-center flex items-center justify-center">
-                              <span
+                            return (
+                              <div
+                                key={index}
                                 className={
-                                  (order?.status === "processing" &&
-                                    "dato processing") ||
-                                  (order?.status === "active" &&
-                                    "dato completed") ||
-                                  (order?.status === "cancelled" &&
-                                    "dato cancelled") ||
-                                  (order?.status === "on-hold" &&
-                                    "dato pending")
+                                  index % 2 === 0
+                                    ? "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5"
+                                    : "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5 bg-[#f7f7f7]"
                                 }
                               >
-                                {order?.status}
-                              </span>
-                            </div>
-                            <div className="text-center lg:flex items-center justify-center">
-                              <span className="dato">
-                                {new Date(
-                                  order?.next_payment_date_gmt
-                                )?.toLocaleDateString("es-ES", {
-                                  year: "numeric",
-                                  month: "short",
-                                  day: "numeric",
-                                })}
-                              </span>
-                            </div>
-                            <div className="text-center hidden lg:flex items-center justify-center">
-                              <span className="dato">
-                                {" "}
-                                {new Date(
-                                  order?.last_payment_date_gmt
-                                )?.toLocaleDateString("es-ES", {
-                                  year: "numeric",
-                                  month: "short",
-                                  day: "numeric",
-                                })}
-                              </span>
-                            </div>
-                            <div className="text-center  lg:flex items-center justify-center">
-                              <Dropdown isDisabled={order?.status !== "active"}>
-                                <Dropdown.Button
-                                  css={{
-                                    backgroundColor: "black",
-                                    color: "white",
-                                  }}
-                                  flat
-                                >
-                                  <HiOutlineDotsVertical size="20px" />
-                                </Dropdown.Button>
-                                <Dropdown.Menu
-                                  css={{
-                                    fontFamily: optionsSWR?.fuente_global,
-                                  }}
-                                  aria-label="Static Actions"
-                                >
-                                  <Dropdown.Item color="error" key="cancelar">
-                                    <button
-                                      onClick={() =>
-                                        handleCancel(
-                                          order?.parent_id,
-                                          order?.id,
-                                          session_id,
-                                          customer_id,
-                                          sesionesSub?.subscription
-                                            ? sesionesSub.subscription
-                                            : ""
-                                        )
-                                      }
-                                      rel={session_id}
-                                      cus={customer_id}
-                                      relSus={
-                                        sesionesSub?.subscription
-                                          ? sesionesSub.subscription
-                                          : ""
-                                      }
+                                <div className=" hidden text-center lg:flex items-center justify-center">
+                                  <span className="dato">{order?.id}</span>
+                                </div>
+                                <div className="text-center flex items-center justify-center">
+                                  <span className="dato">{order?.total}€</span>
+                                </div>
+                                <div className="text-center flex items-center justify-center">
+                                  <span
+                                    className={
+                                      (order?.status === "processing" &&
+                                        "dato processing") ||
+                                      (order?.status === "active" &&
+                                        "dato completed") ||
+                                      (order?.status === "cancelled" &&
+                                        "dato cancelled") ||
+                                      (order?.status === "on-hold" &&
+                                        "dato pending")
+                                    }
+                                  >
+                                    {order?.status}
+                                  </span>
+                                </div>
+                                <div className="text-center lg:flex items-center justify-center">
+                                  <span className="dato">
+                                    {new Date(
+                                      order?.next_payment_date_gmt
+                                    )?.toLocaleDateString("es-ES", {
+                                      year: "numeric",
+                                      month: "short",
+                                      day: "numeric",
+                                    })}
+                                  </span>
+                                </div>
+                                <div className="text-center hidden lg:flex items-center justify-center">
+                                  <span className="dato">
+                                    {" "}
+                                    {new Date(
+                                      order?.last_payment_date_gmt
+                                    )?.toLocaleDateString("es-ES", {
+                                      year: "numeric",
+                                      month: "short",
+                                      day: "numeric",
+                                    })}
+                                  </span>
+                                </div>
+                                <div className="text-center  lg:flex items-center justify-center">
+                                  <Dropdown
+                                    isDisabled={order?.status !== "active"}
+                                  >
+                                    <Dropdown.Button
+                                      css={{
+                                        backgroundColor: "black",
+                                        color: "white",
+                                      }}
+                                      flat
                                     >
-                                      Cancelar suscripción
-                                    </button>
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </>
-                  )}
+                                      <HiOutlineDotsVertical size="20px" />
+                                    </Dropdown.Button>
+                                    <Dropdown.Menu
+                                      css={{
+                                        fontFamily: optionsSWR?.fuente_global,
+                                      }}
+                                      aria-label="Static Actions"
+                                    >
+                                      <Dropdown.Item
+                                        color="error"
+                                        key="cancelar"
+                                      >
+                                        <button
+                                          onClick={() =>
+                                            handleCancel(
+                                              order?.parent_id,
+                                              order?.id,
+                                              session_id,
+                                              customer_id,
+                                              sesionesSub?.subscription
+                                                ? sesionesSub.subscription
+                                                : ""
+                                            )
+                                          }
+                                          rel={session_id}
+                                          cus={customer_id}
+                                          relSus={
+                                            sesionesSub?.subscription
+                                              ? sesionesSub.subscription
+                                              : ""
+                                          }
+                                        >
+                                          Cancelar suscripción
+                                        </button>
+                                      </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                  </Dropdown>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </>
+            )}
           </div>
         </div>
       </div>
