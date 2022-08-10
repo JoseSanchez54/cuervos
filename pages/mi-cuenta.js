@@ -75,15 +75,13 @@ export default function MiCuenta({
     customer_id,
     sesionesSub
   ) => {
-    axios
-      .post("/api/cancel_sub", {
-        order_id,
-        sus_id,
-        session,
-        customer_id,
-        sesionesSub,
-      })
-      .then((res) => location.reload());
+    axios.post("/api/cancel_sub", {
+      order_id,
+      sus_id,
+      session,
+      customer_id,
+      sesionesSub,
+    });
   };
 
   return (
@@ -142,8 +140,8 @@ export default function MiCuenta({
               Desconectarse
             </button>
           </div>
-          <div className="flex flex-row w-full lg:flex-nowrap flex-wrap gap-9 justify-center">
-            <div className="flex flex-col w-full lg:w-1/2 items-center">
+          <div className="flex flex-row w-full  flex-wrap gap-2 justify-center">
+            <div className="flex flex-col w-full  items-center">
               <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
                 <div className="flex flex-col w-full max-w-[1600px]  items-center">
                   <span className="titulo my-9 uppercase">Pedidos</span>
@@ -228,7 +226,7 @@ export default function MiCuenta({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full lg:w-1/2 items-center">
+            <div className="flex flex-col w-full  items-center">
               <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
                 <div className="flex flex-col w-full max-w-[1600px]  items-center">
                   <span className="titulo my-9 uppercase">Suscripciones</span>
@@ -266,7 +264,7 @@ export default function MiCuenta({
                         const sesionesSub = sesionesSWR?.data.find(
                           (res) => res.metadata.sus_id === order?.id.toString()
                         );
-                        console.log(sesionesSub);
+
                         return (
                           <div
                             key={index}
