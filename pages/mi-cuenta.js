@@ -33,17 +33,21 @@ export default function MiCuenta({
   const { isLoading, options: optionsSWR } = useOptions(options);
   const pedidos1 = useSWR("orders", fetcherWc);
   const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data: sesionesSWR } = useSWR("/api/stripe_sessions", fetcher, {
-    initialData: sessions,
-    fallbackData: sessions,
-    refreshInterval: 10000,
-  });
-  console.log("swr", sesionesSWR);
+  const { data: sesionesSWR, isValidating: validando } = useSWR(
+    "/api/stripe_sessions",
+    fetcher,
+    {
+      initialData: sessions,
+      fallbackData: sessions,
+      refreshInterval: 10000,
+    }
+  );
+
   const customers = useSWR("customers", fetcherWc);
   const { data: sus } = useSWR("subscriptions", fetcherWc);
 
   const userSus = sus?.filter((rel) => rel?.billing?.email === username);
-  console.log(userSus);
+
   const userOrders = pedidos1?.data?.filter(
     (order) => order?.billing?.email === username
   );
@@ -246,7 +250,7 @@ export default function MiCuenta({
                     </div>
                     <div className="text-center lg:block hidden"></div>
                   </div>
-                  {pedidos1.isValidating ? (
+                  {pedidos1.isValidating && validando ? (
                     <div className="my-9 h-full pt-9 justify-center flex w-full">
                       <SyncLoader />
                     </div>
