@@ -57,7 +57,21 @@ export default function MiCuenta({
     pais: userCustomer?.billing?.country,
     codigoPostal: userCustomer?.billing?.postcode,
   };
-  const handleCancel = () => {};
+  const handleCancel = (
+    order_id,
+    sus_id,
+    session,
+    customer_id,
+    sesionesSub
+  ) => {
+    axios.post("/api/cancel_sub", {
+      order_id,
+      sus_id,
+      session,
+      customer_id,
+      sesionesSub,
+    });
+  };
 
   return (
     <>
@@ -236,6 +250,10 @@ export default function MiCuenta({
                         const customer_id = order?.meta_data?.find(
                           (meta) => meta?.key === "_stripe_customer_id"
                         )?.value;
+                        const sesionesSub = sessions.data.find(
+                          (res) => res.metadata.sus_id === order?.id.toString()
+                        );
+                        console.log(sessions);
                         return (
                           <div
                             key={index}
@@ -309,9 +327,24 @@ export default function MiCuenta({
                                 >
                                   <Dropdown.Item color="error" key="cancelar">
                                     <button
-                                      onClick={() => handleCancel()}
+                                      onClick={() =>
+                                        handleCancel(
+                                          order?.parent_id,
+                                          order?.id,
+                                          session_id,
+                                          customer_id,
+                                          sesionesSub?.subscription
+                                            ? sesionesSub.subscription
+                                            : ""
+                                        )
+                                      }
                                       rel={session_id}
                                       cus={customer_id}
+                                      relSus={
+                                        sesionesSub?.subscription
+                                          ? sesionesSub.subscription
+                                          : ""
+                                      }
                                     >
                                       Cancelar suscripción
                                     </button>
@@ -399,8 +432,8 @@ export default function MiCuenta({
 }
 
 export async function getStaticProps() {
-  const sessions = await stripe.subscriptions.list({
-    limit: 20,
+  const sessions = await stripe.checkout.sessions.list({
+    limit: 990,
   });
 
   const options = await axios.get(

@@ -3,7 +3,11 @@ import WooCommerce from "../../woocommerce/Woocommerce";
 import dateFormat, { masks } from "dateformat";
 export default async function handler(req, res) {
   const { items, formulario, envio, cupon, sessionID } = req.body;
-
+  const wc = await WooCommerce.post("orders", formulario)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {});
   const itemsWc = [];
   items.map((i) => {
     if (i.variable === false) {
@@ -64,6 +68,7 @@ export default async function handler(req, res) {
             images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
           },
         },
+
         quantity: 1,
       });
     }
@@ -95,6 +100,7 @@ export default async function handler(req, res) {
       lineItemsWC.push({
         ID: i.id,
         product_id: i.id,
+        metadata: { order_id: wc.id },
         price_data: {
           currency: "EUR",
           recurring: {
@@ -269,6 +275,7 @@ export default async function handler(req, res) {
         },
       })
       .then((session) => {
+        console.log(session);
         return session;
       });
     res.status(200).json(session);
