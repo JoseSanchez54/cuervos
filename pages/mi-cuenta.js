@@ -32,6 +32,13 @@ export default function MiCuenta({
   };
   const { isLoading, options: optionsSWR } = useOptions(options);
   const pedidos1 = useSWR("orders", fetcherWc);
+  const fetcher = (url) => fetch(url).then((r) => r.json());
+  const { data: sesionesSWR } = useSWR("/api/stripe_sessions", fetcher, {
+    initialData: sessions,
+    fallbackData: sessions,
+    refreshInterval: 10000,
+  });
+  console.log("swr", sesionesSWR);
   const customers = useSWR("customers", fetcherWc);
   const { data: sus } = useSWR("subscriptions", fetcherWc);
 
@@ -250,10 +257,10 @@ export default function MiCuenta({
                         const customer_id = order?.meta_data?.find(
                           (meta) => meta?.key === "_stripe_customer_id"
                         )?.value;
-                        const sesionesSub = sessions.data.find(
+                        const sesionesSub = sesionesSWR?.data.find(
                           (res) => res.metadata.sus_id === order?.id.toString()
                         );
-                        console.log(sessions);
+                        console.log(sesionesSub);
                         return (
                           <div
                             key={index}
