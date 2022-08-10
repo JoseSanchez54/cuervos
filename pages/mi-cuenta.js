@@ -322,7 +322,7 @@ export default function MiCuenta({
                               </span>
                             </div>
                             <div className="text-center  lg:flex items-center justify-center">
-                              <Dropdown>
+                              <Dropdown isDisabled={order?.status !== "active"}>
                                 <Dropdown.Button
                                   css={{
                                     backgroundColor: "black",
