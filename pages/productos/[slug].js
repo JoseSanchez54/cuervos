@@ -11,6 +11,7 @@ import Grid from "../../components/Grid";
 import Footer from "../../components/Footer";
 import Edad from "../../components/Edad";
 import useSWR from "swr";
+import dateFormat, { masks } from "dateformat";
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
     (response) => {
@@ -100,6 +101,13 @@ const SingleProduct = ({
   categoriasAll,
   upSells,
 }) => {
+  function addDaysToDate(date, days) {
+    var res = new Date(date);
+    res.setDate(res.getDate() + days);
+    return res;
+  }
+
+  console.log(dateFormat(addDaysToDate(new Date(), 30), "yyyy-mm-d H:mm:s"));
   const variations = useSWR(
     "products/" + products[0]?.id + "variations?orderby=id&order=asc",
     fetcherWc,

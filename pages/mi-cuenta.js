@@ -11,7 +11,7 @@ import Footer from "../components/Footer";
 import SyncLoader from "react-spinners/SyncLoader";
 import { usePages } from "../hooks/usePages";
 import { useDispatch } from "react-redux";
-import { motion } from "framer-motion";
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default function MiCuenta({
   options,
@@ -19,7 +19,9 @@ export default function MiCuenta({
   categorias,
   pagina,
   suscriptions,
+  sessions,
 }) {
+  console.log(sessions);
   const username = useSelector((state) => state.userReducer.email);
   const { data } = usePages(pagina, "area");
   const dispatch = useDispatch();
@@ -106,7 +108,7 @@ export default function MiCuenta({
       </div>
       <div className="flex flex-row w-full justify-center">
         <div className="flex flex-col items-center max-w-[1600px]">
-          <div className="flex flex-row justify-end w-full my-5">
+          <div className="flex flex-row px-5 justify-start lg:justify-end w-full my-5">
             <button onClick={() => handleConnect()} className="logout">
               Desconectarse
             </button>
@@ -264,7 +266,6 @@ export default function MiCuenta({
                                 {new Date(
                                   order?.next_payment_date_gmt
                                 )?.toLocaleDateString("es-ES", {
-                                  weekday: "long",
                                   year: "numeric",
                                   month: "short",
                                   day: "numeric",
@@ -277,7 +278,6 @@ export default function MiCuenta({
                                 {new Date(
                                   order?.last_payment_date_gmt
                                 )?.toLocaleDateString("es-ES", {
-                                  weekday: "long",
                                   year: "numeric",
                                   month: "short",
                                   day: "numeric",
@@ -368,6 +368,10 @@ export default function MiCuenta({
 }
 
 export async function getStaticProps() {
+  const sessions = await stripe.subscriptions.list({
+    limit: 20,
+  });
+
   const options = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
@@ -408,6 +412,7 @@ export async function getStaticProps() {
       pagina,
       customers,
       suscriptions,
+      sessions,
     },
     revalidate: 10,
   };

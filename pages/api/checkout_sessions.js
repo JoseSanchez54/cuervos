@@ -1,7 +1,8 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import WooCommerce from "../../woocommerce/Woocommerce";
+import dateFormat, { masks } from "dateformat";
 export default async function handler(req, res) {
-  const { items, formulario, envio, cupon } = req.body;
+  const { items, formulario, envio, cupon, sessionID } = req.body;
 
   const itemsWc = [];
   items.map((i) => {
@@ -92,6 +93,7 @@ export default async function handler(req, res) {
 
     if (i.type === "subscription") {
       lineItemsWC.push({
+        ID: i.id,
         product_id: i.id,
         price_data: {
           currency: "EUR",
@@ -220,14 +222,18 @@ export default async function handler(req, res) {
       res.setDate(res.getDate() + days);
       return res;
     }
+
     var data = {
       customer_id: wcCustomer.id,
       parent_id: wc.id,
       status: "on-hold",
       billing_period: periodico,
       billing_interval: intervalo,
-      start_date: "2021-04-23 10:45:00",
-      next_payment_date: "2022-04-23 10:45:00",
+      start_date: dateFormat(new Date(), "yyyy-mm-d H:mm:s"),
+      next_payment_date: dateFormat(
+        addDaysToDate(new Date(), 30),
+        "yyyy-mm-d H:mm:s"
+      ),
       payment_method: "stripe",
       payment_details: {
         post_meta: {
@@ -243,7 +249,6 @@ export default async function handler(req, res) {
     const suscripcion = await WooCommerce.post("subscriptions", data).then(
       (res) => res.data
     );
-
     const session = await stripe.checkout.sessions
       .create({
         line_items: lineItems,

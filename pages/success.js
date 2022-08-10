@@ -88,7 +88,7 @@ const Success = ({ categorias, opciones }) => {
   const { query } = useRouter();
   const { wc_order_id, session_id, suscripcion } = query;
   const { data: dataWC } = useSWR(
-    () => `/api/success/${wc_order_id}?sus=${suscripcion}`,
+    () => `/api/success/${wc_order_id}?sus=${suscripcion}&sesion=${session_id}`,
     {
       susID: suscripcion,
     }
