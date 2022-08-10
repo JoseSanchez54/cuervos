@@ -5,9 +5,9 @@ export default async (req, res) => {
     status: "processing",
   };
 
-  const wc_order_id = req.query.id.toString();
-  const sus = req.body.susID;
-  const session = req.body.sesion;
+  const sus = req.query.sus;
+  const session = req.query.sesion;
+  const wc_order_id = req.query.id;
   const pedido = await WooCommerce.put("orders/" + wc_order_id, estado)
     .then((response) => {
       return response;
@@ -15,6 +15,20 @@ export default async (req, res) => {
     .catch((error) => {});
   const estadoSUS = {
     status: "active",
+    meta_data: [
+      {
+        id: 50649,
+        key: "_stripe_source_id",
+        value: "src_XE3xLw39fq4Ck7c2h8RgaQ25",
+      },
+      {
+        _stripe_session_id: session,
+      },
+      {
+        key: "_stripe_session_id",
+        value: session,
+      },
+    ],
 
     post_meta: {
       _stripe_session_id: session,
@@ -22,5 +36,5 @@ export default async (req, res) => {
   };
   await WooCommerce.put("subscriptions/" + sus, estadoSUS);
 
-  return res.status(200);
+  return res.status(200).json({ estado: "ok" });
 };

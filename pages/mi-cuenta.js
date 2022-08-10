@@ -218,7 +218,7 @@ export default function MiCuenta({
                     <div className="text-center">
                       <span className="encabezado">Siguiente pago</span>
                     </div>
-                    <div className="text-center">
+                    <div className="text-center lg:block hidden">
                       <span className="encabezado">Último pago</span>
                     </div>
                     <div className="text-center lg:block hidden"></div>
@@ -272,7 +272,7 @@ export default function MiCuenta({
                                 })}
                               </span>
                             </div>
-                            <div className="text-center flex items-center justify-center">
+                            <div className="text-center hidden lg:flex items-center justify-center">
                               <span className="dato">
                                 {" "}
                                 {new Date(

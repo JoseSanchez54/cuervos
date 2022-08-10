@@ -92,6 +92,7 @@ const Success = ({ categorias, opciones }) => {
     {
       susID: suscripcion,
       sesion: session_id,
+      wc_order_id: wc_order_id,
     }
   );
   const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
