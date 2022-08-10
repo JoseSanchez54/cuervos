@@ -115,7 +115,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
               <div className="flex flex-col  h-full w-full">
                 <div className="flex flex-row h-1/2">
                   <div className="relative w-full h-full">
-                    <div className="flex flex-col items-center justify-end lg:justify-start w-full h-full">
+                    <div className="flex flex-col items-center justify-end lg:justify-center w-full h-full">
                       <div className="p-9 lg:text-center z-[10]">
                         <span
                           style={{
