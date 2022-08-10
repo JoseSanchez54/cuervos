@@ -87,7 +87,7 @@ export default function MiCuenta({
         <div className="flex flex-col justify-center w-full h-full">
           <div className="relative w-full justify-center flex h-full">
             <div className="flex p-5 flex-col justify-center max-w-[1600px] items-start w-full h-full">
-              <span className="z-[10] uppercase text-start tituloPrimera ">
+              <span className="z-[10]  uppercase text-start tituloPrimera ">
                 Bienvenido,
                 <br />{" "}
                 {usuario?.nombreCompleto ? usuario?.nombreCompleto : username}
@@ -113,13 +113,14 @@ export default function MiCuenta({
                 fontFamily: optionsSWR?.fuenta_global,
                 color: "white",
                 padding: "20px 30px",
+                textTransform: "uppercase",
               }}
             >
               {" "}
               Desconectarse
             </button>
           </div>
-          <span className="titulo my-6">Pedidos</span>
+          <span className="titulo my- uppercase">Pedidos</span>
           <div className="grid w-full lg:grid-cols-6 grid-cols-4 gap-4 ">
             <div className="lg:block hidden text-center">
               <span className="encabezado">ID</span>
@@ -193,7 +194,7 @@ export default function MiCuenta({
       </div>
       <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
         <div className="flex flex-col w-full max-w-[1600px]  items-center">
-          <span className="titulo my-6">Suscripciones</span>
+          <span className="titulo my-6 uppercase">Suscripciones</span>
           <div className="grid w-full lg:grid-cols-6 grid-cols-4 gap-4 ">
             <div className="lg:block hidden text-center">
               <span className="encabezado">ID</span>
@@ -241,7 +242,8 @@ export default function MiCuenta({
                         className={
                           (order?.status === "processing" &&
                             "dato processing") ||
-                          (order?.status === "procesing" && "dato completed") ||
+                          (order?.status === "processing" &&
+                            "dato completed") ||
                           (order?.status === "cancelled" && "dato cancelled") ||
                           (order?.status === "on-hold" && "dato pending")
                         }
