@@ -15,10 +15,9 @@ export default async (req, res) => {
     .catch((error) => {});
   const estadoSUS = {
     status: "active",
-    payment_details: {
-      post_meta: {
-        _strip_session_id: session,
-      },
+
+    post_meta: {
+      _stripe_session_id: session,
     },
   };
   await WooCommerce.put("subscriptions/" + sus, estadoSUS);

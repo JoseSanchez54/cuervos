@@ -12,6 +12,8 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { usePages } from "../hooks/usePages";
 import { useDispatch } from "react-redux";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+import { Dropdown } from "@nextui-org/react";
+import { HiOutlineDotsVertical } from "react-icons/hi";
 
 export default function MiCuenta({
   options,
@@ -107,7 +109,7 @@ export default function MiCuenta({
         </div>
       </div>
       <div className="flex flex-row w-full justify-center">
-        <div className="flex flex-col items-center max-w-[1600px]">
+        <div className="flex flex-col items-center max-w-[1900px]">
           <div className="flex flex-row px-5 justify-start lg:justify-end w-full my-5">
             <button onClick={() => handleConnect()} className="logout">
               Desconectarse
@@ -219,9 +221,7 @@ export default function MiCuenta({
                     <div className="text-center">
                       <span className="encabezado">Último pago</span>
                     </div>
-                    <div className="text-center lg:block hidden">
-                      <span className="encabezado">CP</span>
-                    </div>
+                    <div className="text-center lg:block hidden"></div>
                   </div>
                   {pedidos1.isValidating ? (
                     <div className="my-9 h-full pt-9 justify-center flex w-full">
@@ -239,18 +239,18 @@ export default function MiCuenta({
                                 : "grid w-full lg:grid-cols-6 grid-cols-4 gap-4 py-5 bg-[#f7f7f7]"
                             }
                           >
-                            <div className=" lg:block hidden text-center">
+                            <div className=" hidden text-center lg:flex items-center justify-center">
                               <span className="dato">{order?.id}</span>
                             </div>
-                            <div className="text-center">
+                            <div className="text-center flex items-center justify-center">
                               <span className="dato">{order?.total}€</span>
                             </div>
-                            <div className="text-center">
+                            <div className="text-center flex items-center justify-center">
                               <span
                                 className={
                                   (order?.status === "processing" &&
                                     "dato processing") ||
-                                  (order?.status === "processing" &&
+                                  (order?.status === "active" &&
                                     "dato completed") ||
                                   (order?.status === "cancelled" &&
                                     "dato cancelled") ||
@@ -261,7 +261,7 @@ export default function MiCuenta({
                                 {order?.status}
                               </span>
                             </div>
-                            <div className="text-center">
+                            <div className="text-center lg:flex items-center justify-center">
                               <span className="dato">
                                 {new Date(
                                   order?.next_payment_date_gmt
@@ -272,7 +272,7 @@ export default function MiCuenta({
                                 })}
                               </span>
                             </div>
-                            <div className="text-center">
+                            <div className="text-center flex items-center justify-center">
                               <span className="dato">
                                 {" "}
                                 {new Date(
@@ -284,10 +284,28 @@ export default function MiCuenta({
                                 })}
                               </span>
                             </div>
-                            <div className="text-center lg:block hidden">
-                              <span className="dato">
-                                {order?.billing?.postcode}
-                              </span>
+                            <div className="text-center  lg:flex items-center justify-center">
+                              <Dropdown>
+                                <Dropdown.Button
+                                  css={{
+                                    backgroundColor: "black",
+                                    color: "white",
+                                  }}
+                                  flat
+                                >
+                                  <HiOutlineDotsVertical size="20px" />
+                                </Dropdown.Button>
+                                <Dropdown.Menu
+                                  css={{
+                                    fontFamily: optionsSWR?.fuente_global,
+                                  }}
+                                  aria-label="Static Actions"
+                                >
+                                  <Dropdown.Item color="error" key="cancelar">
+                                    Cancelar suscripción
+                                  </Dropdown.Item>
+                                </Dropdown.Menu>
+                              </Dropdown>
                             </div>
                           </div>
                         );
@@ -310,6 +328,7 @@ export default function MiCuenta({
           font-family: ${optionsSWR?.fuente_global};
           padding: 20px 30px;
           text-transform: uppercase;
+          border: 1px solid black;
         }
         .logout:hover {
           background: white;
