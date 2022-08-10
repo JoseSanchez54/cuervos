@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 import SyncLoader from "react-spinners/SyncLoader";
 import { usePages } from "../hooks/usePages";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 export default function MiCuenta({
   options,
@@ -106,21 +107,11 @@ export default function MiCuenta({
       <div className="flex flex-row w-full justify-center">
         <div className="flex flex-col items-center max-w-[1600px]">
           <div className="flex flex-row justify-end w-full my-5">
-            <button
-              onClick={() => handleConnect()}
-              style={{
-                backgroundColor: "black",
-                fontFamily: optionsSWR?.fuenta_global,
-                color: "white",
-                padding: "20px 30px",
-                textTransform: "uppercase",
-              }}
-            >
-              {" "}
+            <button onClick={() => handleConnect()} className="logout">
               Desconectarse
             </button>
           </div>
-          <div className="flex flex-row w-full gap-9 justify-center">
+          <div className="flex flex-row w-full lg:flex-nowrap flex-wrap gap-9 justify-center">
             <div className="flex flex-col w-full lg:w-1/2 items-center">
               <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
                 <div className="flex flex-col w-full max-w-[1600px]  items-center">
@@ -312,6 +303,19 @@ export default function MiCuenta({
 
       <Footer options={optionsSWR} />
       <style jsx>{`
+        .logout {
+          cursor: pointer;
+          background: black;
+          color: white;
+          font-family: ${optionsSWR?.fuente_global};
+          padding: 20px 30px;
+          text-transform: uppercase;
+        }
+        .logout:hover {
+          background: white;
+          color: black;
+          border: 1px solid black;
+        }
         .encabezado {
           font-family: ${optionsSWR?.fuente_global};
           font-weight: bold;
