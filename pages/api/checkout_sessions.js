@@ -263,6 +263,10 @@ export default async function handler(req, res) {
           },
         ],
         customer: customer.id,
+        metadata: {
+          order_id: wc.id,
+          sus_id: suscripcion.id,
+        },
       })
       .then((session) => {
         return session;

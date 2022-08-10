@@ -23,7 +23,6 @@ export default function MiCuenta({
   suscriptions,
   sessions,
 }) {
-  console.log(sessions);
   const username = useSelector((state) => state.userReducer.email);
   const { data } = usePages(pagina, "area");
   const dispatch = useDispatch();
@@ -58,6 +57,7 @@ export default function MiCuenta({
     pais: userCustomer?.billing?.country,
     codigoPostal: userCustomer?.billing?.postcode,
   };
+  const handleCancel = () => {};
 
   return (
     <>
@@ -230,6 +230,12 @@ export default function MiCuenta({
                   ) : (
                     <>
                       {userSus?.map((order, index) => {
+                        const session_id = order?.meta_data?.find(
+                          (meta) => meta?.key === "_stripe_session_id"
+                        )?.value;
+                        const customer_id = order?.meta_data?.find(
+                          (meta) => meta?.key === "_stripe_customer_id"
+                        )?.value;
                         return (
                           <div
                             key={index}
@@ -302,7 +308,13 @@ export default function MiCuenta({
                                   aria-label="Static Actions"
                                 >
                                   <Dropdown.Item color="error" key="cancelar">
-                                    Cancelar suscripción
+                                    <button
+                                      onClick={() => handleCancel()}
+                                      rel={session_id}
+                                      cus={customer_id}
+                                    >
+                                      Cancelar suscripción
+                                    </button>
                                   </Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
