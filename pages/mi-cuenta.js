@@ -206,10 +206,10 @@ export default function MiCuenta({
               <span className="encabezado">Estado</span>
             </div>
             <div className="text-center">
-              <span className="encabezado">Calle</span>
+              <span className="encabezado">Siguiente pago</span>
             </div>
             <div className="text-center">
-              <span className="encabezado">Ciudad</span>
+              <span className="encabezado">Último pago</span>
             </div>
             <div className="text-center lg:block hidden">
               <span className="encabezado">CP</span>
@@ -252,10 +252,29 @@ export default function MiCuenta({
                       </span>
                     </div>
                     <div className="text-center">
-                      <span className="dato">{order?.billing?.address_1}</span>
+                      <span className="dato">
+                        {new Date(
+                          order?.next_payment_date_gmt
+                        )?.toLocaleDateString("es-ES", {
+                          weekday: "long",
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </span>
                     </div>
                     <div className="text-center">
-                      <span className="dato">{order?.billing?.city}</span>
+                      <span className="dato">
+                        {" "}
+                        {new Date(
+                          order?.last_payment_date_gmt
+                        )?.toLocaleDateString("es-ES", {
+                          weekday: "long",
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </span>
                     </div>
                     <div className="text-center lg:block hidden">
                       <span className="dato">{order?.billing?.postcode}</span>
