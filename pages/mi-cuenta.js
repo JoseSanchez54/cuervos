@@ -71,13 +71,15 @@ export default function MiCuenta({
     customer_id,
     sesionesSub
   ) => {
-    axios.post("/api/cancel_sub", {
-      order_id,
-      sus_id,
-      session,
-      customer_id,
-      sesionesSub,
-    });
+    axios
+      .post("/api/cancel_sub", {
+        order_id,
+        sus_id,
+        session,
+        customer_id,
+        sesionesSub,
+      })
+      .then((res) => location.reload());
   };
 
   return (
