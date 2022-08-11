@@ -28,6 +28,8 @@ export default function MiCuenta({
   const dispatch = useDispatch();
   const handleConnect = async () => {
     await dispatch({ type: "@Remove" });
+    document.cookie =
+      "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.href = "/";
   };
   const { isLoading, options: optionsSWR } = useOptions(options);
