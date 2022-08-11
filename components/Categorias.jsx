@@ -10,21 +10,21 @@ const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
   return (
     <>
       <DefaultSeo
-        title={pagina.titulo_pagina}
-        description={pagina.descripcion_de_pagina}
+        title={pagina?.titulo_pagina}
+        description={pagina?.descripcion_de_pagina}
         canonical={process.env.URLFINAL + "/" + actual?.slug}
         additionalLinkTags={[
           {
             rel: "icon",
-            href: opciones.favicon_principal,
+            href: opciones?.favicon_principal,
           },
         ]}
         openGraph={{
           type: "website",
           locale: "en_ES",
           url: process.env.URLFINAL,
-          site_name: opciones.nombre_sitio,
-          description: opciones.descripcion_sitio,
+          site_name: opciones?.nombre_sitio,
+          description: opciones?.descripcion_sitio,
         }}
         twitter={{
           handle: "@handle",
@@ -43,7 +43,7 @@ const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
           </div>
 
           <div className="flex flex-row flex-wrap justify-center lg:justify-start  w-full">
-            {productos.map((producto, index) => {
+            {productos?.map((producto, index) => {
               return (
                 <>
                   {index === 0 && (
@@ -120,23 +120,23 @@ const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
       <Footer options={opciones}></Footer>
       <style jsx>{`
         .titulo {
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           font-size: 36px;
         }
         .titulo2 {
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           font-size: 55px;
           color: white;
         }
         @media (max-width: 1022px) {
           .titulo {
-            font-family: ${opciones.fuente_titulos};
+            font-family: ${opciones?.fuente_titulos};
             font-size: 36px;
             line-height: 1.1;
           }
 
           .titulo2 {
-            font-family: ${opciones.fuente_titulos};
+            font-family: ${opciones?.fuente_titulos};
             font-size: 36px;
           }
         }

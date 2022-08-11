@@ -1,19 +1,28 @@
 import { addToCart } from "../utils/addToCart";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const [sus, setSus] = useState({});
+  const [error, setError] = useState("");
+  console.log(seleccion);
   const actualCart = useSelector((state) => state.cartReducer.cart);
-  actualCart.map((item) => {
-    const periodo = item?.meta_data?.find(
-      (meta) => meta?.key === "_subscription_period"
-    )?.value;
-    const customer_id = item?.meta_data?.find(
-      (meta) => meta?.key === "_stripe_customer_id"
-    )?.value;
-  });
+  useEffect(() => {
+    actualCart.map((item) => {
+      const periodo = item?.meta_data?.find(
+        (meta) => meta?.key === "_subscription_period"
+      )?.value;
+      const intervalo = item?.meta_data?.find(
+        (meta) => meta?.key === "_subscription_period_interval"
+      )?.value;
+      setSus({
+        periodo,
+        intervalo,
+      });
+    });
+  }, []);
+
   console.log(actualCart);
   const variable = producto.attributes.length > 0;
   const dispatch = useDispatch();
@@ -35,6 +44,14 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const handleCart = () => {
     if (variable) {
       const productoAdd = addToCart(seleccion, lista);
+      const periodo = productoAdd?.meta_data?.find(
+        (meta) => meta?.key === "_subscription_period"
+      )?.value;
+      const intervalo = productoAdd?.meta_data?.find(
+        (meta) => meta?.key === "_subscription_period_interval"
+      )?.value;
+      console.log(productoAdd);
+
       productoAdd = {
         ...productoAdd,
         nombrePadre: producto.name,
@@ -42,11 +59,19 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         variable: true,
         img: producto.images[0].src,
       };
-
-      dispatch({
-        type: "@AddToCart",
-        producto: productoAdd,
-      });
+      if (
+        (periodo === sus.periodo && intervalo === sus.intervalo) ||
+        actualCart.length === 0
+      ) {
+        dispatch({
+          type: "@AddToCart",
+          producto: productoAdd,
+        });
+      } else {
+        setError(
+          "No se puede agregar dos suscripciones con diferentes intervalos de cobro"
+        );
+      }
     } else {
       producto = {
         ...producto,
@@ -87,6 +112,11 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
       >
         <span>COMPRAR AHORA</span>
       </motion.button>
+      {error && (
+        <>
+          <span className="block w-full">{error}</span>
+        </>
+      )}
 
       <style jsx>{`
         input::-webkit-outer-spin-button,
