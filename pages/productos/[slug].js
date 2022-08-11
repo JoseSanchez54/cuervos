@@ -379,7 +379,8 @@ const SingleProduct = ({
                             <button
                               style={{
                                 border:
-                                  seleccion.botellas === e.attributes[0].option
+                                  seleccion.botellas ||
+                                  seleccion.Meses === e.attributes[0].option
                                     ? "solid 2px #000"
                                     : "none",
                               }}
