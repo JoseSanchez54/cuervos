@@ -11,15 +11,13 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const actualCart = useSelector((state) => state.cartReducer.cart);
   useEffect(() => {
     actualCart.map((item, index) => {
-      console.log(item);
-
       const periodo = item?.meta_data?.find(
         (meta) => meta?.key === "_subscription_period"
       )?.value;
       const intervalo = item?.meta_data?.find(
         (meta) => meta?.key === "_subscription_period_interval"
       )?.value;
-      console.log(periodo);
+
       if (periodo && intervalo) {
         setSus({
           periodo,
