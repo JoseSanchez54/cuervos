@@ -109,7 +109,6 @@ const SingleProduct = ({
       refreshInterval: 100,
     }
   );
-  console.log(products);
 
   const pedidos1 = useSWR("products/" + products[0]?.id, fetcherWc, {
     refreshInterval: 10000,
@@ -380,7 +379,8 @@ const SingleProduct = ({
                             <button
                               style={{
                                 border:
-                                  seleccion.botellas ||
+                                  seleccion.botellas ===
+                                    e.attributes[0].option ||
                                   seleccion.Meses === e.attributes[0].option
                                     ? "solid 2px #000"
                                     : "none",
