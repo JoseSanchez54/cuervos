@@ -147,7 +147,7 @@ export default function MiCuenta({
           </div>
           <div className="flex flex-row w-full  flex-wrap gap-2 justify-center">
             <div className="flex flex-col w-full  items-center">
-              <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
+              <div className="flex flex-row my-9 w-full   justify-center ">
                 <div className="flex flex-col w-full max-w-[1600px]  items-center">
                   <span className="titulo my-9 uppercase">Pedidos</span>
                   <div className="grid w-full lg:grid-cols-6 grid-cols-4 gap-4 ">
