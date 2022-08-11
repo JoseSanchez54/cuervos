@@ -104,7 +104,7 @@ const LoginForm = ({ opciones, login, set }) => {
   };
   const SendCode = () => {
     setLoading(true);
-    axios
+    await axios
       .post(
         process.env.URLBASE +
           `wp-json/bdpwr/v1/set-password?email=${form.email}&password=${form.password}&code=${form.code}`,
