@@ -16,7 +16,6 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
       const intervalo = item?.meta_data?.find(
         (meta) => meta?.key === "_subscription_period_interval"
       )?.value;
-      console.log("effect", sus);
 
       if (periodo && intervalo) {
         setSus({
@@ -28,7 +27,6 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
       }
     });
   }, [actualCart]);
-  console.log(sus);
 
   const variable = producto.attributes.length > 0;
   const dispatch = useDispatch();
