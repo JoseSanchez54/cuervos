@@ -46,7 +46,7 @@ export default function MiCuenta({
   });
 
   const customers = useSWR("customers", fetcherWc);
-  const { data: sus } = useSWR("subscriptions", fetcherWc);
+  const { data: sus } = useSWR("subscriptions?per_page=99", fetcherWc);
 
   const userSus = sus?.filter((rel) => rel?.billing?.email === username);
 
@@ -475,7 +475,7 @@ export async function getStaticProps() {
     .catch((error) => {
       return error;
     });
-  const suscriptions = await WooCommerce.get("subscriptions").then(
+  const suscriptions = await WooCommerce.get("subscriptions?per_page=99").then(
     (res) => res.data
   );
   const categorias = await WooCommerce.get(
