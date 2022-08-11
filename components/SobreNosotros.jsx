@@ -79,12 +79,14 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
           </div>
           <div className="flex gap-9 flex-row my-[50px] flex-wrap lg:flex-nowrap w-full justify-center">
             <div className="flex flex-col lg:w-1/2 w-full">
-              <Image
-                width="658px"
-                height="747px"
-                objectFit="cover"
-                src={pagina?.imagen_tercera_nosotros}
-              />
+              {pagina?.imagen_tercera_nosotros && (
+                <Image
+                  width="658px"
+                  height="747px"
+                  objectFit="cover"
+                  src={pagina?.imagen_tercera_nosotros}
+                />
+              )}
             </div>
             <div className="flex flex-col lg:w-1/2 w-full justify-center">
               <span className="z-[10] uppercase text-center mb-9 tituloPrimera ">
@@ -105,31 +107,37 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
               </p>
             </div>
             <div className="flex flex-col lg:w-1/2 w-full">
-              <Image
-                width="658px"
-                height="747px"
-                objectFit="cover"
-                src={pagina?.imagen_cuarta_nosotros}
-              />
+              {pagina?.imagen_cuarta_nosotros && (
+                <Image
+                  width="658px"
+                  height="747px"
+                  objectFit="cover"
+                  src={pagina?.imagen_cuarta_nosotros}
+                />
+              )}
             </div>
           </div>
           <div className="flex flex-row w-full justify-center">
             <div className="relative w-full min-h-[587px]">
-              <Image
-                layout="fill"
-                objectFit="cover"
-                src={pagina?.imagen_quinta_nosotros}
-              />
+              {pagina?.imagen_quinta_nosotros && (
+                <Image
+                  layout="fill"
+                  objectFit="cover"
+                  src={pagina?.imagen_quinta_nosotros}
+                />
+              )}
             </div>
           </div>
           <div className="flex gap-9 flex-row my-[50px] flex-wrap-reverse lg:flex-nowrap w-full justify-center">
             <div className="flex flex-col lg:w-1/2 w-full">
-              <Image
-                width="658px"
-                height="747px"
-                objectFit="cover"
-                src={pagina?.imagen_sexta_nosotros}
-              />
+              {pagina?.imagen_sexta_nosotros && (
+                <Image
+                  width="658px"
+                  height="747px"
+                  objectFit="cover"
+                  src={pagina?.imagen_sexta_nosotros}
+                />
+              )}
             </div>
             <div className="flex flex-col lg:w-1/2 w-full justify-center">
               <span className="z-[10] uppercase text-center mb-9 tituloPrimera ">
