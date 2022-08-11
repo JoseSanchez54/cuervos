@@ -296,6 +296,7 @@ const LoginForm = ({ opciones, login, set }) => {
                             input: {
                               borderColor: "#7e8085",
                               borderRadius: "0",
+                              letterSpacing: "-8px",
                             },
                           }}
                         />
@@ -334,6 +335,7 @@ const LoginForm = ({ opciones, login, set }) => {
                             input: {
                               borderColor: "#7e8085",
                               borderRadius: "0",
+                              letterSpacing: "-8px",
                             },
                           }}
                         />
@@ -657,6 +659,7 @@ const LoginForm = ({ opciones, login, set }) => {
                                 input: {
                                   borderColor: "#7e8085",
                                   borderRadius: "0",
+                                  letterSpacing: "-8px",
                                 },
                                 div: {
                                   borderRadius: "0",
