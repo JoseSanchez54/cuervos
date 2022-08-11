@@ -138,7 +138,7 @@ const LoginForm = ({ opciones, login, set }) => {
   };
   const SendRegister = async () => {
     let reqOptions = {
-      url: `https://criacuervos.bitmac.es/wp-json/wp/v2/users/register?email=${formulario.email}&password=${formulario.password}&username=${formulario.email}`,
+      url: `https://criacuervos.bitmac.es/wp-json/wp/v2/users/register?email=${form.email}&password=${form.password}&username=${form.email}`,
       method: "POST",
       headers: headersList,
     };
