@@ -86,9 +86,13 @@ const LoginForm = ({ opciones, login, set }) => {
   const SendOlvidar = async () => {
     setLoading(true);
     const res = await axios
-      .post(process.env.URLBASE + "wp-json/bdpwr/v1/reset-password", {
-        email: form.email,
-      })
+      .post(
+        process.env.URLBASE +
+          `wp-json/bdpwr/v1/reset-password?email=${form.email}`,
+        {
+          email: form.email,
+        }
+      )
       .then((res) => {
         setLoading(false);
         setError("Se ha enviado un correo para restablecer la contraseña");
@@ -101,11 +105,15 @@ const LoginForm = ({ opciones, login, set }) => {
   const SendCode = () => {
     setLoading(true);
     axios
-      .post(process.env.URLBASE + "wp-json/bdpwr/v1/set-password", {
-        code: form.code,
-        email: form.email,
-        password: form.password,
-      })
+      .post(
+        process.env.URLBASE +
+          `wp-json/bdpwr/v1/set-password?email=${form.email}&password=${form.password}&code=${form.code}`,
+        {
+          code: form.code,
+          email: form.email,
+          password: form.password,
+        }
+      )
       .then((res) => {
         setCode(false);
         setOlvidar(false);
