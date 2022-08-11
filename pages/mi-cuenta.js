@@ -122,7 +122,7 @@ export default function MiCuenta({
       >
         <div className="flex flex-col justify-center w-full h-full">
           <div className="relative w-full justify-center flex h-full">
-            <div className="flex p-5 flex-col justify-center max-w-[1600px] items-start w-full h-full">
+            <div className="flex p-5 flex-col justify-center max-w-[1600px] items-start w-full ">
               <span className="z-[10]  uppercase text-start tituloPrimera ">
                 Bienvenido,
                 <br />{" "}
@@ -142,7 +142,7 @@ export default function MiCuenta({
         </div>
       </div>
       <div className="flex flex-row w-full justify-center">
-        <div className="flex flex-col items-center max-w-[1900px]">
+        <div className="flex flex-col items-center w-full max-w-[1900px]">
           <div className="flex flex-row px-5 justify-start lg:justify-end w-full my-5">
             <button onClick={() => handleConnect()} className="logout">
               Desconectarse
