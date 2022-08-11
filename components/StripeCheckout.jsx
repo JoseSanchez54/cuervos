@@ -41,7 +41,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
   return (
     <>
       <button className="items-center" onClick={(e) => handle(e)}>
-        Pagar {loading && <ClipLoader size="10px" color="white" />}
+        Pagar {loading && <ClipLoader size="16px" color="white" />}
       </button>
 
       <style jsx>
