@@ -121,7 +121,9 @@ export default function MiCuenta({
               <span className="z-[10]  uppercase text-start tituloPrimera ">
                 Bienvenido,
                 <br />{" "}
-                {usuario?.nombreCompleto ? usuario?.nombreCompleto : username}
+                {usuario?.nombre !== undefined
+                  ? usuario?.nombreCompleto
+                  : username}
               </span>
               <Image
                 objectFit="cover"
