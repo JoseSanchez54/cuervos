@@ -156,6 +156,7 @@ const LoginForm = ({ opciones, login, set }) => {
         setRegistro(false);
       })
       .catch((err) => {
+        console.log(err);
         setLoading(false);
         setError("No se ha podido crear la cuenta");
       });
