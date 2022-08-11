@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const [sus, setSus] = useState({});
   const [error, setError] = useState("");
-  console.log(seleccion);
+
   const actualCart = useSelector((state) => state.cartReducer.cart);
   useEffect(() => {
     actualCart.map((item) => {
@@ -21,7 +21,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         intervalo,
       });
     });
-  }, []);
+  }, [actualCart]);
   const variable = producto.attributes.length > 0;
   const dispatch = useDispatch();
   if (variable) {
@@ -41,14 +41,8 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
 
   const handleCart = () => {
     if (variable) {
+      console.log(sus);
       const productoAdd = addToCart(seleccion, lista);
-      const periodo = productoAdd?.meta_data?.find(
-        (meta) => meta?.key === "_subscription_period"
-      )?.value;
-      const intervalo = productoAdd?.meta_data?.find(
-        (meta) => meta?.key === "_subscription_period_interval"
-      )?.value;
-
       productoAdd = {
         ...productoAdd,
         nombrePadre: producto.name,
@@ -56,11 +50,33 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         variable: true,
         img: producto.images[0].src,
       };
+      if (producto.type === "variable-subscription") {
+        const periodo = productoAdd?.meta_data?.find(
+          (meta) => meta?.key === "_subscription_period"
+        )?.value;
+        const intervalo = productoAdd?.meta_data?.find(
+          (meta) => meta?.key === "_subscription_period_interval"
+        )?.value;
+        if (sus.intervalo === intervalo || actualCart.length === 0) {
+          dispatch({
+            type: "@AddToCart",
+            producto: productoAdd,
+          });
+        }
+      } else {
+        productoAdd = {
+          ...productoAdd,
+          nombrePadre: producto.name,
+          idPadre: producto.id,
+          variable: true,
+          img: producto.images[0].src,
+        };
 
-      dispatch({
-        type: "@AddToCart",
-        producto: productoAdd,
-      });
+        dispatch({
+          type: "@AddToCart",
+          producto: productoAdd,
+        });
+      }
     } else {
       producto = {
         ...producto,
