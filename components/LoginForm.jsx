@@ -144,7 +144,7 @@ const LoginForm = ({ opciones, login, set }) => {
       .catch((error) => {
         console.log(error);
       });
-    axios
+    await axios
       .post(
         process.env.URLBASE +
           `wp-json/wp/v2/users/register?email=${form.email}&password=${form.password}`,
