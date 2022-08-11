@@ -7,7 +7,7 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
 import WooCommerce from "../woocommerce/Woocommerce";
-//
+
 const LoginForm = ({ opciones, login, set }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -102,7 +102,7 @@ const LoginForm = ({ opciones, login, set }) => {
         setLoading(false);
       });
   };
-  const SendCode = () => {
+  const SendCode = async () => {
     setLoading(true);
     await axios
       .post(
