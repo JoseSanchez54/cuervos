@@ -23,7 +23,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
     });
   }, []);
 
-  console.log(actualCart);
+  console.log(producto);
   const variable = producto.attributes.length > 0;
   const dispatch = useDispatch();
   if (variable) {
@@ -59,19 +59,11 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         variable: true,
         img: producto.images[0].src,
       };
-      if (
-        (periodo === sus.periodo && intervalo === sus.intervalo) ||
-        actualCart.length === 0
-      ) {
-        dispatch({
-          type: "@AddToCart",
-          producto: productoAdd,
-        });
-      } else {
-        setError(
-          "No se puede agregar dos suscripciones con diferentes intervalos de cobro"
-        );
-      }
+
+      dispatch({
+        type: "@AddToCart",
+        producto: productoAdd,
+      });
     } else {
       producto = {
         ...producto,
