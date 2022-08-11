@@ -9,6 +9,10 @@ import { useDispatch } from "react-redux";
 import WooCommerce from "../woocommerce/Woocommerce";
 
 const LoginForm = ({ opciones, login, set }) => {
+  let headersList = {
+    Accept: "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+  };
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [registro, setRegistro] = useState(false);
@@ -133,6 +137,11 @@ const LoginForm = ({ opciones, login, set }) => {
       });
   };
   const SendRegister = async () => {
+    let reqOptions = {
+      url: `https://criacuervos.bitmac.es/wp-json/wp/v2/users/register?email=${formulario.email}&password=${formulario.password}&username=${formulario.email}`,
+      method: "POST",
+      headers: headersList,
+    };
     setLoading(true);
     const wcForm = {
       email: form.email,
@@ -144,14 +153,8 @@ const LoginForm = ({ opciones, login, set }) => {
       .catch((error) => {
         console.log(error);
       });
-    await axios
-      .post(
-        "https://criacuervos.bitmac.es/wp-json/wp/v2/users/register?email=test@test.com&password=koko",
-        {
-          email: form.email,
-          password: form.password,
-        }
-      )
+    let response = await axios
+      .request(reqOptions)
       .then((res) => {
         setCode(false);
         setOlvidar(false);
