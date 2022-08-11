@@ -2,8 +2,11 @@ import React from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function StripeCheckout({ formulario, envio, cupon }) {
+  const [loading, setLoading] = useState(false);
   const actualCart = useSelector((state) => state.cartReducer.cart);
   const router = useRouter();
   React.useEffect(() => {
@@ -21,6 +24,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
   }, []);
   const handle = (e) => {
     e.preventDefault();
+    setLoading(true);
     axios
       .post("/api/checkout_sessions", {
         items: actualCart,
@@ -29,13 +33,16 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
         cupon: cupon,
       })
       .then((session) => {
+        setLoading(false);
         router.push(session.data.url);
       });
   };
 
   return (
     <>
-      <button onClick={(e) => handle(e)}>Pagar</button>
+      <button className="items-center" onClick={(e) => handle(e)}>
+        Pagar {loading && <ClipLoader size="10px" color="white" />}
+      </button>
 
       <style jsx>
         {`
@@ -48,6 +55,9 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
             display: block;
             width: 100%;
             margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
           }
           button:hover {
             color: white;
