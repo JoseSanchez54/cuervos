@@ -49,14 +49,15 @@ const NuestraVision = ({ opciones, pagina, categorias }) => {
                   {pagina.parrafo_vision}
                 </p>
               </div>
-
-              <Image
-                objectFit="cover"
-                src={pagina.primera_imagen_vision}
-                layout="fill"
-                priority="high"
-                quality={100}
-              ></Image>
+              {pagina.primera_imagen_vision && (
+                <Image
+                  objectFit="cover"
+                  src={pagina.primera_imagen_vision}
+                  layout="fill"
+                  priority="high"
+                  quality={100}
+                ></Image>
+              )}
             </div>
           </div>
         </div>
@@ -86,20 +87,26 @@ const NuestraVision = ({ opciones, pagina, categorias }) => {
               </p>
             </div>
             <div className="flex flex-col lg:w-1/2 w-full">
-              <Image
-                width="658px"
-                height="747px"
-                src={pagina.imagen_tercera_vision}
-              />
+              {pagina.imagen_tercera_vision && (
+                <Image
+                  width="658px"
+                  height="747px"
+                  objectFit="cover"
+                  src={pagina.imagen_tercera_vision}
+                />
+              )}
             </div>
           </div>
           <div className="flex gap-9 flex-row my-[50px] lg:flex-nowrap w-full justify-center flex-wrap-reverse">
             <div className="flex flex-col lg:w-1/2 w-full">
-              <Image
-                width="658px"
-                height="747px"
-                src={pagina.imagen_cuarta_vision}
-              />
+              {pagina.imagen_cuarta_vision && (
+                <Image
+                  width="658px"
+                  height="747px"
+                  objectFit="cover"
+                  src={pagina.imagen_cuarta_vision}
+                />
+              )}
             </div>
             <div className="flex flex-col lg:w-1/2 w-full justify-center">
               <span className="z-[10] uppercase text-center mb-9 tituloPrimera ">
@@ -112,7 +119,13 @@ const NuestraVision = ({ opciones, pagina, categorias }) => {
           </div>
           <div className="flex flex-row w-full justify-center">
             <div className="relative w-full min-h-[587px]">
-              <Image layout="fill" src={pagina.imagen_quinta_vision} />
+              {pagina.imagen_quinta_vision && (
+                <Image
+                  layout="fill"
+                  objectFit="cover"
+                  src={pagina.imagen_quinta_vision}
+                />
+              )}
             </div>
           </div>
           <div className="flex gap-9 flex-row my-[50px] flex-wrap-reverse lg:flex-nowrap w-full justify-center">
@@ -125,11 +138,14 @@ const NuestraVision = ({ opciones, pagina, categorias }) => {
               </p>
             </div>
             <div className="flex flex-col lg:w-1/2 w-full">
-              <Image
-                width="658px"
-                height="747px"
-                src={pagina.imagen_sexta_vision}
-              />
+              {pagina.imagen_sexta_vision && (
+                <Image
+                  width="658px"
+                  height="747px"
+                  objectFit="cover"
+                  src={pagina.imagen_sexta_vision}
+                />
+              )}
             </div>
           </div>
         </div>
