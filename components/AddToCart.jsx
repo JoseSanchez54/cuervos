@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
-  const [sus, setSus] = useState({});
+  const [sus, setSus] = useState(null);
   const [error, setError] = useState("");
 
   const actualCart = useSelector((state) => state.cartReducer.cart);
@@ -16,6 +16,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
       const intervalo = item?.meta_data?.find(
         (meta) => meta?.key === "_subscription_period_interval"
       )?.value;
+      console.log("effect", sus);
 
       if (periodo && intervalo) {
         setSus({
@@ -23,10 +24,12 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           intervalo,
         });
       } else {
-        setSus({});
+        setSus(null);
       }
     });
   }, [actualCart]);
+  console.log(sus);
+
   const variable = producto.attributes.length > 0;
   const dispatch = useDispatch();
   if (variable) {
@@ -61,11 +64,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         const intervalo = productoAdd?.meta_data?.find(
           (meta) => meta?.key === "_subscription_period_interval"
         )?.value;
-        if (
-          sus.intervalo === intervalo ||
-          actualCart.length === 0 ||
-          sus === {}
-        ) {
+        if (sus?.intervalo === intervalo || actualCart.length === 0 || !sus) {
           dispatch({
             type: "@AddToCart",
             producto: productoAdd,
