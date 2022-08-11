@@ -6,23 +6,27 @@ import { useState, useEffect } from "react";
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const [sus, setSus] = useState({});
   const [error, setError] = useState("");
+  console.log(sus);
 
   const actualCart = useSelector((state) => state.cartReducer.cart);
   useEffect(() => {
     actualCart.map((item, index) => {
-      if (item.type === "variable-subscription") {
-        const periodo = item?.meta_data?.find(
-          (meta) => meta?.key === "_subscription_period"
-        )?.value;
-        const intervalo = item?.meta_data?.find(
-          (meta) => meta?.key === "_subscription_period_interval"
-        )?.value;
-        if (index === 0) {
-          setSus({
-            periodo,
-            intervalo,
-          });
-        }
+      console.log(item);
+
+      const periodo = item?.meta_data?.find(
+        (meta) => meta?.key === "_subscription_period"
+      )?.value;
+      const intervalo = item?.meta_data?.find(
+        (meta) => meta?.key === "_subscription_period_interval"
+      )?.value;
+      console.log(periodo);
+      if (periodo && intervalo) {
+        setSus({
+          periodo,
+          intervalo,
+        });
+      } else {
+        setSus({});
       }
     });
   }, [actualCart]);
