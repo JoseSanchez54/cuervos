@@ -49,14 +49,15 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
                   {pagina?.parrafo_nosotros}
                 </p>
               </div>
-
-              <Image
-                objectFit="cover"
-                src={pagina?.primera_imagen_nosotros}
-                layout="fill"
-                priority="high"
-                quality={100}
-              ></Image>
+              {pagina?.primera_imagen_nosotros && (
+                <Image
+                  objectFit="cover"
+                  src={pagina?.primera_imagen_nosotros}
+                  layout="fill"
+                  priority="high"
+                  quality={100}
+                ></Image>
+              )}
             </div>
           </div>
         </div>
@@ -81,6 +82,7 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
               <Image
                 width="658px"
                 height="747px"
+                objectFit="cover"
                 src={pagina?.imagen_tercera_nosotros}
               />
             </div>
@@ -106,13 +108,18 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
               <Image
                 width="658px"
                 height="747px"
+                objectFit="cover"
                 src={pagina?.imagen_cuarta_nosotros}
               />
             </div>
           </div>
           <div className="flex flex-row w-full justify-center">
             <div className="relative w-full min-h-[587px]">
-              <Image layout="fill" src={pagina?.imagen_quinta_nosotros} />
+              <Image
+                layout="fill"
+                objectFit="cover"
+                src={pagina?.imagen_quinta_nosotros}
+              />
             </div>
           </div>
           <div className="flex gap-9 flex-row my-[50px] flex-wrap-reverse lg:flex-nowrap w-full justify-center">
@@ -120,6 +127,7 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
               <Image
                 width="658px"
                 height="747px"
+                objectFit="cover"
                 src={pagina?.imagen_sexta_nosotros}
               />
             </div>
