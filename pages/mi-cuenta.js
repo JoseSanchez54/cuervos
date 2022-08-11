@@ -230,7 +230,7 @@ export default function MiCuenta({
               <>
                 {" "}
                 <div className="flex flex-col w-full  items-center">
-                  <div className="flex flex-row my-9 w-full lg:min-h-[76vh]  justify-center ">
+                  <div className="flex flex-row my-9 w-full justify-center ">
                     <div className="flex flex-col w-full max-w-[1600px]  items-center">
                       <span className="titulo my-9 uppercase">
                         Suscripciones
