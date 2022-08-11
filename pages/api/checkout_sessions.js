@@ -33,13 +33,13 @@ export default async function handler(req, res) {
     const metadata = Object?.values(i?.meta_data).map((key) => {
       return key;
     });
-    periodico = metadata?.filter((m) => m.key === "_subscription_period")[0]
-      ?.value;
-    intervalo = metadata?.filter(
-      (m) => m.key === "_subscription_period_interval"
-    )[0]?.value;
 
-    if (i.type === "subscription") {
+    if (i.type === "subscription" || i.attributes[0].name === "Meses") {
+      periodico = metadata?.filter((m) => m.key === "_subscription_period")[0]
+        ?.value;
+      intervalo = metadata?.filter(
+        (m) => m.key === "_subscription_period_interval"
+      )[0]?.value;
       sus = true;
       lineItems.push({
         price_data: {

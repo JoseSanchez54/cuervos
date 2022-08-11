@@ -41,7 +41,6 @@ const MenuLateral = ({ opciones, categorias }) => {
   });
   const padres = categories?.filter((res) => res.parent === 0);
   const hijos = categories?.filter((res) => res.parent === seccion);
-  
 
   return (
     <>
@@ -275,7 +274,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                                 {options?.titulo_promocion}
                               </span>
                               <button className="buyNow">
-                                <Link href="/categoria/tinto">
+                                <Link href="/categoria/todos">
                                   <a>Comprar ahora</a>
                                 </Link>
                               </button>

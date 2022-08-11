@@ -1,5 +1,5 @@
 import { addToCart } from "../utils/addToCart";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
