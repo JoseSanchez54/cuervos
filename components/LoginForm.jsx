@@ -146,8 +146,7 @@ const LoginForm = ({ opciones, login, set }) => {
       });
     await axios
       .post(
-        process.env.URLBASE +
-          `wp-json/wp/v2/users/register?email=${form.email}&password=${form.password}`,
+        "https://criacuervos.bitmac.es/wp-json/wp/v2/users/register?email=test@test.com&password=koko",
         {
           email: form.email,
           password: form.password,
