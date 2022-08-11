@@ -11,13 +11,11 @@ const Nosotros = ({ opciones, pagina, categorias }) => {
 
   return (
     <>
-      {!isValidating && (
-        <NuestraVision
-          opciones={optionsSWR}
-          pagina={data}
-          categorias={categorias}
-        />
-      )}
+      <NuestraVision
+        opciones={optionsSWR}
+        pagina={data}
+        categorias={categorias}
+      />
     </>
   );
 };

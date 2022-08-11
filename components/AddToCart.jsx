@@ -1,8 +1,20 @@
 import { addToCart } from "../utils/addToCart";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
+  const [sus, setSus] = useState({});
+  const actualCart = useSelector((state) => state.cartReducer.cart);
+  actualCart.map((item) => {
+    const periodo = item?.meta_data?.find(
+      (meta) => meta?.key === "_subscription_period"
+    )?.value;
+    const customer_id = item?.meta_data?.find(
+      (meta) => meta?.key === "_stripe_customer_id"
+    )?.value;
+  });
+  console.log(actualCart);
   const variable = producto.attributes.length > 0;
   const dispatch = useDispatch();
   if (variable) {
