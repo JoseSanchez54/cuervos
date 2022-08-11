@@ -8,7 +8,6 @@ import { BiUser } from "react-icons/bi";
 import MiniCart from "../components/MiniCart";
 import LoginForm from "./LoginForm";
 import { useState } from "react";
-import { Dropdown } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 
 const Nav = ({ opciones, categorias }) => {
@@ -31,7 +30,7 @@ const Nav = ({ opciones, categorias }) => {
               <Image
                 width="85px"
                 height="63px"
-                src={opciones.logo_principal}
+                src={opciones?.logo_principal}
               ></Image>
             </a>
           </Link>
@@ -43,7 +42,7 @@ const Nav = ({ opciones, categorias }) => {
                 {!isMobile ? (
                   <button
                     style={{
-                      fontFamily: opciones.fuente_global,
+                      fontFamily: opciones?.fuente_global,
                       color: "black",
                     }}
                     onClick={() => handleLogin()}
@@ -60,7 +59,7 @@ const Nav = ({ opciones, categorias }) => {
               <Link href="/mi-cuenta" passHref>
                 <a
                   style={{
-                    fontFamily: opciones.fuente_global,
+                    fontFamily: opciones?.fuente_global,
                     color: "black",
                   }}
                 >
