@@ -137,10 +137,14 @@ const LoginForm = ({ opciones, login, set }) => {
         console.log(error);
       });
     axios
-      .post(process.env.URLBASE + "wp-json/wp/v2/users/register", {
-        email: form.email,
-        password: form.password,
-      })
+      .post(
+        process.env.URLBASE +
+          `wp-json/wp/v2/users/register?email=${form.email}&password=${form.password}`,
+        {
+          email: form.email,
+          password: form.password,
+        }
+      )
       .then((res) => {
         setCode(false);
         setOlvidar(false);

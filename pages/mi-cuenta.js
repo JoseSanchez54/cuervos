@@ -26,6 +26,10 @@ export default function MiCuenta({
   const username = useSelector((state) => state.userReducer.email);
   const { data } = usePages(pagina, "area");
   const dispatch = useDispatch();
+  /**
+   * When the user clicks the logout button, the user's session is removed from the database and the
+   * user is redirected to the login page.
+   */
   const handleConnect = async () => {
     await dispatch({ type: "@Remove" });
     document.cookie =
@@ -35,6 +39,7 @@ export default function MiCuenta({
   const { isLoading, options: optionsSWR } = useOptions(options);
   const pedidos1 = useSWR("orders", fetcherWc);
   const fetcher = (url) => fetch(url).then((r) => r.json());
+
   const {
     data: sesionesSWR,
     isValidating: validando,
@@ -44,6 +49,7 @@ export default function MiCuenta({
     fallbackData: sessions,
     refreshInterval: 10000,
   });
+
 
   const customers = useSWR("customers", fetcherWc);
   const { data: sus } = useSWR(

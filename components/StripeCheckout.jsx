@@ -5,6 +5,12 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
+/**
+ * I'm trying to create a stripe session and then redirect to the stripe checkout page.
+ * </code>
+ * @returns The session.data.url is being returned.
+ * </code>
+ */
 export default function StripeCheckout({ formulario, envio, cupon }) {
   const [loading, setLoading] = useState(false);
   const actualCart = useSelector((state) => state.cartReducer.cart);

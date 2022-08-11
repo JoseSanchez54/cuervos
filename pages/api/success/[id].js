@@ -1,5 +1,6 @@
 import WooCommerce from "../../../woocommerce/Woocommerce";
 
+/* A function that is called when a user makes a payment. */
 export default async (req, res) => {
   const estado = {
     status: "processing",
