@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const [sus, setSus] = useState({});
   const [error, setError] = useState("");
-  console.log(sus);
+
 
   const actualCart = useSelector((state) => state.cartReducer.cart);
   useEffect(() => {
@@ -47,7 +47,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
 
   const handleCart = () => {
     if (variable) {
-      console.log(sus);
+  
       const productoAdd = addToCart(seleccion, lista);
 
       if (producto.type === "variable-subscription") {

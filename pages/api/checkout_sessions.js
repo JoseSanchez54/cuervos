@@ -275,7 +275,6 @@ export default async function handler(req, res) {
         },
       })
       .then((session) => {
-        console.log(session);
         return session;
       });
     res.status(200).json(session);
