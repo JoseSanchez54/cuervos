@@ -3,7 +3,7 @@ import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
 import { useOptions } from "../hooks/useOptions";
 import { usePages } from "../hooks/usePages";
-import { useProducts } from "../hooks/useProducts";
+
 const Nosotros = ({ opciones, pagina, categorias }) => {
   const { isLoading, options: optionsSWR } = useOptions(opciones);
   const { data, isValidating } = usePages(pagina, "nosotros");

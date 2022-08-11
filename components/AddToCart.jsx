@@ -10,17 +10,19 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const actualCart = useSelector((state) => state.cartReducer.cart);
   useEffect(() => {
     actualCart.map((item, index) => {
-      const periodo = item?.meta_data?.find(
-        (meta) => meta?.key === "_subscription_period"
-      )?.value;
-      const intervalo = item?.meta_data?.find(
-        (meta) => meta?.key === "_subscription_period_interval"
-      )?.value;
-      if (index === 0) {
-        setSus({
-          periodo,
-          intervalo,
-        });
+      if (item.type === "variable-subscription") {
+        const periodo = item?.meta_data?.find(
+          (meta) => meta?.key === "_subscription_period"
+        )?.value;
+        const intervalo = item?.meta_data?.find(
+          (meta) => meta?.key === "_subscription_period_interval"
+        )?.value;
+        if (index === 0) {
+          setSus({
+            periodo,
+            intervalo,
+          });
+        }
       }
     });
   }, [actualCart]);
@@ -59,7 +61,11 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         const intervalo = productoAdd?.meta_data?.find(
           (meta) => meta?.key === "_subscription_period_interval"
         )?.value;
-        if (sus.intervalo === intervalo || actualCart.length === 0) {
+        if (
+          sus.intervalo === intervalo ||
+          actualCart.length === 0 ||
+          sus === {}
+        ) {
           dispatch({
             type: "@AddToCart",
             producto: productoAdd,
