@@ -22,8 +22,6 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
       });
     });
   }, []);
-
-  console.log(producto);
   const variable = producto.attributes.length > 0;
   const dispatch = useDispatch();
   if (variable) {
@@ -50,7 +48,6 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
       const intervalo = productoAdd?.meta_data?.find(
         (meta) => meta?.key === "_subscription_period_interval"
       )?.value;
-      console.log(productoAdd);
 
       productoAdd = {
         ...productoAdd,
