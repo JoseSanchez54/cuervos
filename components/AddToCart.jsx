@@ -7,7 +7,6 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const [sus, setSus] = useState({});
   const [error, setError] = useState("");
 
-
   const actualCart = useSelector((state) => state.cartReducer.cart);
   useEffect(() => {
     actualCart.map((item, index) => {
@@ -47,7 +46,6 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
 
   const handleCart = () => {
     if (variable) {
-  
       const productoAdd = addToCart(seleccion, lista);
 
       if (producto.type === "variable-subscription") {
@@ -72,6 +70,11 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
             type: "@AddToCart",
             producto: productoAdd,
           });
+          setError("");
+        } else {
+          setError(
+            "No puedes agregar productos de diferente intervalo de facturación"
+          );
         }
       } else {
         productoAdd = {
@@ -103,35 +106,47 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
 
   return (
     <>
-      <motion.button
-        initial={{
-          color: "white",
-          padding: "15px",
-          backgroundColor: "black",
-          fontFamily: opciones.fuente_global,
-          border: "2px solid transparent",
-        }}
-        whileHover={{
-          color: "black",
-          backgroundColor: "transparent",
-          border: "2px solid black",
-        }}
-        transition={{ type: "spring", stiffness: 100 }}
-        className="block w-full "
-        whileTap={{
-          backgroundColor: "transparent",
-          color: "black",
-          border: "1px solid black",
-        }}
-        onClick={() => handleCart()}
-      >
-        <span>COMPRAR AHORA</span>
-      </motion.button>
-      {error && (
-        <>
-          <span className="block w-full">{error}</span>
-        </>
-      )}
+      <div className="flex flex-col w-full">
+        <motion.button
+          initial={{
+            color: "white",
+            padding: "15px",
+            backgroundColor: "black",
+            fontFamily: opciones.fuente_global,
+            border: "2px solid transparent",
+          }}
+          whileHover={{
+            color: "black",
+            backgroundColor: "transparent",
+            border: "2px solid black",
+          }}
+          transition={{ type: "spring", stiffness: 100 }}
+          className="block w-full "
+          whileTap={{
+            backgroundColor: "transparent",
+            color: "black",
+            border: "1px solid black",
+          }}
+          onClick={() => handleCart()}
+        >
+          <span>COMPRAR AHORA</span>
+        </motion.button>
+        <div className="flex flex-row w-full">
+          {" "}
+          {error && (
+            <>
+              <span
+                style={{
+                  fontFamily: opciones.fuente_global,
+                }}
+                className="block w-full my-3"
+              >
+                {error}
+              </span>
+            </>
+          )}
+        </div>
+      </div>
 
       <style jsx>{`
         input::-webkit-outer-spin-button,
