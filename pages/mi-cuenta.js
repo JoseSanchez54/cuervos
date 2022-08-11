@@ -226,7 +226,7 @@ export default function MiCuenta({
                 </div>
               </div>
             </div>
-            {userSus.length > 0 && (
+            {userSus?.length > 0 && (
               <>
                 {" "}
                 <div className="flex flex-col w-full  items-center">
