@@ -89,7 +89,7 @@ export default function Tienda({
   return (
     <>
       <Categorias
-        pagina={pagesNew}
+        pagina={data}
         categorias={categorias}
         opciones={optionsSWR}
         productos={productosSWR}

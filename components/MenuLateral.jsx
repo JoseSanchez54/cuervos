@@ -75,15 +75,18 @@ const MenuLateral = ({ opciones, categorias }) => {
               !seccion ? (
                 <div className="flex flex-col lg:w-1/2 w-full h-full">
                   <div className="flex flex-row justify-between items-center w-full p-9  borde-b ">
-                    <Link href="/">
-                      <a>
-                        <Image
-                          width="85px"
-                          height="63px"
-                          src={options?.logo_principal}
-                        ></Image>
-                      </a>
-                    </Link>
+                    {options?.logo_principal && (
+                      <Link href="/">
+                        <a>
+                          <Image
+                            width="85px"
+                            height="63px"
+                            src={options?.logo_principal}
+                          ></Image>
+                        </a>
+                      </Link>
+                    )}
+
                     <button onClick={(e) => handleAbrir()}>
                       <GrClose />
                     </button>
@@ -123,15 +126,18 @@ const MenuLateral = ({ opciones, categorias }) => {
                 <AnimatePresence>
                   <div className="flex flex-col lg:w-1/2 w-full h-full">
                     <div className="flex flex-row justify-between items-center w-full p-9  borde-b ">
-                      <Link href="/">
-                        <a>
-                          <Image
-                            width="85px"
-                            height="63px"
-                            src={options?.logo_principal}
-                          ></Image>
-                        </a>
-                      </Link>
+                      {options?.logo_principal && (
+                        <Link href="/">
+                          <a>
+                            <Image
+                              width="85px"
+                              height="63px"
+                              src={options?.logo_principal}
+                            ></Image>
+                          </a>
+                        </Link>
+                      )}
+
                       <button onClick={(e) => setSeccion(null)}>
                         <AiOutlineArrowLeft />
                       </button>
@@ -193,15 +199,18 @@ const MenuLateral = ({ opciones, categorias }) => {
             ) : (
               <div className="flex flex-col lg:w-1/2 w-full h-full">
                 <div className="flex flex-row justify-between items-center w-full lg:p-9 p-1  borde-b ">
-                  <Link href="/">
-                    <a>
-                      <Image
-                        width="85px"
-                        height="63px"
-                        src={options?.logo_principal}
-                      ></Image>
-                    </a>
-                  </Link>
+                  {options?.logo_principal && (
+                    <Link href="/">
+                      <a>
+                        <Image
+                          width="85px"
+                          height="63px"
+                          src={options?.logo_principal}
+                        ></Image>
+                      </a>
+                    </Link>
+                  )}
+
                   {!seccion ? (
                     <button onClick={(e) => handleAbrir()}>
                       <GrClose />

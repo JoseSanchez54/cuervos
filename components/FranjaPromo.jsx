@@ -5,19 +5,19 @@ const FranjaPromo = ({ opciones }) => {
     <>
       <div
         style={{
-          backgroundColor: opciones.promocion_color_fondo,
-          color: opciones.promocion_color_texto,
-          fontFamily: opciones.fuente_titulos,
+          backgroundColor: opciones?.promocion_color_fondo,
+          color: opciones?.promocion_color_texto,
+          fontFamily: opciones?.fuente_titulos,
         }}
         className="flex flex-row w-full h-[75px]"
       >
         <Marquee gradient={false}>
-          <span className="marquesina">{opciones.promocion_uno}</span>
-          <span className="marquesina">{opciones.promocion_dos}</span>
-          <span className="marquesina">{opciones.promocion_uno}</span>
-          <span className="marquesina">{opciones.promocion_dos}</span>
-          <span className="marquesina">{opciones.promocion_uno}</span>
-          <span className="marquesina">{opciones.promocion_dos}</span>
+          <span className="marquesina">{opciones?.promocion_uno}</span>
+          <span className="marquesina">{opciones?.promocion_dos}</span>
+          <span className="marquesina">{opciones?.promocion_uno}</span>
+          <span className="marquesina">{opciones?.promocion_dos}</span>
+          <span className="marquesina">{opciones?.promocion_uno}</span>
+          <span className="marquesina">{opciones?.promocion_dos}</span>
         </Marquee>
       </div>
       <style jsx>{`
