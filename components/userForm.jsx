@@ -20,12 +20,10 @@ const userForm = ({ opciones }) => {
         <div className="flex lfex-row w-full">
           <div className="flex flex-col w-1/2">
             <Input
-              {...bindings}
               clearable
               labelPlaceholder="Email"
               initialValue="Email"
               name="email"
-              onClearClick={reset}
               required
               css={{
                 backgroundColor: "white",
