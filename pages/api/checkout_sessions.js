@@ -251,10 +251,13 @@ export default async function handler(req, res) {
       line_items: lineItemsWC,
       shipping_lines: wcForm.shipping_lines,
     };
+    let suscripcion = {};
+    if (sus) {
+      suscripcion = await WooCommerce.post("subscriptions", data).then(
+        (res) => res.data
+      );
+    }
 
-    const suscripcion = await WooCommerce.post("subscriptions", data).then(
-      (res) => res.data
-    );
     const session = await stripe.checkout.sessions
       .create({
         line_items: lineItems,
