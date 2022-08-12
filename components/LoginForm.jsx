@@ -146,13 +146,7 @@ const LoginForm = ({ opciones, login, set }) => {
     const wcForm = {
       email: form.email,
     };
-    const wcCustomer = await WooCommerce.post("customers", wcForm)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
     let response = await axios
       .request(reqOptions)
       .then((res) => {
