@@ -610,7 +610,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
           color: #000;
         }
         .atras {
-          color: #fff;
+          color: #000;
           text-decoration: underline;
           text-align: center;
         }
