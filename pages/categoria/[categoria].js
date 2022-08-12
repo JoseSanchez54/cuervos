@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
     }
   );
 
-  const paths = categorias.map((produ) => {
+  const paths = await categorias.map((produ) => {
     return {
       params: {
         categoria: produ.slug.toString(),
@@ -54,7 +54,7 @@ export async function getStaticProps(props) {
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const productos = await WooCommerce.get(
-    "products?per_page=99&status=publish&category=" + categoriaActual?.id
+    "products?per_page=10&status=publish&category=" + categoriaActual?.id
   ).then((response) => {
     return response.data;
   });
