@@ -47,7 +47,7 @@ export async function getStaticProps(props) {
   ).then((response) => {
     return response.data;
   });
-  const categoriaActual = categorias.find(
+  const categoriaActual = await categorias.find(
     (e) => e.slug === props.params.categoria
   );
 
