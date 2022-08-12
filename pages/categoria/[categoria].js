@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
   });
   return {
     paths: paths,
-    fallback: true,
+    fallback: "blocking",
   };
 };
 export async function getStaticProps(props) {
@@ -89,7 +89,7 @@ export default function Tienda({
   return (
     <>
       <Categorias
-        pagina={pagesNew}
+        pagina={data}
         categorias={categorias}
         opciones={optionsSWR}
         productos={productosSWR}
