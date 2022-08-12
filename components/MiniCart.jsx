@@ -265,7 +265,7 @@ const MiniCart = ({ opciones, tasas }) => {
           font-size: 1.5rem;
           font-weight: bold;
           color: #fff;
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
         }
         .overlay {
           width: 100vw;
@@ -287,7 +287,7 @@ const MiniCart = ({ opciones, tasas }) => {
           display: flex !important;
         }
         .mensajeEnviado {
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           line-height: 1;
           color: black;
           font-weight: bold;
@@ -305,7 +305,7 @@ const MiniCart = ({ opciones, tasas }) => {
           line-height: calc(30px + (102 - 13) * (100vh - 320px) / (2560 - 320));
           margin: 25px 0px;
           display: block;
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           z-index: 9;
         }
         .cursor-pointer {
@@ -401,7 +401,7 @@ const MiniCart = ({ opciones, tasas }) => {
         }
         .direcciones span {
           display: block;
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           text-align: end;
           color: rgb(154, 152, 152) !important;
           font-size: 12px;
@@ -409,7 +409,7 @@ const MiniCart = ({ opciones, tasas }) => {
         }
         .tituloContacto {
           color: white;
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           font-size: calc(42px + (100 - 27) * (100vh - 320px) / (2560 - 320));
           width: 100%;
           font-style: italic;
@@ -426,17 +426,17 @@ const MiniCart = ({ opciones, tasas }) => {
           font-size: 20px;
           font-weight: normal;
           color: #fff;
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
         }
         .miniCartName {
           font-size: 24px;
 
           font-weight: normal;
           color: #fff;
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
         }
         .minicartD {
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           font-size: 18px;
           font-weight: bold;
           cursor: pointer;
@@ -447,7 +447,7 @@ const MiniCart = ({ opciones, tasas }) => {
           margin-top: 6px;
         }
         .botonComprar {
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           color: #fff;
           font-size: 25px;
           background-color: black;
@@ -505,7 +505,7 @@ const MiniCart = ({ opciones, tasas }) => {
           position: absolute;
           width: 20px;
           height: 20px;
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           font-size: 13px;
           top: 19px;
           background-color: #000000;
@@ -520,13 +520,13 @@ const MiniCart = ({ opciones, tasas }) => {
         .label {
           color: #fff;
           font-size: 13px;
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           font-weight: bold;
         }
         .option {
           color: #fff;
           font-size: 12px;
-          font-family: ${opciones.fuente_titulos};
+          font-family: ${opciones?.fuente_titulos};
           font-weight: normal;
         }
         @media (max-width: 768px) {

@@ -11,34 +11,39 @@ const ShopNav = ({ pagina, opciones }) => {
   useEffect(() => {
     setActivo(router.query.categoria);
   }, [router]);
-  const menuBruto = Object?.values(pagina?.menu_tienda).map((key) => {
-    return key;
-  });
+  let menuBruto = "";
+  if (pagina) {
+    menuBruto = Object?.values(pagina?.menu_tienda).map((key) => {
+      return key;
+    });
+  }
+
   return (
     <>
       <div className="flex flex-row gap-5 justify-between my-9 w-full">
-        {menuBruto?.map((menu, index) => {
-          return (
-            <div className="flex flex-col" key={index}>
-              <Link href={`/categoria${menu.url}`} passHref>
-                <a>
-                  <span
-                    className="uppercase"
-                    style={{
-                      fontFamily: options?.fuente_global,
-                      fontSize: "16px",
-                      color: "black",
-                      textDecoration:
-                        "/" + activo === menu.url ? "underline" : "none",
-                    }}
-                  >
-                    {menu.etiqueta}
-                  </span>
-                </a>
-              </Link>
-            </div>
-          );
-        })}
+        {pagina &&
+          menuBruto?.map((menu, index) => {
+            return (
+              <div className="flex flex-col" key={index}>
+                <Link href={`/categoria${menu.url}`} passHref>
+                  <a>
+                    <span
+                      className="uppercase"
+                      style={{
+                        fontFamily: options?.fuente_global,
+                        fontSize: "16px",
+                        color: "black",
+                        textDecoration:
+                          "/" + activo === menu.url ? "underline" : "none",
+                      }}
+                    >
+                      {menu.etiqueta}
+                    </span>
+                  </a>
+                </Link>
+              </div>
+            );
+          })}
       </div>
     </>
   );

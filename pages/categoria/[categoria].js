@@ -11,6 +11,7 @@ export const getStaticPaths = async () => {
       return response.data;
     }
   );
+  console.log(categorias);
 
   const paths = categorias.map((produ) => {
     return {
@@ -82,13 +83,13 @@ export default function Tienda({
   categoriaActual,
 }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
-  const { data, isValidating } = usePages(pagesNew, "tienda");
+  const { data } = usePages(pagesNew, "tienda");
   const { products: productosSWR } = useProducts(productos, categoriaActual);
-
+  console.log(pagesNew);
   return (
     <>
       <Categorias
-        pagina={data}
+        pagina={pagesNew}
         categorias={categorias}
         opciones={optionsSWR}
         productos={productosSWR}
