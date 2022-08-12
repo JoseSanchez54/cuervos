@@ -567,7 +567,7 @@ const SingleProduct = ({
               </div>
             </div>
           </div>
-          {isVino && (
+          {isVino && imagenBanner && (
             <>
               {" "}
               <div className="flex mt-[80px] flex-row w-full justify-center">
