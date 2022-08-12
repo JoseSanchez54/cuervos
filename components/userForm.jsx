@@ -1,6 +1,6 @@
 import { Input } from "@nextui-org/react";
 import { useState } from "react";
-const userForm = ({ opciones }) => {
+const UserForm = ({ opciones }) => {
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -47,3 +47,4 @@ const userForm = ({ opciones }) => {
     </div>
   );
 };
+export default UserForm;
