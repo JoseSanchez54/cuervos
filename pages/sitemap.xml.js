@@ -103,7 +103,7 @@ export async function getServerSideProps({ res }) {
               return `
             <url>
               <loc>${baseUrl}/categoria/${post.slug}</loc>
-              <lastmod>${new Date(post.date_modified).toISOString()}</lastmod>
+              <lastmod>${new Date().toISOString()}</lastmod>
               <changefreq>monthly</changefreq>
               <priority>0.9</priority>
             </url>
