@@ -251,7 +251,7 @@ export default async function handler(req, res) {
       line_items: lineItemsWC,
       shipping_lines: wcForm.shipping_lines,
     };
-    let suscripcion = {};
+    let suscripcion = undefined;
     if (sus) {
       suscripcion = await WooCommerce.post("subscriptions", data).then(
         (res) => res.data
