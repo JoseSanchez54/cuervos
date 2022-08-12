@@ -6,11 +6,11 @@ import Categorias from "../../components/Categorias";
 import { usePages } from "../../hooks/usePages";
 
 export const getStaticPaths = async () => {
-  const categorias = await WooCommerce.get("products/categories").then(
-    (response) => {
-      return response.data;
-    }
-  );
+  const categorias = await WooCommerce.get(
+    "products/categories?per_page=100"
+  ).then((response) => {
+    return response.data;
+  });
 
   const paths = await categorias.map((produ) => {
     return {
