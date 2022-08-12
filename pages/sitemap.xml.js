@@ -20,6 +20,11 @@ export async function getServerSideProps({ res }) {
       return response.data;
     }
   );
+  const categorias = await WooCommerce.get(
+    "products/categories?per_page=100"
+  ).then((response) => {
+    return response.data;
+  });
 
   const YOUR_URL = checkDomain("vinoscriacuervos.com");
   const baseUrl = {
@@ -93,6 +98,18 @@ export async function getServerSideProps({ res }) {
           `;
           })
           .join("")}
+          ${categorias
+            .map((post) => {
+              return `
+            <url>
+              <loc>${baseUrl}/categoria/${post.slug}</loc>
+              <lastmod>${new Date(post.date_modified).toISOString()}</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>0.9</priority>
+            </url>
+          `;
+            })
+            .join("")}
       <url>
         <loc>${baseUrl}/contacto</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
