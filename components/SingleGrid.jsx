@@ -51,6 +51,16 @@ const SingleGrid = ({ producto, opciones }) => {
     hover: { color: "#fff" },
   };
 
+  const metadata = Object?.values(producto?.meta_data).map((key) => {
+    return key;
+  });
+  const precioindividual = metadata?.filter(
+    (m) => m.key === "precioindividual"
+  )[0]?.value;
+  const precioindividualrebaja = metadata?.filter(
+    (m) => m.key === "precioindividualrebaja"
+  )[0]?.value;
+
   return (
     <AnimatePresence>
       <div
@@ -92,8 +102,16 @@ const SingleGrid = ({ producto, opciones }) => {
                   </Link>
                   {producto?.categories[0]?.slug === "destacados" ? (
                     <Precio
-                      precio={producto?.regular_price}
-                      rebaja={producto?.sale_price}
+                      precio={
+                        precioindividual !== ""
+                          ? precioindividual
+                          : producto?.regular_price
+                      }
+                      rebaja={
+                        precioindividualrebaja
+                          ? precioindividualrebaja
+                          : producto?.sale_price
+                      }
                       hover={cambioImagen}
                       opciones={opciones}
                       variable={producto?.type === "variable"}

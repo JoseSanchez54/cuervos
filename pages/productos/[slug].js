@@ -134,17 +134,15 @@ const SingleProduct = ({
     });
   }, []);
 
-  const [precio, setPrecio] = useState(product?.price);
-  const handlePrecio = (precio) => {
-    setPrecio(precio);
-  };
-
   const metadata = Object?.values(product?.meta_data).map((key) => {
     return key;
   });
   const video = metadata?.filter((m) => m.key === "video")[0]?.value;
   const colorFondo = metadata?.filter((m) => m.key === "color-de-fondo")[0]
     ?.value;
+  const precioindividual = metadata?.filter(
+    (m) => m.key === "precioindividual"
+  )[0]?.value;
 
   const imagenBanner = metadata.filter((m) => m.key === "imagen_vinero")[0]
     ?.value;
@@ -153,7 +151,12 @@ const SingleProduct = ({
   const parrafoBanner = metadata.filter(
     (m) => m.key === "parrafo_banner_copy"
   )[0]?.value;
-
+  const [precio, setPrecio] = useState(
+    precioindividual ? precioindividual : product?.price
+  );
+  const handlePrecio = (precio) => {
+    setPrecio(precio);
+  };
   function definirVariaciones(p, v) {
     const atributos = p.attributes
       .filter((e, index) => e.variation === true)

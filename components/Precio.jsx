@@ -90,7 +90,7 @@ const Precio = ({
                             }}
                             className="rebaja"
                           >
-                            {variaciones[0]?.sale_price / 2}€
+                            {rebaja ? rebaja : variaciones[0]?.sale_price / 2}€
                           </span>
                         </div>
                       </div>
@@ -106,7 +106,7 @@ const Precio = ({
                             }}
                             className="rebaja"
                           >
-                            {variaciones[0]?.price / 2}€
+                            {precio ? precio : variaciones[0]?.price / 2}€
                           </span>
                         </div>
                       </div>
