@@ -136,7 +136,9 @@ const Success = ({ categorias, opciones }) => {
                   fontFamily: opciones.fuente_titulos,
                 }}
               >
-                Hemos enviado los datos de tu pedido al email proporcionado
+                Nos ponemos manos a la obra para que recibas tu pedido cuanto
+                antes. Te enviaremos por email los datos de tu pedido y te
+                avisaremos cuando el pedido vaya en camino hacia ti.
               </p>
               <button
                 style={{
@@ -160,7 +162,7 @@ const Success = ({ categorias, opciones }) => {
                       color: "black",
                     }}
                   >
-                    Volver a la home
+                    Volver a Cría Cuervos
                   </a>
                 </Link>
               </button>
