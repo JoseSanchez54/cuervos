@@ -51,9 +51,8 @@ const UserForm = ({ opciones, usuario }) => {
       last_name: form.apellido,
       email: form.email,
     };
-    console.log(data);
 
-    WooCommerce.put("customers/" + usuario.id, data)
+    await WooCommerce.put("customers/" + usuario.id, data)
       .then((response) => {
         console.log(response);
         return response;
@@ -69,7 +68,7 @@ const UserForm = ({ opciones, usuario }) => {
       {activo && (
         <>
           <div className="flex fixed top-0 right-0 left-0 bottom-0 flex-row w-screen h-screen justify-center items-center">
-            <div className="flex max-w-[700px] gap-5 py-9 px-9 bg-white flex-col w-full items-center">
+            <div className="flex max-w-[446px] gap-5 py-9 px-9 bg-white flex-col w-full items-center">
               <form onSubmit={(e) => handleEnviar(e)}>
                 <div className="flex mb-9 w-full flex-row justify-between">
                   <span
