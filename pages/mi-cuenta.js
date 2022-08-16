@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import { Dropdown } from "@nextui-org/react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import UserForm from "../components/userForm";
 
 export default function MiCuenta({
   options,
@@ -49,7 +50,6 @@ export default function MiCuenta({
     fallbackData: sessions,
     refreshInterval: 10000,
   });
-
 
   const customers = useSWR("customers", fetcherWc);
   const { data: sus } = useSWR(
@@ -149,10 +149,11 @@ export default function MiCuenta({
       </div>
       <div className="flex flex-row w-full justify-center">
         <div className="flex flex-col items-center w-full max-w-[1900px]">
-          <div className="flex flex-row px-5 justify-start lg:justify-end w-full my-5">
+          <div className="flex flex-row px-5 gap-5 justify-start lg:justify-end w-full my-5">
             <button onClick={() => handleConnect()} className="logout">
               Desconectarse
             </button>
+            <UserForm opciones={optionsSWR}></UserForm>
           </div>
           <div className="flex flex-row w-full  flex-wrap gap-2 justify-center">
             <div className="flex flex-col w-full  items-center">
