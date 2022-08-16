@@ -96,7 +96,6 @@ export default function MiCuenta({
     });
     mutate(sesionesSub);
   };
-  console.log(usuario);
 
   return (
     <>
