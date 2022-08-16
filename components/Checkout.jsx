@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import StripeCheckout from "./StripeCheckout";
 import WooCommerce from "../woocommerce/Woocommerce";
+import { Checkbox } from "@nextui-org/react";
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
@@ -121,6 +122,12 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     total: total,
     cupon: "",
   });
+  const handleCheck = (e, nombre) => {
+    setFormulario({
+      ...formulario,
+      [nombre]: e,
+    });
+  };
   const handleFormulario = (e) => {
     if (e.target.name === "email") {
       if (validarEmail(e.target.value)) {
@@ -197,7 +204,10 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       provincia,
       cp,
       pais,
+      politicas,
+      comerciales,
     } = e.target;
+
     const inputsArray = [
       telefono,
       email,
@@ -208,9 +218,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       provincia,
       cp,
       pais,
+      politicas,
+      comerciales,
     ];
     inputsArray.map((input) => {
-      if (input.value === "") {
+      if (input.value === "" || politicas === false) {
         input.classList.add("error");
       } else {
         input.classList.remove("error");
@@ -225,7 +237,8 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       formulario.direccion !== "" &&
       formulario.ciudad !== "" &&
       formulario.provincia !== "" &&
-      formulario.cp !== ""
+      formulario.cp !== "" &&
+      politicas === true
     ) {
       setCompleto(true);
     } else {
@@ -407,7 +420,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
             </div>
           </div>
           <div className="flex flex-row fila">
-            <div className="flex flex-col w-full mx-2">
+            <div className="flex flex-col gap-5 w-full mx-2">
               <input
                 type="text"
                 name="cupon"
@@ -415,6 +428,24 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 onChange={(e) => getCupones(e)}
                 disabled={completo}
               />
+              <Checkbox
+                name="comerciales"
+                onChange={(e) => handleCheck(e, "comerciales")}
+                isRequired={true}
+                defaultSelected={false}
+                size="xs"
+              >
+                Acepto recibir comunicaciones comerciales
+              </Checkbox>
+              <Checkbox
+                name="politicas"
+                onChange={(e) => handleCheck(e, "politicas")}
+                isRequired={true}
+                defaultSelected={false}
+                size="xs"
+              >
+                Acepto la política de privacidad y los términos y condiciones
+              </Checkbox>
               {cupon === null && errorCupon !== null && (
                 <span
                   style={{
@@ -543,7 +574,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                       fontFamily: opciones?.fuente_global,
                       color: "red",
                     }}
-                    className="error"
+                    className="error my-5"
                   >
                     {error}
                   </span>
