@@ -3,12 +3,10 @@ import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
 import useSWR from "swr";
 import fetcherWc from "../utils/fetcherWc";
+import UserForm from "../components/UserForm";
 const Nav = dynamic(() => import("../components/Nav"), { ssr: false });
 const Image = dynamic(() => import("next/image"), { ssr: false });
 const Footer = dynamic(() => import("../components/Footer"), { ssr: false });
-const UserForm = dynamic(() => import("../components/UserForm"), {
-  ssr: false,
-});
 const SyncLoader = dynamic(() => import("react-spinners/SyncLoader"));
 import { useOptions } from "../hooks/useOptions";
 import { useSelector } from "react-redux";
