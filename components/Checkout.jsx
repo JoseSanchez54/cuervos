@@ -477,11 +477,13 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
             </div>
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
+                inputValue={formulario.provincia}
                 placeholder={
                   userCustomer?.billing.state
                     ? userCustomer?.billing.state
                     : "Provincia"
                 }
+                isDisabled={completo}
                 name="provincia"
                 value={formulario.provincia}
                 styles={customStyles}
