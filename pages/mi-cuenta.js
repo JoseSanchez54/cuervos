@@ -63,6 +63,7 @@ export default function MiCuenta({
   const userOrders = pedidos1?.data?.filter(
     (order) => order?.billing?.email === username
   );
+/* Finding the userCustomer object in the customers array. */
   const userCustomer = customers?.data?.find(
     (order) => order?.billing?.email === username
   );

@@ -5,11 +5,33 @@ import { Checkbox } from "@nextui-org/react";
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
+import fetcherWc from "../utils/fetcherWc";
+import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 const datosPaises = require("../utils/data.json");
 const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const dispatch = useDispatch();
+  const customers = useSWR("customers", fetcherWc);
+  const usuario = useSelector((state) => state.userReducer);
+  const userCustomer = customers?.data?.find(
+    (order) => order?.billing?.email === usuario.email
+  );
+  const usuarioActual = {
+    id: userCustomer?.id,
+    nombre: userCustomer?.billing?.first_name,
+    apellido: userCustomer?.billing?.last_name,
+    nombreCompleto:
+      userCustomer?.billing?.first_name +
+      " " +
+      userCustomer?.billing?.last_name,
+    email: userCustomer?.billing?.email,
+    telefono: userCustomer?.billing?.phone,
+    direccion: userCustomer?.billing?.address_1,
+    ciudad: userCustomer?.billing?.city,
+    pais: userCustomer?.billing?.country,
+    codigoPostal: userCustomer?.billing?.postcode,
+  };
   const [cupon, setCupon] = useState(null);
   const [listo, setListo] = useState(false);
   const [error, setError] = useState(null);
@@ -96,7 +118,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const taxes = useSelector((state) => state.cartReducer.taxes);
   const envios = useSelector((state) => state.cartReducer.envios);
   const peso = useSelector((state) => state.cartReducer.peso);
-  const usuario = useSelector((state) => state.userReducer);
+
   const precioEnvio = envios.find(
     (e) =>
       parseFloat(e.peso_maximo) >= peso && parseFloat(e.peso_minimo) <= peso
@@ -110,10 +132,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   }
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
+
   const [formulario, setFormulario] = useState({
     nombre: "",
     apellido: "",
-    email: usuario?.email ? usuario.email : "",
+    email: "",
     telefono: "",
     direccion: "",
     ciudad: "",
@@ -333,7 +356,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="text"
                 name="nombre"
-                placeholder="Nombre"
+                placeholder={
+                  userCustomer?.billing.first_name
+                    ? userCustomer?.billing.first_name
+                    : "Nombre"
+                }
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -342,7 +369,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="text"
                 name="apellido"
-                placeholder="Apellidos"
+                placeholder={
+                  userCustomer?.billing.last_name
+                    ? userCustomer?.billing.last_name
+                    : "Apellidos"
+                }
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -362,7 +393,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="tel"
                 name="telefono"
-                placeholder="Teléfono"
+                placeholder={
+                  userCustomer?.billing.phone
+                    ? userCustomer?.billing.phone
+                    : "Teléfono"
+                }
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -373,7 +408,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="text"
                 name="direccion"
-                placeholder="Dirección"
+                placeholder={
+                  userCustomer?.billing.address_1
+                    ? userCustomer?.billing.address_1
+                    : "Dirección"
+                }
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -404,7 +443,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="text"
                 name="ciudad"
-                placeholder="Ciudad"
+                placeholder={
+                  userCustomer?.billing.city
+                    ? userCustomer?.billing.city
+                    : "Ciudad"
+                }
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -413,7 +456,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="text"
                 name="cp"
-                placeholder="CP"
+                placeholder={
+                  userCustomer?.billing.postcode
+                    ? userCustomer?.billing.postcode
+                    : "Código postal"
+                }
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
