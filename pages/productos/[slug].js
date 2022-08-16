@@ -326,14 +326,19 @@ const SingleProduct = ({
               <div className="w-full flex flex-col self-start top-[90px]">
                 <div className="flex flex-row w-full">
                   <div className="flex p-5 flex-col">
-                    <span className="etiqueta">{product?.name}</span>
-                    <span className="titulo my-6">
-                      {metadata.map((e, index) => {
-                        if (e.key === "etiqueta") {
-                          return e.value;
-                        }
-                      })}
-                    </span>
+                    <h1>
+                      <span className="etiqueta">{product?.name}</span>
+                    </h1>
+                    <h2>
+                      <span className="titulo my-6">
+                        {metadata.map((e, index) => {
+                          if (e.key === "etiqueta") {
+                            return e.value;
+                          }
+                        })}
+                      </span>
+                    </h2>
+
                     <span className="inyectado uppercase mb-6">
                       {removeTags(product?.short_description)}
                     </span>

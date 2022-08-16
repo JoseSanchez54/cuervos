@@ -42,12 +42,16 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
                 <span className="z-[10] uppercase text-center tituloPrimera ">
                   {pagina?.pretitulo_nosotros}
                 </span>
-                <span className="z-[10] uppercase text-center titulo ">
-                  {pagina?.titulo_nosotros}
-                </span>
-                <p className="uppercase parrafoPrimera max-w-[350px] text-center">
-                  {pagina?.parrafo_nosotros}
-                </p>
+                <h1>
+                  <span className="z-[10] uppercase text-center titulo ">
+                    {pagina?.titulo_nosotros}
+                  </span>
+                </h1>
+                <h2>
+                  <p className="uppercase parrafoPrimera max-w-[350px] text-center">
+                    {pagina?.parrafo_nosotros}
+                  </p>
+                </h2>
               </div>
               {pagina?.primera_imagen_nosotros && (
                 <Image

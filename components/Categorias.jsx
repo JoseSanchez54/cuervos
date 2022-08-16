@@ -53,9 +53,12 @@ const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
                     >
                       <div className="flex flex-col min-h-[200px] w-full items-center lg:w-2/3">
                         <div className="relative p-3 w-full h-full justify-center items-center flex-col flex">
-                          <span className="z-[20] uppercase text-center titulo2">
-                            {pagina?.primer_titulo_tienda}
-                          </span>
+                          <h1>
+                            <span className="z-[20] uppercase text-center titulo2">
+                              {pagina?.primer_titulo_tienda}
+                            </span>
+                          </h1>
+
                           {pagina?.banner_tienda && (
                             <Image
                               objectFit="cover"
@@ -86,9 +89,12 @@ const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
                         >
                           <div className="flex flex-col min-h-[200px] w-full items-center lg:w-2/3">
                             <div className="relative p-3 w-full h-full justify-center items-center flex-col flex">
-                              <span className="z-[20] uppercase text-center titulo2">
-                                {pagina?.segundo_titulo_tienda}
-                              </span>
+                              <h2>
+                                <span className="z-[20] uppercase text-center titulo2">
+                                  {pagina?.segundo_titulo_tienda}
+                                </span>
+                              </h2>
+
                               {pagina?.banner_tienda_segundo && (
                                 <Image
                                   objectFit="cover"

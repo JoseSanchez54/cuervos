@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { useOptions } from "../hooks/useOptions";
-import Link from "next/link";
+
+/**
+ * It's a button that opens a new tab with a link to a whatsapp chat with a phone number.
+ * @returns A React component.
+ */
 const Washapp = () => {
   const { options } = useOptions();
   return (

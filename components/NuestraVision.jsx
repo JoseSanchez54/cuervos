@@ -42,12 +42,17 @@ const NuestraVision = ({ opciones, pagina, categorias }) => {
                 <span className="z-[10] uppercase text-center tituloPrimera ">
                   {pagina.pretitulo_vision}
                 </span>
-                <span className="z-[10] uppercase text-center titulo ">
-                  {pagina.titulo_vision}
-                </span>
-                <p className="uppercase parrafoPrimera max-w-[350px] text-center">
-                  {pagina.parrafo_vision}
-                </p>
+                <h1>
+                  <span className="z-[10] uppercase text-center titulo ">
+                    {pagina.titulo_vision}
+                  </span>
+                </h1>
+                <h2>
+                  {" "}
+                  <p className="uppercase parrafoPrimera max-w-[350px] text-center">
+                    {pagina.parrafo_vision}
+                  </p>
+                </h2>
               </div>
               {pagina.primera_imagen_vision && (
                 <Image

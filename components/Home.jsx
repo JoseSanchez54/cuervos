@@ -54,9 +54,12 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           <div className="relative w-full h-full">
             <div className="flex flex-col lg:justify-end justify-start items-center lg:items-start w-full h-full">
               <div className="p-9 z-[10]">
-                <span className="z-[10] uppercase w-full text-center lg:text-left block titulo lg:ml-[40px]">
-                  {pagina.titulo}
-                </span>
+                <h1 style={{ fontWeight: "normal" }}>
+                  {" "}
+                  <span className="z-[10] uppercase w-full text-center lg:text-left block titulo lg:ml-[40px]">
+                    {pagina.titulo}
+                  </span>
+                </h1>
               </div>
 
               <Image
@@ -76,14 +79,17 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
               <div className="relative w-full min min-h-[776px] h-full">
                 <div className="flex flex-col items-center w-full h-full">
                   <div className="lg:p-[100px] p-9 max-w-[560px]  lg:text-center z-[10]">
-                    <span
-                      style={{
-                        fontSize: "55px",
-                      }}
-                      className="tituloPrimera   uppercase z-[10]"
-                    >
-                      {pagina.segunda_primer_titulo}
-                    </span>
+                    <h2 style={{ fontWeight: "normal" }}>
+                      <span
+                        style={{
+                          fontSize: "55px",
+                        }}
+                        className="tituloPrimera   uppercase z-[10]"
+                      >
+                        {pagina.segunda_primer_titulo}
+                      </span>
+                    </h2>
+
                     {!isMobile && (
                       <p
                         style={{
