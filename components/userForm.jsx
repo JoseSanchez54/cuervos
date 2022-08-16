@@ -1,5 +1,5 @@
 import { Input } from "@nextui-org/react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { GrClose } from "react-icons/gr/";
 import WooCommerce from "../woocommerce/Woocommerce";
 const UserForm = ({ opciones, usuario }) => {
