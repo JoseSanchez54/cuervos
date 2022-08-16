@@ -326,10 +326,12 @@ const SingleProduct = ({
               <div className="w-full flex flex-col self-start top-[90px]">
                 <div className="flex flex-row w-full">
                   <div className="flex p-5 flex-col">
-                    <h1>
+                    <h1 style={{ fontWeight: "normal" }}>
                       <span className="etiqueta">{product?.name}</span>
                     </h1>
-                    <h2>
+                    <h2
+                      style={{ fontWeight: "normal", letterSpacing: "initial" }}
+                    >
                       <span className="titulo my-6">
                         {metadata.map((e, index) => {
                           if (e.key === "etiqueta") {
