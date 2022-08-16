@@ -329,9 +329,7 @@ const SingleProduct = ({
                     <h1 style={{ fontWeight: "normal" }}>
                       <span className="etiqueta">{product?.name}</span>
                     </h1>
-                    <h2
-                      style={{ fontWeight: "normal", letterSpacing: "initial" }}
-                    >
+                    <h2 style={{ fontWeight: "normal", letterSpacing: "2px" }}>
                       <span className="titulo my-6">
                         {metadata.map((e, index) => {
                           if (e.key === "etiqueta") {
