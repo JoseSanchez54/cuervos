@@ -429,6 +429,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 disabled={completo}
               />
               <Checkbox
+                css={{
+                  span: {
+                    fontFamily: opciones?.fuente_global,
+                  },
+                }}
                 name="comerciales"
                 onChange={(e) => handleCheck(e, "comerciales")}
                 isRequired={true}
@@ -438,6 +443,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                 Acepto recibir comunicaciones comerciales
               </Checkbox>
               <Checkbox
+                css={{
+                  span: {
+                    fontFamily: opciones?.fuente_global,
+                  },
+                }}
                 name="politicas"
                 onChange={(e) => handleCheck(e, "politicas")}
                 isRequired={true}
