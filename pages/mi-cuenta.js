@@ -1,20 +1,21 @@
+import dynamic from "next/dynamic";
 import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
+import useSWR from "swr";
+import fetcherWc from "../utils/fetcherWc";
+const Nav = dynamic(() => import("../components/Nav"), { ssr: false });
+const Image = dynamic(() => import("next/image"), { ssr: false });
+const Footer = dynamic(() => import("../components/Footer"), { ssr: false });
+const UserForm = dynamic(() => import("../components/UserForm"));
+const SyncLoader = dynamic(() => import("react-spinners/SyncLoader"));
 import { useOptions } from "../hooks/useOptions";
-import Nav from "../components/Nav";
 import { useSelector } from "react-redux";
 import { DefaultSeo } from "next-seo";
-import Image from "next/image";
-import fetcherWc from "../utils/fetcherWc";
-import useSWR from "swr";
-import Footer from "../components/Footer";
-import SyncLoader from "react-spinners/SyncLoader";
 import { usePages } from "../hooks/usePages";
 import { useDispatch } from "react-redux";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import { Dropdown } from "@nextui-org/react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
-import UserForm from "../components/userForm";
 
 export default function MiCuenta({
   options,
@@ -95,6 +96,7 @@ export default function MiCuenta({
     });
     mutate(sesionesSub);
   };
+  console.log(usuario);
 
   return (
     <>
@@ -153,7 +155,7 @@ export default function MiCuenta({
             <button onClick={() => handleConnect()} className="logout">
               Desconectarse
             </button>
-            <UserForm opciones={optionsSWR}></UserForm>
+            <UserForm usuario={usuario} opciones={optionsSWR}></UserForm>
           </div>
           <div className="flex flex-row w-full  flex-wrap gap-2 justify-center">
             <div className="flex flex-col w-full  items-center">
