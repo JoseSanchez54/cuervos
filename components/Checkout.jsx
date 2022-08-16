@@ -123,6 +123,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     cupon: "",
   });
   const handleCheck = (e, nombre) => {
+    console.log(e);
     setFormulario({
       ...formulario,
       [nombre]: e,
@@ -205,7 +206,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       cp,
       pais,
       politicas,
-      comerciales,
     } = e.target;
 
     const inputsArray = [
@@ -219,7 +219,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       cp,
       pais,
       politicas,
-      comerciales,
     ];
     inputsArray.map((input) => {
       if (input.value === "" || politicas === false) {
@@ -228,6 +227,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
         input.classList.remove("error");
       }
     });
+
     if (
       formulario.nombre !== "" &&
       formulario.apellido !== "" &&
@@ -238,7 +238,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       formulario.ciudad !== "" &&
       formulario.provincia !== "" &&
       formulario.cp !== "" &&
-      politicas === true
+      politicas.checked === true
     ) {
       setCompleto(true);
     } else {

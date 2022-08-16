@@ -67,6 +67,7 @@ export default function MiCuenta({
     (order) => order?.billing?.email === username
   );
   const usuario = {
+    id: userCustomer?.id,
     nombre: userCustomer?.billing?.first_name,
     apellido: userCustomer?.billing?.last_name,
     nombreCompleto:
