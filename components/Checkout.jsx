@@ -17,6 +17,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   const userCustomer = customers?.data?.find(
     (order) => order?.billing?.email === usuario.email
   );
+
   const usuarioActual = {
     id: userCustomer?.id,
     nombre: userCustomer?.billing?.first_name,
@@ -146,32 +147,25 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     cupon: "",
   });
   const handleCheck = (e, nombre) => {
-    console.log(e);
     setFormulario({
       ...formulario,
       [nombre]: e,
     });
   };
   const handleFormulario = (e) => {
-    if (e.target.name === "email") {
-      if (validarEmail(e.target.value)) {
-        setFormulario({ ...formulario, [e.target.name]: e.target.value });
-      } else {
-        e.target.classList.add("error");
-      }
+    console.log(e.target.value);
+
+    if (e.target.value === "") {
+      e.target.classList.add("error");
+      setFormulario({
+        ...formulario,
+        [e.target.name]: e.target.value,
+      });
     } else {
-      if (e.target.value === "") {
-        e.target.classList.add("error");
-        setFormulario({
-          ...formulario,
-          [e.target.name]: e.target.value,
-        });
-      } else {
-        setFormulario({
-          ...formulario,
-          [e.target.name]: e.target.value,
-        });
-      }
+      setFormulario({
+        ...formulario,
+        [e.target.name]: e.target.value,
+      });
     }
   };
 
@@ -255,7 +249,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       formulario.nombre !== "" &&
       formulario.apellido !== "" &&
       formulario.email !== "" &&
-      validarEmail(formulario.email) &&
       formulario.telefono !== "" &&
       formulario.direccion !== "" &&
       formulario.ciudad !== "" &&
@@ -264,6 +257,9 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       politicas.checked === true
     ) {
       setCompleto(true);
+    } else if (!validarEmail(formulario.email)) {
+      setCompleto(false);
+      setError("Comprueba tu email");
     } else {
       setCompleto(false);
       setError("Por favor compruebe todos los campos");
@@ -350,6 +346,47 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   return (
     <>
       <div>
+        {userCustomer?.billing.first_name !== "" && (
+          <>
+            <div className="flex bg-black py-5 px-3 items-center flex-row gap-5 w-full">
+              <span
+                style={{
+                  fontFamily: opciones.fuente_global,
+                  color: "white",
+                }}
+              >
+                ¿Quieres usar tu direccion anterior?
+              </span>
+
+              <button
+                style={{
+                  fontFamily: opciones.fuente_global,
+                  color: "white",
+                  border: "solid 1px white",
+                  padding: "10px 20px",
+                }}
+                onClick={() => {
+                  setFormulario({
+                    ...formulario,
+                    nombre: usuarioActual.nombre,
+                    apellido: usuarioActual.apellido,
+                    telefono: usuarioActual.telefono,
+                    direccion: usuarioActual.direccion,
+                    cp: usuarioActual.codigoPostal,
+                    pais: usuarioActual.pais,
+                    provincia: usuarioActual.provincia,
+                    email: usuarioActual.email,
+                    ciudad: usuarioActual.ciudad,
+                  });
+                  setCompleto(true);
+                }}
+              >
+                Rellenar
+              </button>
+            </div>
+          </>
+        )}
+
         <form onSubmit={(e) => actionForm(e)} method="post" target="_blank">
           <div className="flex flex-row fila">
             <div className="flex flex-col w-full mx-2 md:w-1/2">
@@ -361,6 +398,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                     ? userCustomer?.billing.first_name
                     : "Nombre"
                 }
+                value={formulario.nombre}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -374,6 +412,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                     ? userCustomer?.billing.last_name
                     : "Apellidos"
                 }
+                value={formulario.apellido}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -384,6 +423,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="email"
                 name="email"
+                value={formulario.email}
                 placeholder={usuario?.email ? usuario?.email : "Email"}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
@@ -393,6 +433,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="tel"
                 name="telefono"
+                value={formulario.telefono}
                 placeholder={
                   userCustomer?.billing.phone
                     ? userCustomer?.billing.phone
@@ -408,6 +449,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="text"
                 name="direccion"
+                value={formulario.direccion}
                 placeholder={
                   userCustomer?.billing.address_1
                     ? userCustomer?.billing.address_1
@@ -421,8 +463,13 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
           <div className="flex flex-row">
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
-                placeholder="Pais"
+                placeholder={
+                  userCustomer?.billing.country
+                    ? userCustomer?.billing.country
+                    : "País"
+                }
                 name="pais"
+                value={formulario.pais}
                 options={optionsPais}
                 onChange={handlePais}
                 styles={customStyles}
@@ -430,8 +477,13 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
             </div>
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
-                placeholder="Provincia"
+                placeholder={
+                  userCustomer?.billing.state
+                    ? userCustomer?.billing.state
+                    : "Provincia"
+                }
                 name="provincia"
+                value={formulario.provincia}
                 styles={customStyles}
                 options={arrt}
                 onChange={handleProvincias}
@@ -443,6 +495,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="text"
                 name="ciudad"
+                value={formulario.ciudad}
                 placeholder={
                   userCustomer?.billing.city
                     ? userCustomer?.billing.city
@@ -456,6 +509,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               <input
                 type="text"
                 name="cp"
+                value={formulario.cp}
                 placeholder={
                   userCustomer?.billing.postcode
                     ? userCustomer?.billing.postcode
