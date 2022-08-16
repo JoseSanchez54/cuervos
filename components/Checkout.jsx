@@ -153,8 +153,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     });
   };
   const handleFormulario = (e) => {
-    console.log(e.target.value);
-
     if (e.target.value === "") {
       e.target.classList.add("error");
       setFormulario({
