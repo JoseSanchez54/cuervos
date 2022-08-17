@@ -243,13 +243,13 @@ export default async function handler(req, res) {
       payment_method: "stripe",
       payment_details: {
         post_meta: {
-          _stripe_customer_id: customer.id,
+          _stripe_customer_id: customer?.id,
         },
       },
-      billing: wcForm.billing,
-      shipping: wcForm.shipping,
+      billing: wcForm?.billing,
+      shipping: wcForm?.shipping,
       line_items: lineItemsWC,
-      shipping_lines: wcForm.shipping_lines,
+      shipping_lines: wcForm?.shipping_lines,
     };
     let suscripcion = undefined;
     if (sus) {
