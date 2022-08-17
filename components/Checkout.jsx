@@ -177,9 +177,9 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       address_1: formulario.direccion,
       address_2: formulario.direccion,
       city: formulario.ciudad,
-      state: formulario.provincia,
+      state: formulario.labelProvincia,
       postcode: formulario.cp,
-      country: formulario.pais,
+      country: formulario.labelPais,
       email: formulario.email,
       phone: formulario.telefono,
       coupon: cupon,
@@ -189,10 +189,20 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       last_name: formulario.apellido,
       address_1: formulario.direccion,
       city: formulario.ciudad,
-      state: formulario.provincia,
+      state: formulario.labelProvincia,
       postcode: formulario.codigoPostal,
-      country: formulario.pais,
+      country: formulario.labelPais,
     },
+    meta_data: [
+      {
+        key: "codigoPais",
+        value: formulario.pais,
+      },
+      {
+        key: "codigoProvincia",
+        value: formulario.provincia,
+      },
+    ],
 
     line_items: actualCart.map((item) => ({
       product_id: item.id,
@@ -236,7 +246,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       politicas,
     ];
     inputsArray.map((input) => {
-      if (input.value === "" || politicas === false) {
+      if (input?.value === "" || politicas === false) {
         input.classList.add("error");
       } else {
         input.classList.remove("error");
@@ -297,6 +307,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     setFormulario({
       ...formulario,
       provincia: e.value,
+      labelProvincia: e.label,
     });
     setPais({ ...pais, shortCodeProvincia: e.shortcode });
   };
@@ -305,12 +316,14 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     setFormulario({
       ...formulario,
       pais: e.value,
+      labelPais: e.label,
     });
 
     setPais({
       ...pais,
       valor: e.value,
       shortCode: e.shortCode,
+      label: e.label,
     });
   };
   const tasa = taxes.find((e) => e.country === pais.shortCode);
@@ -467,7 +480,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                     : "País"
                 }
                 name="pais"
-                value={formulario.pais}
                 options={optionsPais}
                 onChange={handlePais}
                 styles={customStyles}
@@ -761,6 +773,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
           color: red;
           font-size: 12px;
           font-family: "Helvetica";
+          margin-top: 20px;
         }
         input[type="text"],
         input[type="email"],
