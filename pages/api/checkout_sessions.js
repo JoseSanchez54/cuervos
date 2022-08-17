@@ -271,10 +271,10 @@ export default async function handler(req, res) {
             coupon: cup?.id,
           },
         ],
-        customer: customer.id,
+        customer: customer?.id,
         metadata: {
-          order_id: wc.id,
-          sus_id: suscripcion.id,
+          order_id: wc?.id,
+          sus_id: suscripcion?.id,
         },
       })
       .then((session) => {
