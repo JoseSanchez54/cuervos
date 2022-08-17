@@ -32,6 +32,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     ciudad: userCustomer?.billing?.city,
     pais: userCustomer?.billing?.country,
     codigoPostal: userCustomer?.billing?.postcode,
+    provincia: userCustomer?.billing?.state,
   };
   const [cupon, setCupon] = useState(null);
   const [listo, setListo] = useState(false);
@@ -146,6 +147,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     total: total,
     cupon: "",
   });
+  console.log(formulario);
   const handleCheck = (e, nombre) => {
     setFormulario({
       ...formulario,
@@ -353,6 +355,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       });
     }
   }, [pais]);
+  console.log(userCustomer);
 
   return (
     <>
@@ -488,7 +491,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
             </div>
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
-                setValue={formulario.provincia}
+                setValue={formulario.labelProvincia}
                 placeholder={
                   userCustomer?.billing.state
                     ? userCustomer?.billing.state
@@ -708,7 +711,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
           </div>
 
           <div className="flex flex-row w-full justify-center mt-5">
-            {completo && !tax.error ? (
+            {completo ? (
               <>
                 <div className="flex items-center flex-col">
                   {" "}
