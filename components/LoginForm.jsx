@@ -7,7 +7,6 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
 
-
 const LoginForm = ({ opciones, login, set }) => {
   let headersList = {
     Accept: "*/*",
@@ -200,16 +199,18 @@ const LoginForm = ({ opciones, login, set }) => {
               className="absolute cursor-pointer top-9 right-9"
             />
             <div className="flex flex-col max-w-[1200px] items-center justify-center w-full">
-              <Image
-                src={opciones.logo_principal}
-                height="200px"
-                width="200px"
-                objectFit="contain"
-              ></Image>
+              {!loading && (
+                <Image
+                  src={opciones.logo_principal}
+                  height="200px"
+                  width="200px"
+                  objectFit="contain"
+                ></Image>
+              )}
 
               {loading ? (
                 <>
-                  <SyncLoader color="#000" />
+                  <Image src="/loader.gif" height="200px" width="200px" />
                 </>
               ) : (
                 <>
