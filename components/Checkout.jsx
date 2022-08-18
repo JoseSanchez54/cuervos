@@ -147,7 +147,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     total: total,
     cupon: "",
   });
-  console.log(formulario);
   const handleCheck = (e, nombre) => {
     setFormulario({
       ...formulario,
@@ -355,7 +354,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       });
     }
   }, [pais]);
-  console.log(userCustomer);
 
   return (
     <>
