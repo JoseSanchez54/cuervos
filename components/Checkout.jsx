@@ -358,7 +358,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       });
     }
   }, [pais]);
-  console.log(data);
 
   return (
     <>
