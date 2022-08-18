@@ -246,8 +246,8 @@ export default async function handler(req, res) {
           _stripe_customer_id: customer?.id,
         },
       },
-      billing: wcForm?.billing,
-      shipping: wcForm?.shipping,
+      billing: wcForm.billing,
+      shipping: wcForm.shipping,
       line_items: lineItemsWC,
       shipping_lines: wcForm?.shipping_lines,
     };

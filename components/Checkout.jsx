@@ -146,8 +146,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     cp: "",
     total: total,
     cupon: "",
+    provincia: "",
+    labelProvincia: "",
+    labelPais: "",
   });
-  console.log(formulario);
+
   const handleCheck = (e, nombre) => {
     setFormulario({
       ...formulario,
@@ -355,7 +358,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       });
     }
   }, [pais]);
-  console.log(userCustomer);
+  console.log(data);
 
   return (
     <>
@@ -388,11 +391,16 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                     direccion: usuarioActual.direccion,
                     cp: usuarioActual.codigoPostal,
                     pais: usuarioActual.pais,
-                    provincia: usuarioActual.provincia,
+                    provincia: codigoProvincia,
                     email: usuarioActual.email,
                     ciudad: usuarioActual.ciudad,
                   });
                   setCompleto(true);
+                  setPais({
+                    ...pais,
+                    valor: codigoPais,
+                    shortCodeProvincia: codigoProvincia,
+                  });
                 }}
               >
                 Rellenar
