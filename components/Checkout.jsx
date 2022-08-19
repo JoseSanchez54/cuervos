@@ -1,43 +1,30 @@
 import dynamic from "next/dynamic";
-import StripeCheckout from "./StripeCheckout";
 import WooCommerce from "../woocommerce/Woocommerce";
-import { Checkbox } from "@nextui-org/react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useUser } from "../hooks/useUser";
+import validarEmail from "../utils/validarEmail";
+const StripeCheckout = dynamic(() => import("./StripeCheckout"), {
+  ssr: true,
+});
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
-import fetcherWc from "../utils/fetcherWc";
-import useSWR from "swr";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+const Checkbox = dynamic(() =>
+  import("@nextui-org/react").then((mod) => mod.Checkbox)
+);
 const datosPaises = require("../utils/data.json");
-const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
-  const dispatch = useDispatch();
-  const customers = useSWR("customers", fetcherWc);
-  const usuario = useSelector((state) => state.userReducer);
-  const userCustomer = customers?.data?.find(
-    (order) => order?.billing?.email === usuario.email
-  );
-
-  const usuarioActual = {
-    id: userCustomer?.id,
-    nombre: userCustomer?.billing?.first_name,
-    apellido: userCustomer?.billing?.last_name,
-    nombreCompleto:
-      userCustomer?.billing?.first_name +
-      " " +
-      userCustomer?.billing?.last_name,
-    email: userCustomer?.billing?.email,
-    telefono: userCustomer?.billing?.phone,
-    direccion: userCustomer?.billing?.address_1,
-    ciudad: userCustomer?.billing?.city,
-    pais: userCustomer?.billing?.country,
-    codigoPostal: userCustomer?.billing?.postcode,
-    provincia: userCustomer?.billing?.state,
-  };
+const FormularioCheckout = ({ onAction, opciones }) => {
+  const { usuarioActual, userCustomer, usuario, codigoPais, codigoProvincia } =
+    useUser();
   const [cupon, setCupon] = useState(null);
-  const [listo, setListo] = useState(false);
   const [error, setError] = useState(null);
   const [errorCupon, setErrorCupon] = useState(null);
+  const actualCart = useSelector((state) => state.cartReducer.cart);
+  const total = useSelector((state) => state.cartReducer.total);
+  const taxes = useSelector((state) => state.cartReducer.taxes);
+  const envios = useSelector((state) => state.cartReducer.envios);
+  const peso = useSelector((state) => state.cartReducer.peso);
   const getCupones = async (e) => {
     const fechaHoy = new Date();
     const codigo = e.target.value;
@@ -115,23 +102,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     },
   };
 
-  const actualCart = useSelector((state) => state.cartReducer.cart);
-  const total = useSelector((state) => state.cartReducer.total);
-  const taxes = useSelector((state) => state.cartReducer.taxes);
-  const envios = useSelector((state) => state.cartReducer.envios);
-  const peso = useSelector((state) => state.cartReducer.peso);
-
   const precioEnvio = envios.find(
     (e) =>
       parseFloat(e.peso_maximo) >= peso && parseFloat(e.peso_minimo) <= peso
   );
-  function validarEmail(email) {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  }
+
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
 
@@ -167,8 +142,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       });
     }
   };
-
-  const data = {
+  const [data, setData] = useState({
     payment_method: "Stripe Cría Cuervos",
     payment_method_title: "Stripe",
     set_paid: false,
@@ -197,11 +171,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     meta_data: [
       {
         key: "codigoPais",
-        value: formulario.pais,
+        value: pais.value,
       },
       {
         key: "codigoProvincia",
-        value: formulario.provincia,
+        value: pais.shortCodeProvincia,
       },
     ],
 
@@ -217,7 +191,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
         total: total > 50 ? "0" : precioEnvio?.precio,
       },
     ],
-  };
+  });
 
   const actionForm = (e) => {
     e.preventDefault();
@@ -354,11 +328,11 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
       });
     }
   }, [pais]);
-
+  console.log(data);
   return (
     <>
       <div>
-        {userCustomer?.billing.first_name !== "" && (
+        {userCustomer && (
           <>
             <div className="flex bg-black py-5 px-3 items-center flex-row gap-5 w-full">
               <span
@@ -378,6 +352,10 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                   padding: "10px 20px",
                 }}
                 onClick={() => {
+                  setPais({
+                    value: codigoPais,
+                    shortCodeProvincia: codigoProvincia,
+                  });
                   setFormulario({
                     ...formulario,
                     nombre: usuarioActual.nombre,
@@ -389,6 +367,56 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                     provincia: usuarioActual.provincia,
                     email: usuarioActual.email,
                     ciudad: usuarioActual.ciudad,
+                  });
+                  setData({
+                    payment_method: "Stripe Cría Cuervos",
+                    payment_method_title: "Stripe",
+                    set_paid: false,
+                    billing: {
+                      first_name: formulario.nombre,
+                      last_name: formulario.apellido,
+                      address_1: formulario.direccion,
+                      address_2: formulario.direccion,
+                      city: formulario.ciudad,
+                      state: formulario.labelProvincia,
+                      postcode: formulario.cp,
+                      country: formulario.labelPais,
+                      email: formulario.email,
+                      phone: formulario.telefono,
+                      coupon: cupon,
+                    },
+                    shipping: {
+                      first_name: formulario.nombre,
+                      last_name: formulario.apellido,
+                      address_1: formulario.direccion,
+                      city: formulario.ciudad,
+                      state: formulario.labelProvincia,
+                      postcode: formulario.codigoPostal,
+                      country: formulario.labelPais,
+                    },
+                    meta_data: [
+                      {
+                        key: "codigoPais",
+                        value: codigoPais,
+                      },
+                      {
+                        key: "codigoProvincia",
+                        value: codigoProvincia,
+                      },
+                    ],
+
+                    line_items: actualCart.map((item) => ({
+                      product_id: item.id,
+                      quantity: item.cantidad,
+                      variation_id: item?.variacion?.id,
+                    })),
+                    shipping_lines: [
+                      {
+                        method_id: "flat_rate",
+                        method_title: "Gastos de envio",
+                        total: total > 50 ? "0" : precioEnvio?.precio,
+                      },
+                    ],
                   });
                   setCompleto(true);
                 }}
@@ -801,3 +829,4 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     </>
   );
 };
+export default FormularioCheckout;
