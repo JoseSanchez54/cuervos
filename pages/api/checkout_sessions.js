@@ -2,7 +2,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import WooCommerce from "../../woocommerce/Woocommerce";
 import dateFormat, { masks } from "dateformat";
 export default async function handler(req, res) {
-  const { items, formulario, envio, cupon } = req.body;
+  const { items, formulario, envio, cupon, sessionID } = req.body;
   const wc = await WooCommerce.post("orders", formulario)
     .then((response) => {
       return response.data;
@@ -153,16 +153,6 @@ export default async function handler(req, res) {
         email: formulario.billing.email,
         phone: formulario.billing.phone,
       },
-      meta_data: [
-        {
-          key: "codigoPais",
-          value: formulario.meta_data[0].value,
-        },
-        {
-          key: "codigoProvincia",
-          value: formulario.meta_data[1].value,
-        },
-      ],
       shipping: {
         first_name: formulario.billing.first_name,
         last_name: formulario.billing.last_name,
