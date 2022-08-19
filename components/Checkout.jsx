@@ -358,7 +358,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   return (
     <>
       <div>
-        {userCustomer?.billing.first_name !== "" && (
+        {/*  {userCustomer && (
           <>
             <div className="flex bg-black py-5 px-3 items-center flex-row gap-5 w-full">
               <span
@@ -397,7 +397,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               </button>
             </div>
           </>
-        )}
+        )} */}
 
         <form onSubmit={(e) => actionForm(e)} method="post" target="_blank">
           <div className="flex flex-row fila">
