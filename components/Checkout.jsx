@@ -1,43 +1,51 @@
 import dynamic from "next/dynamic";
-import StripeCheckout from "./StripeCheckout";
 import WooCommerce from "../woocommerce/Woocommerce";
-import { Checkbox } from "@nextui-org/react";
-const Select = dynamic(() => import("react-select"), {
-  ssr: false,
-});
 import fetcherWc from "../utils/fetcherWc";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import validarEmail from "../utils/validarEmail";
+const StripeCheckout = dynamic(() => import("./StripeCheckout"), {
+  ssr: true,
+});
+const Select = dynamic(() => import("react-select"), {
+  ssr: false,
+});
+const Checkbox = dynamic(() =>
+  import("@nextui-org/react").then((mod) => mod.Checkbox)
+);
 const datosPaises = require("../utils/data.json");
-const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
+const FormularioCheckout = ({ onAction, opciones }) => {
   const dispatch = useDispatch();
   const customers = useSWR("customers", fetcherWc);
   const usuario = useSelector((state) => state.userReducer);
   const userCustomer = customers?.data?.find(
     (order) => order?.billing?.email === usuario.email
   );
-
-  const usuarioActual = {
-    id: userCustomer?.id,
-    nombre: userCustomer?.billing?.first_name,
-    apellido: userCustomer?.billing?.last_name,
-    nombreCompleto:
-      userCustomer?.billing?.first_name +
-      " " +
-      userCustomer?.billing?.last_name,
-    email: userCustomer?.billing?.email,
-    telefono: userCustomer?.billing?.phone,
-    direccion: userCustomer?.billing?.address_1,
-    ciudad: userCustomer?.billing?.city,
-    pais: userCustomer?.billing?.country,
-    codigoPostal: userCustomer?.billing?.postcode,
-    provincia: userCustomer?.billing?.state,
-  };
-  const [cupon, setCupon] = useState(null);
+  const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
+  const [estadoP, setEstadoP] = useState(onAction);
+  const [cupon, setCupon] = useState("");
   const [listo, setListo] = useState(false);
   const [error, setError] = useState(null);
   const [errorCupon, setErrorCupon] = useState(null);
+  const actualCart = useSelector((state) => state.cartReducer.cart);
+  const total = useSelector((state) => state.cartReducer.total);
+  const taxes = useSelector((state) => state.cartReducer.taxes);
+  const envios = useSelector((state) => state.cartReducer.envios);
+  const peso = useSelector((state) => state.cartReducer.peso);
+  const [formulario, setFormulario] = useState({
+    nombre: "",
+    apellido: "",
+    email: "",
+    telefono: "",
+    direccion: "",
+    ciudad: "",
+    pais: "",
+    cp: "",
+    total: total,
+    cupon: cupon,
+  });
+
   const getCupones = async (e) => {
     const fechaHoy = new Date();
     const codigo = e.target.value;
@@ -84,8 +92,6 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     }
   };
 
-  const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
-  const [estadoP, setEstadoP] = useState(onAction);
   const handleEstado = () => {
     setEstadoP(!estadoP);
   };
@@ -115,38 +121,14 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     },
   };
 
-  const actualCart = useSelector((state) => state.cartReducer.cart);
-  const total = useSelector((state) => state.cartReducer.total);
-  const taxes = useSelector((state) => state.cartReducer.taxes);
-  const envios = useSelector((state) => state.cartReducer.envios);
-  const peso = useSelector((state) => state.cartReducer.peso);
-
   const precioEnvio = envios.find(
     (e) =>
       parseFloat(e.peso_maximo) >= peso && parseFloat(e.peso_minimo) <= peso
   );
-  function validarEmail(email) {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  }
+
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
 
-  const [formulario, setFormulario] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    telefono: "",
-    direccion: "",
-    ciudad: "",
-    pais: "",
-    cp: "",
-    total: total,
-    cupon: "",
-  });
   const handleCheck = (e, nombre) => {
     setFormulario({
       ...formulario,
@@ -341,10 +323,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
     if (tasa) {
       const bueno = tasa.rate.split(".");
       const iva2 = formulario.total * (bueno[0] / 100);
-      const iva = iva2.toFixed(2);
-
       subtotal = formulario.total - formulario.total * (bueno[0] / 100);
-
       setTax({ tasa: bueno[0], error: false, mensaje: "" });
     } else {
       setTax({
@@ -358,7 +337,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
   return (
     <>
       <div>
-        {/*  {userCustomer && (
+        {userCustomer && (
           <>
             <div className="flex bg-black py-5 px-3 items-center flex-row gap-5 w-full">
               <span
@@ -378,17 +357,24 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
                   padding: "10px 20px",
                 }}
                 onClick={() => {
+                  const metadata = Object?.values(userCustomer?.meta_data).map(
+                    (key) => {
+                      return key;
+                    }
+                  );
                   setFormulario({
                     ...formulario,
-                    nombre: usuarioActual.nombre,
-                    apellido: usuarioActual.apellido,
-                    telefono: usuarioActual.telefono,
-                    direccion: usuarioActual.direccion,
-                    cp: usuarioActual.codigoPostal,
-                    pais: usuarioActual.pais,
-                    provincia: usuarioActual.provincia,
-                    email: usuarioActual.email,
-                    ciudad: usuarioActual.ciudad,
+                    nombre: userCustomer.billing.first_name,
+                    apellido: userCustomer.billing.last_name,
+                    telefono: userCustomer.billing.phone,
+                    direccion: userCustomer.billing.address_1,
+                    cp: userCustomer.billing.postcode,
+                    pais: userCustomer.billing.country,
+                    provincia: metadata?.codigoProvincia
+                      ? metadata?.codigoProvincia
+                      : userCustomer.billing.state,
+                    email: userCustomer.billing.email,
+                    ciudad: userCustomer.billing.city,
                   });
                   setCompleto(true);
                 }}
@@ -397,7 +383,7 @@ const FormularioCheckout = ({ onAction, tasas, opciones, checkout }) => {
               </button>
             </div>
           </>
-        )} */}
+        )}
 
         <form onSubmit={(e) => actionForm(e)} method="post" target="_blank">
           <div className="flex flex-row fila">
