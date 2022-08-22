@@ -136,9 +136,10 @@ const Success = ({ categorias, opciones }) => {
                   fontFamily: opciones.fuente_titulos,
                 }}
               >
-                Nos ponemos manos a la obra para que recibas tu pedido cuanto
-                antes. Te enviaremos por email los datos de tu pedido y te
-                avisaremos cuando el pedido vaya en camino hacia ti.
+                Oído cocina. Nos ponemos a trabajar en tu pedido de la misma
+                manera en la que afrontamos la vida. ¡Aquí y Ahora! Hemos
+                mandado a tu email la confirmación de compra. Gracias por tu
+                confianza. 
               </p>
               <button
                 style={{
