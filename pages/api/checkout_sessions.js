@@ -1,6 +1,6 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import WooCommerce from "../../woocommerce/Woocommerce";
-import dateFormat, { masks } from "dateformat";
+import dateFormat from "dateformat";
 export default async function handler(req, res) {
   const { items, formulario, envio, cupon, sessionID } = req.body;
   const wc = await WooCommerce.post("orders", formulario)

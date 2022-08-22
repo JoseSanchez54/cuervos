@@ -160,9 +160,9 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       address_1: formulario.direccion,
       address_2: formulario.direccion,
       city: formulario.ciudad,
-      state: formulario.labelProvincia,
+      state: pais.shortCodeProvincia,
       postcode: formulario.cp,
-      country: formulario.labelPais,
+      country: pais.valor,
       email: formulario.email,
       phone: formulario.telefono,
       coupon: cupon,
@@ -171,10 +171,14 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       first_name: formulario.nombre,
       last_name: formulario.apellido,
       address_1: formulario.direccion,
+      address_2: formulario.direccion,
       city: formulario.ciudad,
-      state: formulario.labelProvincia,
-      postcode: formulario.codigoPostal,
-      country: formulario.labelPais,
+      state: pais.shortCodeProvincia,
+      postcode: formulario.cp,
+      country: pais.valor,
+      email: formulario.email,
+      phone: formulario.telefono,
+      coupon: cupon,
     },
     meta_data: [
       {
@@ -292,7 +296,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       provincia: e.value,
       labelProvincia: e.label,
     });
-    setPais({ ...pais, shortCodeProvincia: e.shortcode });
+    setPais({ ...pais, shortCodeProvincia: e.shortcode, provincia: e.label });
   };
 
   const handlePais = (e) => {
@@ -333,7 +337,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       });
     }
   }, [pais]);
-
+  console.log(formulario);
   return (
     <>
       <div>
@@ -362,6 +366,12 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                       return key;
                     }
                   );
+                  const codigoProvincia = metadata?.filter(
+                    (m) => m.key === "codigoProvincia"
+                  )[0]?.value;
+                  const codigoPais = metadata?.filter(
+                    (m) => m.key === "codigoPais"
+                  )[0]?.value;
                   setFormulario({
                     ...formulario,
                     nombre: userCustomer.billing.first_name,
@@ -369,9 +379,11 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                     telefono: userCustomer.billing.phone,
                     direccion: userCustomer.billing.address_1,
                     cp: userCustomer.billing.postcode,
-                    pais: userCustomer.billing.country,
-                    provincia: metadata?.codigoProvincia
-                      ? metadata?.codigoProvincia
+                    pais: codigoPais
+                      ? codigoPais
+                      : userCustomer.billing.country,
+                    provincia: codigoProvincia
+                      ? codigoProvincia
                       : userCustomer.billing.state,
                     email: userCustomer.billing.email,
                     ciudad: userCustomer.billing.city,

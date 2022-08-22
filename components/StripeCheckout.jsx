@@ -12,6 +12,7 @@ import ClipLoader from "react-spinners/ClipLoader";
  * </code>
  */
 export default function StripeCheckout({ formulario, envio, cupon }) {
+  console.log(formulario);
   const [loading, setLoading] = useState(false);
   const actualCart = useSelector((state) => state.cartReducer.cart);
   const router = useRouter();
