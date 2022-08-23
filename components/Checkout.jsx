@@ -602,8 +602,10 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 <Link href="/legal/politica-de-privacidad">
                   <a>política de privacidad</a>{" "}
                 </Link>
-                y<Link href="/legal/aviso_legal"></Link>
-                <a>los términos y condiciones</a>
+                y
+                <Link href="/legal/aviso_legal">
+                  <a>los términos y condiciones</a>
+                </Link>
               </Checkbox>
               {cupon === null && errorCupon !== null && (
                 <span
