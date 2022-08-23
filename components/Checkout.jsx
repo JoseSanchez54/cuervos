@@ -365,7 +365,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       });
     }
   }, [pais]);
-  console.log(userCustomer);
+
   return (
     <>
       <div>
