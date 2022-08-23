@@ -134,3 +134,7 @@ h2 {
   font-weight: normal !important;
   letter-spacing: inherit !important;
 }
+#onesignal-bell-container.onesignal-reset.onesignal-bell-container-bottom-right {
+  bottom: 62px !important;
+  right: -8px !important;
+}
