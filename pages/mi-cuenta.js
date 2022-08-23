@@ -30,9 +30,8 @@ export default function MiCuenta({
     window.OneSignal = window.OneSignal || [];
     OneSignal.push(function () {
       OneSignal.init({
-        appId: "89eb0178-7278-4def-8277-17687d2629a2",
-        safari_web_id:
-          "web.onesignal.auto.6974e7ad-baef-42fd-b71d-7f7df083312f",
+        appId: process.env.SIGNAL_ID,
+        safari_web_id: process.env.SAFARI_ID,
         notifyButton: {
           enable: true,
         },
