@@ -631,7 +631,7 @@ const LoginForm = ({ opciones, login, set }) => {
                             initial={{
                               opacity: 0,
                             }}
-                            className="mt-9"
+                            className="mt-9 w-full text-center"
                           >
                             <Input
                               clearable
@@ -658,6 +658,8 @@ const LoginForm = ({ opciones, login, set }) => {
                                 },
                                 div: {
                                   borderRadius: "0",
+                                  maxWidth: "144px",
+                                  width: "100%",
                                 },
                               }}
                             />
