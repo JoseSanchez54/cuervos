@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import { Dropdown } from "@nextui-org/react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import { useEffect } from "react";
 
 export default function MiCuenta({
   options,
@@ -25,6 +26,66 @@ export default function MiCuenta({
   suscriptions,
   sessions,
 }) {
+  useEffect(() => {
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function () {
+      OneSignal.init({
+        appId: "89eb0178-7278-4def-8277-17687d2629a2",
+        safari_web_id:
+          "web.onesignal.auto.6974e7ad-baef-42fd-b71d-7f7df083312f",
+        notifyButton: {
+          enable: true,
+        },
+
+        allowLocalhostAsSecureOrigin: true,
+        notifyButton: {
+          enable: true /* Required to use the Subscription Bell */,
+          size: "medium" /* One of 'small', 'medium', or 'large' */,
+          theme:
+            "default" /* One of 'default' (red-white) or 'inverse" (white-red) */,
+          position: "bottom-right" /* Either 'bottom-left' or 'bottom-right' */,
+          offset: {
+            bottom: "28px",
+            right: "23px" /* Only applied if bottom-right */,
+          },
+          showCredit: false /* Hide the OneSignal logo */,
+          text: {
+            "tip.state.unsubscribed": "Suscríbete para recibir notificaciones",
+            "tip.state.subscribed": "Te has vuelto a suscribir",
+            "tip.state.blocked": "Has bloqueado las suscripciones",
+            "message.prenotify": "Click para suscribirte a las notificaciones",
+            "message.action.subscribed": "Gracias por suscribirte",
+            "message.action.resubscribed":
+              "Te has suscrito a las notificaciones",
+            "message.action.unsubscribed": "No recibirás más notificaciones",
+            "dialog.main.title": "Opciones",
+            "dialog.main.button.subscribe": "SUSCRIBIRME",
+            "dialog.main.button.unsubscribe": "DARSE DE BAJA",
+            "dialog.blocked.title": "Desbloquear las notificaciones",
+            "dialog.blocked.message":
+              "Sigue estas instrucciones para desbloquear las notificaciones",
+          },
+          colors: {
+            // Customize the colors of the main button and dialog popup button
+            "circle.background": "rgb(0,0,0)",
+            "circle.foreground": "white",
+            "badge.background": "rgb(84,110,123)",
+            "badge.foreground": "white",
+            "badge.bordercolor": "white",
+            "pulse.color": "white",
+            "dialog.button.background.hovering": "rgb(77, 101, 113)",
+            "dialog.button.background.active": "rgb(70, 92, 103)",
+            "dialog.button.background": "rgb(84,110,123)",
+            "dialog.button.foreground": "white",
+          },
+        },
+      });
+    });
+
+    return () => {
+      window.OneSignal = undefined;
+    };
+  }, []);
   const username = useSelector((state) => state.userReducer.email);
   const { data } = usePages(pagina, "area");
   const dispatch = useDispatch();
@@ -63,7 +124,7 @@ export default function MiCuenta({
   const userOrders = pedidos1?.data?.filter(
     (order) => order?.billing?.email === username
   );
-/* Finding the userCustomer object in the customers array. */
+  /* Finding the userCustomer object in the customers array. */
   const userCustomer = customers?.data?.find(
     (order) => order?.billing?.email === username
   );
