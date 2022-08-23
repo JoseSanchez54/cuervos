@@ -503,6 +503,8 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 placeholder={
                   userCustomer?.billing.country
                     ? userCustomer?.billing.country
+                    : formulario.pais
+                    ? formulario.labelPais
                     : "País"
                 }
                 name="pais"
@@ -514,10 +516,11 @@ const FormularioCheckout = ({ onAction, opciones }) => {
             </div>
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
-                setValue={formulario.labelProvincia}
                 placeholder={
                   userCustomer?.billing.state
                     ? userCustomer?.billing.state
+                    : formulario.provincia
+                    ? formulario.labelProvincia
                     : "Provincia"
                 }
                 isDisabled={completo}
