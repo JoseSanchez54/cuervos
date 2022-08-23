@@ -600,7 +600,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
               >
                 Acepto la{" "}
                 <Link href="/legal/politica-de-privacidad">
-                  <a>política de privacidad</a>{" "}
+                  <a>política de privacidad</a>
                 </Link>
                 y
                 <Link href="/legal/aviso_legal">
