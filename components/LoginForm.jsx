@@ -647,7 +647,7 @@ const LoginForm = ({ opciones, login, set }) => {
                                 borderColor: "#7e8085",
                                 fontFamily: opciones.fuente_global,
                                 borderRadius: "0",
-                                maxWidth: "144px",
+                                maxWidth: "175px",
                                 width: "100%",
                                 label: {
                                   color: "#7e8085",
