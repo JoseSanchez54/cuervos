@@ -631,7 +631,7 @@ const LoginForm = ({ opciones, login, set }) => {
                             initial={{
                               opacity: 0,
                             }}
-                            className="mt-9"
+                            className="mt-9 w-full text-center"
                           >
                             <Input
                               clearable
@@ -647,6 +647,8 @@ const LoginForm = ({ opciones, login, set }) => {
                                 borderColor: "#7e8085",
                                 fontFamily: opciones.fuente_global,
                                 borderRadius: "0",
+                                maxWidth: "144px",
+                                width: "100%",
                                 label: {
                                   color: "#7e8085",
                                   zIndex: "1",
