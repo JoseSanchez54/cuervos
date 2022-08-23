@@ -182,8 +182,12 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       state: formulario.provinciaFacturacion
         ? formulario.provinciaFacturacion
         : formulario.provincia,
-      postcode: formulario.cp,
-      country: formulario.pais,
+      postcode: formulario.cpFacturacion
+        ? formulario.cpFacturacion
+        : formulario.cp,
+      country: formulario.paisFacturacion
+        ? formulario.paisFacturacion
+        : formulario.pais,
       email: formulario.email,
       phone: formulario.telefono,
       coupon: cupon,
