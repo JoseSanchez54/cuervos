@@ -44,6 +44,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     cp: "",
     total: total,
     cupon: cupon,
+    signalId: "",
   });
 
   const getCupones = async (e) => {
