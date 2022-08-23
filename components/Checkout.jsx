@@ -114,12 +114,14 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       ...provided,
       width: "100%",
       maxHeight: "200px",
+      backgroundColor: "white",
     }),
     control: () => ({
       // none of react-select's styles are passed to <Control />
       display: "flex",
       borderBottom: "1px solid black",
       color: "black",
+      backgroundColor: "white",
     }),
     singleValue: (provided, state) => {
       const opacity = state.isDisabled ? 0.5 : 1;
@@ -558,7 +560,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
             </div>
           </div>
           <div className="flex flex-row fila">
-            <div className="flex flex-col gap-5 w-full mx-2">
+            <div className="flex flex-col gap-5 z-0 w-full mx-2">
               <input
                 type="text"
                 name="cupon"
