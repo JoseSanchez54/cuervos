@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       return key;
     });
 
-    if (i.type === "subscription" || i.attributes[0].name === "Meses") {
+    if (i.type === "subscription") {
       periodico = metadata?.filter((m) => m.key === "_subscription_period")[0]
         ?.value;
       intervalo = metadata?.filter(
