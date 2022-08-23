@@ -598,13 +598,24 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 defaultSelected={false}
                 size="xs"
               >
-                Acepto la{" "}
+                Acepto la
                 <Link href="/legal/politica-de-privacidad">
-                  <a>política de privacidad</a>
+                  <a
+                    style={{
+                      marginLeft: "2px",
+                      marginRight: "2px",
+                    }}
+                  >
+                    {" "}
+                    {" política de privacidad"}
+                  </a>
                 </Link>
-                y
+                {" y "}
                 <Link href="/legal/aviso_legal">
-                  <a>los términos y condiciones</a>
+                  <a style={{ marginLeft: "2px" }}>
+                    {" "}
+                    {" términos y condiciones"}
+                  </a>
                 </Link>
               </Checkbox>
               {cupon === null && errorCupon !== null && (
