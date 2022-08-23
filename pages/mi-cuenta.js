@@ -217,7 +217,9 @@ export default function MiCuenta({
             <button onClick={() => handleConnect()} className="logout">
               Desconectarse
             </button>
-            <UserForm usuario={usuario} opciones={optionsSWR}></UserForm>
+            {usuario && (
+              <UserForm usuario={usuario} opciones={optionsSWR}></UserForm>
+            )}
           </div>
           <div className="flex flex-row w-full  flex-wrap gap-2 justify-center">
             <div className="flex flex-col w-full  items-center">
