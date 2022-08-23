@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import validarEmail from "../utils/validarEmail";
+import Link from "next/link";
 const StripeCheckout = dynamic(() => import("./StripeCheckout"), {
   ssr: true,
 });
@@ -364,7 +365,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       });
     }
   }, [pais]);
-  console.log(formulario);
+
   return (
     <>
       <div>
@@ -597,7 +598,12 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 defaultSelected={false}
                 size="xs"
               >
-                Acepto la política de privacidad y los términos y condiciones
+                Acepto la{" "}
+                <Link href="/legal/politica-de-privacidad">
+                  <a>política de privacidad</a>{" "}
+                </Link>
+                y<Link href="/legal/aviso_legal"></Link>
+                <a>los términos y condiciones</a>
               </Checkbox>
               {cupon === null && errorCupon !== null && (
                 <span
