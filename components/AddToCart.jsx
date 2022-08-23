@@ -6,8 +6,12 @@ import { useState, useEffect } from "react";
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const [sus, setSus] = useState(null);
   const [error, setError] = useState("");
-
+  const [texto, setTexto] = useState("COMPRAR AHORA");
+  if (texto !== "COMPRAR AHORA") {
+    setTimeout(() => setTexto("COMPRAR AHORA"), 2000);
+  }
   const actualCart = useSelector((state) => state.cartReducer.cart);
+
   useEffect(() => {
     actualCart.map((item, index) => {
       const periodo = item?.meta_data?.find(
@@ -46,6 +50,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   }
 
   const handleCart = () => {
+    setTexto("AÑADIDO");
     if (variable) {
       const productoAdd = addToCart(seleccion, lista);
 
@@ -67,6 +72,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
             type: "@AddToCart",
             producto: productoAdd,
           });
+
           setError("");
         } else {
           setError(
@@ -126,7 +132,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           }}
           onClick={() => handleCart()}
         >
-          <span>COMPRAR AHORA</span>
+          <span>{texto}</span>
         </motion.button>
         <div className="flex flex-row w-full">
           {" "}
