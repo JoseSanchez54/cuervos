@@ -42,6 +42,13 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     ciudad: "",
     pais: "",
     cp: "",
+    nombreFacturacion: "",
+    apellidoFacturacion: "",
+    telefonoFacturacion: "",
+    direccionFacturacion: "",
+    ciudadFacturacion: "",
+    paisFacturacion: "",
+    cpFacturacion: "",
     total: total,
     cupon: cupon,
     signalId: "",
@@ -156,12 +163,20 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     payment_method_title: "Stripe",
     set_paid: false,
     billing: {
-      first_name: formulario.nombre,
-      last_name: formulario.apellido,
-      address_1: formulario.direccion,
-      address_2: formulario.direccion,
-      city: formulario.ciudad,
-      state: formulario.provincia,
+      first_name: nombreFacturacion ? nombreFacturacion : formulario.nombre,
+      last_name: formulario.apellidoFacturacion
+        ? formulario.apellidoFacturacion
+        : formulario.apellido,
+      address_1: formulario.direccionFacturacion
+        ? formulario.direccionFacturacion
+        : formulario.direccion,
+      address_2: formulario.direccionFacturacion
+        ? formulario.direccionFacturacion
+        : formulario.direccion,
+      city: formulario.ciudadFacturacion
+        ? formulario.ciudadFacturacion
+        : formulario.ciudad,
+      state: formulario.provinciaFformulario.provincia,
       postcode: formulario.cp,
       country: formulario.pais,
       email: formulario.email,
