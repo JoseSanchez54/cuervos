@@ -163,7 +163,10 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     payment_method_title: "Stripe",
     set_paid: false,
     billing: {
-      first_name: nombreFacturacion ? nombreFacturacion : formulario.nombre,
+      first_name:
+        formulario.nombreFacturacion !== ""
+          ? nombreFacturacion
+          : formulario.nombre,
       last_name: formulario.apellidoFacturacion
         ? formulario.apellidoFacturacion
         : formulario.apellido,
@@ -176,7 +179,9 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       city: formulario.ciudadFacturacion
         ? formulario.ciudadFacturacion
         : formulario.ciudad,
-      state: formulario.provinciaFformulario.provincia,
+      state: formulario.provinciaFacturacion
+        ? formulario.provinciaFacturacion
+        : formulario.provincia,
       postcode: formulario.cp,
       country: formulario.pais,
       email: formulario.email,

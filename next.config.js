@@ -28,6 +28,8 @@ module.exports = {
     URLBASE: process.env.URLBASE,
     PASSSECRET: "Passwordsecretaadefinir",
     URLFINAL: process.env.URLFINAL,
+    SIGNAL_ID: process.env.SIGNAL_ID,
+    SAFARI_ID: process.env.SAFARI_ID,
   },
   swcMinify: true,
 
