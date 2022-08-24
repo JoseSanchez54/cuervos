@@ -366,7 +366,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       });
     }
   }, [pais]);
-  console.log(userCustomer);
+
   return (
     <>
       <div>
@@ -401,6 +401,10 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                   const codigoPais = metadata?.filter(
                     (m) => m.key === "codigoPais"
                   )[0]?.value;
+                  const provinciaLabel = datosPaises[0].regions.find(
+                    (e) => e.shortCode === codigoProvincia
+                  ).name;
+
                   setFormulario({
                     ...formulario,
                     nombre: userCustomer.billing.first_name,
@@ -416,6 +420,8 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                       : userCustomer.billing.state,
                     email: userCustomer.billing.email,
                     ciudad: userCustomer.billing.city,
+                    completo: true,
+                    provinciaLabel: provinciaLabel,
                   });
                   setCompleto(true);
                 }}
@@ -486,7 +492,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
           <div className="flex flex-row">
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
-                placeholder={"País"}
+                placeholder={formulario.completo ? "España" : "País"}
                 name="pais"
                 options={optionsPais}
                 onChange={(e) => handlePais(e)}
@@ -496,7 +502,9 @@ const FormularioCheckout = ({ onAction, opciones }) => {
             </div>
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
-                placeholder={"Provincia"}
+                placeholder={
+                  formulario.completo ? formulario.provinciaLabel : "Provincia"
+                }
                 isDisabled={completo}
                 name="provincia"
                 styles={customStyles}
