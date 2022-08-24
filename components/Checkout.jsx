@@ -432,11 +432,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
               <input
                 type="text"
                 name="nombre"
-                placeholder={
-                  userCustomer?.billing.first_name
-                    ? userCustomer?.billing.first_name
-                    : "Nombre"
-                }
+                placeholder={"Nombre"}
                 value={formulario.nombre}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
@@ -446,11 +442,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
               <input
                 type="text"
                 name="apellido"
-                placeholder={
-                  userCustomer?.billing.last_name
-                    ? userCustomer?.billing.last_name
-                    : "Apellidos"
-                }
+                placeholder={"Apellidos"}
                 value={formulario.apellido}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
@@ -463,7 +455,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 type="email"
                 name="email"
                 value={formulario.email}
-                placeholder={usuario?.email ? usuario?.email : "Email"}
+                placeholder={"Email"}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -473,11 +465,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 type="tel"
                 name="telefono"
                 value={formulario.telefono}
-                placeholder={
-                  userCustomer?.billing.phone
-                    ? userCustomer?.billing.phone
-                    : "Teléfono"
-                }
+                placeholder={"Teléfono"}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -489,11 +477,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 type="text"
                 name="direccion"
                 value={formulario.direccion}
-                placeholder={
-                  userCustomer?.billing.address_1
-                    ? userCustomer?.billing.address_1
-                    : "Dirección"
-                }
+                placeholder="Dirección"
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -502,36 +486,22 @@ const FormularioCheckout = ({ onAction, opciones }) => {
           <div className="flex flex-row">
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
-                placeholder={
-                  userCustomer?.billing.country
-                    ? userCustomer?.billing.country
-                    : formulario.pais
-                    ? formulario.labelPais
-                    : "País"
-                }
+                placeholder={"País"}
                 name="pais"
                 options={optionsPais}
-                onChange={handlePais}
+                onChange={(e) => handlePais(e)}
                 styles={customStyles}
                 isDisabled={completo}
               />
             </div>
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
-                setValue={formulario.labelProvincia}
-                placeholder={
-                  userCustomer?.billing.state
-                    ? userCustomer?.billing.state
-                    : formulario.provincia
-                    ? formulario.labelProvincia
-                    : "Provincia"
-                }
+                placeholder={"Provincia"}
                 isDisabled={completo}
                 name="provincia"
-                value={formulario.provincia}
                 styles={customStyles}
                 options={arrt}
-                onChange={handleProvincias}
+                onChange={(e) => handleProvincias(e)}
               />
             </div>
           </div>
