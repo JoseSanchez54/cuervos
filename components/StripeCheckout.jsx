@@ -12,23 +12,57 @@ import ClipLoader from "react-spinners/ClipLoader";
  * </code>
  */
 export default function StripeCheckout({ formulario, envio, cupon }) {
-  console.log(formulario);
   const [loading, setLoading] = useState(false);
   const actualCart = useSelector((state) => state.cartReducer.cart);
   const router = useRouter();
   React.useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
-      console.log("Order placed! You will receive an email confirmation.");
-    }
-
-    if (query.get("canceled")) {
-      console.log(
-        "Order canceled -- continue to shop around and checkout when you’re ready."
-      );
-    }
+    paypal
+      .Buttons({
+        // Sets up the transaction when a payment button is clicked
+        createOrder: function (data, actions) {
+          return fetch("/api/paypalorders", {
+            method: "post",
+            // use the "body" param to optionally pass additional order information
+            // like product ids or amount
+          })
+            .then((response) => response.json())
+            .then((order) => order.id);
+        },
+        // Finalize the transaction after payer approval
+        onApprove: function (data, actions) {
+          return fetch(`/api/capture?=${data.orderID}`, {
+            method: "post",
+            body: {
+              orderID: data.orderID,
+            },
+          })
+            .then((response) => response.json())
+            .then((orderData) => {
+              // Successful capture! For dev/demo purposes:
+              console.log(
+                "Capture result",
+                orderData,
+                JSON.stringify(orderData, null, 2)
+              );
+              var transaction =
+                orderData.purchase_units[0].payments.captures[0];
+              alert(
+                "Transaction " +
+                  transaction.status +
+                  ": " +
+                  transaction.id +
+                  "\n\nSee console for all available details"
+              );
+              // When ready to go live, remove the alert and show a success message within this page. For example:
+              // var element = document.getElementById('paypal-button-container');
+              // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+              // Or go to another URL:  actions.redirect('thank_you.html');
+            });
+        },
+      })
+      .render("#paypal-button-container");
   }, []);
+
   const handle = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -50,6 +84,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
       <button className="items-center" onClick={(e) => handle(e)}>
         Pagar {loading && <ClipLoader size="16px" color="white" />}
       </button>
+      <div id="paypal-button-container"></div>
 
       <style jsx>
         {`

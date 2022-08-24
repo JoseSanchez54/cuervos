@@ -30,6 +30,8 @@ module.exports = {
     URLFINAL: process.env.URLFINAL,
     SIGNAL_ID: process.env.SIGNAL_ID,
     SAFARI_ID: process.env.SAFARI_ID,
+    CLIENT_ID: process.env.CLIENT_ID,
+    APP_SECRET: process.env.APP_SECRET,
   },
   swcMinify: true,
 
