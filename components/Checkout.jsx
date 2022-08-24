@@ -365,13 +365,12 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       });
     }
   }, [pais]);
-  console.log(userCustomer);
+
   return (
     <>
       <div>
-        {userCustomer &&
-          {
-            /* <>
+        {/*  {userCustomer && (
+          <>
             <div className="flex bg-black py-5 px-3 items-center flex-row gap-5 w-full">
               <span
                 style={{
@@ -423,8 +422,8 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 Rellenar
               </button>
             </div>
-          </> */
-          }}
+          </>
+        )} */}
 
         <form onSubmit={(e) => actionForm(e)} method="post" target="_blank">
           <div className="flex flex-row fila">
