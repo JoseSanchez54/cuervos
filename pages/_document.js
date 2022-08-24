@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default function Document() {
   return (
@@ -8,7 +9,7 @@ export default function Document() {
           src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
           async=""
         ></script>
-        <script src="https://www.paypal.com/sdk/js?client-id=AVbAI_7_F8U_6sR6QBDOWXY2bOpPfgbNFsBYn8wkAvNngJUPmADuObbPEgIa8qayu09XfAEPKInRTyZm&currency=EUR"></script>
+        <Script src="https://www.paypal.com/sdk/js?client-id=AVbAI_7_F8U_6sR6QBDOWXY2bOpPfgbNFsBYn8wkAvNngJUPmADuObbPEgIa8qayu09XfAEPKInRTyZm&currency=EUR"></Script>
       </Head>
       <body>
         <Main />
