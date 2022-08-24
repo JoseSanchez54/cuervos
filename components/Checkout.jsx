@@ -21,7 +21,8 @@ const FormularioCheckout = ({ onAction, opciones }) => {
   const customers = useSWR("customers", fetcherWc);
   const usuario = useSelector((state) => state.userReducer);
   const userCustomer = customers?.data?.find(
-    (order) => order?.billing?.email === usuario.email
+    (order) =>
+      order?.billing?.email === usuario.email && order.billing.email !== ""
   );
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
   const [estadoP, setEstadoP] = useState(onAction);
@@ -365,11 +366,11 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       });
     }
   }, [pais]);
-
+  console.log(userCustomer);
   return (
     <>
       <div>
-        {/*  {userCustomer && (
+        {userCustomer && (
           <>
             <div className="flex bg-black py-5 px-3 items-center flex-row gap-5 w-full">
               <span
@@ -423,7 +424,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
               </button>
             </div>
           </>
-        )} */}
+        )}
 
         <form onSubmit={(e) => actionForm(e)} method="post" target="_blank">
           <div className="flex flex-row fila">
