@@ -54,6 +54,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     total: total,
     cupon: cupon,
     signalId: "",
+    facturacion: false,
   });
 
   const getCupones = async (e) => {
@@ -169,7 +170,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     billing: {
       first_name:
         formulario.nombreFacturacion !== ""
-          ? nombreFacturacion
+          ? formulario.nombreFacturacion
           : formulario.nombre,
       last_name: formulario.apellidoFacturacion
         ? formulario.apellidoFacturacion
@@ -407,19 +408,28 @@ const FormularioCheckout = ({ onAction, opciones }) => {
 
                   setFormulario({
                     ...formulario,
-                    nombre: userCustomer.billing.first_name,
-                    apellido: userCustomer.billing.last_name,
-                    telefono: userCustomer.billing.phone,
-                    direccion: userCustomer.billing.address_1,
-                    cp: userCustomer.billing.postcode,
-                    pais: codigoPais
+                    nombreFacturacion: userCustomer.billing.first_name,
+                    nombre: userCustomer.shipping.first_name,
+                    apellidoFacturacion: userCustomer.billing.last_name,
+                    apellido: userCustomer.shipping.last_name,
+                    telefonoFacturacion: userCustomer.billing.phone,
+                    telefono: userCustomer.shipping.phone,
+                    direccionFacturacion: userCustomer.billing.address_1,
+                    direccion: userCustomer.shipping.address_1,
+                    cpFacturacion: userCustomer.billing.postcode,
+                    cp: userCustomer.shipping.postcode,
+                    paisFacturacion: codigoPais
                       ? codigoPais
                       : userCustomer.billing.country,
-                    provincia: codigoProvincia
+                    pais: userCustomer.shipping.country,
+                    provinciaFacturacion: codigoProvincia
                       ? codigoProvincia
                       : userCustomer.billing.state,
-                    email: userCustomer.billing.email,
-                    ciudad: userCustomer.billing.city,
+                    provincia: userCustomer.shipping.state,
+                    emailFacturacion: userCustomer.shipping.email,
+                    email: userCustomer.shipping.email,
+                    ciudadFacturacion: userCustomer.billing.city,
+                    ciudad: userCustomer.shipping.city,
                     completo: true,
                     provinciaLabel: provinciaLabel,
                   });
@@ -519,11 +529,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 type="text"
                 name="ciudad"
                 value={formulario.ciudad}
-                placeholder={
-                  userCustomer?.billing.city
-                    ? userCustomer?.billing.city
-                    : "Ciudad"
-                }
+                placeholder={"Ciudad"}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -533,11 +539,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 type="text"
                 name="cp"
                 value={formulario.cp}
-                placeholder={
-                  userCustomer?.billing.postcode
-                    ? userCustomer?.billing.postcode
-                    : "Código postal"
-                }
+                placeholder={"Código postal"}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -552,6 +554,130 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 onChange={(e) => getCupones(e)}
                 disabled={completo}
               />
+              <Checkbox
+                css={{
+                  span: {
+                    fontFamily: opciones?.fuente_global,
+                  },
+                }}
+                name="facturacion"
+                onChange={(e) => handleCheck(e, "facturacion")}
+                isRequired={false}
+                defaultSelected={false}
+                size="xs"
+              >
+                Tengo una dirección de facturación diferente
+              </Checkbox>
+              {formulario.facturacion && (
+                <>
+                  {" "}
+                  <div className="flex flex-row fila">
+                    <div className="flex flex-col w-full mx-2 md:w-1/2">
+                      <input
+                        type="text"
+                        name="nombreFacturacion"
+                        placeholder={"Nombre"}
+                        value={formulario.nombreFacturacion}
+                        onChange={(e) => handleFormulario(e)}
+                        disabled={completo}
+                      />
+                    </div>
+                    <div className="flex flex-col w-full mx-2 md:w-1/2">
+                      <input
+                        type="text"
+                        name="apellidoFacturacion"
+                        placeholder={"Apellidos"}
+                        value={formulario.apellidoFacturacion}
+                        onChange={(e) => handleFormulario(e)}
+                        disabled={completo}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-row fila">
+                    <div className="flex flex-col w-full mx-2 md:w-1/2">
+                      <input
+                        type="email"
+                        name="emailFacturacion"
+                        value={formulario.emailFacturacion}
+                        placeholder={"Email"}
+                        onChange={(e) => handleFormulario(e)}
+                        disabled={completo}
+                      />
+                    </div>
+                    <div className="flex flex-col w-full mx-2 md:w-1/2">
+                      <input
+                        type="tel"
+                        name="telefonoFacturacion"
+                        value={formulario.telefonoFacturacion}
+                        placeholder={"Teléfono"}
+                        onChange={(e) => handleFormulario(e)}
+                        disabled={completo}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-row fila">
+                    <div className="flex flex-col w-full mx-2 ">
+                      <input
+                        type="text"
+                        name="direccionFacturacion"
+                        value={formulario.direccionFacturacion}
+                        placeholder="Dirección"
+                        onChange={(e) => handleFormulario(e)}
+                        disabled={completo}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-row">
+                    <div className="flex flex-col w-full mx-2 md:w-1/2">
+                      <Select
+                        placeholder={formulario.completo ? "España" : "País"}
+                        name="paisFacturacion"
+                        options={optionsPais}
+                        onChange={(e) => handlePais(e)}
+                        styles={customStyles}
+                        isDisabled={completo}
+                      />
+                    </div>
+                    <div className="flex flex-col w-full mx-2 md:w-1/2">
+                      <Select
+                        placeholder={
+                          formulario.completo
+                            ? formulario.provinciaLabel
+                            : "Provincia"
+                        }
+                        isDisabled={completo}
+                        name="provinciaFacturacion"
+                        styles={customStyles}
+                        options={arrt}
+                        onChange={(e) => handleProvincias(e)}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-row fila">
+                    <div className="flex flex-col w-full mx-2 md:w-1/2">
+                      <input
+                        type="text"
+                        name="ciudadFacturacion"
+                        value={formulario.ciudadFacturacion}
+                        placeholder={"Ciudad"}
+                        onChange={(e) => handleFormulario(e)}
+                        disabled={completo}
+                      />
+                    </div>
+                    <div className="flex flex-col w-full mx-2 md:w-1/2">
+                      <input
+                        type="text"
+                        name="cpFacturacion"
+                        value={formulario.cpFacturacion}
+                        placeholder={"Código postal"}
+                        onChange={(e) => handleFormulario(e)}
+                        disabled={completo}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+
               <Checkbox
                 css={{
                   span: {
@@ -773,7 +899,6 @@ const FormularioCheckout = ({ onAction, opciones }) => {
           </button>
         </div>
       </div>
-
       <style jsx>{`
         .botonForm {
           font-family: "Helvetica";
