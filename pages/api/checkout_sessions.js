@@ -3,11 +3,7 @@ import WooCommerce from "../../woocommerce/Woocommerce";
 import dateFormat from "dateformat";
 export default async function handler(req, res) {
   const { items, formulario, envio, cupon, sessionID } = req.body;
-  const wc = await WooCommerce.post("orders", formulario)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {});
+
   const itemsWc = [];
   items.map((i) => {
     if (i.variable === false) {
