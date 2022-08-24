@@ -21,7 +21,8 @@ const FormularioCheckout = ({ onAction, opciones }) => {
   const customers = useSWR("customers", fetcherWc);
   const usuario = useSelector((state) => state.userReducer);
   const userCustomer = customers?.data?.find(
-    (order) => order?.billing?.email === usuario.email
+    (order) =>
+      order?.billing?.email === usuario.email && order.billing.email !== ""
   );
   const [tax, setTax] = useState({ tasa: "", error: false, mensaje: "" });
   const [estadoP, setEstadoP] = useState(onAction);
@@ -369,7 +370,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
   return (
     <>
       <div>
-        {/*  {userCustomer && (
+        {userCustomer && (
           <>
             <div className="flex bg-black py-5 px-3 items-center flex-row gap-5 w-full">
               <span
@@ -400,6 +401,10 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                   const codigoPais = metadata?.filter(
                     (m) => m.key === "codigoPais"
                   )[0]?.value;
+                  const provinciaLabel = datosPaises[0].regions.find(
+                    (e) => e.shortCode === codigoProvincia
+                  ).name;
+
                   setFormulario({
                     ...formulario,
                     nombre: userCustomer.billing.first_name,
@@ -415,6 +420,8 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                       : userCustomer.billing.state,
                     email: userCustomer.billing.email,
                     ciudad: userCustomer.billing.city,
+                    completo: true,
+                    provinciaLabel: provinciaLabel,
                   });
                   setCompleto(true);
                 }}
@@ -423,7 +430,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
               </button>
             </div>
           </>
-        )} */}
+        )}
 
         <form onSubmit={(e) => actionForm(e)} method="post" target="_blank">
           <div className="flex flex-row fila">
@@ -431,11 +438,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
               <input
                 type="text"
                 name="nombre"
-                placeholder={
-                  userCustomer?.billing.first_name
-                    ? userCustomer?.billing.first_name
-                    : "Nombre"
-                }
+                placeholder={"Nombre"}
                 value={formulario.nombre}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
@@ -445,11 +448,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
               <input
                 type="text"
                 name="apellido"
-                placeholder={
-                  userCustomer?.billing.last_name
-                    ? userCustomer?.billing.last_name
-                    : "Apellidos"
-                }
+                placeholder={"Apellidos"}
                 value={formulario.apellido}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
@@ -462,7 +461,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 type="email"
                 name="email"
                 value={formulario.email}
-                placeholder={usuario?.email ? usuario?.email : "Email"}
+                placeholder={"Email"}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -472,11 +471,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 type="tel"
                 name="telefono"
                 value={formulario.telefono}
-                placeholder={
-                  userCustomer?.billing.phone
-                    ? userCustomer?.billing.phone
-                    : "Teléfono"
-                }
+                placeholder={"Teléfono"}
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -488,11 +483,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 type="text"
                 name="direccion"
                 value={formulario.direccion}
-                placeholder={
-                  userCustomer?.billing.address_1
-                    ? userCustomer?.billing.address_1
-                    : "Dirección"
-                }
+                placeholder="Dirección"
                 onChange={(e) => handleFormulario(e)}
                 disabled={completo}
               />
@@ -501,36 +492,24 @@ const FormularioCheckout = ({ onAction, opciones }) => {
           <div className="flex flex-row">
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
-                placeholder={
-                  userCustomer?.billing.country
-                    ? userCustomer?.billing.country
-                    : formulario.pais
-                    ? formulario.labelPais
-                    : "País"
-                }
+                placeholder={formulario.completo ? "España" : "País"}
                 name="pais"
                 options={optionsPais}
-                onChange={handlePais}
+                onChange={(e) => handlePais(e)}
                 styles={customStyles}
                 isDisabled={completo}
               />
             </div>
             <div className="flex flex-col w-full mx-2 md:w-1/2">
               <Select
-                setValue={formulario.labelProvincia}
                 placeholder={
-                  userCustomer?.billing.state
-                    ? userCustomer?.billing.state
-                    : formulario.provincia
-                    ? formulario.labelProvincia
-                    : "Provincia"
+                  formulario.completo ? formulario.provinciaLabel : "Provincia"
                 }
                 isDisabled={completo}
                 name="provincia"
-                value={formulario.provincia}
                 styles={customStyles}
                 options={arrt}
-                onChange={handleProvincias}
+                onChange={(e) => handleProvincias(e)}
               />
             </div>
           </div>
