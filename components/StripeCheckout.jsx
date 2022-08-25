@@ -17,21 +17,15 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
   const [sub, setSub] = useState(false);
   const [loading, setLoading] = useState(false);
   const actualCart = useSelector((state) => state.cartReducer.cart);
-  console.log(actualCart);
-  const unidades = [];
-  actualCart.map((e) => {
-    const actual = e.meta_data.find((x) => x.key === "_subscription_period");
-    if (actual && sub == false) {
-      setSub(true);
-    }
-    const unidad = {
-      amount: {
-        currency: "EUR",
-        value: e.price,
-      },
-    };
-    unidades.push(unidad);
-  });
+  const total = useSelector((state) => state.cartReducer.total);
+  envio = envio.replace(",", ".");
+
+  const unidad = {
+    amount: {
+      currency: "EUR",
+      value: total,
+    },
+  };
   const router = useRouter();
 
   const handle = (e) => {
@@ -55,10 +49,11 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
       <button className="items-center my-3" onClick={(e) => handle(e)}>
         Pagar {loading && <ClipLoader size="16px" color="white" />}
       </button>
-      <PayPalScriptProvider options={{ "client-id": process.env.CLIENT_ID }}>
+      {/* <PayPalScriptProvider options={{ "client-id": process.env.CLIENT_ID }}>
         {sub === false && (
           <>
             <PayPalButtons
+              currency="EUR"
               style={{ layout: "horizontal" }}
               createOrder={(data, actions) => {
                 axios.post("/api/orders", {
@@ -66,7 +61,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
                   actualCart: actualCart,
                 });
                 return actions.order.create({
-                  purchase_units: unidades,
+                  purchase_units: [unidad],
                 });
               }}
               onApprove={(data, actions) => {
@@ -78,7 +73,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
             />
           </>
         )}
-      </PayPalScriptProvider>
+      </PayPalScriptProvider> */}
 
       <style jsx>
         {`
