@@ -493,6 +493,7 @@ export default function MiCuenta({
         .tituloPrimera {
           font-family: ${optionsSWR?.fuente_global};
           font-size: 45px;
+          color: black;
         }
         .dato {
           font-family: ${optionsSWR?.fuente_global};
