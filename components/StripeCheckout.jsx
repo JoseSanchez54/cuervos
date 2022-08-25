@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import Router from "next/router";
 
 /**
  * I'm trying to create a stripe session and then redirect to the stripe checkout page.
@@ -13,11 +14,16 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
  * </code>
  */
 export default function StripeCheckout({ formulario, envio, cupon }) {
+  const [sub, setSub] = useState(false);
   const [loading, setLoading] = useState(false);
   const actualCart = useSelector((state) => state.cartReducer.cart);
   console.log(actualCart);
   const unidades = [];
   actualCart.map((e) => {
+    const actual = e.meta_data.find((x) => x.key === "_subscription_period");
+    if (actual && sub == false) {
+      setSub(true);
+    }
     const unidad = {
       amount: {
         currency: "EUR",
@@ -46,24 +52,32 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
 
   return (
     <>
-      <button className="items-center" onClick={(e) => handle(e)}>
+      <button className="items-center my-3" onClick={(e) => handle(e)}>
         Pagar {loading && <ClipLoader size="16px" color="white" />}
       </button>
       <PayPalScriptProvider options={{ "client-id": process.env.CLIENT_ID }}>
-        <PayPalButtons
-          style={{ layout: "horizontal" }}
-          createOrder={(data, actions) => {
-            return actions.order.create({
-              purchase_units: unidades,
-            });
-          }}
-          onApprove={(data, actions) => {
-            return actions.order.capture().then((details) => {
-              const name = details.payer.name.given_name;
-              alert(`Transaction completed by ${name}`);
-            });
-          }}
-        />
+        {sub === false && (
+          <>
+            <PayPalButtons
+              style={{ layout: "horizontal" }}
+              createOrder={(data, actions) => {
+                axios.post("/api/orders", {
+                  formulario: formulario,
+                  actualCart: actualCart,
+                });
+                return actions.order.create({
+                  purchase_units: unidades,
+                });
+              }}
+              onApprove={(data, actions) => {
+                return actions.order.capture().then((details) => {
+                  const name = details.payer.name.given_name;
+                  Router.push("/success");
+                });
+              }}
+            />
+          </>
+        )}
       </PayPalScriptProvider>
 
       <style jsx>
