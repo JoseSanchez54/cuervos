@@ -1,8 +1,8 @@
 import * as paypal from "../../utils/paypal-api";
 
 export default async (req, res) => {
-  const { orderID } = req.params;
-  console.log(req.method);
+  console.log(req.query);
+  const { orderID } = req.query;
 
   try {
     const captureData = await paypal.capturePayment(orderID);

@@ -30,11 +30,9 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
         },
         // Finalize the transaction after payer approval
         onApprove: function (data, actions) {
-          return fetch(`/api/capture?=${data.orderID}`, {
+          return fetch(`/api/capture?orderID=${data.orderID}`, {
             method: "post",
-            body: {
-              orderID: data.orderID,
-            },
+            orderID: data.orderID,
           })
             .then((response) => response.json())
             .then((orderData) => {
