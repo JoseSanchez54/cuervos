@@ -1,7 +1,8 @@
 const { CLIENT_ID, APP_SECRET } = process.env;
 const base = "https://api-m.sandbox.paypal.com";
 
-export async function createOrder() {
+export async function createOrder(data, actions) {
+  console.log(data);
   const accessToken = await generateAccessToken();
   const url = `${base}/v2/checkout/orders`;
   const response = await fetch(url, {
@@ -27,10 +28,9 @@ export async function createOrder() {
 }
 
 export async function capturePayment(orderID) {
-  console.log(orderID);
   const accessToken = await generateAccessToken();
   const url = `${base}/v2/checkout/orders/${orderID}/capture`;
-  console.log("url", url);
+
   const response = await fetch(url, {
     method: "post",
     headers: {

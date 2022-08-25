@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 /**
  * I'm trying to create a stripe session and then redirect to the stripe checkout page.
@@ -14,52 +15,18 @@ import ClipLoader from "react-spinners/ClipLoader";
 export default function StripeCheckout({ formulario, envio, cupon }) {
   const [loading, setLoading] = useState(false);
   const actualCart = useSelector((state) => state.cartReducer.cart);
+  console.log(actualCart);
+  const unidades = [];
+  actualCart.map((e) => {
+    const unidad = {
+      amount: {
+        currency: "EUR",
+        value: e.price,
+      },
+    };
+    unidades.push(unidad);
+  });
   const router = useRouter();
-  React.useEffect(() => {
-    paypal
-      .Buttons({
-        // Sets up the transaction when a payment button is clicked
-        createOrder: function (data, actions) {
-          return fetch("/api/paypalorders", {
-            method: "post",
-            // use the "body" param to optionally pass additional order information
-            // like product ids or amount
-          })
-            .then((response) => response.json())
-            .then((order) => order.id);
-        },
-        // Finalize the transaction after payer approval
-        onApprove: function (data, actions) {
-          return fetch(`/api/capture?orderID=${data.orderID}`, {
-            method: "post",
-            orderID: data.orderID,
-          })
-            .then((response) => response.json())
-            .then((orderData) => {
-              // Successful capture! For dev/demo purposes:
-              console.log(
-                "Capture result",
-                orderData,
-                JSON.stringify(orderData, null, 2)
-              );
-              var transaction =
-                orderData.purchase_units[0].payments.captures[0];
-              alert(
-                "Transaction " +
-                  transaction.status +
-                  ": " +
-                  transaction.id +
-                  "\n\nSee console for all available details"
-              );
-              // When ready to go live, remove the alert and show a success message within this page. For example:
-              // var element = document.getElementById('paypal-button-container');
-              // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-              // Or go to another URL:  actions.redirect('thank_you.html');
-            });
-        },
-      })
-      .render("#paypal-button-container");
-  }, []);
 
   const handle = (e) => {
     e.preventDefault();
@@ -82,7 +49,22 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
       <button className="items-center" onClick={(e) => handle(e)}>
         Pagar {loading && <ClipLoader size="16px" color="white" />}
       </button>
-      <div id="paypal-button-container"></div>
+      <PayPalScriptProvider options={{ "client-id": process.env.CLIENT_ID }}>
+        <PayPalButtons
+          style={{ layout: "horizontal" }}
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              purchase_units: unidades,
+            });
+          }}
+          onApprove={(data, actions) => {
+            return actions.order.capture().then((details) => {
+              const name = details.payer.name.given_name;
+              alert(`Transaction completed by ${name}`);
+            });
+          }}
+        />
+      </PayPalScriptProvider>
 
       <style jsx>
         {`

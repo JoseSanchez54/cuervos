@@ -1,7 +1,6 @@
 import * as paypal from "../../utils/paypal-api";
 
 export default async (req, res) => {
-  console.log(req.query);
   const { orderID } = req.query;
 
   try {

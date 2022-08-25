@@ -8,10 +8,6 @@ export default function Document() {
           src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
           async=""
         ></script>
-        <script
-          async=""
-          src="https://www.paypal.com/sdk/js?client-id=AVbAI_7_F8U_6sR6QBDOWXY2bOpPfgbNFsBYn8wkAvNngJUPmADuObbPEgIa8qayu09XfAEPKInRTyZm&currency=EUR"
-        ></script>
       </Head>
       <body>
         <Main />
