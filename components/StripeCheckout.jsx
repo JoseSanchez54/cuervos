@@ -19,15 +19,24 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
   const actualCart = useSelector((state) => state.cartReducer.cart);
   const total = useSelector((state) => state.cartReducer.total);
   envio = envio.replace(",", ".");
+  console.log(cupon);
+  const costo =
+    parseFloat(total) < 50
+      ? parseFloat(total) + parseFloat(envio)
+      : parseFloat(total);
 
   const unidad = {
     amount: {
       currency: "EUR",
-      value: total,
+      value: !cupon
+        ? costo
+        : cupon.tipo !== "porcentaje"
+        ? costo - parseFloat(cupon.amount)
+        : costo - parseFloat((total * cupon.amount) / 100),
     },
   };
   const router = useRouter();
-
+  console.log(unidad);
   const handle = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -49,7 +58,9 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
       <button className="items-center my-3" onClick={(e) => handle(e)}>
         Pagar {loading && <ClipLoader size="16px" color="white" />}
       </button>
-      {/* <PayPalScriptProvider options={{ "client-id": process.env.CLIENT_ID }}>
+      <PayPalScriptProvider
+        options={{ "client-id": process.env.CLIENT_ID, currency: "EUR" }}
+      >
         {sub === false && (
           <>
             <PayPalButtons
@@ -73,7 +84,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
             />
           </>
         )}
-      </PayPalScriptProvider> */}
+      </PayPalScriptProvider>
 
       <style jsx>
         {`
