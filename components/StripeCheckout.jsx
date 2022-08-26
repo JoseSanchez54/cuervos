@@ -19,24 +19,30 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
   const actualCart = useSelector((state) => state.cartReducer.cart);
   const total = useSelector((state) => state.cartReducer.total);
   envio = envio.replace(",", ".");
-  console.log(cupon);
+  actualCart.map((e) => {
+    const actual = e.meta_data.find((x) => x.key === "_subscription_period");
+    if (actual && sub == false) {
+      setSub(true);
+    }
+  });
   const costo =
     parseFloat(total) < 50
       ? parseFloat(total) + parseFloat(envio)
       : parseFloat(total);
 
-  const unidad = {
+  let unidad = {
     amount: {
       currency: "EUR",
       value: !cupon
         ? costo
         : cupon.tipo !== "porcentaje"
         ? costo - parseFloat(cupon.amount)
-        : costo - parseFloat((total * cupon.amount) / 100),
+        : (costo - parseFloat((total * cupon.amount) / 100)).toFixed(2),
     },
   };
+
   const router = useRouter();
-  console.log(unidad);
+
   const handle = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -52,12 +58,39 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
         router.push(session.data.url);
       });
   };
-
+  console.log(unidad.value);
   return (
     <>
       <button className="items-center my-3" onClick={(e) => handle(e)}>
         Pagar {loading && <ClipLoader size="16px" color="white" />}
       </button>
+      <PayPalScriptProvider
+        options={{ "client-id": process.env.CLIENT_ID, currency: "EUR" }}
+      >
+        {sub === false && (
+          <>
+            <PayPalButtons
+              currency="EUR"
+              style={{ layout: "horizontal" }}
+              createOrder={(data, actions) => {
+                axios.post("/api/orders", {
+                  formulario: formulario,
+                  actualCart: actualCart,
+                });
+                return actions.order.create({
+                  purchase_units: [unidad],
+                });
+              }}
+              onApprove={(data, actions) => {
+                return actions.order.capture().then((details) => {
+                  const name = details.payer.name.given_name;
+                  Router.push("/success");
+                });
+              }}
+            />
+          </>
+        )}
+      </PayPalScriptProvider>
 
       <style jsx>
         {`
