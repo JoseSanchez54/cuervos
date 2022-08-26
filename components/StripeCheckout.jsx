@@ -79,14 +79,16 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
                     formulario: formulario,
                     actualCart: actualCart,
                   })
-                  .then((res) => setIdPedidoPaypal(res.data.id));
+                  .then((res) => {
+                    setIdPedidoPaypal(res.data.id);
+                    console.log(idPedidoPaypal);
+                  });
                 return actions.order.create({
                   purchase_units: [unidad],
                 });
               }}
               onApprove={(data, actions) => {
                 axios.post("/api/orders", {
-                  aprobado: true,
                   id: idPedidoPaypal,
                 });
                 return actions.order.capture().then((details) => {
