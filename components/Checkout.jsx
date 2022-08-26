@@ -138,8 +138,8 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     (e) =>
       parseFloat(e.peso_maximo) >= peso && parseFloat(e.peso_minimo) <= peso
   );
-  if (parseFloat(total) > 50) {
-    precioEnvio = 0;
+  if (total > 50) {
+    precioEnvio.precio = 0;
   }
 
   const [pais, setPais] = useState("");

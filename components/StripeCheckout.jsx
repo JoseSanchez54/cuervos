@@ -58,7 +58,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
       <button className="items-center my-3" onClick={(e) => handle(e)}>
         Pagar {loading && <ClipLoader size="16px" color="white" />}
       </button>
-      <PayPalScriptProvider
+      {/*  <PayPalScriptProvider
         options={{ "client-id": process.env.CLIENT_ID, currency: "EUR" }}
       >
         {sub === false && (
@@ -84,7 +84,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
             />
           </>
         )}
-      </PayPalScriptProvider>
+      </PayPalScriptProvider> */}
 
       <style jsx>
         {`
