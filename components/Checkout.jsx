@@ -370,6 +370,8 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       });
     }
   }, [pais]);
+  const totalDescontado =
+    parseFloat(formulario.total) * parseFloat(cupon?.descuento);
 
   return (
     <>
@@ -814,11 +816,11 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                         {cupon?.tipo === "porcentaje" ? (
                           <>
                             {tax.tasa === ""
-                              ? parseFloat(formulario.total) *
-                                  parseFloat(cupon?.descuento) +
+                              ? parseFloat(formulario.total) -
+                                totalDescontado +
                                 "€"
-                              : parseFloat(formulario.total) *
-                                  parseFloat(cupon?.descuento) +
+                              : parseFloat(formulario.total) -
+                                totalDescontado +
                                 parseFloat(precioEnvio.precio) +
                                 "€"}
                           </>
