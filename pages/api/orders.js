@@ -10,16 +10,27 @@ export default async (req, res) => {
         return res.status(500).json({ Error: "Error en la api" });
       });
   } else if (req.method === "POST") {
-    let { formulario } = req.body;
+    let { formulario, id } = req.body;
     formulario.payment_method = "paypal";
     formulario.payment_method_title = "PayPal";
-
-    await WooCommerce.post("orders", formulario)
-      .then((response) => {
-        return res.status(200).json(response.data);
+    if (!id) {
+      await WooCommerce.post("orders", formulario)
+        .then((response) => {
+          return res.status(200).json(response.data);
+        })
+        .catch((error) => {
+          return res.status(500).json({ Error: "Error en la api" });
+        });
+    } else {
+      await WooCommerce.put("orders/" + id, {
+        status: "completed",
       })
-      .catch((error) => {
-        return res.status(500).json({ Error: "Error en la api" });
-      });
+        .then((response) => {
+          return res.status(200).json(response.data);
+        })
+        .catch((error) => {
+          return res.status(500).json({ Error: "Error en la api" });
+        });
+    }
   }
 };
