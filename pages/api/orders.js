@@ -11,10 +11,15 @@ export default async (req, res) => {
       });
   } else if (req.method === "POST") {
     let { formulario, id } = req.body;
-    formulario.payment_method = "paypal";
-    formulario.payment_method_title = "PayPal";
+    const wcForm = {
+      ...formulario,
+      payment_method: "paypal",
+      payment_method_title: "Paypal",
+      set_paid: false,
+    };
+
     if (!id) {
-      await WooCommerce.post("orders", formulario)
+      await WooCommerce.post("orders", wcForm)
         .then((response) => {
           return res.status(200).json(response.data);
         })
@@ -22,8 +27,10 @@ export default async (req, res) => {
           return res.status(500).json({ Error: "Error en la api" });
         });
     } else {
+      console.log("//////////////////////////////", id);
       await WooCommerce.put("orders/" + id, {
         status: "completed",
+        set_paid: true,
       })
         .then((response) => {
           return res.status(200).json(response.data);

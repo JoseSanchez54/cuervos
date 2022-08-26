@@ -54,7 +54,7 @@ const UserForm = ({ opciones, usuario }) => {
 
     await WooCommerce.put("customers/" + usuario.id, data)
       .then((response) => {
-        console.log(response);
+       
         return response;
       })
       .catch((error) => {
