@@ -15,7 +15,7 @@ import Router from "next/router";
  */
 export default function StripeCheckout({ formulario, envio, cupon }) {
   const [sub, setSub] = useState(false);
-  const [idPedidoPaypal, setIdPedidoPaypal] = useState(false);
+  const [idPedidoPaypal, setIdPedidoPaypal] = useState("");
   const [loading, setLoading] = useState(false);
   const actualCart = useSelector((state) => state.cartReducer.cart);
   const total = useSelector((state) => state.cartReducer.total);
@@ -80,17 +80,20 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
                     actualCart: actualCart,
                   })
                   .then((res) => {
+                    localStorage.setItem("idPedido", res.data.id);
                     setIdPedidoPaypal(res.data.id);
-                    console.log(idPedidoPaypal);
                   });
                 return actions.order.create({
                   purchase_units: [unidad],
                 });
               }}
               onApprove={(data, actions) => {
-                axios.post("/api/orders", {
-                  id: idPedidoPaypal,
-                });
+                console.log(localStorage.getItem("idPedido"));
+                axios
+                  .post("/api/orders", {
+                    id: localStorage.getItem("idPedido"),
+                  })
+                  .then(localStorage.removeItem("idPedido"));
                 return actions.order.capture().then((details) => {
                   const name = details.payer.name.given_name;
                   Router.push("/success");
