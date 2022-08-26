@@ -58,33 +58,6 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
       <button className="items-center my-3" onClick={(e) => handle(e)}>
         Pagar {loading && <ClipLoader size="16px" color="white" />}
       </button>
-      {/*  <PayPalScriptProvider
-        options={{ "client-id": process.env.CLIENT_ID, currency: "EUR" }}
-      >
-        {sub === false && (
-          <>
-            <PayPalButtons
-              currency="EUR"
-              style={{ layout: "horizontal" }}
-              createOrder={(data, actions) => {
-                axios.post("/api/orders", {
-                  formulario: formulario,
-                  actualCart: actualCart,
-                });
-                return actions.order.create({
-                  purchase_units: [unidad],
-                });
-              }}
-              onApprove={(data, actions) => {
-                return actions.order.capture().then((details) => {
-                  const name = details.payer.name.given_name;
-                  Router.push("/success");
-                });
-              }}
-            />
-          </>
-        )}
-      </PayPalScriptProvider> */}
 
       <style jsx>
         {`
