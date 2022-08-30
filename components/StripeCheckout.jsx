@@ -88,7 +88,6 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
                 });
               }}
               onApprove={(data, actions) => {
-                console.log(localStorage.getItem("idPedido"));
                 axios
                   .post("/api/orders", {
                     id: localStorage.getItem("idPedido"),
