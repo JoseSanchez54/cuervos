@@ -44,6 +44,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     ciudad: "",
     pais: "",
     cp: "",
+    provincia: "",
     nombreFacturacion: "",
     apellidoFacturacion: "",
     telefonoFacturacion: "",
@@ -237,7 +238,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       },
     ],
   };
-
+  console.log(formulario);
   const actionForm = (e) => {
     e.preventDefault();
     const {
