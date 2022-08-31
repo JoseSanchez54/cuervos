@@ -27,9 +27,8 @@ export default async (req, res) => {
           return res.status(500).json({ Error: "Error en la api" });
         });
     } else {
-      console.log("//////////////////////////////", id);
       await WooCommerce.put("orders/" + id, {
-        status: "completed",
+        status: "processing ",
         set_paid: true,
       })
         .then((response) => {
