@@ -14,7 +14,7 @@ export default function Document() {
         <NextScript />
         <noscript
           dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${process.env.GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;" />`,
+            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5Q7WG63" height="0" width="0" style="display: none; visibility: hidden;" />`,
           }}
         />
       </body>
