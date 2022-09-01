@@ -8,5 +8,7 @@ export default async (req, res) => {
     ).then((response) => {
       return res.status(200).json(response.data);
     });
+  } else {
+    res.status(404).json({ Error: "Error en la api" });
   }
 };
