@@ -562,7 +562,7 @@ const SingleProduct = ({
                         textTransform: "uppercase",
                       }}
                     >
-                      Los detalles de nuestro {product?.name}
+                      Los detalles de {product?.name}
                     </span>
                     <span className="inyectado2 mt-6">
                       {removeTags(product?.description)}

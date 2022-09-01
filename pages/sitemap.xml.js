@@ -122,12 +122,7 @@ export async function getServerSideProps({ res }) {
         <changefreq>yearly</changefreq>
         <priority>0.1</priority>
       </url> 
-      <url>
-        <loc>${baseUrl}/nuestra-vision</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.1</priority>
-      </url> 
+ 
  
   
       <url>
