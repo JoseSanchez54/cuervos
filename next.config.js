@@ -32,6 +32,9 @@ module.exports = {
     SAFARI_ID: process.env.SAFARI_ID,
     CLIENT_ID: process.env.CLIENT_ID,
     APP_SECRET: process.env.APP_SECRET,
+    GTM_ID: process.env.GTM_ID,
+    NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+    GTM_ID: process.env.GTM_ID,
   },
   swcMinify: true,
 
