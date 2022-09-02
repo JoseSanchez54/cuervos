@@ -35,6 +35,8 @@ module.exports = {
     GTM_ID: process.env.GTM_ID,
     NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
     GTM_ID: process.env.GTM_ID,
+    FB_ACCESS_TOKEN: process.env.FB_ACCESS_TOKEN,
+    NEXT_PUBLIC_FB_PIXEL_ID: process.env.NEXT_PUBLIC_FB_PIXEL_ID,
   },
   swcMinify: true,
 
