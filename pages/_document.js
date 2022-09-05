@@ -8,6 +8,15 @@ export default function Document() {
           src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
           async=""
         ></script>
+        <script src="/pixel.js" async=""></script>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style="display:none"
+            src="https://www.facebook.com/tr?id=397822372456827&ev=PageView&noscript=1"
+          />
+        </noscript>
       </Head>
       <body>
         <Main />
