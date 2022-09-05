@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import WooCommerce from "../woocommerce/Woocommerce";
 import HomeCuervos from "../components/Home";
 import { useOptions } from "../hooks/useOptions";
@@ -54,14 +53,7 @@ export async function getStaticProps() {
       return response.data;
     }
   );
-  const bizSdk = require("facebook-nodejs-business-sdk");
 
-  const accessToken = process.env.FB_ACCESS_TOKEN;
-  const accountId = "act_{{adaccount-id}}";
-  const FacebookAdsApi = bizSdk.FacebookAdsApi.init(accessToken);
-  const AdAccount = bizSdk.AdAccount;
-  const Campaign = bizSdk.Campaign;
-  console.log(FacebookAdsApi);
   return {
     props: {
       options: options.data[0],
