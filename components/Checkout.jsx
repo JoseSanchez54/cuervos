@@ -60,7 +60,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
 
   const getCupones = async (e) => {
     const fechaHoy = new Date();
-    const codigo = e.target.value;
+    const codigo = e.target.value.toLowerCase();
     if (e.target.value === "") {
       setCupon(null);
       setErrorCupon(null);
@@ -68,6 +68,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       handleFormulario(e);
       const cupones = await WooCommerce.get("coupons")
         .then((response) => {
+          console.log(response.data);
           return response.data;
         })
         .catch((error) => {
@@ -238,7 +239,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       },
     ],
   };
-  console.log(formulario);
+
   const actionForm = (e) => {
     e.preventDefault();
     const {
