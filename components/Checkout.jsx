@@ -68,7 +68,6 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       handleFormulario(e);
       const cupones = await WooCommerce.get("coupons")
         .then((response) => {
-          console.log(response.data);
           return response.data;
         })
         .catch((error) => {
