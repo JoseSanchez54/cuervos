@@ -14,7 +14,8 @@ import Script from "next/script";
 import { gtmVirtualPageView } from "../utils/gtm";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import * as fbq from "../utils/fbpixel";
+import withFBQ from "next-fbq";
+import Router from "next/router";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -23,19 +24,8 @@ function MyApp({ Component, pageProps }) {
       pageTypeName: pageProps.page || null,
       url: router.pathname,
     };
-
     gtmVirtualPageView(mainDataLayer);
-    fbq.pageview();
-
-    const handleRouteChange = () => {
-      fbq.pageview();
-    };
-
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [pageProps, router.events]);
+  }, [pageProps]);
 
   const redirectURL =
     process.env.NODE_ENV === "development"
@@ -76,23 +66,6 @@ function MyApp({ Component, pageProps }) {
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','${process.env.GTM_ID}');`}
           </Script>
-          <Script
-            id="fb-pixel"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', 397822372456827);
-          `,
-            }}
-          />
 
           <Component {...pageProps} />
           {cookies === "false" && <CookieAd funcion={setCookies} />}
@@ -103,4 +76,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(withFBQ("397822372456827", Router)(MyApp));
