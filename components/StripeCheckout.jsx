@@ -14,6 +14,7 @@ import Router from "next/router";
  * </code>
  */
 export default function StripeCheckout({ formulario, envio, cupon }) {
+
   const [sub, setSub] = useState(false);
   const [idPedidoPaypal, setIdPedidoPaypal] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,13 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
     }
   });
   const costo =
-    parseFloat(total) < 50
+    (parseFloat(total) < 50 && formulario.shipping.state !== "GC") ||
+    (parseFloat(total) < 50 && formulario.shipping.state !== "TF") ||
+    (parseFloat(total) < 50 && formulario.shipping.state !== "PM")
+      ? parseFloat(total) + parseFloat(envio)
+      : formulario.shipping.state === "GC" ||
+        formulario.shipping.state === "TF" ||
+        formulario.shipping.state === "PM"
       ? parseFloat(total) + parseFloat(envio)
       : parseFloat(total);
 
