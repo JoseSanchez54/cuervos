@@ -58,6 +58,10 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     facturacion: false,
   });
 
+  /**
+   * I'm trying to get the coupon code from the user and then check if it exists in the database and if
+   * it's valid.
+   */
   const getCupones = async (e) => {
     const fechaHoy = new Date();
     const codigo = e.target.value.toLowerCase();
@@ -139,12 +143,24 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     (e) =>
       parseFloat(e.peso_maximo) >= peso && parseFloat(e.peso_minimo) <= peso
   );
-  if (total > 50) {
+  if (
+    (total > 50 && formulario.provincia !== "TF") ||
+    (total > 50 && formulario.provincia !== "GC") ||
+    (total > 50 && formulario.provincia !== "PM")
+  ) {
     precioEnvio.precio = 0;
+  }
+  if (
+    formulario.provincia === "TF" ||
+    formulario.provincia === "GC" ||
+    formulario.provincia === "PM"
+  ) {
+    precioEnvio.precio = 20;
   }
 
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
+  console.log(formulario);
 
   const handleCheck = (e, nombre) => {
     setFormulario({
@@ -234,7 +250,16 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       {
         method_id: "flat_rate",
         method_title: "Gastos de envio",
-        total: total > 50 ? "0" : precioEnvio?.precio,
+        total:
+          formulario.provincia === "GC" ||
+          formulario.provincia === "TF" ||
+          formulario.provincia === "PM"
+            ? "20"
+            : (total > 50 && formulario.provincia !== "GC") ||
+              (total > 50 && formulario.provincia !== "TF") ||
+              (total > 50 && formulario.provincia !== "PM")
+            ? "0"
+            : precioEnvio?.precio,
       },
     ],
   };
@@ -797,9 +822,13 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                     <div className="flex flex-col items-end w-1/2">
                       <span className="subtotal">
                         +
-                        {total > 50
-                          ? "0€ (Envio gratuito)"
-                          : precioEnvio?.precio + "€"}
+                        {formulario.provincia === "GC" ||
+                        formulario.provincia === "TF" ||
+                        formulario.provincia === "PM"
+                          ? "20€"
+                          : total > 50
+                          ? "0€"
+                          : precioEnvio?.precio}
                       </span>
                     </div>
                   </div>
@@ -874,7 +903,15 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                   {" "}
                   <StripeCheckout
                     formulario={data}
-                    envio={total > 50 ? "0" : precioEnvio.precio}
+                    envio={
+                      formulario.provincia === "GC" ||
+                      formulario.provincia === "TF" ||
+                      formulario.provincia === "PM"
+                        ? "20"
+                        : total > 50
+                        ? "0"
+                        : precioEnvio?.precio
+                    }
                     cupon={cupon}
                   />
                   <button
