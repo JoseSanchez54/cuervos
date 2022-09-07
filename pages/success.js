@@ -110,6 +110,11 @@ const Success = ({ categorias, opciones }) => {
     dispatch({
       type: "@EMPTY_CART",
     });
+    import("react-facebook-pixel")
+      .then((module) => module.default)
+      .then((ReactPixel) => {
+        ReactPixel.track("CompraRealizada", wc_order_id);
+      });
   }, []);
 
   return (
