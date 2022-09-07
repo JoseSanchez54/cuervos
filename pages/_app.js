@@ -26,6 +26,18 @@ function MyApp({ Component, pageProps }) {
     };
     gtmVirtualPageView(mainDataLayer);
   }, [pageProps]);
+  useEffect(() => {
+    import("react-facebook-pixel")
+      .then((x) => x.default)
+      .then((ReactPixel) => {
+        ReactPixel.init("397822372456827");
+        ReactPixel.pageView();
+
+        router.events.on("routeChangeComplete", () => {
+          ReactPixel.pageView();
+        });
+      });
+  }, [router.events]);
 
   const redirectURL =
     process.env.NODE_ENV === "development"
@@ -76,4 +88,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default wrapper.withRedux(withFBQ("397822372456827", Router)(MyApp));
+export default wrapper.withRedux(MyApp);
