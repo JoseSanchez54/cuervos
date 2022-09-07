@@ -61,6 +61,12 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           idPadre: producto.id,
           variable: true,
         };
+        import("react-facebook-pixel")
+          .then((module) => module.default)
+          .then((ReactPixel) => {
+            ReactPixel.track("addToCart", productoAdd);
+          });
+
         const periodo = productoAdd?.meta_data?.find(
           (meta) => meta?.key === "_subscription_period"
         )?.value;
@@ -88,6 +94,12 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           img: producto.images[0].src,
         };
 
+        import("react-facebook-pixel")
+          .then((module) => module.default)
+          .then((ReactPixel) => {
+            ReactPixel.track("addToCart", productoAdd);
+          });
+
         dispatch({
           type: "@AddToCart",
           producto: productoAdd,
@@ -104,6 +116,11 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         type: "@AddToCart",
         producto: producto,
       });
+      import("react-facebook-pixel")
+        .then((module) => module.default)
+        .then((ReactPixel) => {
+          ReactPixel.track("addToCart", producto);
+        });
     }
   };
 

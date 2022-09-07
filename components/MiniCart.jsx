@@ -219,7 +219,14 @@ const MiniCart = ({ opciones, tasas }) => {
                         <div className="flex flex-row justify-center">
                           <div className="flex flex-col">
                             <button
-                              onClick={() => handleCheckout(checkout)}
+                              onClick={() => {
+                                handleCheckout(checkout);
+                                import("react-facebook-pixel")
+                                  .then((module) => module.default)
+                                  .then((ReactPixel) => {
+                                    ReactPixel.track("initCheckout", total);
+                                  });
+                              }}
                               className="mt-2 botonComprar mb-9"
                             >
                               Finalizar compra
@@ -234,7 +241,14 @@ const MiniCart = ({ opciones, tasas }) => {
                   <div className="flex flex-row justify-center">
                     <div className="flex flex-col w-full">
                       <button
-                        onClick={() => handleCheckout(checkout)}
+                        onClick={() => {
+                          handleCheckout(checkout);
+                          import("react-facebook-pixel")
+                            .then((module) => module.default)
+                            .then((ReactPixel) => {
+                              ReactPixel.track("initCheckout", total);
+                            });
+                        }}
                         className="mt-2 botonComprar block"
                       >
                         Finalizar compra
