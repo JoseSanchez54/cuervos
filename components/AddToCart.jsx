@@ -61,10 +61,21 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           idPadre: producto.id,
           variable: true,
         };
+        const productToFB = {
+          content_ids: productoAdd.id,
+          content_type: "product",
+          value: productoAdd.price,
+          currency: "EUR",
+          content_category: productoAdd.categories[0].name,
+          contents: {
+            id: productoAdd.id,
+            quantity: 1,
+          },
+        };
         import("react-facebook-pixel")
           .then((module) => module.default)
           .then((ReactPixel) => {
-            ReactPixel.track("AddToCart", productoAdd);
+            ReactPixel.track("AddToCart", productToFB);
           });
 
         const periodo = productoAdd?.meta_data?.find(
@@ -93,11 +104,22 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           variable: true,
           img: producto.images[0].src,
         };
+        const productToFB = {
+          content_ids: producto.id,
+          content_type: "product",
+          value: producto.price,
+          currency: "EUR",
+          content_category: producto.categories[0].name,
+          contents: {
+            id: producto.id,
+            quantity: 1,
+          },
+        };
 
         import("react-facebook-pixel")
           .then((module) => module.default)
           .then((ReactPixel) => {
-            ReactPixel.track("AddToCart", productoAdd);
+            ReactPixel.track("AddToCart", productToFB);
           });
 
         dispatch({
@@ -116,10 +138,21 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         type: "@AddToCart",
         producto: producto,
       });
+      const productToFB = {
+        content_ids: producto.id,
+        content_type: "product",
+        value: producto.price,
+        currency: "EUR",
+        content_category: producto.categories[0].name,
+        contents: {
+          id: producto.id,
+          quantity: 1,
+        },
+      };
       import("react-facebook-pixel")
         .then((module) => module.default)
         .then((ReactPixel) => {
-          ReactPixel.track("AddToCart", producto);
+          ReactPixel.track("AddToCart", productToFB);
         });
     }
   };
