@@ -57,6 +57,14 @@ const MiniCart = ({ opciones, tasas }) => {
   const vaciarF = () => {
     dispatch({ type: "@EMPTY_CART" });
   };
+  const toFB = {
+    content_name: "Checkout",
+    content_category: "Checkout",
+    content_ids: actualCart.map((e) => e.id),
+    content_type: "product",
+    value: total,
+    currency: "EUR",
+  };
 
   return (
     <>
@@ -221,10 +229,11 @@ const MiniCart = ({ opciones, tasas }) => {
                             <button
                               onClick={() => {
                                 handleCheckout(checkout);
+                                
                                 import("react-facebook-pixel")
                                   .then((module) => module.default)
                                   .then((ReactPixel) => {
-                                    ReactPixel.track("InitiateCheckout", total);
+                                    ReactPixel.track("InitiateCheckout", toFB);
                                   });
                               }}
                               className="mt-2 botonComprar mb-9"
