@@ -130,7 +130,7 @@ const SingleProduct = ({
     import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
-        ReactPixel.track("ViewContent", productoAdd);
+        ReactPixel.track("ViewContent", product?.name);
       });
 
     product?.categories.map((f) => {
