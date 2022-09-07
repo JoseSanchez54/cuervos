@@ -160,7 +160,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
 
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
-  console.log(formulario);
+
 
   const handleCheck = (e, nombre) => {
     setFormulario({
