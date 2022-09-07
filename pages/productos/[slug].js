@@ -87,7 +87,7 @@ export async function getStaticProps(context) {
       categoriasAll,
       upSells,
     },
-    revalidate: 1000,
+    revalidate: 10000,
   };
 }
 const SingleProduct = ({
@@ -127,6 +127,12 @@ const SingleProduct = ({
 
   const [isVino, setIsVino] = useState(false);
   useEffect(() => {
+    import("react-facebook-pixel")
+      .then((module) => module.default)
+      .then((ReactPixel) => {
+        ReactPixel.track("ViewContent", productoAdd);
+      });
+
     product?.categories.map((f) => {
       if (f.slug === "destacados") {
         setIsVino(true);

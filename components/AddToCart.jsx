@@ -64,7 +64,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         import("react-facebook-pixel")
           .then((module) => module.default)
           .then((ReactPixel) => {
-            ReactPixel.track("addToCart", productoAdd);
+            ReactPixel.track("AddToCart", productoAdd);
           });
 
         const periodo = productoAdd?.meta_data?.find(
@@ -97,7 +97,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         import("react-facebook-pixel")
           .then((module) => module.default)
           .then((ReactPixel) => {
-            ReactPixel.track("addToCart", productoAdd);
+            ReactPixel.track("AddToCart", productoAdd);
           });
 
         dispatch({
@@ -119,7 +119,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
       import("react-facebook-pixel")
         .then((module) => module.default)
         .then((ReactPixel) => {
-          ReactPixel.track("addToCart", producto);
+          ReactPixel.track("AddToCart", producto);
         });
     }
   };
