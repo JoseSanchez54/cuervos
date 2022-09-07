@@ -113,7 +113,7 @@ const Success = ({ categorias, opciones }) => {
     import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
-        ReactPixel.track("CompraRealizada", wc_order_id);
+        ReactPixel.track("Purchase", wc_order_id);
       });
   }, []);
 

@@ -224,7 +224,7 @@ const MiniCart = ({ opciones, tasas }) => {
                                 import("react-facebook-pixel")
                                   .then((module) => module.default)
                                   .then((ReactPixel) => {
-                                    ReactPixel.track("initCheckout", total);
+                                    ReactPixel.track("InitiateCheckout", total);
                                   });
                               }}
                               className="mt-2 botonComprar mb-9"
@@ -246,7 +246,7 @@ const MiniCart = ({ opciones, tasas }) => {
                           import("react-facebook-pixel")
                             .then((module) => module.default)
                             .then((ReactPixel) => {
-                              ReactPixel.track("initCheckout", total);
+                              ReactPixel.track("InitiateCheckout", total);
                             });
                         }}
                         className="mt-2 botonComprar block"
