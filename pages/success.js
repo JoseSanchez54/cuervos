@@ -27,6 +27,13 @@ export async function getStaticProps() {
   ).then((response) => {
     return response.data;
   });
+  const orders = await WooCommerce.get("orders")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error.response.data);
+    });
 
   return {
     props: {
@@ -35,11 +42,12 @@ export async function getStaticProps() {
       entradas: posts,
       internos: internos,
       categorias,
+      orders,
     },
-    revalidate: 10,
+    revalidate: 1000,
   };
 }
-const Success = ({ categorias, opciones }) => {
+const Success = ({ categorias, opciones, orders }) => {
   const dispatch = useDispatch();
 
   const refAnimationInstance = useRef(null);
@@ -96,6 +104,9 @@ const Success = ({ categorias, opciones }) => {
     }
   );
   const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
+  const order = orders.find((order) => order.id == wc_order_id);
+
+  console.log(order);
 
   const canvasStyles = {
     position: "fixed",
@@ -110,10 +121,23 @@ const Success = ({ categorias, opciones }) => {
     dispatch({
       type: "@EMPTY_CART",
     });
+    const ids = [];
+    order.line_items.map((item) => {
+      ids.push(item.product_id);
+    });
+    const toFB = {
+      content_name: order?.line_items[0].name,
+      content_ids: ids,
+      content_type: "product",
+      value: order?.total,
+      currency: "EUR",
+      num_items: order?.line_items.length,
+    };
+
     import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
-        ReactPixel.track("Purchase", wc_order_id);
+        ReactPixel.track("Purchase", toFB);
       });
   }, []);
 

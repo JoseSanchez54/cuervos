@@ -127,10 +127,21 @@ const SingleProduct = ({
 
   const [isVino, setIsVino] = useState(false);
   useEffect(() => {
+    const productToFB = {
+      content_ids: product.id,
+      content_type: "product",
+      value: product.price,
+      currency: "EUR",
+      content_category: product.categories[0].name,
+      contents: {
+        id: product.id,
+        quantity: 1,
+      },
+    };
     import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
-        ReactPixel.track("ViewContent", product?.name);
+        ReactPixel.track("ViewContent", productToFB);
       });
 
     product?.categories.map((f) => {
