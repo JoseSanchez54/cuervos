@@ -106,8 +106,6 @@ const Success = ({ categorias, opciones, orders }) => {
   const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
   const order = orders.find((order) => order.id == wc_order_id);
 
-  console.log(order);
-
   const canvasStyles = {
     position: "fixed",
     pointerEvents: "none",
