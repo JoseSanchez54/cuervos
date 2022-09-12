@@ -44,7 +44,7 @@ export async function getStaticProps() {
       categorias,
       orders,
     },
-    revalidate: 1000,
+    revalidate: 10,
   };
 }
 const Success = ({ categorias, opciones, orders }) => {

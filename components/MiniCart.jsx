@@ -43,6 +43,7 @@ const MiniCart = ({ opciones, tasas }) => {
     }
   };
 
+/* A function that returns a class based on the state of the component. */
   const cantidad = actualCart?.length;
   const handle = () => {
     if (open === true) {

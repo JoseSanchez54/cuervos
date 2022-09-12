@@ -184,13 +184,25 @@ export default async function handler(req, res) {
             console.log(error);
           });
       });
+    let formulario2 = {
+      ...formulario,
+      coupon_lines: [
+        {
+          code: cupon.code,
+        },
+      ],
+    };
+    console.log(formulario);
 
     // Create Checkout Sessions from body params.
-    const wc = await WooCommerce.post("orders", formulario)
+    const wc = await WooCommerce.post("orders", formulario2)
       .then((response) => {
+        console.log(response);
         return response.data;
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error);
+      });
     const wcCustomer = WooCommerce.post("customers", wcForm)
       .then((response) => {
         return response.data;

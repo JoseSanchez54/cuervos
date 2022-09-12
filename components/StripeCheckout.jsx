@@ -14,7 +14,6 @@ import Router from "next/router";
  * </code>
  */
 export default function StripeCheckout({ formulario, envio, cupon }) {
-
   const [sub, setSub] = useState(false);
   const [idPedidoPaypal, setIdPedidoPaypal] = useState("");
   const [loading, setLoading] = useState(false);
@@ -66,6 +65,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
         router.push(session.data.url);
       });
   };
+  console.log(cupon);
 
   return (
     <>
