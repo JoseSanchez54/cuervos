@@ -192,7 +192,6 @@ export default async function handler(req, res) {
         },
       ],
     };
-    console.log(formulario);
 
     // Create Checkout Sessions from body params.
     const wc = await WooCommerce.post("orders", formulario2)
