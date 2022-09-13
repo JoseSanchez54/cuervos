@@ -1,4 +1,18 @@
 module.exports = {
+  async redirects() {
+    return [
+      {
+        source: "/verdejo",
+        destination: "/productos/verdejo",
+        permanent: true,
+      },
+      {
+        source: "/tempranillo",
+        destination: "/productos/tempranillo",
+        permanent: true,
+      },
+    ];
+  },
   loaders: [
     {
       test: /\.css$/,
