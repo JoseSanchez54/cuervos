@@ -14,8 +14,6 @@ import Script from "next/script";
 import { gtmVirtualPageView } from "../utils/gtm";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import withFBQ from "next-fbq";
-import Router from "next/router";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();

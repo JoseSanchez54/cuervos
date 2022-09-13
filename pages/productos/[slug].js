@@ -87,7 +87,7 @@ export async function getStaticProps(context) {
       categoriasAll,
       upSells,
     },
-    revalidate: 10000,
+    revalidate: 10,
   };
 }
 const SingleProduct = ({
