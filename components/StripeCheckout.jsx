@@ -65,7 +65,6 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
         router.push(session.data.url);
       });
   };
-  console.log(cupon);
 
   return (
     <>
