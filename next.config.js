@@ -7,6 +7,11 @@ module.exports = {
         permanent: true,
       },
       {
+        source: "/rosado",
+        destination: "/productos/rosado",
+        permanent: true,
+      },
+      {
         source: "/tempranillo",
         destination: "/productos/tempranillo",
         permanent: true,
