@@ -1,9 +1,10 @@
 import WooCommerce from "../../woocommerce/Woocommerce";
 
 export default async (req, res) => {
-  await WooCommerce.get("taxes")
+  const taxes = await WooCommerce.get("taxes")
     .then((response) => {
-      return res.status(200).json(response.data);
+      return response.data;
     })
     .catch((error) => {});
+  await res.status(200).json(taxes);
 };
