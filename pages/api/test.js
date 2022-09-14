@@ -1,12 +1,13 @@
 import WooCommerce from "../../woocommerce/Woocommerce";
 
 export default async (req, res) => {
-  if (req?.categoria?.id) {
-    await WooCommerce.get(
+
+    const pro = await WooCommerce.get(
       "products?per_page=50products&status=publish&category=" +
         req?.categoria?.id
     ).then((response) => {
-      return res.status(200).json(response.data);
+      return response.data;
     });
-  }
+    await res.status(200).json(pro);
+  
 };
