@@ -14,6 +14,7 @@ import Script from "next/script";
 import { gtmVirtualPageView } from "../utils/gtm";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import WooCommerce from "../woocommerce/Woocommerce";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -44,12 +45,17 @@ function MyApp({ Component, pageProps }) {
   const [cookies, setCookies] = useState(false);
   const store = useStore();
   const dispatch = useDispatch();
-  const tasas = axios.get(redirectURL + "/api/taxes").then((e) =>
-    dispatch({
-      type: "@setTaxes",
-      taxes: e.data,
+  /*   const tasas = axios.get(redirectURL + "/api/taxes").then((e) =>
+    
+  ); */
+  const taxes = WooCommerce.get("taxes")
+    .then((e) => {
+      dispatch({
+        type: "@setTaxes",
+        taxes: e.data,
+      });
     })
-  );
+    .catch((error) => {});
   const envios = axios
     .get(process.env.URLBASE + "wp-json/jet-cct/envios")
     .then((e) =>
