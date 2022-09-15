@@ -45,10 +45,7 @@ function MyApp({ Component, pageProps }) {
   const [cookies, setCookies] = useState(false);
   const store = useStore();
   const dispatch = useDispatch();
-  /*   const tasas = axios.get(redirectURL + "/api/taxes").then((e) =>
-    
-  ); */
-  const taxes = WooCommerce.get("taxes")
+  WooCommerce.get("taxes")
     .then((e) => {
       dispatch({
         type: "@setTaxes",
@@ -56,14 +53,12 @@ function MyApp({ Component, pageProps }) {
       });
     })
     .catch((error) => {});
-  const envios = axios
-    .get(process.env.URLBASE + "wp-json/jet-cct/envios")
-    .then((e) =>
-      dispatch({
-        type: "@setShipping",
-        envios: e.data,
-      })
-    );
+  axios.get(process.env.URLBASE + "wp-json/jet-cct/envios").then((e) =>
+    dispatch({
+      type: "@setShipping",
+      envios: e.data,
+    })
+  );
 
   return (
     <SWRConfig
