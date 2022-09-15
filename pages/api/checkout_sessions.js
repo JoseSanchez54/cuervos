@@ -192,16 +192,29 @@ export default async function handler(req, res) {
         },
       ],
     };
+    let wc;
 
     // Create Checkout Sessions from body params.
-    const wc = await WooCommerce.post("orders", formulario2)
-      .then((response) => {
-        console.log(response);
-        return response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (cupon.code) {
+      wc = await WooCommerce.post("orders", formulario2)
+        .then((response) => {
+          console.log(response);
+          return response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      wc = await WooCommerce.post("orders", formulario)
+        .then((response) => {
+          console.log(response);
+          return response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
     const wcCustomer = WooCommerce.post("customers", wcForm)
       .then((response) => {
         return response.data;
