@@ -56,6 +56,8 @@ module.exports = {
     GTM_ID: process.env.GTM_ID,
     FB_ACCESS_TOKEN: process.env.FB_ACCESS_TOKEN,
     NEXT_PUBLIC_FB_PIXEL_ID: process.env.NEXT_PUBLIC_FB_PIXEL_ID,
+    WCKEY: process.env.WCKEY,
+    WCS: process.env.WCS,
   },
   swcMinify: true,
 
