@@ -106,7 +106,7 @@ const SingleProduct = ({
     fetcherWc,
     {
       fallbackData: variaciones,
-      refreshInterval: 100,
+      refreshInterval: 10000,
     }
   );
 
