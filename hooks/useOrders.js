@@ -1,8 +1,10 @@
 import useSWR from "swr";
+import fetcherWc from "../utils/fetcherWc";
 
 export const useOrders = (initialdata) => {
   const { data, error, isValidating, mutate } = useSWR(
-    "/api/orders",
+    "orders",
+    fetcherWc,
 
     {
       fallbackData: initialdata,

@@ -1,10 +1,10 @@
 import useSWR from "swr";
+import fetcherWc from "../utils/fetcherWc";
 
 export const useVariations = (id) => {
-  const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error, isValidating, mutate } = useSWR(
-    "/api/variaciones?id=" + id,
-    fetcher
+    "products/" + id + "/variations" + "?per_page=50",
+    fetcherWc
   );
 
   return {
