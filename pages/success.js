@@ -123,8 +123,6 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   });
   const order = orders?.find((order) => order.id == wc_order_id);
 
-  console.log(order);
-
   useEffect(() => {
     fire();
     const toFB = {
