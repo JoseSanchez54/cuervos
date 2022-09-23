@@ -94,6 +94,56 @@ const Embajador = ({ embajador, options, categorias }) => {
         />
       }
       <Nav categorias={categorias} opciones={options} />
+      <div
+        style={{ color: "white" }}
+        className="flex  flex-row w-full  alto items-end justify-center"
+      >
+        <div className="flex flex-col justify-start w-full h-full">
+          <div className="relative w-full h-full">
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="p-9 z-[10] flex flex-col justify-center items-center">
+                <h1>
+                  <span className="z-[10] uppercase text-center titulo ">
+                    {embajador?.nombre}
+                  </span>
+                </h1>
+              </div>
+              {embajador?.principal_foto && (
+                <Image
+                  objectFit="cover"
+                  src={embajador?.principal_foto}
+                  layout="fill"
+                  priority="high"
+                  quality={100}
+                ></Image>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row w-full  justify-center items-center">
+        <div className="flex flex-col justify-center items-center w-full max-w-[1212px]">
+          <div className="flex flex-row w-full flex-wrap justify-center">
+            <>
+              <div className="flex flex-col p-5 lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
+                {embajador?.principal_foto && (
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={embajador?.principal_foto}
+                  ></Image>
+                )}
+                <div
+                  style={{
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                  }}
+                  className="w-full h-full absolute top-0 right-0 left-0 bottom-0 overlay "
+                ></div>
+              </div>
+            </>
+          </div>
+        </div>
+      </div>
       <Footer options={options}></Footer>
       <style jsx>{`
         .titulo {

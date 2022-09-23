@@ -116,9 +116,7 @@ const Success = ({ categorias, opciones, orders }) => {
   };
   useEffect(() => {
     fire();
-    dispatch({
-      type: "@EMPTY_CART",
-    });
+   
     const ids = [];
     order.line_items.map((item) => {
       ids.push(item.product_id);
@@ -137,6 +135,9 @@ const Success = ({ categorias, opciones, orders }) => {
       .then((ReactPixel) => {
         ReactPixel.track("Purchase", toFB);
       });
+       dispatch({
+         type: "@EMPTY_CART",
+       });
   }, []);
 
   return (
