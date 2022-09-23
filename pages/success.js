@@ -136,6 +136,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     };
 
     if (toFB.content_name !== undefined) {
+      console.log(toFB);
       import("react-facebook-pixel")
         .then((module) => module.default)
         .then((ReactPixel) => {
@@ -146,7 +147,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     dispatch({
       type: "@EMPTY_CART",
     });
-  }, []);
+  }, [query]);
 
   return (
     <>
