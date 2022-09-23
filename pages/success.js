@@ -145,7 +145,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     dispatch({
       type: "@EMPTY_CART",
     });
-  }, [order]);
+  }, []);
 
   return (
     <>
