@@ -16,7 +16,6 @@ const Image = dynamic(() => import("next/image"));
 const Embajadores = ({ options, pagesNew, categorias, embajadores }) => {
   const { data } = usePages(pagesNew, "embajadores");
   const { embajadores: embajadoresUpdate } = useEmbajador(embajadores);
-  console.log(embajadoresUpdate);
 
   return (
     <>
