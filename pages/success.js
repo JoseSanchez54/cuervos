@@ -118,10 +118,11 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   const { orders } = useOrders(orders1);
 
   const ids = [];
+
+  const order = orders?.find((order) => order.id == wc_order_id);
   order?.line_items.map((item) => {
     ids.push(item.product_id);
   });
-  const order = orders?.find((order) => order.id == wc_order_id);
 
   useEffect(() => {
     fire();
