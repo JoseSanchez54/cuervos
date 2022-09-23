@@ -8,6 +8,7 @@ import ReactCanvasConfetti from "react-canvas-confetti";
 import Footer from "../components/Footer";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
+import { useOrders } from "../hooks/useOrders";
 export async function getStaticProps() {
   const template = await axios
     .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
@@ -47,7 +48,7 @@ export async function getStaticProps() {
     revalidate: 10,
   };
 }
-const Success = ({ categorias, opciones, orders }) => {
+const Success = ({ categorias, opciones, orders: orders1 }) => {
   const dispatch = useDispatch();
 
   const refAnimationInstance = useRef(null);
@@ -93,6 +94,7 @@ const Success = ({ categorias, opciones, orders }) => {
       startVelocity: 45,
     });
   }, [makeShot]);
+
   const { query } = useRouter();
   const { wc_order_id, session_id, suscripcion } = query;
   const { data: dataWC } = useSWR(
@@ -104,7 +106,6 @@ const Success = ({ categorias, opciones, orders }) => {
     }
   );
   const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
-  const order = orders.find((order) => order.id == wc_order_id);
 
   const canvasStyles = {
     position: "fixed",
@@ -114,13 +115,18 @@ const Success = ({ categorias, opciones, orders }) => {
     top: 0,
     left: 0,
   };
+  const { orders } = useOrders(orders1);
+
+  const ids = [];
+  order?.line_items.map((item) => {
+    ids.push(item.product_id);
+  });
+  const order = orders?.find((order) => order.id == wc_order_id);
+
+  console.log(order);
+
   useEffect(() => {
     fire();
-   
-    const ids = [];
-    order.line_items.map((item) => {
-      ids.push(item.product_id);
-    });
     const toFB = {
       content_name: order?.line_items[0].name,
       content_ids: ids,
@@ -130,15 +136,18 @@ const Success = ({ categorias, opciones, orders }) => {
       num_items: order?.line_items.length,
     };
 
-    import("react-facebook-pixel")
-      .then((module) => module.default)
-      .then((ReactPixel) => {
-        ReactPixel.track("Purchase", toFB);
-      });
-       dispatch({
-         type: "@EMPTY_CART",
-       });
-  }, []);
+    if (toFB.content_name !== undefined) {
+      import("react-facebook-pixel")
+        .then((module) => module.default)
+        .then((ReactPixel) => {
+          ReactPixel.track("Purchase", toFB);
+        });
+    }
+
+    dispatch({
+      type: "@EMPTY_CART",
+    });
+  }, [order]);
 
   return (
     <>
