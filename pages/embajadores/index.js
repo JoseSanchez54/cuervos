@@ -111,13 +111,7 @@ const Embajadores = ({ options, pagesNew, categorias, embajadores }) => {
                           >
                             {e?.nombre}
                           </span>
-                          <Link
-                            passHref
-                            href={
-                              "/embajadores/" +
-                              quitarAcentos(e?.nombre).replace(" ", "-")
-                            }
-                          >
+                          <Link passHref href={"/embajadores/" + e?.slug}>
                             <a>
                               <motion.button
                                 className="mt-5"

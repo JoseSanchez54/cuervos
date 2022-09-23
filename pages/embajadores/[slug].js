@@ -20,7 +20,7 @@ export const getStaticPaths = async () => {
   const paths = embajadores.map((produ) => {
     return {
       params: {
-        slug: quitarAcentos(produ?.nombre).replace(" ", "-"),
+        slug: produ.slug,
       },
     };
   });
@@ -31,6 +31,7 @@ export const getStaticPaths = async () => {
 };
 export async function getStaticProps(context) {
   const slug = context.params.slug;
+  console.log(context.params);
   const pagesNew = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/paginas"
   );
@@ -40,51 +41,58 @@ export async function getStaticProps(context) {
   const options = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
-  const embajadores = await axios
-    .get(process.env.URLBASE + "/wp-json/jet-cct/embajadores")
-    .then((res) => res.data);
+
   const categorias = await WooCommerce.get(
     "products/categories?order=desc&per_page=100"
   ).then((response) => {
     return response.data;
   });
+  const embajadores = await axios
+    .get(process.env.URLBASE + "/wp-json/jet-cct/embajadores")
+    .then((res) => res.data);
+  const embajador = await embajadores.find(
+    (embajador) => slug === embajador.slug
+  );
 
   return {
     props: {
       options: options.data[0],
       pagesNew: home2,
       categorias,
-      embajadores,
+      embajador,
     },
     revalidate: 10,
   };
 }
-const Embajador = ({ embajadores, options, categorias }) => {
+const Embajador = ({ embajador, options, categorias }) => {
+  console.log(embajador);
   return (
     <>
-      {/*       <DefaultSeo
-        title={data?.titulo_pagina}
-        description={data?.descripcion_de_pagina}
-        canonical={process.env.URLFINAL}
-        additionalLinkTags={[
-          {
-            rel: "icon",
-            href: options.favicon_principal,
-          },
-        ]}
-        openGraph={{
-          type: "website",
-          locale: "en_ES",
-          url: process.env.URLFINAL,
-          site_name: options.nombre_sitio,
-          description: options.descripcion_sitio,
-        }}
-        twitter={{
-          handle: "@handle",
-          site: "@site",
-          cardType: "summary_large_image",
-        }}
-      /> */}
+      {
+        <DefaultSeo
+          title={"Cría Cuervos - " + embajador?.nombre}
+          description={embajador?.informacion}
+          canonical={process.env.URLFINAL}
+          additionalLinkTags={[
+            {
+              rel: "icon",
+              href: options.favicon_principal,
+            },
+          ]}
+          openGraph={{
+            type: "website",
+            locale: "en_ES",
+            url: process.env.URLFINAL,
+            site_name: options.nombre_sitio,
+            description: options.descripcion_sitio,
+          }}
+          twitter={{
+            handle: "@handle",
+            site: "@site",
+            cardType: "summary_large_image",
+          }}
+        />
+      }
       <Nav categorias={categorias} opciones={options} />
       <Footer options={options}></Footer>
       <style jsx>{`
