@@ -33,22 +33,7 @@ export const getStaticPaths = async () => {
 };
 export async function getStaticProps(context) {
   const slug = context.params.slug;
-
   const products = await fetcherWc("products?slug=" + slug);
-
-  let relacionados = [];
-  const getRelacionados = await products[0]?.related_ids.map((e) => {
-    const getting = fetcherWc("products/" + e).then((d) =>
-      relacionados.push(d)
-    );
-  });
-  let upSells = [];
-  const getUpsells = await products[0]?.upsell_ids.map((e) => {
-    const getting = fetcherWc("products/" + e).then((d) => upSells.push(d));
-  });
-  const paquete = await axios
-    .get(process.env.URLBASE + "wp-json/jet-cct/ajustes_internos/")
-    .then((res) => res.data[0].paquete);
   const options = await axios.get(
     process.env.URLBASE + "wp-json/jet-cct/opciones_generales/"
   );

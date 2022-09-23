@@ -16,7 +16,6 @@ const Image = dynamic(() => import("next/image"));
 const Embajadores = ({ options, pagesNew, categorias, embajadores }) => {
   const { data } = usePages(pagesNew, "embajadores");
   const { embajadores: embajadoresUpdate } = useEmbajador(embajadores);
-  console.log(embajadoresUpdate);
 
   return (
     <>
@@ -112,13 +111,7 @@ const Embajadores = ({ options, pagesNew, categorias, embajadores }) => {
                           >
                             {e?.nombre}
                           </span>
-                          <Link
-                            passHref
-                            href={
-                              "/embajadores/" +
-                              quitarAcentos(e?.nombre).replace(" ", "-")
-                            }
-                          >
+                          <Link passHref href={"/embajadores/" + e?.slug}>
                             <a>
                               <motion.button
                                 className="mt-5"
