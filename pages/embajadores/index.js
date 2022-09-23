@@ -82,10 +82,13 @@ const Embajadores = ({ options, pagesNew, categorias, embajadores }) => {
         <div className="flex flex-col justify-center items-center w-full max-w-[1212px]">
           <div className="flex flex-row w-full flex-wrap justify-center">
             {embajadoresUpdate &&
-              embajadoresUpdate?.map((e) => {
+              embajadoresUpdate?.map((e, index) => {
                 return (
                   <>
-                    <div className="flex flex-col p-5 lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
+                    <div
+                      key={index}
+                      className="flex flex-col p-5 lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start"
+                    >
                       {e?.principal_foto && (
                         <Image
                           layout="fill"
