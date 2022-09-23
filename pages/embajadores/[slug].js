@@ -125,6 +125,7 @@ const Embajador = ({ embajador, options, categorias }) => {
         <div className="flex flex-col justify-center items-center w-full max-w-[1212px]">
           <div className="flex flex-row w-full flex-wrap justify-center">
             <>
+              <div className="flex flex-col p-5 bg-black lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start"></div>
               <div className="flex flex-col p-5 lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
                 {embajador?.principal_foto && (
                   <Image
