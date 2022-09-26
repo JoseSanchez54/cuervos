@@ -58,11 +58,6 @@ const Embajadores = ({ options, pagesNew, categorias, embajadores }) => {
                     {data?.titulo}
                   </span>
                 </h1>
-                <h2>
-                  <p className="uppercase parrafoPrimera max-w-[350px] text-center">
-                    {data?.parrafo_contacto}
-                  </p>
-                </h2>
               </div>
               {data?.primera_imagen && (
                 <Image
@@ -191,7 +186,10 @@ export async function getStaticProps(props) {
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const embajadores = await axios
-    .get(process.env.URLBASE + "/wp-json/jet-cct/embajadores")
+    .get(
+      process.env.URLBASE +
+        "/wp-json/jet-cct/embajadores/?_orderby=_ID&_order=asc&_ordertype=integer"
+    )
     .then((res) => res.data);
   const categorias = await WooCommerce.get(
     "products/categories?order=desc&per_page=100"
