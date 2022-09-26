@@ -123,15 +123,146 @@ const Embajador = ({ embajador, options, categorias }) => {
       </div>
       <div className="flex flex-row w-full  justify-center items-center">
         <div className="flex flex-col justify-center items-center w-full max-w-[1212px]">
+          <div className="flex py-9 px-5 flex-row w-full flex-wrap justify-center">
+            <div className="flex flex-col w-full">
+              <span
+                style={{
+                  color: "black",
+                }}
+                className="titulo"
+              >
+                {embajador?.puesto}
+              </span>
+              <p
+                className="mt-5"
+                dangerouslySetInnerHTML={{ __html: embajador?.informacion }}
+              ></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row w-full  justify-center items-center">
+        <div className="flex flex-col justify-center items-center w-full max-w-[1212px]">
           <div className="flex flex-row w-full flex-wrap justify-center">
             <>
-              <div className="flex flex-col p-5 bg-black lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start"></div>
+              <div className="flex flex-col p-9 bg-black lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
+                <span
+                  style={{
+                    color: "white",
+                    fontSize: "79px",
+                    fontFamily: options?.fuente_titulos,
+                  }}
+                >
+                  {embajador?.frase}
+                </span>
+                <div className="flex flex-row w-full justify-end items-end">
+                  <span style={{ fontSize: "20px", color: "white" }}>
+                    {embajador?.nombre}
+                  </span>
+                </div>
+              </div>
               <div className="flex flex-col p-5 lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
                 {embajador?.principal_foto && (
                   <Image
                     layout="fill"
                     objectFit="cover"
                     src={embajador?.principal_foto}
+                  ></Image>
+                )}
+                <div
+                  style={{
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                  }}
+                  className="w-full h-full absolute top-0 right-0 left-0 bottom-0 overlay "
+                ></div>
+              </div>
+            </>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row w-full  justify-center items-center">
+        <div className="flex flex-col justify-center items-center w-full max-w-[1212px]">
+          <div className="flex flex-row w-full flex-wrap justify-center">
+            <>
+              <div className="flex flex-col p-5 bg-black lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
+                {embajador?.segunda_foto && (
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={embajador?.segunda_foto}
+                  ></Image>
+                )}
+              </div>
+              <div className="flex flex-col p-5 lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
+                {embajador?.tercera_foto && (
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={embajador?.tercera_foto}
+                  ></Image>
+                )}
+                <div
+                  style={{
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                  }}
+                  className="w-full h-full absolute top-0 right-0 left-0 bottom-0 overlay "
+                ></div>
+              </div>
+            </>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row w-full  justify-center items-center">
+        <div className="flex flex-col justify-center items-center w-full max-w-[1212px]">
+          <div className="flex flex-row w-full flex-wrap justify-center">
+            <>
+              <div className="flex flex-col p-5 bg-black lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
+                {embajador?.cuarta_foto && (
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={embajador?.cuarta_foto}
+                  ></Image>
+                )}
+              </div>
+              <div className="flex flex-col p-5 lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
+                {embajador?.quinta_foto && (
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={embajador?.quinta_foto}
+                  ></Image>
+                )}
+                <div
+                  style={{
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                  }}
+                  className="w-full h-full absolute top-0 right-0 left-0 bottom-0 overlay "
+                ></div>
+              </div>
+            </>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row w-full  justify-center items-center">
+        <div className="flex flex-col justify-center items-center w-full max-w-[1212px]">
+          <div className="flex flex-row w-full flex-wrap justify-center">
+            <>
+              <div className="flex flex-col p-5 bg-black lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
+                {embajador?.sexta_foto && (
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={embajador?.sexta_foto}
+                  ></Image>
+                )}
+              </div>
+              <div className="flex flex-col p-5 lg:p-9 min-h-[660px] relative w-full lg:w-1/2 h-full justify-start items-start">
+                {embajador?.septima_foto && (
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={embajador?.septima_foto}
                   ></Image>
                 )}
                 <div
