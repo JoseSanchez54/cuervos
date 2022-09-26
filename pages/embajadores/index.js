@@ -65,10 +65,10 @@ const Embajadores = ({ options, pagesNew, categorias, embajadores }) => {
                   </p>
                 </h2>
               </div>
-              {data?.principal_foto && (
+              {data?.primera_imagen && (
                 <Image
                   objectFit="cover"
-                  src={data?.principal_foto}
+                  src={data?.primera_imagen}
                   layout="fill"
                   priority="high"
                   quality={100}
