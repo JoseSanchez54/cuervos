@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NewsletterForm from "./NewsletterForm";
 const Footer = ({ options }) => {
   let menuBruto = "";
   if (options) {
@@ -10,6 +11,9 @@ const Footer = ({ options }) => {
   return (
     <div className="flex flex-row bg-[#FAFAFA] p-7 justify-center w-full">
       <div className="flex flex-col max-w-[1212px] items-center w-full">
+        <div className="flex flex-row w-full justify-center">
+          <NewsletterForm />
+        </div>
         <div className="lg:flex hidden flex-row justify-between w-full">
           {options &&
             menuBruto.map((e) => {

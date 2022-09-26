@@ -58,6 +58,8 @@ module.exports = {
     NEXT_PUBLIC_FB_PIXEL_ID: process.env.NEXT_PUBLIC_FB_PIXEL_ID,
     WCKEY: process.env.WCKEY,
     WCS: process.env.WCS,
+    MAILCHIMPSERVER: process.env.MAILCHIMPSERVER,
+    MAILCHIMP: process.env.MAILCHIMP,
   },
   swcMinify: true,
 
