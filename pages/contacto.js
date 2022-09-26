@@ -13,7 +13,7 @@ const Contacto = ({ opciones, pagina, categoriasAll }) => {
   return (
     <>
       <DefaultSeo
-        title={pagina.titulo_pagina}
+        title={"Cría Cuervos - " + pagina.titulo_pagina}
         description={pagina.descripcion_de_pagina}
         canonical={process.env.URLFINAL}
         additionalLinkTags={[
