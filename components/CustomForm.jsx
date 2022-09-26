@@ -18,6 +18,16 @@ const CustomForm = ({ status, message, onValidated }) => {
     <form onSubmit={submit}>
       <div className="flex flex-row w-full justify-center">
         <div className="flex flex-col w-full items-center">
+          <span
+            className="my-5"
+            style={{
+              fontFamily: options?.fuente_global,
+              color: "black",
+              fontSize: "28px",
+            }}
+          >
+            Suscribete a nuestra newsletter
+          </span>
           <div
             style={{
               padding: 10,
@@ -31,6 +41,7 @@ const CustomForm = ({ status, message, onValidated }) => {
                 label: {
                   color: "#7e8085",
                   zIndex: "1",
+                  borderRadius: "0px",
                 },
                 input: {
                   borderColor: "#7e8085",
