@@ -133,7 +133,9 @@ const Embajador = ({ embajador, options, categorias }) => {
               >
                 {embajador?.puesto}
               </span>
-              <p>{embajador?.informacion}</p>
+              <p
+                dangerouslySetInnerHTML={{ __html: embajador?.informacion }}
+              ></p>
             </div>
           </div>
         </div>
