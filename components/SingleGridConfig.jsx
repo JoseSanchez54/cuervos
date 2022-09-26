@@ -6,9 +6,11 @@ import Precio from "./Precio";
 import { useDispatch } from "react-redux";
 import { useVariations } from "../hooks/useVariations";
 
-const SingleGridConfig = ({ producto, opciones }) => {
+const SingleGridConfig = ({ producto, opciones, botellas }) => {
   const { variacion } = useVariations(producto?.id);
-
+  const handleBotellas = (e) => {
+    botellas.set(botellas.value + 1);
+  };
   const [cambioImagen, setCambioImagen] = useState(false);
   const dispatch = useDispatch();
   function definirVariaciones(p, v) {
@@ -92,6 +94,7 @@ const SingleGridConfig = ({ producto, opciones }) => {
           color: "black",
           border: "1px solid black",
         }}
+        onClick={() => handleBotellas(1)}
       >
         Añadir
       </motion.button>

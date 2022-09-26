@@ -65,7 +65,12 @@ const Configurador = ({ options, categorias, productos }) => {
             </div>
           </div>
           <div className="flex flex-row justify-center w-full">
-            <Grid productos={productos} opciones={options} config={true} />
+            <Grid
+              productos={productos}
+              opciones={options}
+              config={true}
+              botellas={{ set: setBotellas, value: botellas }}
+            />
           </div>
         </div>
       </div>

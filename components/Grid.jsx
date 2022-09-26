@@ -3,7 +3,7 @@ const SingleGrid = dynamic(() => import("../components/SingleGrid"));
 const SingleGridConfig = dynamic(() =>
   import("../components/SingleGridConfig")
 );
-const Grid = ({ productos, opciones, max = 1000, config }) => {
+const Grid = ({ productos, opciones, max = 1000, config, botellas }) => {
   return (
     <>
       {productos.map((producto, index) => {
@@ -15,7 +15,11 @@ const Grid = ({ productos, opciones, max = 1000, config }) => {
                 key={producto.id}
               >
                 {config === true ? (
-                  <SingleGridConfig producto={producto} opciones={opciones} />
+                  <SingleGridConfig
+                    producto={producto}
+                    opciones={opciones}
+                    botellas={botellas}
+                  />
                 ) : (
                   <SingleGrid
                     producto={producto}
