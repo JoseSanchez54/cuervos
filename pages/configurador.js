@@ -69,7 +69,7 @@ const Configurador = ({ options, categorias, productos }) => {
               productos={productos}
               opciones={options}
               config={true}
-              botellas={{ set: setBotellas, value: botellas }}
+              botellas={{ set: setBotellas, value: botellas, caja: caja }}
             />
           </div>
         </div>

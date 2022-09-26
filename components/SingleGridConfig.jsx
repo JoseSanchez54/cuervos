@@ -9,7 +9,9 @@ import { useVariations } from "../hooks/useVariations";
 const SingleGridConfig = ({ producto, opciones, botellas }) => {
   const { variacion } = useVariations(producto?.id);
   const handleBotellas = (e) => {
-    botellas.set(botellas.value + 1);
+    if (botellas.value < botellas.caja) {
+      botellas.set(botellas.value + 1);
+    }
   };
   const [cambioImagen, setCambioImagen] = useState(false);
   const dispatch = useDispatch();
