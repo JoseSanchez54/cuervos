@@ -19,7 +19,7 @@ const CustomForm = ({ status, message, onValidated }) => {
       <div className="flex flex-row w-full justify-center">
         <div className="flex flex-col w-full items-center">
           <span
-            className="my-5"
+            className="my-5 text-center"
             style={{
               fontFamily: options?.fuente_global,
               color: "black",

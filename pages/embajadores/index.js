@@ -165,7 +165,7 @@ const Embajadores = ({ options, pagesNew, categorias, embajadores }) => {
         @media (max-width: 1022px) {
           .titulo {
             font-family: ${options?.fuente_titulos};
-            font-size: 90px;
+            font-size: 55px;
             line-height: 1.1;
           }
         }
