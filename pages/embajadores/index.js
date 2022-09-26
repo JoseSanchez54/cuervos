@@ -9,7 +9,6 @@ import { usePages } from "../../hooks/usePages";
 import { useEmbajador } from "../../hooks/useEmbajador";
 import { motion } from "framer-motion";
 const Nav = dynamic(() => import("../../components/Nav"));
-import quitarAcentos from "../../utils/quitarAcentos";
 const Footer = dynamic(() => import("../../components/Footer"));
 const Edad = dynamic(() => import("../../components/Edad"));
 const Image = dynamic(() => import("next/image"));
