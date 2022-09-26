@@ -26,7 +26,7 @@ const CustomForm = ({ status, message, onValidated }) => {
               fontSize: "28px",
             }}
           >
-            Suscribete a nuestra newsletter
+            Suscríbete a nuestra newsletter
           </span>
           <div
             style={{
