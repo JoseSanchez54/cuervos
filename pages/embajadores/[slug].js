@@ -123,7 +123,7 @@ const Embajador = ({ embajador, options, categorias }) => {
       </div>
       <div className="flex flex-row w-full  justify-center items-center">
         <div className="flex flex-col justify-center items-center w-full max-w-[1212px]">
-          <div className="flex py-9 flex-row w-full flex-wrap justify-center">
+          <div className="flex py-9 px-5 flex-row w-full flex-wrap justify-center">
             <div className="flex flex-col w-full">
               <span
                 style={{
@@ -134,6 +134,7 @@ const Embajador = ({ embajador, options, categorias }) => {
                 {embajador?.puesto}
               </span>
               <p
+                className="mt-5"
                 dangerouslySetInnerHTML={{ __html: embajador?.informacion }}
               ></p>
             </div>
