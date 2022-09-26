@@ -168,25 +168,16 @@ const SingleGrid = ({ producto, opciones, config }) => {
                   </Link>
                 )}
               </div>
-              {config === false ? (
-                <>
-                  {hover && (
-                    <Image
-                      objectFit="cover"
-                      layout="fill"
-                      src={!cambioImagen ? producto?.images[0].src : hover}
-                    ></Image>
-                  )}
-                </>
-              ) : (
-                <>
+
+              <>
+                {hover && (
                   <Image
                     objectFit="cover"
                     layout="fill"
-                    src={producto?.images[0].src}
+                    src={!cambioImagen ? producto?.images[0].src : hover}
                   ></Image>
-                </>
-              )}
+                )}
+              </>
             </div>
           </>
         </a>
