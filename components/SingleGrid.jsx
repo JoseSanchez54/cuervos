@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 const Image = dynamic(() => import("next/image"));
 import Link from "next/link";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Precio from "../components/Precio";
 import { useDispatch } from "react-redux";
 import { useVariations } from "../hooks/useVariations";
@@ -167,16 +167,13 @@ const SingleGrid = ({ producto, opciones }) => {
                   </motion.a>
                 </Link>
               </div>
-
-              <>
-                {hover && (
-                  <Image
-                    objectFit="cover"
-                    layout="fill"
-                    src={!cambioImagen ? producto?.images[0].src : hover}
-                  ></Image>
-                )}
-              </>
+              {hover && (
+                <Image
+                  objectFit="cover"
+                  layout="fill"
+                  src={!cambioImagen ? producto?.images[0].src : hover}
+                ></Image>
+              )}
             </div>
           </>
         </a>
