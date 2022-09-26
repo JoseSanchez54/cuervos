@@ -20,7 +20,7 @@ const Embajadores = ({ options, pagesNew, categorias, embajadores }) => {
   return (
     <>
       <DefaultSeo
-        title={data?.titulo_pagina}
+        title={"Cría Cuervos - " + data?.titulo_pagina}
         description={data?.descripcion_de_pagina}
         canonical={process.env.URLFINAL}
         additionalLinkTags={[
