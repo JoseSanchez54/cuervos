@@ -165,7 +165,7 @@ const FormularioContacto = ({ options }) => {
                         className="form-check-label w-full"
                       >
                         He leído y acepto la{" "}
-                        <Link passHref href="/privacidad">
+                        <Link passHref href="/legal/politica-de-privacidad">
                           <a style={{ color: "black", fontWeight: "bold" }}>
                             política de privacidad
                           </a>
