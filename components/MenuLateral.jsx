@@ -96,15 +96,17 @@ const MenuLateral = ({ opciones, categorias }) => {
                       {padres.map((res, index) => {
                         return (
                           <>
-                            {res.slug !== "todos" && res.slug !== "destacados" && (
-                              <button
-                                key={index}
-                                style={{ textAlign: "start" }}
-                                onClick={(e) => handleSeccion(res.id)}
-                              >
-                                <a className="enlaceSup">{res.name}</a>
-                              </button>
-                            )}
+                            {res.slug !== "todos" &&
+                              res.slug !== "vetados" &&
+                              res.slug !== "destacados" && (
+                                <button
+                                  key={index}
+                                  style={{ textAlign: "start" }}
+                                  onClick={(e) => handleSeccion(res.id)}
+                                >
+                                  <a className="enlaceSup">{res.name}</a>
+                                </button>
+                              )}
                           </>
                         );
                       })}
@@ -226,15 +228,17 @@ const MenuLateral = ({ opciones, categorias }) => {
                     {padres.map((res, index) => {
                       return (
                         <>
-                          {res.slug !== "todos" && res.slug !== "destacados" && (
-                            <button
-                              key={index}
-                              style={{ textAlign: "start" }}
-                              onClick={(e) => handleSeccion(res.id)}
-                            >
-                              <a className="enlaceSup">{res.name}</a>
-                            </button>
-                          )}
+                          {res.slug !== "todos" &&
+                            res.slug !== "vetados" &&
+                            res.slug !== "destacados" && (
+                              <button
+                                key={index}
+                                style={{ textAlign: "start" }}
+                                onClick={(e) => handleSeccion(res.id)}
+                              >
+                                <a className="enlaceSup">{res.name}</a>
+                              </button>
+                            )}
                         </>
                       );
                     })}
