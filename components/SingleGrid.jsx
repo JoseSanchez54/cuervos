@@ -7,7 +7,7 @@ import Precio from "../components/Precio";
 import { useDispatch } from "react-redux";
 import { useVariations } from "../hooks/useVariations";
 
-const SingleGrid = ({ producto, opciones, config }) => {
+const SingleGrid = ({ producto, opciones }) => {
   const { variacion } = useVariations(producto?.id);
 
   const [cambioImagen, setCambioImagen] = useState(false);
@@ -127,46 +127,45 @@ const SingleGrid = ({ producto, opciones, config }) => {
                     variaciones={variacion}
                   />
                 )}
-                {config === false && (
-                  <Link
+
+                <Link
+                  variants={texto}
+                  initial="initial"
+                  whileHover="hover"
+                  href={{
+                    pathname: "/productos/[slug]",
+                    query: { slug: producto?.slug },
+                  }}
+                  passHref
+                >
+                  <motion.a
                     variants={texto}
                     initial="initial"
                     whileHover="hover"
-                    href={{
-                      pathname: "/productos/[slug]",
-                      query: { slug: producto?.slug },
-                    }}
-                    passHref
                   >
-                    <motion.a
-                      variants={texto}
-                      initial="initial"
-                      whileHover="hover"
+                    <button
+                      style={{
+                        fontFamily: opciones.fuente_global,
+                        zIndex: "10",
+                        fontSize: "12px",
+                        color: cambioImagen ? "#fff" : "#000",
+                        display: "flex",
+                        border: cambioImagen
+                          ? "1px solid #fff"
+                          : "1px solid #000",
+                        width: "fit-content",
+                        padding: "10px 20px",
+                        marginTop: "10px",
+                        "&:hover": {
+                          backgroundColor: "#000",
+                          color: "#fff",
+                        },
+                      }}
                     >
-                      <button
-                        style={{
-                          fontFamily: opciones.fuente_global,
-                          zIndex: "10",
-                          fontSize: "12px",
-                          color: cambioImagen ? "#fff" : "#000",
-                          display: "flex",
-                          border: cambioImagen
-                            ? "1px solid #fff"
-                            : "1px solid #000",
-                          width: "fit-content",
-                          padding: "10px 20px",
-                          marginTop: "10px",
-                          "&:hover": {
-                            backgroundColor: "#000",
-                            color: "#fff",
-                          },
-                        }}
-                      >
-                        COMPRAR
-                      </button>
-                    </motion.a>
-                  </Link>
-                )}
+                      COMPRAR
+                    </button>
+                  </motion.a>
+                </Link>
               </div>
 
               <>
