@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { useOrders } from "../hooks/useOrders";
+import { DefaultSeo } from "next-seo";
 export async function getStaticProps() {
   const template = await axios
     .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
@@ -150,6 +151,29 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
 
   return (
     <>
+      <DefaultSeo
+        title={"Cría Cuervos - Pedido completo"}
+        description={"El pedido se ha completado correctamente"}
+        canonical={process.env.URLFINAL}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: opciones.favicon_principal,
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_ES",
+          url: process.env.URLFINAL,
+          site_name: opciones.nombre_sitio,
+          description: opciones.descripcion_sitio,
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
       <Nav categorias={categorias} opciones={opciones} />
 
