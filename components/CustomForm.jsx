@@ -1,6 +1,8 @@
 import { Input, Textarea, Checkbox } from "@nextui-org/react";
 import Link from "next/link";
+import { useOptions } from "../hooks/useOptions";
 const CustomForm = ({ status, message, onValidated }) => {
+  const { options } = useOptions();
   let email, checkbox;
   console.log(checkbox);
   const submit = (e) =>
@@ -62,10 +64,19 @@ const CustomForm = ({ status, message, onValidated }) => {
               <label
                 htmlFor="acceptTerms"
                 className="form-check-label mx-1 w-full"
+                style={{
+                  fontFamily: options?.fuente_global,
+                }}
               >
                 He leído y acepto la{" "}
                 <Link passHref href="/privacidad">
-                  <a style={{ color: "black", fontWeight: "bold" }}>
+                  <a
+                    style={{
+                      color: "black",
+                      fontWeight: "bold",
+                      fontFamily: options?.fuente_global,
+                    }}
+                  >
                     política de privacidad
                   </a>
                 </Link>
@@ -78,7 +89,13 @@ const CustomForm = ({ status, message, onValidated }) => {
                 id="acceptTerms"
                 required
               />
-              <label htmlFor="acceptTerms2" className="form-check-label mx-1">
+              <label
+                style={{
+                  fontFamily: options?.fuente_global,
+                }}
+                htmlFor="acceptTerms2"
+                className="form-check-label mx-1"
+              >
                 Acepto recibir comunicaciones comerciales
               </label>
             </div>
