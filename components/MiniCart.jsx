@@ -43,7 +43,7 @@ const MiniCart = ({ opciones, tasas }) => {
     }
   };
 
-/* A function that returns a class based on the state of the component. */
+  /* A function that returns a class based on the state of the component. */
   const cantidad = actualCart?.length;
   const handle = () => {
     if (open === true) {
@@ -162,7 +162,9 @@ const MiniCart = ({ opciones, tasas }) => {
                                 </div>
                                 <div className="flex flex-col ">
                                   <span className="miniCartName">
-                                    {producto?.nombrePadre}
+                                    {producto?.nombrePadre
+                                      ? producto?.nombrePadre
+                                      : producto?.name}
                                   </span>
 
                                   <div className="flex flex-row mt-2">

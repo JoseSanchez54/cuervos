@@ -42,11 +42,20 @@ export async function getStaticProps() {
 
 const Configurador = ({ options, categorias, productos }) => {
   const actual = useSelector((state) => state.configReducer.cart);
+
   const [caja, setCaja] = useState(null);
   const [fase, setFase] = useState(1);
   const [botellas, setBotellas] = useState(actual.length);
   const { options: optionsSWR } = useOptions(options);
   const dispatch = useDispatch();
+  const handleFinal = () => {
+    actual.map((e) =>
+      dispatch({
+        type: "@AddToCart",
+        producto: e,
+      })
+    );
+  };
   return (
     <>
       <Nav categorias={categorias} opciones={optionsSWR} />
@@ -220,6 +229,27 @@ const Configurador = ({ options, categorias, productos }) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex flex-row justify-center w-full">
+        <motion.button
+          initial={{
+            backgroundColor: "black",
+            fontFamily: options?.fuente_global,
+            color: "white",
+            padding: "10px 20px",
+            textTransform: "uppercase",
+            margin: "20px 10px",
+            border: "1px solid black",
+          }}
+          whileHover={{
+            backgroundColor: "white",
+            color: "black",
+            border: "1px solid black",
+          }}
+          onClick={() => handleFinal()}
+        >
+          Añadir al carrito
+        </motion.button>
       </div>
 
       <Footer options={optionsSWR} />
