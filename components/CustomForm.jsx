@@ -16,7 +16,7 @@ const CustomForm = ({ status, message, onValidated }) => {
 
   return (
     <form onSubmit={submit}>
-      <div className="flex flex-row w-full justify-center">
+      <div className="flex flex-row w-full items-center xl:min-h-[260px] justify-center">
         <div className="flex flex-col w-full items-center">
           <span
             className="my-5 text-center"
