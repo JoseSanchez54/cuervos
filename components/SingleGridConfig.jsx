@@ -64,7 +64,6 @@ const SingleGridConfig = ({ producto, opciones, botellas }) => {
   return (
     <div
       key={producto?.id}
-      style={{ cursor: "pointer" }}
       className="flex flex-col mx-5 z-[21] w-full h-[508px] max-h-[508px]  max-w-[404px]"
     >
       <>
