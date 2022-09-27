@@ -80,15 +80,6 @@ const SingleGridConfig = ({ producto, opciones, botellas }) => {
             >
               {producto?.name}
             </span>
-
-            <Precio
-              precio={producto?.regular_price}
-              rebaja={producto?.sale_price}
-              hover={cambioImagen}
-              opciones={opciones}
-              variable={producto?.type === "variable"}
-              variaciones={variacion}
-            />
           </div>
           <div
             style={{
