@@ -25,7 +25,7 @@ export async function getStaticProps() {
     (page) => page.pagina_asociada === "area"
   );
   const productos = await WooCommerce.get(
-    "products?per_page=100&status=publish&category=1447"
+    "products?per_page=3&status=publish&category=1447&orderby=id&order=asc"
   ).then((response) => {
     return response.data;
   });
