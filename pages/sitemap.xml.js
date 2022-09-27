@@ -117,9 +117,9 @@ export async function getServerSideProps({ res }) {
           `;
             })
             .join("")}
-                    ${embajadores
-                      .map((post) => {
-                        return `
+             ${embajadores
+               .map((post) => {
+                 return `
             <url>
               <loc>${baseUrl}/embajadores/${post.slug}</loc>
               <lastmod>${new Date().toISOString()}</lastmod>
@@ -127,8 +127,8 @@ export async function getServerSideProps({ res }) {
               <priority>0.9</priority>
             </url>
           `;
-                      })
-                      .join("")}
+               })
+               .join("")}
       <url>
         <loc>${baseUrl}/contacto</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
