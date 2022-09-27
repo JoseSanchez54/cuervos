@@ -2,9 +2,13 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
 import { useState, useEffect } from "react";
-import Script from "next/script";
+
 const Nav = dynamic(() => import("../components/Nav"), { ssr: false });
 const Footer = dynamic(() => import("../components/Footer"), { ssr: false });
+const DefaultSeo = dynamic(
+  () => import("next-seo").then((mod) => mod.DefaultSeo),
+  { ssr: false }
+);
 import { useOptions } from "../hooks/useOptions";
 
 export async function getStaticProps() {
@@ -48,6 +52,29 @@ const Localizaciones = ({ options, categorias }) => {
   }, []);
   return (
     <>
+      <DefaultSeo
+        title={"Cría Cuervos - Localizaciones"}
+        description={"Localizaciones donde puedes encontrar Vinos Cría Cuervos"}
+        canonical={process.env.URLFINAL}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: options.favicon_principal,
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_ES",
+          url: process.env.URLFINAL,
+          site_name: options.nombre_sitio,
+          description: options.descripcion_sitio,
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <Nav categorias={categorias} opciones={optionsSWR} />
       <div className="flex flex-row w-full justify-center my-9">
         <div className="flex flex-col p-5 max-w-[1220px] items-center w-full">
