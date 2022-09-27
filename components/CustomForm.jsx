@@ -80,7 +80,7 @@ const CustomForm = ({ status, message, onValidated }) => {
                 }}
               >
                 He leído y acepto la{" "}
-                <Link passHref href="/privacidad">
+                <Link passHref href="/legal/politica-de-privacidad">
                   <a
                     style={{
                       color: "black",
