@@ -188,7 +188,7 @@ export async function getStaticProps(props) {
   const embajadores = await axios
     .get(
       process.env.URLBASE +
-        "/wp-json/jet-cct/embajadores/?_orderby=_ID&_order=asc&_ordertype=integer"
+        "/wp-json/jet-cct/embajadores/?_orderby=orden&_order=asc&_ordertype=integer"
     )
     .then((res) => res.data);
   const categorias = await WooCommerce.get(
