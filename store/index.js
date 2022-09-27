@@ -2,11 +2,13 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { createWrapper } from "next-redux-wrapper";
 import cartReducer from "../reducers/cartReducer";
 import userReducer from "../reducers/userReducer";
+import configReducer from "../reducers/configReducer";
 import thunkMiddleware from "redux-thunk";
 
 const combinedReducer = combineReducers({
   cartReducer,
   userReducer,
+  configReducer,
 });
 const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== "production") {
@@ -27,7 +29,7 @@ const makeStore = ({ isServer }) => {
 
     const persistConfig = {
       key: "nextjs",
-      whitelist: ["cartReducer", "userReducer"], // que reducer tiene persistencia
+      whitelist: ["cartReducer", "userReducer", "configReducer"], // que reducer tiene persistencia
       storage, // donde guarda la persistencia
     };
 

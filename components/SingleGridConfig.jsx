@@ -5,16 +5,32 @@ import { motion } from "framer-motion";
 import Precio from "./Precio";
 import { useDispatch } from "react-redux";
 import { useVariations } from "../hooks/useVariations";
+import { useSelector } from "react-redux";
 
 const SingleGridConfig = ({ producto, opciones, botellas }) => {
+  const actual = useSelector((state) => state.configReducer.cart);
+  const cantidad = actual.filter((e) => e.id === producto.id).length;
+  const dispatch = useDispatch();
   const { variacion } = useVariations(producto?.id);
   const handleBotellas = (e) => {
     if (botellas.value < botellas.caja) {
       botellas.set(botellas.value + 1);
+      dispatch({
+        type: "@Add",
+        producto: producto,
+      });
     }
   };
+
+  const handleEliminar = () => {
+    dispatch({
+      type: "@Remove",
+      id: producto.id,
+      precio: producto.price,
+      peso: producto.weight,
+    });
+  };
   const [cambioImagen, setCambioImagen] = useState(false);
-  const dispatch = useDispatch();
   function definirVariaciones(p, v) {
     const atributos = p.attributes
       .filter((e, index) => e.variation === true)
@@ -74,6 +90,25 @@ const SingleGridConfig = ({ producto, opciones, botellas }) => {
               variaciones={variacion}
             />
           </div>
+          <div
+            style={{
+              backgroundColor: "black",
+              borderRadius: "100%",
+              padding: "5px 5px",
+              height: "30px",
+              width: "30px",
+            }}
+            className="absolute flex flex-row justify-center items-center z-[99] right-0 top-2"
+          >
+            <span
+              style={{
+                color: "white",
+                fontFamily: opciones.fuente_global,
+              }}
+            >
+              {cantidad}
+            </span>
+          </div>
           <Image
             objectFit="cover"
             layout="fill"
@@ -88,7 +123,7 @@ const SingleGridConfig = ({ producto, opciones, botellas }) => {
           color: "white",
           padding: "10px 20px",
           textTransform: "uppercase",
-          margin: "20px 10px",
+
           border: "1px solid black",
         }}
         whileHover={{
@@ -99,6 +134,26 @@ const SingleGridConfig = ({ producto, opciones, botellas }) => {
         onClick={() => handleBotellas(1)}
       >
         Añadir
+      </motion.button>
+      <motion.button
+        initial={{
+          backgroundColor: "black",
+          fontFamily: opciones?.fuente_global,
+          color: "white",
+          padding: "10px 20px",
+          textTransform: "uppercase",
+          marginTop: "10px",
+
+          border: "1px solid black",
+        }}
+        whileHover={{
+          backgroundColor: "white",
+          color: "black",
+          border: "1px solid black",
+        }}
+        onClick={() => handleEliminar()}
+      >
+        Eliminar
       </motion.button>
     </div>
   );
