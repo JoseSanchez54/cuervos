@@ -46,47 +46,60 @@ const Configurador = ({ options, categorias, productos }) => {
   const actual = useSelector((state) => state.configReducer.cart);
 
   const [caja, setCaja] = useState(null);
+  const [error, setError] = useState(null);
   const [ids, setIds] = useState(null);
   const [fase, setFase] = useState(1);
   const [botellas, setBotellas] = useState(actual.length);
   const { options: optionsSWR } = useOptions(options);
   const dispatch = useDispatch();
   const handleFinal = async () => {
-    const tempranillo = [];
-    const verdejo = [];
-    const rose = [];
-    actual.map((e) => {
-      if (e.name === "Tempranillo") {
-        tempranillo.push(e);
-      } else if (e.name === "Verdejo") {
-        verdejo.push(e);
-      } else if (e.name === "El Rosé") {
-        rose.push(e);
-      }
-    });
-    const cajaA = await WooCommerce.get("products/" + ids)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.log(error.response.data);
+    if (caja === botellas) {
+      setError(null);
+      const tempranillo = [];
+      const verdejo = [];
+      const rose = [];
+      actual.map((e) => {
+        if (e.name === "Tempranillo") {
+          tempranillo.push(e);
+        } else if (e.name === "Verdejo") {
+          verdejo.push(e);
+        } else if (e.name === "El Rosé") {
+          rose.push(e);
+        }
       });
-    const cajaWC = {
-      ...cajaA,
-      variable: false,
-      idPadre: cajaA.id,
-      nombrePadre: cajaA.name,
-      img: cajaA.images[0].src,
-      meta_data: [
-        { key: "tempranillo", value: tempranillo.length },
-        { key: "verdejo", value: verdejo.length },
-        { key: "rose", value: rose.length },
-      ],
-    };
-    await dispatch({
-      type: "@AddToCart",
-      producto: cajaWC,
-    });
+      const cajaA = await WooCommerce.get("products/" + ids)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+      const cajaWC = {
+        ...cajaA,
+        variable: false,
+        idPadre: cajaA.id,
+        nombrePadre: cajaA.name,
+        img: cajaA.images[0].src,
+        meta_data: [
+          { key: "tempranillo", value: tempranillo.length },
+          { key: "verdejo", value: verdejo.length },
+          { key: "rose", value: rose.length },
+        ],
+      };
+
+      await dispatch({
+        type: "@AddToCart",
+        producto: cajaWC,
+      });
+    } else {
+      setError(
+        "Debes seleccionar " +
+          cajas +
+          " botellas, actualmente tienes " +
+          botellas +
+          " botellas seleccionadas"
+      );
+    }
   };
   return (
     <>
@@ -131,6 +144,15 @@ const Configurador = ({ options, categorias, productos }) => {
               </span>
             )}
           </div>
+          <span
+            style={{
+              fontFamily: options?.fuente_global,
+              color: "black",
+              fontSize: "1rem",
+            }}
+          >
+            {error}
+          </span>
           {fase === 1 && (
             <div className="flex flex-row min-h-[500px] items-between justify-center w-full">
               <div className="flex flex-col items-center w-full">
