@@ -49,13 +49,38 @@ const Configurador = ({ options, categorias, productos }) => {
   const [botellas, setBotellas] = useState(actual.length);
   const { options: optionsSWR } = useOptions(options);
   const dispatch = useDispatch();
-  const handleFinal = () => {
-    actual.map((e) =>
-      dispatch({
-        type: "@AddToCart",
-        producto: e,
+  const handleFinal = async () => {
+    const tempranillo = [];
+    const verdejo = [];
+    const rose = [];
+    actual.map((e) => {
+      if (e.name === "Tempranillo") {
+        tempranillo.push(e);
+      } else if (e.name === "Verdejo") {
+        verdejo.push(e);
+      } else if (e.name === "El Rosé") {
+        rose.push(e);
+      }
+    });
+    const cajaA = await WooCommerce.get("products/" + ids)
+      .then((response) => {
+        return response.data;
       })
-    );
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+    const cajaWC = {
+      ...cajaA,
+      meta_data: [
+        { tempranillo: tempranillo.length },
+        { verdejo: verdejo.length },
+        { rose: rose.length },
+      ],
+    };
+    await dispatch({
+      type: "@AddToCart",
+      producto: cajaWC,
+    });
   };
   return (
     <>
