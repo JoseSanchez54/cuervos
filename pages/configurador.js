@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 const Nav = dynamic(() => import("../components/Nav"), { ssr: false });
 const Footer = dynamic(() => import("../components/Footer"), { ssr: false });
@@ -101,6 +101,13 @@ const Configurador = ({ options, categorias, productos }) => {
       );
     }
   };
+  useEffect(() => {
+    dispatch({
+      type: "@EMPTY",
+    });
+    setBotellas(0);
+    setFase(1);
+  }, []);
   return (
     <>
       <DefaultSeo
