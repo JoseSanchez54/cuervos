@@ -72,9 +72,9 @@ const Configurador = ({ options, categorias, productos }) => {
     const cajaWC = {
       ...cajaA,
       meta_data: [
-        { tempranillo: tempranillo.length },
-        { verdejo: verdejo.length },
-        { rose: rose.length },
+        { key: "tempranillo", value: tempranillo.length },
+        { key: "verdejo", value: verdejo.length },
+        { key: "rose", value: rose.length },
       ],
     };
     await dispatch({
