@@ -44,6 +44,7 @@ const Configurador = ({ options, categorias, productos }) => {
   const actual = useSelector((state) => state.configReducer.cart);
 
   const [caja, setCaja] = useState(null);
+  const [ids, setIds] = useState(null);
   const [fase, setFase] = useState(1);
   const [botellas, setBotellas] = useState(actual.length);
   const { options: optionsSWR } = useOptions(options);
@@ -92,7 +93,7 @@ const Configurador = ({ options, categorias, productos }) => {
                     <button
                       onClick={() => {
                         setCaja(3);
-                        console.log(botellas);
+                        setIds("9871");
                         if (botellas > 3) {
                           dispatch({
                             type: "@EMPTY",
@@ -108,6 +109,7 @@ const Configurador = ({ options, categorias, productos }) => {
                     <button
                       onClick={() => {
                         setCaja(6);
+                        setIds("9872");
                         if (botellas > 6) {
                           dispatch({
                             type: "@EMPTY",
@@ -123,6 +125,7 @@ const Configurador = ({ options, categorias, productos }) => {
                     <button
                       onClick={() => {
                         setCaja(12);
+                        setIds("9873");
                         if (botellas > 12) {
                           dispatch({
                             type: "@EMPTY",
