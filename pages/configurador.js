@@ -44,17 +44,43 @@ const Configurador = ({ options, categorias, productos }) => {
   const actual = useSelector((state) => state.configReducer.cart);
 
   const [caja, setCaja] = useState(null);
+  const [ids, setIds] = useState(null);
   const [fase, setFase] = useState(1);
   const [botellas, setBotellas] = useState(actual.length);
   const { options: optionsSWR } = useOptions(options);
   const dispatch = useDispatch();
-  const handleFinal = () => {
-    actual.map((e) =>
-      dispatch({
-        type: "@AddToCart",
-        producto: e,
+  const handleFinal = async () => {
+    const tempranillo = [];
+    const verdejo = [];
+    const rose = [];
+    actual.map((e) => {
+      if (e.name === "Tempranillo") {
+        tempranillo.push(e);
+      } else if (e.name === "Verdejo") {
+        verdejo.push(e);
+      } else if (e.name === "El Rosé") {
+        rose.push(e);
+      }
+    });
+    const cajaA = await WooCommerce.get("products/" + ids)
+      .then((response) => {
+        return response.data;
       })
-    );
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+    const cajaWC = {
+      ...cajaA,
+      meta_data: [
+        { tempranillo: tempranillo.length },
+        { verdejo: verdejo.length },
+        { rose: rose.length },
+      ],
+    };
+    await dispatch({
+      type: "@AddToCart",
+      producto: cajaWC,
+    });
   };
   return (
     <>
@@ -92,7 +118,7 @@ const Configurador = ({ options, categorias, productos }) => {
                     <button
                       onClick={() => {
                         setCaja(3);
-                        console.log(botellas);
+                        setIds("9871");
                         if (botellas > 3) {
                           dispatch({
                             type: "@EMPTY",
@@ -108,6 +134,7 @@ const Configurador = ({ options, categorias, productos }) => {
                     <button
                       onClick={() => {
                         setCaja(6);
+                        setIds("9872");
                         if (botellas > 6) {
                           dispatch({
                             type: "@EMPTY",
@@ -123,6 +150,7 @@ const Configurador = ({ options, categorias, productos }) => {
                     <button
                       onClick={() => {
                         setCaja(12);
+                        setIds("9873");
                         if (botellas > 12) {
                           dispatch({
                             type: "@EMPTY",
