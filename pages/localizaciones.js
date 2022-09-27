@@ -1,8 +1,7 @@
 import dynamic from "next/dynamic";
 import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
-import { useState, useEffect } from "react";
-
+import { useEffect } from "react";
 const Nav = dynamic(() => import("../components/Nav"), { ssr: false });
 const Footer = dynamic(() => import("../components/Footer"), { ssr: false });
 const DefaultSeo = dynamic(
@@ -20,27 +19,18 @@ export async function getStaticProps() {
   ).then((response) => {
     return response.data;
   });
-  const pagesNew = await axios.get(
-    process.env.URLBASE + "/wp-json/jet-cct/paginas"
-  );
-  const pagina = await pagesNew.data.find(
-    (page) => page.pagina_asociada === "area"
-  );
 
   return {
     props: {
       options: options.data[0],
       categorias,
-      pagina,
     },
     revalidate: 10,
   };
 }
 
 const Localizaciones = ({ options, categorias }) => {
-  const [caja, setCaja] = useState(null);
-  const [botellas, setBotellas] = useState(0);
-  const { isLoading, options: optionsSWR } = useOptions(options);
+  const { options: optionsSWR } = useOptions(options);
   useEffect(() => {
     (function (s, t, o, c, k) {
       c = s.createElement(t);
