@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 const Image = dynamic(() => import("next/image"));
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import Precio from "../components/Precio";
 import { useDispatch } from "react-redux";
 import { useVariations } from "../hooks/useVariations";
