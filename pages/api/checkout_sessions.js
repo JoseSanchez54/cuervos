@@ -3,6 +3,7 @@ import WooCommerce from "../../woocommerce/Woocommerce";
 import dateFormat from "dateformat";
 export default async function handler(req, res) {
   const { items, formulario, envio, cupon, sessionID } = req.body;
+  let nota;
 
   const itemsWc = [];
   items.map((i) => {
@@ -29,6 +30,20 @@ export default async function handler(req, res) {
     const metadata = Object?.values(i?.meta_data).map((key) => {
       return key;
     });
+    const verdejo = metadata?.filter((m) => m.key === "verdejo")[0]?.value;
+    const rose = metadata?.filter((m) => m.key === "rose")[0]?.value;
+    const tempranillo = metadata?.filter((m) => m.key === "tempranillo")[0]
+      ?.value;
+    nota = {
+      note:
+        "Verdejo: " +
+        verdejo +
+        " botellas, Tempranillo: " +
+        tempranillo +
+        " botellas, Rose: " +
+        rose +
+        " botellas",
+    };
 
     if (i.type === "subscription") {
       periodico = metadata?.filter((m) => m.key === "_subscription_period")[0]
@@ -82,6 +97,7 @@ export default async function handler(req, res) {
     },
     quantity: 1,
   });
+
   await items.map((i) => {
     const metadata = Object?.values(i?.meta_data).map((key) => {
       return key;
@@ -277,6 +293,14 @@ export default async function handler(req, res) {
         (res) => res.data
       );
     }
+
+    WooCommerce.post("orders/" + wc.id + "/notes", nota)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
 
     const session = await stripe.checkout.sessions
       .create({

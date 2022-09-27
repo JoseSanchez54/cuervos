@@ -233,55 +233,56 @@ const Configurador = ({ options, categorias, productos }) => {
               </motion.button>
             </div>
             <div className="flex flex-col items-center justify-center w-1/3">
-              <motion.button
-                initial={{
-                  backgroundColor: "black",
-                  fontFamily: options?.fuente_global,
-                  color: "white",
-                  padding: "10px 20px",
-                  textTransform: "uppercase",
-                  margin: "20px 10px",
-                  border: "1px solid black",
-                }}
-                whileHover={{
-                  backgroundColor: "white",
-                  color: "black",
-                  border: "1px solid black",
-                }}
-                onClick={() => {
-                  if (fase === 1 && caja !== null) {
-                    setFase(fase + 1);
-                  } else if (fase === 2 && botellas === caja) {
-                    setFase(fase + 1);
-                  }
-                }}
-              >
-                Siguiente
-              </motion.button>
+              {fase === 1 ? (
+                <motion.button
+                  initial={{
+                    backgroundColor: "black",
+                    fontFamily: options?.fuente_global,
+                    color: "white",
+                    padding: "10px 20px",
+                    textTransform: "uppercase",
+                    margin: "20px 10px",
+                    border: "1px solid black",
+                  }}
+                  whileHover={{
+                    backgroundColor: "white",
+                    color: "black",
+                    border: "1px solid black",
+                  }}
+                  onClick={() => {
+                    if (fase === 1 && caja !== null) {
+                      setFase(fase + 1);
+                    } else if (fase === 2 && botellas === caja) {
+                      setFase(fase + 1);
+                    }
+                  }}
+                >
+                  Siguiente
+                </motion.button>
+              ) : (
+                <motion.button
+                  initial={{
+                    backgroundColor: "black",
+                    fontFamily: options?.fuente_global,
+                    color: "white",
+                    padding: "10px 20px",
+                    textTransform: "uppercase",
+                    margin: "20px 10px",
+                    border: "1px solid black",
+                  }}
+                  whileHover={{
+                    backgroundColor: "white",
+                    color: "black",
+                    border: "1px solid black",
+                  }}
+                  onClick={() => handleFinal()}
+                >
+                  Finalizar
+                </motion.button>
+              )}
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex flex-row justify-center w-full">
-        <motion.button
-          initial={{
-            backgroundColor: "black",
-            fontFamily: options?.fuente_global,
-            color: "white",
-            padding: "10px 20px",
-            textTransform: "uppercase",
-            margin: "20px 10px",
-            border: "1px solid black",
-          }}
-          whileHover={{
-            backgroundColor: "white",
-            color: "black",
-            border: "1px solid black",
-          }}
-          onClick={() => handleFinal()}
-        >
-          Añadir al carrito
-        </motion.button>
       </div>
 
       <Footer options={optionsSWR} />
