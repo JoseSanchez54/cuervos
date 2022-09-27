@@ -8,7 +8,9 @@ const Footer = dynamic(() => import("../components/Footer"), { ssr: false });
 const Grid = dynamic(() => import("../components/Grid"), { ssr: false });
 import { useOptions } from "../hooks/useOptions";
 import { useSelector, useDispatch } from "react-redux";
-
+const DefaultSeo = dynamic(() =>
+  import("next-seo").then((mod) => mod.DefaultSeo)
+);
 export async function getStaticProps() {
   const options = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
@@ -88,6 +90,31 @@ const Configurador = ({ options, categorias, productos }) => {
   };
   return (
     <>
+      <DefaultSeo
+        title={"Cría Cuervos - Configurador"}
+        description={
+          "Pagina de configuración de producto de Vinos Cría Cuervos"
+        }
+        canonical={process.env.URLFINAL}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: options.favicon_principal,
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_ES",
+          url: process.env.URLFINAL,
+          site_name: options.nombre_sitio,
+          description: options.descripcion_sitio,
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <Nav categorias={categorias} opciones={optionsSWR} />
       <div className="flex flex-row lg:min-h-[600px] w-full justify-center my-9">
         <div className="flex flex-col max-w-[1200px] items-center w-full">
@@ -233,55 +260,56 @@ const Configurador = ({ options, categorias, productos }) => {
               </motion.button>
             </div>
             <div className="flex flex-col items-center justify-center w-1/3">
-              <motion.button
-                initial={{
-                  backgroundColor: "black",
-                  fontFamily: options?.fuente_global,
-                  color: "white",
-                  padding: "10px 20px",
-                  textTransform: "uppercase",
-                  margin: "20px 10px",
-                  border: "1px solid black",
-                }}
-                whileHover={{
-                  backgroundColor: "white",
-                  color: "black",
-                  border: "1px solid black",
-                }}
-                onClick={() => {
-                  if (fase === 1 && caja !== null) {
-                    setFase(fase + 1);
-                  } else if (fase === 2 && botellas === caja) {
-                    setFase(fase + 1);
-                  }
-                }}
-              >
-                Siguiente
-              </motion.button>
+              {fase === 1 ? (
+                <motion.button
+                  initial={{
+                    backgroundColor: "black",
+                    fontFamily: options?.fuente_global,
+                    color: "white",
+                    padding: "10px 20px",
+                    textTransform: "uppercase",
+                    margin: "20px 10px",
+                    border: "1px solid black",
+                  }}
+                  whileHover={{
+                    backgroundColor: "white",
+                    color: "black",
+                    border: "1px solid black",
+                  }}
+                  onClick={() => {
+                    if (fase === 1 && caja !== null) {
+                      setFase(fase + 1);
+                    } else if (fase === 2 && botellas === caja) {
+                      setFase(fase + 1);
+                    }
+                  }}
+                >
+                  Siguiente
+                </motion.button>
+              ) : (
+                <motion.button
+                  initial={{
+                    backgroundColor: "black",
+                    fontFamily: options?.fuente_global,
+                    color: "white",
+                    padding: "10px 20px",
+                    textTransform: "uppercase",
+                    margin: "20px 10px",
+                    border: "1px solid black",
+                  }}
+                  whileHover={{
+                    backgroundColor: "white",
+                    color: "black",
+                    border: "1px solid black",
+                  }}
+                  onClick={() => handleFinal()}
+                >
+                  Finalizar
+                </motion.button>
+              )}
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex flex-row justify-center w-full">
-        <motion.button
-          initial={{
-            backgroundColor: "black",
-            fontFamily: options?.fuente_global,
-            color: "white",
-            padding: "10px 20px",
-            textTransform: "uppercase",
-            margin: "20px 10px",
-            border: "1px solid black",
-          }}
-          whileHover={{
-            backgroundColor: "white",
-            color: "black",
-            border: "1px solid black",
-          }}
-          onClick={() => handleFinal()}
-        >
-          Añadir al carrito
-        </motion.button>
       </div>
 
       <Footer options={optionsSWR} />
