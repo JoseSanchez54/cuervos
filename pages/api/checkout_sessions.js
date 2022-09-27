@@ -34,16 +34,18 @@ export default async function handler(req, res) {
     const rose = metadata?.filter((m) => m.key === "rose")[0]?.value;
     const tempranillo = metadata?.filter((m) => m.key === "tempranillo")[0]
       ?.value;
-    nota = {
-      note:
-        "Verdejo: " +
-        verdejo +
-        " botellas, Tempranillo: " +
-        tempranillo +
-        " botellas, Rose: " +
-        rose +
-        " botellas",
-    };
+    if (verdejo > 0 || tempranillo > 0 || rose > 0) {
+      nota = {
+        note:
+          "Verdejo: " +
+          verdejo +
+          " botellas, Tempranillo: " +
+          tempranillo +
+          " botellas, Rose: " +
+          rose +
+          " botellas",
+      };
+    }
 
     if (i.type === "subscription") {
       periodico = metadata?.filter((m) => m.key === "_subscription_period")[0]
