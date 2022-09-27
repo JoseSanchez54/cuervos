@@ -71,6 +71,10 @@ const Configurador = ({ options, categorias, productos }) => {
       });
     const cajaWC = {
       ...cajaA,
+      variable: false,
+      idPadre: cajaA.id,
+      nombrePadre: cajaA.name,
+      img: cajaA.images[0].src,
       meta_data: [
         { key: "tempranillo", value: tempranillo.length },
         { key: "verdejo", value: verdejo.length },
