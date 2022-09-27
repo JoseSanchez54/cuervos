@@ -1,5 +1,6 @@
 import fs from "fs";
 import WooCommerce from "../woocommerce/Woocommerce";
+import axios from "axios";
 
 const Sitemap = (props) => {
   //console.log(props)
@@ -25,6 +26,12 @@ export async function getServerSideProps({ res }) {
   ).then((response) => {
     return response.data;
   });
+  const embajadores = await axios
+    .get(
+      process.env.URLBASE +
+        "/wp-json/jet-cct/embajadores/?_orderby=orden&_order=asc&_ordertype=integer"
+    )
+    .then((res) => res.data);
 
   const YOUR_URL = checkDomain("vinoscriacuervos.com");
   const baseUrl = {
@@ -110,6 +117,18 @@ export async function getServerSideProps({ res }) {
           `;
             })
             .join("")}
+                    ${embajadores
+                      .map((post) => {
+                        return `
+            <url>
+              <loc>${baseUrl}/embajadores/${post.slug}</loc>
+              <lastmod>${new Date().toISOString()}</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>0.9</priority>
+            </url>
+          `;
+                      })
+                      .join("")}
       <url>
         <loc>${baseUrl}/contacto</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
@@ -118,6 +137,18 @@ export async function getServerSideProps({ res }) {
       </url> 
       <url>
         <loc>${baseUrl}/sobre-nosotros</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.1</priority>
+      </url> 
+       <url>
+        <loc>${baseUrl}/localizaciones</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.1</priority>
+      </url> 
+       <url>
+        <loc>${baseUrl}/embajadores</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.1</priority>
