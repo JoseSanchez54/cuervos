@@ -52,7 +52,7 @@ const Configurador = ({ options, categorias, productos }) => {
       <Nav categorias={categorias} opciones={optionsSWR} />
       <div className="flex flex-row lg:min-h-[600px] w-full justify-center my-9">
         <div className="flex flex-col max-w-[1200px] items-center w-full">
-          <div className="flex flex-row w-full  justify-center">
+          <div className="flex my-9 flex-row w-full  justify-center">
             {caja && (
               <span
                 style={{
