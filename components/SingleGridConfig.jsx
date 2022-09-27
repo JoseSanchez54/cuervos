@@ -29,6 +29,7 @@ const SingleGridConfig = ({ producto, opciones, botellas }) => {
       precio: producto.price,
       peso: producto.weight,
     });
+    botellas.set(botellas.value - 1);
   };
   const [cambioImagen, setCambioImagen] = useState(false);
   function definirVariaciones(p, v) {
