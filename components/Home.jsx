@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 const Nav = dynamic(() => import("../components/Nav"));
 const Image = dynamic(() => import("next/image"));
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 const Grid = dynamic(() => import("../components/Grid"));
 const Footer = dynamic(() => import("../components/Footer"));
@@ -26,8 +26,36 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
   const destacados = Object?.values(pagina?.destacados).map((key) => {
     return key;
   });
-  console.log(destacados);
-
+  const spanMotion = {
+    initial: {
+      fontFamily: opciones?.fuente_global,
+      fontSize: "20px",
+      color: "#35233C",
+      display: "flex",
+      gap: "5px",
+    },
+    hover: {
+      color: "#ffffff",
+    },
+  };
+  const divMotion = {
+    initial: {
+      backgroundColor: "#F0F0F0",
+      borderRadius: "15px",
+    },
+    hover: {
+      backgroundColor: "#F7546C",
+    },
+  };
+  const divMotion2 = {
+    initial: {
+      x: 0,
+      width: "fit-content",
+    },
+    hover: {
+      x: 7,
+    },
+  };
   return (
     <>
       <DefaultSeo
@@ -56,7 +84,7 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
       <Nav categorias={categorias} opciones={opciones} />
       <div className="flex flex-row w-full h-full justify-center">
         <div className="flex flex-col w-full h-full items-center p-3 max-w-[1200px]">
-          <div className="flex lg:mt-[200px]  lg:flex-nowrap flex-wrap flex-row w-full justify-center">
+          <div className="flex lg:mt-[150px]  lg:flex-nowrap flex-wrap flex-row w-full justify-center">
             <div className="flex flex-col w-full items-start justify-center lg:w-1/2">
               <h1
                 style={{
@@ -129,16 +157,33 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
                             {e?.parrafo}
                           </span>
                         </div>
-                        <div className="z-50">
+                        <motion.div
+                          initial={{
+                            x: 0,
+                            width: "fit-content",
+                          }}
+                          whileHover={{
+                            x: 7,
+                          }}
+                          className="z-29 w-fit-content"
+                        >
                           <Link href={e?.enlace} passHref>
-                            <motion.a>
+                            <motion.a
+                              initial={{
+                                x: 0,
+                                width: "fit-content",
+                              }}
+                              whileHover={{
+                                x: 100,
+                              }}
+                            >
                               <BsArrowRightCircleFill
                                 color="white"
                                 size="30px"
                               />
                             </motion.a>
                           </Link>
-                        </div>
+                        </motion.div>
                       </div>
                       <div
                         className="flex flex-row justify-center items-center"
@@ -147,7 +192,7 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
                           fontSize: "14px",
                           color: "#fff",
                           backgroundColor: "#F7546C",
-                          zIndex: "50",
+                          zIndex: "29",
                           height: "30px",
                           borderRadius: "20px",
                           padding: "0px 20px",
@@ -208,7 +253,16 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
                             {e?.parrafo}
                           </span>
                         </div>
-                        <div className="z-50">
+                        <motion.div
+                          initial={{
+                            width: "fit-content",
+                            x: 0,
+                          }}
+                          whileHover={{
+                            x: 7,
+                          }}
+                          className="z-29 w-fit-content"
+                        >
                           <Link href={e?.enlace} passHref>
                             <motion.a>
                               <BsArrowRightCircleFill
@@ -217,7 +271,7 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
                               />
                             </motion.a>
                           </Link>
-                        </div>
+                        </motion.div>
                       </div>
                     </div>
                     <Image
@@ -230,6 +284,87 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
                   </div>
                 );
               }
+            })}
+          </div>
+          <div className="flex lg:my-[100px] my-[20px]  lg:flex-nowrap flex-wrap flex-row w-full justify-center">
+            <div className="flex flex-col w-full items-center lg:items-start justify-center lg:w-1/2">
+              <h1
+                style={{
+                  fontFamily: opciones.fuente_global,
+                  fontSize: "22px",
+                  fontWeight: "bold",
+                  lineHeight: "1.1",
+                  maxWidth: "284px",
+                }}
+                className="text-center lg:text-left"
+              >
+                Más de 500 productos para Todo tipo de empresas
+              </h1>
+            </div>
+            <div className="flex flex-col w-full items-center lg:items-end my-[15px]  justify-center lg:w-1/2">
+              <Link href="/tienda">
+                <a>
+                  <motion.button
+                    initial={{
+                      fontFamily: opciones?.fuente_global,
+                      color: "#ffffff",
+                      backgroundColor: "#F7546C",
+                      border: "1px solid #F7546C",
+                      padding: "5px 25px",
+                      borderRadius: "20px",
+                      fontSize: "15px",
+                      fontWeight: "bold",
+                    }}
+                    whileHover={{
+                      fontFamily: opciones?.fuente_global,
+                      color: "#F7546C",
+                      backgroundColor: "transparent",
+                      border: "1px solid #F7546C",
+                      fontSize: "15px",
+                    }}
+                  >
+                    Ver todos los<br></br> productos
+                  </motion.button>
+                </a>
+              </Link>
+            </div>
+          </div>
+          <div className="flex flex-row  flex-wrap gap-3  w-full justify-center">
+            {categorias?.map((e, index) => {
+              return (
+                <AnimatePresence>
+                  <motion.div
+                    key={index}
+                    variants={divMotion}
+                    initial="initial"
+                    whileHover="hover"
+                    className="flex flex-col items-end justify-end relative p-5 lg:max-w-[270px] min-h-[133px]  lg:w-1/4 w-1/2"
+                  >
+                    <motion.div variants={divMotion2} className="z-[29]">
+                      <Link href={"/" + e?.slug} passHref>
+                        <a>
+                          <motion.span variants={spanMotion}>
+                            {e?.name}{" "}
+                            <BsArrowRightCircleFill
+                              color="#35233C"
+                              size="20px"
+                            />
+                          </motion.span>
+                        </a>
+                      </Link>
+                    </motion.div>
+
+                    {e?.image?.src && (
+                      <Image
+                        objectFit="contain"
+                        objectPosition="left"
+                        layout="fill"
+                        src={e?.image?.src}
+                      />
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              );
             })}
           </div>
         </div>
