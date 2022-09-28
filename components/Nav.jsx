@@ -19,7 +19,6 @@ const Nav = ({ opciones, categorias }) => {
   const { isMobile } = useMobile();
   return (
     <>
-      <FranjaPromo opciones={opciones} />
       <div className="flex sticky top-0 bg-white pt-[8px] z-[30] flex-row w-full justify-between  my-4">
         <div className="flex flex-col w-1/3 h-auto items-start py-1 px-5 justify-center">
           <MenuLateral categorias={categorias} opciones={opciones} />
