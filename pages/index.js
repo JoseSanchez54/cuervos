@@ -6,8 +6,8 @@ import { useProducts } from "../hooks/useProducts";
 import { usePages } from "../hooks/usePages";
 
 export default function Home({ options, categorias, pagesNew }) {
-  const { isLoading, options: optionsSWR } = useOptions(options);
-  const { data, isValidating } = usePages(pagesNew, "Principal");
+  const { options: optionsSWR } = useOptions(options);
+  const { data } = usePages(pagesNew, "Principal");
   const { products: productosSWR } = useProducts();
 
   return (
