@@ -253,8 +253,8 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                             >
                               {pagina.segunda_quinto_titulo}
                             </span>
-                            {/*  <Link href={pagina.quinto_enlace}>
-                                   <motion.button
+                            <Link href={pagina.quinto_enlace}>
+                              <motion.button
                                 initial={{
                                   border: "2px solid white",
                                   color: "white",
@@ -272,8 +272,8 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
                                 }}
                               >
                                 Encuentra tu Nuevo lugar favorito
-                              </motion.button> 
-                            </Link>*/}
+                              </motion.button>
+                            </Link>
                           </div>
                           {pagina.segunda_quinta_imagen_fondo && (
                             <Image
