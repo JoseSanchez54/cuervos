@@ -1,18 +1,18 @@
 import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
-import HomeCuervos from "../components/Home";
+import HomePrintly from "../components/Home";
 import { useOptions } from "../hooks/useOptions";
 import { useProducts } from "../hooks/useProducts";
 import { usePages } from "../hooks/usePages";
 
-export default function Home({ options, categorias, pagesNew, vinos }) {
+export default function Home({ options, categorias, pagesNew }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { data, isValidating } = usePages(pagesNew, "Principal");
-  const { products: productosSWR } = useProducts(vinos);
+  const { products: productosSWR } = useProducts();
 
   return (
     <>
-      <HomeCuervos
+      <HomePrintly
         pagina={data}
         categorias={categorias}
         opciones={optionsSWR}
@@ -48,11 +48,6 @@ export async function getStaticProps() {
   ).then((response) => {
     return response.data;
   });
-  const vinos = await WooCommerce.get("products?category=1430").then(
-    (response) => {
-      return response.data;
-    }
-  );
 
   return {
     props: {
@@ -62,7 +57,6 @@ export async function getStaticProps() {
       entradas: posts,
       internos: internos,
       categorias,
-      vinos,
     },
     revalidate: 10,
   };
