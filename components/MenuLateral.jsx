@@ -44,11 +44,10 @@ const MenuLateral = ({ opciones, categorias }) => {
 
   return (
     <>
-      {!abrir ? (
-        <button>
-          <GiHamburgerMenu onClick={(e) => handleAbrir()} size="25px" />
-        </button>
-      ) : (
+      <button>
+        <GiHamburgerMenu onClick={(e) => handleAbrir()} size="25px" />
+      </button>
+      {abrir && (
         <AnimatePresence>
           <motion.div
             initial={{
@@ -60,7 +59,6 @@ const MenuLateral = ({ opciones, categorias }) => {
               bottom: 0,
               backgroundColor: "white",
               zIndex: 99,
-              cursor: "pointer",
             }}
             animate={{
               left: 0,
@@ -74,7 +72,7 @@ const MenuLateral = ({ opciones, categorias }) => {
             {isMobile ? (
               !seccion ? (
                 <div className="flex flex-col lg:w-1/2 w-full h-full">
-                  <div className="flex flex-row justify-between items-center w-full p-9  borde-b ">
+                  <div className="flex flex-row justify-between items-center w-full px-9 py-3  borde-b ">
                     {options?.logo_principal && (
                       <Link href="/">
                         <a>
@@ -82,6 +80,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                             width="85px"
                             height="63px"
                             src={options?.logo_principal}
+                            objectFit="contain"
                           ></Image>
                         </a>
                       </Link>
@@ -135,6 +134,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                               width="85px"
                               height="63px"
                               src={options?.logo_principal}
+                              objectFit="contain"
                             ></Image>
                           </a>
                         </Link>
@@ -208,6 +208,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                           width="85px"
                           height="63px"
                           src={options?.logo_principal}
+                          objectFit="contain"
                         ></Image>
                       </a>
                     </Link>
@@ -362,7 +363,6 @@ const MenuLateral = ({ opciones, categorias }) => {
           bottom: 0;
           background-color: white;
           z-index: 9;
-          cursor: "pointer";
         }
         .borde-b {
           border-bottom: 1px solid #e0e0e0;
@@ -372,29 +372,30 @@ const MenuLateral = ({ opciones, categorias }) => {
         }
         a.enlaceSup {
           font-family: ${options?.fuente_global};
-          color: ${options?.color_texto_header};
-          font-size: 2em;
+          color: black;
+          font-size: 20px;
           font-weight: bold;
           background-position: 0% 100%;
           background-repeat: no-repeat;
           background-size: 0% 2px;
           transition: background-size 0.3s;
-          text-transform: uppercase;
+          text-transform: initial;
         }
         .enlaceBot {
           font-family: ${options?.fuente_global};
-          color: ${options?.color_texto_header};
+          color: black;
           font-size: 1.1em;
           text-transform: uppercase;
+          width: fit-content;
         }
         .enlaceinf {
           font-family: ${options?.fuente_global};
-          color: ${options?.color_texto_header};
+          color: black;
           font-size: 1.1em;
           text-transform: uppercase;
         }
         a:hover {
-          color: ${options?.color_texto_header_hover};
+          color: #f7546c;
           background-size: 100% 2px;
         }
         .overlay {
