@@ -69,7 +69,7 @@ const Precio = ({
                 <>
                   {variaciones[0]?.sale_price ? (
                     <>
-                      <div className="flex gap-2 z-[11] flex-row w-full">
+                      <div className="flex justify-center gap-2 z-[11] flex-row w-full">
                         <div className="flex flex-col">
                           <span
                             style={{
@@ -82,7 +82,7 @@ const Precio = ({
                             {variaciones[0]?.regular_price / 2}€
                           </span>
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex items-center flex-col">
                           <span
                             style={{
                               color: hover ? "white" : "black",
@@ -97,7 +97,7 @@ const Precio = ({
                     </>
                   ) : (
                     <>
-                      <div className="flex  z-[11] flex-row w-full">
+                      <div className="flex justify-center  z-[11] flex-row w-full">
                         <div className="flex flex-col">
                           <span
                             style={{
@@ -106,7 +106,7 @@ const Precio = ({
                             }}
                             className="rebaja"
                           >
-                            {precio ? precio : variaciones[0]?.price / 2}€
+                            Desde {precio ? precio : variaciones[0]?.price / 2}€
                           </span>
                         </div>
                       </div>
@@ -117,8 +117,8 @@ const Precio = ({
                 <>
                   {variaciones[0]?.sale_price ? (
                     <>
-                      <div className="flex gap-2 z-[11] flex-row w-full">
-                        <div className="flex flex-col">
+                      <div className="flex gap-2 justify-center z-[11] flex-row w-full">
+                        <div className="flex items-center flex-col">
                           <span
                             style={{
                               color: hover ? "white" : "black",
@@ -138,15 +138,15 @@ const Precio = ({
                             }}
                             className="rebaja"
                           >
-                            {variaciones[0]?.sale_price}€
+                            Desde {variaciones[0]?.sale_price}€
                           </span>
                         </div>
                       </div>
                     </>
                   ) : (
                     <>
-                      <div className="flex  z-[11] flex-row w-full">
-                        <div className="flex flex-col">
+                      <div className="flex justify-center  z-[11] flex-row w-full">
+                        <div className="flex items-center flex-col">
                           <span
                             style={{
                               color: hover ? "white" : "black",
@@ -154,7 +154,7 @@ const Precio = ({
                             }}
                             className="rebaja"
                           >
-                            {variaciones[0]?.price}€
+                            Desde {variaciones[0]?.price}€
                           </span>
                         </div>
                       </div>

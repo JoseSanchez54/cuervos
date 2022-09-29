@@ -48,11 +48,11 @@ export async function getStaticProps() {
   ).then((response) => {
     return response.data;
   });
-  const ofertasMes = await WooCommerce.get("products?category=1457").then(
-    (response) => {
-      return response.data;
-    }
-  );
+  const ofertasMes = await WooCommerce.get(
+    "products?category=1457&status=publish"
+  ).then((response) => {
+    return response.data;
+  });
 
   return {
     props: {

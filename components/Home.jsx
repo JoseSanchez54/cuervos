@@ -371,6 +371,28 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
               );
             })}
           </div>
+          <div className="flex flex-row gap-5 lg:mt-[50px] mt-5 w-full justify-center">
+            <div className="flex flex-col w-full">
+              {" "}
+              <span
+                style={{
+                  fontFamily: opciones.fuente_global,
+                  fontSize: "22px",
+                  fontWeight: "bold",
+                }}
+              >
+                Ofertas del mes
+              </span>
+              <p
+                style={{
+                  fontFamily: opciones.fuente_global,
+                  fontSize: "18px",
+                }}
+              >
+                Descubre los productos en oferta este mes. ¡No te los pierdas!
+              </p>
+            </div>
+          </div>
           <div className="flex flex-row gap-5 mt-9 w-full justify-center">
             <Grid productos={ofertas} opciones={opciones} max={5} />
           </div>

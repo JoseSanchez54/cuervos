@@ -60,6 +60,12 @@ const SingleGrid = ({ producto, opciones }) => {
   return (
     <AnimatePresence>
       <motion.div
+        transition={{
+          opacity: { ease: "linear" },
+          layout: { duration: 0.3 },
+          type: "spring",
+          stiffness: 100,
+        }}
         initial="initial"
         whileHover="hover"
         key={producto?.id}
@@ -129,24 +135,54 @@ const SingleGrid = ({ producto, opciones }) => {
                     variable={producto?.type === "variable"}
                     variaciones={variacion}
                   />
-                  <Link
-                    variants={boton}
-                    initial="initial"
-                    whileHover="hover"
-                    href={{
-                      pathname: "/productos/[slug]",
-                      query: { slug: producto?.slug },
+                  <motion.div
+                    transition={{
+                      opacity: { ease: "linear" },
+                      layout: { duration: 0.3 },
+                      type: "spring",
+                      stiffness: 100,
                     }}
-                    passHref
+                    className="mt-4"
+                    variants={boton}
                   >
-                    <motion.a
-                      variants={boton}
-                      initial="initial"
-                      whileHover="hover"
+                    <Link
+                      href={{
+                        pathname: "/productos/[slug]",
+                        query: { slug: producto?.slug },
+                      }}
+                      passHref
                     >
-                      <button>COMPRAR</button>
-                    </motion.a>
-                  </Link>
+                      <motion.a>
+                        <motion.button
+                          transition={{
+                            opacity: { ease: "linear" },
+                            layout: { duration: 0.3 },
+                            type: "spring",
+                            stiffness: 100,
+                          }}
+                          initial={{
+                            fontFamily: opciones?.fuente_global,
+                            color: "#ffffff",
+                            backgroundColor: "#F7546C",
+                            border: "1px solid #F7546C",
+                            padding: "5px 25px",
+                            borderRadius: "20px",
+                            fontSize: "15px",
+                            fontWeight: "bold",
+                          }}
+                          whileHover={{
+                            fontFamily: opciones?.fuente_global,
+                            color: "#F7546C",
+                            backgroundColor: "transparent",
+                            border: "1px solid #F7546C",
+                            fontSize: "15px",
+                          }}
+                        >
+                          COMPRAR
+                        </motion.button>
+                      </motion.a>
+                    </Link>
+                  </motion.div>
                 </div>
               </motion.div>
             </>
