@@ -9,7 +9,7 @@ import { DefaultSeo } from "next-seo";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import useMobile from "../hooks/useMobile";
 import Edad from "./Edad";
-const HomePrintly = ({ opciones, pagina, categorias }) => {
+const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
   const { isMobile } = useMobile();
   const variablesBoton = {
     initial: {
@@ -56,6 +56,7 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
       x: 7,
     },
   };
+  const IconoFlecha = motion(BsArrowRightCircleFill);
   return (
     <>
       <DefaultSeo
@@ -332,40 +333,46 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
           <div className="flex flex-row  flex-wrap gap-3  w-full justify-center">
             {categorias?.map((e, index) => {
               return (
-                <AnimatePresence>
-                  <motion.div
-                    key={index}
-                    variants={divMotion}
-                    initial="initial"
-                    whileHover="hover"
-                    className="flex flex-col items-end justify-end relative p-5 lg:max-w-[270px] min-h-[133px]  lg:w-1/4 w-1/2"
-                  >
-                    <motion.div variants={divMotion2} className="z-[29]">
-                      <Link href={"/" + e?.slug} passHref>
-                        <a>
-                          <motion.span variants={spanMotion}>
-                            {e?.name}{" "}
-                            <BsArrowRightCircleFill
-                              color="#35233C"
-                              size="20px"
-                            />
-                          </motion.span>
-                        </a>
-                      </Link>
-                    </motion.div>
+                <>
+                  {e.slug !== "destacados" && e.slug !== "todos" && (
+                    <>
+                      <AnimatePresence>
+                        <motion.div
+                          key={index}
+                          variants={divMotion}
+                          initial="initial"
+                          whileHover="hover"
+                          className="flex flex-col items-end justify-end relative p-5 lg:max-w-[270px] min-h-[133px]  lg:w-1/4 w-1/2"
+                        >
+                          <motion.div variants={divMotion2} className="z-[29]">
+                            <Link href={"/" + e?.slug} passHref>
+                              <a>
+                                <motion.span variants={spanMotion}>
+                                  {e?.name}
+                                  <IconoFlecha />
+                                </motion.span>
+                              </a>
+                            </Link>
+                          </motion.div>
 
-                    {e?.image?.src && (
-                      <Image
-                        objectFit="contain"
-                        objectPosition="left"
-                        layout="fill"
-                        src={e?.image?.src}
-                      />
-                    )}
-                  </motion.div>
-                </AnimatePresence>
+                          {e?.image?.src && (
+                            <Image
+                              objectFit="contain"
+                              objectPosition="left"
+                              layout="fill"
+                              src={e?.image?.src}
+                            />
+                          )}
+                        </motion.div>
+                      </AnimatePresence>
+                    </>
+                  )}
+                </>
               );
             })}
+          </div>
+          <div className="flex flex-row w-full justify-center">
+            <Grid productos={ofertas} opciones={opciones} max={5} />
           </div>
         </div>
       </div>
