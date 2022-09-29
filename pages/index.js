@@ -59,7 +59,6 @@ export async function getStaticProps() {
     props: {
       options: options.data[0],
       pagesNew: home2,
-      entradas: posts,
       ofertasMes,
       categorias,
       sectores,
