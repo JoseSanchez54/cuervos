@@ -5,10 +5,17 @@ import { useOptions } from "../hooks/useOptions";
 import { useProducts } from "../hooks/useProducts";
 import { usePages } from "../hooks/usePages";
 
-export default function Home({ options, categorias, pagesNew, ofertasMes }) {
+export default function Home({
+  options,
+  categorias,
+  pagesNew,
+  ofertasMes,
+  sectores,
+}) {
   const { options: optionsSWR } = useOptions(options);
   const { data } = usePages(pagesNew, "Principal");
   const { products: productosSWR } = useProducts(ofertasMes, 1457);
+  console.log(sectores);
 
   return (
     <>
@@ -23,14 +30,8 @@ export default function Home({ options, categorias, pagesNew, ofertasMes }) {
 }
 
 export async function getStaticProps() {
-  const template = await axios
-    .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
-    .then((res) => res.data[0].plantilla);
-  const internos = await axios
-    .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
-    .then((res) => res.data);
-  const posts = await axios
-    .get(process.env.URLBASE + "wp-json/wp/v2/allposts")
+  const sectores = await axios
+    .get(process.env.URLBASE + "wp-json/wp/v2/sectores")
     .then((res) => res?.data);
 
   const pagesNew = await axios.get(
@@ -58,10 +59,10 @@ export async function getStaticProps() {
     props: {
       options: options.data[0],
       pagesNew: home2,
-      template: template,
       entradas: posts,
       ofertasMes,
       categorias,
+      sectores,
     },
     revalidate: 10,
   };

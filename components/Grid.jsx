@@ -19,13 +19,14 @@ const Grid = ({ productos, opciones, max = 1000, config, botellas }) => {
                   />
                 ) : (
                   <div
-                    className="flex flex-col gap-2 z-[21] w-full h-[508px] max-h-[508px]  max-w-[232px]"
+                    className="flex flex-col gap-2 z-[21] w-full h-[548px] max-h-[548px]  max-w-[232px]"
                     key={producto.id}
                   >
                     <SingleGrid
                       producto={producto}
                       opciones={opciones}
                       config={config}
+                      oferta={true}
                     />
                   </div>
                 )}

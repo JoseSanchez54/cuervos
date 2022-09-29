@@ -371,7 +371,7 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
               );
             })}
           </div>
-          <div className="flex flex-row gap-5 lg:mt-[50px] mt-5 w-full justify-center">
+          <div className="flex flex-row gap-5 lg:mt-[150px] mt-5 w-full justify-center">
             <div className="flex flex-col w-full">
               {" "}
               <span
@@ -395,6 +395,62 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
           </div>
           <div className="flex flex-row gap-5 mt-9 w-full justify-center">
             <Grid productos={ofertas} opciones={opciones} max={5} />
+          </div>
+          <div className="flex lg:my-[100px] my-[20px]  lg:flex-nowrap flex-wrap flex-row w-full justify-center">
+            <div className="flex flex-col w-full items-center lg:items-start justify-center lg:w-1/2">
+              <span
+                style={{
+                  fontFamily: opciones.fuente_global,
+                  fontSize: "40px",
+                  fontWeight: "bold",
+                  lineHeight: "1.1",
+                  maxWidth: "580px",
+                }}
+                className="text-center lg:text-left"
+              >
+                Mira todo lo que podemos hacer por tu negocio
+              </span>
+              <p
+                style={{
+                  fontFamily: opciones.fuente_global,
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  lineHeight: "1.1",
+                  maxWidth: "500px",
+                }}
+                className="text-center lg:text-left mt-3"
+              >
+                Tenemos productos de impresión y material corporativo para todo
+                tipo de empresas.
+              </p>
+            </div>
+            <div className="flex flex-col w-full items-center lg:items-end my-[15px]  justify-center lg:w-1/2">
+              <Link href="/tienda">
+                <a>
+                  <motion.button
+                    initial={{
+                      fontFamily: opciones?.fuente_global,
+                      color: "#ffffff",
+                      backgroundColor: "#F7546C",
+                      border: "1px solid #F7546C",
+                      padding: "5px 25px",
+                      borderRadius: "20px",
+                      fontSize: "15px",
+                      fontWeight: "bold",
+                    }}
+                    whileHover={{
+                      fontFamily: opciones?.fuente_global,
+                      color: "#F7546C",
+                      backgroundColor: "transparent",
+                      border: "1px solid #F7546C",
+                      fontSize: "15px",
+                    }}
+                  >
+                    Ver todos los<br></br> Sectores
+                  </motion.button>
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
