@@ -141,12 +141,12 @@ const MiniCart = ({ opciones, tasas }) => {
                         producto;
                       return (
                         <div
+                          key={index}
                           className={
                             index === 0
                               ? "flex flex-col justify-start w-full md:flex-row producto1 px-[10px]"
                               : "flex flex-col justify-start w-full md:flex-row producto px-[10px] "
                           }
-                          key={index}
                         >
                           <div className="flex flex-row justify-between w-full mt-5 md:flex-row md:mt-0">
                             <div className="flex flex-col justify-center pl-5 mt-5 text-center md:text-start md:mt-0">
@@ -177,11 +177,14 @@ const MiniCart = ({ opciones, tasas }) => {
 
                                   <div className="flex flex-row mt-2">
                                     <div className="flex flex-col w-full">
-                                      {attributes?.map((e) => {
+                                      {attributes?.map((e, index) => {
                                         if (e?.name === "Botellas") {
                                           return (
                                             <>
-                                              <span className="label">
+                                              <span
+                                                key={index}
+                                                className="label"
+                                              >
                                                 Botellas: {e?.option}
                                               </span>
                                             </>
