@@ -44,11 +44,10 @@ const Nav = ({ opciones, categorias }) => {
           </div>
           <div className="flex flex-col w-1/3 items-center h-auto">
             <div className="flex flex-row w-full items-center h-full justify-between gap-5">
-              {menuBruto.map((e, index) => {
+              {menuBruto.map((e) => {
                 return (
-                  <Link key={index} passHref href={e?.enlace}>
+                  <Link passHref href={e?.enlace}>
                     <motion.a
-                      key={index}
                       initial={
                         pathname === e?.enlace
                           ? {
