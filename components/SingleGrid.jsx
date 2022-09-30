@@ -31,6 +31,8 @@ const SingleGrid = ({ producto, opciones }) => {
   }
   //const atributos = definirVariaciones(producto, variaciones);
 
+  const hover = producto?.meta_data?.filter((res) => res.key === "imagenh")[0]
+    ?.value;
   const textMotion = {
     initial: {
       fontFamily: opciones.fuente_global,
@@ -45,9 +47,19 @@ const SingleGrid = ({ producto, opciones }) => {
     hover: { backgroundColor: "#000", color: "#fff", border: "1px solid #000" },
   };
   const texto = {
-    initial: { color: "#000", zIndex: "10" },
+    initial: { color: cambioImagen ? "#fff" : "#000", zIndex: "10" },
     hover: { color: "#fff" },
   };
+
+  const metadata = Object?.values(producto?.meta_data).map((key) => {
+    return key;
+  });
+  const precioindividual = metadata?.filter(
+    (m) => m.key === "precioindividual"
+  )[0]?.value;
+  const precioindividualrebaja = metadata?.filter(
+    (m) => m.key === "precioindividualrebaja"
+  )[0]?.value;
 
   return (
     <div
@@ -76,7 +88,7 @@ const SingleGrid = ({ producto, opciones }) => {
                   <a className="z-[20] mb-3">
                     <span
                       style={{
-                        color: "#131214",
+                        color: cambioImagen ? "#fff" : "#000",
                         fontFamily: opciones.fuente_global,
                         textTransform: "uppercase",
                         fontWeight: "bold",
@@ -87,14 +99,35 @@ const SingleGrid = ({ producto, opciones }) => {
                     </span>
                   </a>
                 </Link>
-                <Precio
-                  precio={producto?.regular_price}
-                  rebaja={producto?.sale_price}
-                  hover={cambioImagen}
-                  opciones={opciones}
-                  variable={producto?.type === "variable"}
-                  variaciones={variacion}
-                />
+                {producto?.categories[0]?.slug === "destacados" ? (
+                  <Precio
+                    precio={
+                      precioindividual !== ""
+                        ? precioindividual
+                        : producto?.regular_price
+                    }
+                    rebaja={
+                      precioindividualrebaja
+                        ? precioindividualrebaja
+                        : producto?.sale_price
+                    }
+                    hover={cambioImagen}
+                    opciones={opciones}
+                    variable={producto?.type === "variable"}
+                    variaciones={variacion}
+                    cat="destacados"
+                  />
+                ) : (
+                  <Precio
+                    precio={producto?.regular_price}
+                    rebaja={producto?.sale_price}
+                    hover={cambioImagen}
+                    opciones={opciones}
+                    variable={producto?.type === "variable"}
+                    variaciones={variacion}
+                  />
+                )}
+
                 <Link
                   variants={texto}
                   initial="initial"
@@ -110,10 +143,37 @@ const SingleGrid = ({ producto, opciones }) => {
                     initial="initial"
                     whileHover="hover"
                   >
-                    <button>COMPRAR</button>
+                    <button
+                      style={{
+                        fontFamily: opciones.fuente_global,
+                        zIndex: "10",
+                        fontSize: "12px",
+                        color: cambioImagen ? "#fff" : "#000",
+                        display: "flex",
+                        border: cambioImagen
+                          ? "1px solid #fff"
+                          : "1px solid #000",
+                        width: "fit-content",
+                        padding: "10px 20px",
+                        marginTop: "10px",
+                        "&:hover": {
+                          backgroundColor: "#000",
+                          color: "#fff",
+                        },
+                      }}
+                    >
+                      COMPRAR
+                    </button>
                   </motion.a>
                 </Link>
               </div>
+              {hover && (
+                <Image
+                  objectFit="cover"
+                  layout="fill"
+                  src={!cambioImagen ? producto?.images[0].src : hover}
+                ></Image>
+              )}
             </div>
           </>
         </a>

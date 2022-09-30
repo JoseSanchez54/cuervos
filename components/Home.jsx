@@ -345,7 +345,7 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
                           className="flex flex-col items-end justify-end relative p-5 lg:max-w-[270px] min-h-[133px]  lg:w-1/4 w-1/2"
                         >
                           <motion.div variants={divMotion2} className="z-[29]">
-                            <Link href={"/categorias/" + e?.slug} passHref>
+                            <Link href={"/" + e?.slug} passHref>
                               <a>
                                 <motion.span variants={spanMotion}>
                                   {e?.name}
