@@ -5,7 +5,7 @@ import { useOptions } from "../hooks/useOptions";
 import { useProducts } from "../hooks/useProducts";
 import { usePages } from "../hooks/usePages";
 
-export default function Home({ options, categorias, pagesNew, ofertasMes }) {
+export default function Home({ options, categorias, pagesNew }) {
   const { options: optionsSWR } = useOptions(options);
   const { data } = usePages(pagesNew, "Principal");
   const { products: productosSWR } = useProducts();
@@ -16,7 +16,7 @@ export default function Home({ options, categorias, pagesNew, ofertasMes }) {
         pagina={data}
         categorias={categorias}
         opciones={optionsSWR}
-        ofertas={ofertasMes}
+        vinos={productosSWR}
       />
     </>
   );
@@ -44,15 +44,10 @@ export async function getStaticProps() {
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
   const categorias = await WooCommerce.get(
-    "products/categories?order=desc&per_page=100"
+    "products/categories?order=desc&per_page=100&per_page=100"
   ).then((response) => {
     return response.data;
   });
-  const ofertasMes = await WooCommerce.get("products?category=1457").then(
-    (response) => {
-      return response.data;
-    }
-  );
 
   return {
     props: {
@@ -60,7 +55,7 @@ export async function getStaticProps() {
       pagesNew: home2,
       template: template,
       entradas: posts,
-      ofertasMes,
+      internos: internos,
       categorias,
     },
     revalidate: 10,
