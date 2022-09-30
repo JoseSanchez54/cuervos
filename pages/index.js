@@ -15,6 +15,7 @@ export default function Home({
   const { options: optionsSWR } = useOptions(options);
   const { data } = usePages(pagesNew, "Principal");
   const { products: productosSWR } = useProducts(ofertasMes, 1457);
+  console.log(sectores);
 
   return (
     <>
@@ -23,7 +24,6 @@ export default function Home({
         categorias={categorias}
         opciones={optionsSWR}
         ofertas={productosSWR}
-        sectores={sectores}
       />
     </>
   );

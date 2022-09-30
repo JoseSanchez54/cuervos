@@ -90,38 +90,36 @@ const MenuLateral = ({ opciones, categorias }) => {
                       <GrClose />
                     </button>
                   </div>
-                  <div className="flex flex-col w-full overflow-auto">
-                    <div className="flex flex-row w-full borde-b p-9 borde-t ">
-                      <div className="flex flex-col w-full gap-5 justify-between">
-                        {padres.map((res, index) => {
-                          return (
-                            <>
-                              {res.slug !== "todos" &&
-                                res.slug !== "vetados" &&
-                                res.slug !== "destacados" && (
-                                  <button
-                                    key={res.id}
-                                    style={{ textAlign: "start" }}
-                                    onClick={(e) => handleSeccion(res.id)}
-                                  >
-                                    <a className="enlaceSup">{res.name}</a>
-                                  </button>
-                                )}
-                            </>
-                          );
-                        })}
-                      </div>
+                  <div className="flex flex-row w-full borde-b p-9 borde-t ">
+                    <div className="flex flex-col w-full gap-5 justify-between">
+                      {padres.map((res, index) => {
+                        return (
+                          <>
+                            {res.slug !== "todos" &&
+                              res.slug !== "vetados" &&
+                              res.slug !== "destacados" && (
+                                <button
+                                  key={res.id}
+                                  style={{ textAlign: "start" }}
+                                  onClick={(e) => handleSeccion(res.id)}
+                                >
+                                  <a className="enlaceSup">{res.name}</a>
+                                </button>
+                              )}
+                          </>
+                        );
+                      })}
                     </div>
-                    <div className="flex flex-row p-9 w-full">
-                      <div className="flex flex-col gap-3 w-full">
-                        {menuBruto?.map((e, index) => {
-                          return (
-                            <Link key={e.enlace} href={e.enlace}>
-                              <a className="enlaceBot uppercase">{e.label}</a>
-                            </Link>
-                          );
-                        })}
-                      </div>
+                  </div>
+                  <div className="flex flex-row p-9 w-full">
+                    <div className="flex flex-col gap-3 w-full">
+                      {menuBruto?.map((e, index) => {
+                        return (
+                          <Link key={e.enlace} href={e.enlace}>
+                            <a className="enlaceBot uppercase">{e.label}</a>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
