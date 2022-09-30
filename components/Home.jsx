@@ -1,14 +1,14 @@
 import dynamic from "next/dynamic";
-const Nav = dynamic(() => import("../components/Nav"));
+const Nav = dynamic(() => import("./Nav"));
 const Image = dynamic(() => import("next/image"));
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-const Grid = dynamic(() => import("../components/Grid"));
-const Footer = dynamic(() => import("../components/Footer"));
+const Grid = dynamic(() => import("./Grid"));
+const Footer = dynamic(() => import("./Footer"));
+const CatSlider = dynamic(() => import("./CatSlider"));
 import { DefaultSeo } from "next-seo";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import useMobile from "../hooks/useMobile";
-import Edad from "./Edad";
 const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
   const { isMobile } = useMobile();
   const variablesBoton = {
@@ -330,46 +330,56 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
               </Link>
             </div>
           </div>
-          <div className="flex flex-row  flex-wrap gap-3  w-full justify-center">
-            {categorias?.map((e, index) => {
-              return (
-                <>
-                  {e.slug !== "destacados" && e.slug !== "todos" && (
-                    <>
-                      <AnimatePresence>
-                        <motion.div
-                          key={index}
-                          variants={divMotion}
-                          initial="initial"
-                          whileHover="hover"
-                          className="flex flex-col items-end justify-end relative p-5 lg:max-w-[270px] min-h-[133px]  lg:w-1/4 w-1/2"
-                        >
-                          <motion.div variants={divMotion2} className="z-[29]">
-                            <Link href={"/categorias/" + e?.slug} passHref>
-                              <a>
-                                <motion.span variants={spanMotion}>
-                                  {e?.name}
-                                  <IconoFlecha />
-                                </motion.span>
-                              </a>
-                            </Link>
-                          </motion.div>
 
-                          {e?.image?.src && (
-                            <Image
-                              objectFit="contain"
-                              objectPosition="left"
-                              layout="fill"
-                              src={e?.image?.src}
-                            />
-                          )}
-                        </motion.div>
-                      </AnimatePresence>
-                    </>
-                  )}
-                </>
-              );
-            })}
+          <div className="flex flex-row   gap-3  w-full justify-center">
+            {isMobile ? (
+              <div className="contents">
+                <CatSlider categorias={categorias} opciones={opciones} />
+              </div>
+            ) : (
+              categorias?.map((e, index) => {
+                return (
+                  <>
+                    {e.slug !== "destacados" && e.slug !== "todos" && (
+                      <>
+                        <AnimatePresence>
+                          <motion.div
+                            key={index}
+                            variants={divMotion}
+                            initial="initial"
+                            whileHover="hover"
+                            className="flex flex-col items-end justify-end relative p-5 lg:max-w-[270px] min-h-[133px]  lg:w-1/4 w-1/2"
+                          >
+                            <motion.div
+                              variants={divMotion2}
+                              className="z-[29]"
+                            >
+                              <Link href={"/categorias/" + e?.slug} passHref>
+                                <a>
+                                  <motion.span variants={spanMotion}>
+                                    {e?.name}
+                                    <IconoFlecha />
+                                  </motion.span>
+                                </a>
+                              </Link>
+                            </motion.div>
+
+                            {e?.image?.src && (
+                              <Image
+                                objectFit="contain"
+                                objectPosition="left"
+                                layout="fill"
+                                src={e?.image?.src}
+                              />
+                            )}
+                          </motion.div>
+                        </AnimatePresence>
+                      </>
+                    )}
+                  </>
+                );
+              })
+            )}
           </div>
           <div className="flex flex-row gap-5 lg:mt-[150px] mt-5 w-full justify-center">
             <div className="flex flex-col w-full">
@@ -393,10 +403,10 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
               </p>
             </div>
           </div>
-          <div className="flex flex-row gap-5 mt-9 w-full justify-center">
+          <div className="flex flex-row flex-wrap lg:flex-nowrap gap-5 my-[50px] w-full justify-center">
             <Grid productos={ofertas} opciones={opciones} max={5} />
           </div>
-          <div className="flex lg:my-[100px] my-[20px]  lg:flex-nowrap flex-wrap flex-row w-full justify-center">
+          <div className="flex lg:my-[30px] my-[20px]  lg:flex-nowrap flex-wrap flex-row w-full justify-center">
             <div className="flex flex-col w-full items-center lg:items-start justify-center lg:w-1/2">
               <span
                 style={{
@@ -424,7 +434,7 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
                 tipo de empresas.
               </p>
             </div>
-            <div className="flex flex-col w-full items-center lg:items-end my-[15px]  justify-center lg:w-1/2">
+            <div className="flex flex-col w-full items-center lg:items-end my-[30px]  justify-center lg:w-1/2">
               <Link href="/tienda">
                 <a>
                   <motion.button
@@ -458,7 +468,6 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
       <Footer options={opciones}></Footer>
 
       <style jsx>{``}</style>
-      <Edad options={opciones} />
     </>
   );
 };

@@ -1,40 +1,41 @@
 import dynamic from "next/dynamic";
-const SingleGrid = dynamic(() => import("../components/SingleGrid"));
-const SingleGridConfig = dynamic(() =>
-  import("../components/SingleGridConfig")
-);
-const Grid = ({ productos, opciones, max = 1000, config, botellas }) => {
+const SingleGrid = dynamic(() => import("./SingleGrid"));
+import useMobile from "../hooks/useMobile";
+const OfertaSlider = dynamic(() => import("./OfertaSlider"));
+const Grid = ({ productos, opciones, max = 1000 }) => {
+  const { isMobile } = useMobile();
   return (
     <>
-      {productos.map((producto, index) => {
-        return (
-          <>
-            {index < max && (
+      {isMobile ? (
+        <>
+          <div className="contents">
+            <OfertaSlider categorias={productos} opciones={opciones} />
+          </div>
+        </>
+      ) : (
+        <>
+          {productos.map((producto, index) => {
+            return (
               <>
-                {config === true ? (
-                  <SingleGridConfig
-                    producto={producto}
-                    opciones={opciones}
-                    botellas={botellas}
-                  />
-                ) : (
-                  <div
-                    className="flex flex-col gap-2 z-[21] w-full h-[548px] max-h-[548px]  max-w-[232px]"
-                    key={producto.id}
-                  >
-                    <SingleGrid
-                      producto={producto}
-                      opciones={opciones}
-                      config={config}
-                      oferta={true}
-                    />
-                  </div>
+                {index < max && (
+                  <>
+                    <div
+                      className="flex flex-col gap-2 z-[21] w-full   max-w-[232px]"
+                      key={producto.id}
+                    >
+                      <SingleGrid
+                        producto={producto}
+                        opciones={opciones}
+                        oferta={true}
+                      />
+                    </div>
+                  </>
                 )}
               </>
-            )}
-          </>
-        );
-      })}
+            );
+          })}
+        </>
+      )}
     </>
   );
 };
