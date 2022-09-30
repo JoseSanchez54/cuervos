@@ -4,7 +4,7 @@ import fetcherWc from "../utils/fetcherWc";
 export const useProducts = (initialdata, categoria) => {
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error, isValidating, mutate } = useSWR(
-    "products?per_page=50products&status=publish&category=" + categoria,
+    "products?per_page=50products&status=publish&category=" + categoria?.id,
     fetcherWc,
     {
       fallbackData: initialdata,

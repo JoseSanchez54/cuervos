@@ -8,7 +8,7 @@ import { usePages } from "../hooks/usePages";
 export default function Home({ options, categorias, pagesNew, ofertasMes }) {
   const { options: optionsSWR } = useOptions(options);
   const { data } = usePages(pagesNew, "Principal");
-  const { products: productosSWR } = useProducts(ofertasMes, 1457);
+  const { products: productosSWR } = useProducts();
 
   return (
     <>
@@ -16,7 +16,7 @@ export default function Home({ options, categorias, pagesNew, ofertasMes }) {
         pagina={data}
         categorias={categorias}
         opciones={optionsSWR}
-        ofertas={productosSWR}
+        ofertas={ofertasMes}
       />
     </>
   );

@@ -53,6 +53,8 @@ const SingleGrid = ({ producto, opciones }) => {
     <div
       key={producto?.id}
       style={{ cursor: "pointer" }}
+      onMouseOver={(e) => setCambioImagen(true)}
+      onMouseLeave={(e) => setCambioImagen(false)}
       className="flex flex-col z-[21] w-full h-[508px] max-h-[508px]  max-w-[404px]"
     >
       <Link
@@ -61,69 +63,60 @@ const SingleGrid = ({ producto, opciones }) => {
           query: { slug: producto?.slug },
         }}
       >
-        <>
-          <div className="flex min-h-[231px] relative flex-row w-full">
-            <Image
-              objectFit="cover"
-              layout="fill"
-              src={producto?.images[0].src}
-            ></Image>
-          </div>
-          <a className="h-full">
-            <>
-              <div className="relative w-full max-h-[508px] h-full max-w-[404px]">
-                <div className="flex flex-col p-7">
-                  <Link
-                    href={{
-                      pathname: "/productos/[slug]",
-                      query: { slug: producto?.slug },
-                    }}
-                  >
-                    <a className="z-[20] mb-3">
-                      <span
-                        style={{
-                          color: "#131214",
-                          fontFamily: opciones.fuente_global,
-                          textTransform: "uppercase",
-                          fontWeight: "bold",
-                        }}
-                        className="z-[10]"
-                      >
-                        {producto?.name}
-                      </span>
-                    </a>
-                  </Link>
-                  <Precio
-                    precio={producto?.regular_price}
-                    rebaja={producto?.sale_price}
-                    hover={cambioImagen}
-                    opciones={opciones}
-                    variable={producto?.type === "variable"}
-                    variaciones={variacion}
-                  />
-                  <Link
+        <a className="h-full">
+          <>
+            <div className="relative w-full max-h-[508px] h-full max-w-[404px]">
+              <div className="flex flex-col p-7">
+                <Link
+                  href={{
+                    pathname: "/productos/[slug]",
+                    query: { slug: producto?.slug },
+                  }}
+                >
+                  <a className="z-[20] mb-3">
+                    <span
+                      style={{
+                        color: "#131214",
+                        fontFamily: opciones.fuente_global,
+                        textTransform: "uppercase",
+                        fontWeight: "bold",
+                      }}
+                      className="z-[10]"
+                    >
+                      {producto?.name}
+                    </span>
+                  </a>
+                </Link>
+                <Precio
+                  precio={producto?.regular_price}
+                  rebaja={producto?.sale_price}
+                  hover={cambioImagen}
+                  opciones={opciones}
+                  variable={producto?.type === "variable"}
+                  variaciones={variacion}
+                />
+                <Link
+                  variants={texto}
+                  initial="initial"
+                  whileHover="hover"
+                  href={{
+                    pathname: "/productos/[slug]",
+                    query: { slug: producto?.slug },
+                  }}
+                  passHref
+                >
+                  <motion.a
                     variants={texto}
                     initial="initial"
                     whileHover="hover"
-                    href={{
-                      pathname: "/productos/[slug]",
-                      query: { slug: producto?.slug },
-                    }}
-                    passHref
                   >
-                    <motion.a
-                      variants={texto}
-                      initial="initial"
-                      whileHover="hover"
-                    >
-                      <button>COMPRAR</button>
-                    </motion.a>
-                  </Link>
-                </div>
+                    <button>COMPRAR</button>
+                  </motion.a>
+                </Link>
               </div>
-            </>
-          </a>
-        </>
+            </div>
+          </>
+        </a>
       </Link>
     </div>
   );
