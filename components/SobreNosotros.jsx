@@ -31,6 +31,129 @@ const SobreNosotros = ({ opciones, pagina, categorias }) => {
         }}
       />
       <Nav categorias={categorias} opciones={opciones} />
+      <div
+        style={{ color: "white" }}
+        className="flex  flex-row w-full  alto items-end justify-center"
+      >
+        <div className="flex flex-col justify-center w-full h-full">
+          <div className="relative w-full h-full">
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="p-9 z-[10] flex flex-col justify-center items-center">
+                <span className="z-[10] uppercase text-center tituloPrimera ">
+                  {pagina?.pretitulo_nosotros}
+                </span>
+                <h1>
+                  <span className="z-[10] uppercase text-center titulo ">
+                    {pagina?.titulo_nosotros}
+                  </span>
+                </h1>
+                <h2>
+                  <p className="uppercase parrafoPrimera max-w-[350px] text-center">
+                    {pagina?.parrafo_nosotros}
+                  </p>
+                </h2>
+              </div>
+              {pagina?.primera_imagen_nosotros && (
+                <Image
+                  objectFit="cover"
+                  src={pagina?.primera_imagen_nosotros}
+                  layout="fill"
+                  priority="high"
+                  quality={100}
+                ></Image>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style={{ color: "black" }}
+        className="flex flex-row p-5 w-full justify-center mt-[50px] lg:mt-[100px]"
+      >
+        <div className="flex flex-col w-full  max-w-[1212px]">
+          <div className="flex flex-row flex-wrap  my-[50px] w-full ">
+            <div className="flex flex-col items-center w-full">
+              <span className="z-[10] uppercase text-center tituloPrimera ">
+                {pagina?.segunda_primer_titulo_nosotros}
+              </span>
+              <p className="uppercase parrafoPrimera mt-[20px]  max-w-[350px] text-center">
+                {pagina?.segunda_primer_parrafo_nosotros}
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-9 flex-row my-[50px] flex-wrap lg:flex-nowrap w-full justify-center">
+            <div className="flex flex-col lg:w-1/2 w-full">
+              {pagina?.imagen_tercera_nosotros && (
+                <Image
+                  width="658px"
+                  height="747px"
+                  objectFit="cover"
+                  src={pagina?.imagen_tercera_nosotros}
+                />
+              )}
+            </div>
+            <div className="flex flex-col lg:w-1/2 w-full justify-center">
+              <span className="z-[10] uppercase text-center mb-9 tituloPrimera ">
+                {pagina?.titulo_tercera_nosotros}
+              </span>
+              <p className="uppercase parrafoPrimera  text-center">
+                {pagina?.parrafo_tercera_nosotros}
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-9 flex-row my-[50px] lg:flex-nowrap w-full justify-center flex-wrap-reverse">
+            <div className="flex flex-col lg:w-1/2 w-full justify-center">
+              <span className="z-[10] uppercase text-center mb-9 tituloPrimera ">
+                {pagina?.titulo_cuarta_nosotros}
+              </span>
+              <p className="uppercase parrafoPrimera  text-center">
+                {pagina?.parrafo_cuarta_nosotros}
+              </p>
+            </div>
+            <div className="flex flex-col lg:w-1/2 w-full">
+              {pagina?.imagen_cuarta_nosotros && (
+                <Image
+                  width="658px"
+                  height="747px"
+                  objectFit="cover"
+                  src={pagina?.imagen_cuarta_nosotros}
+                />
+              )}
+            </div>
+          </div>
+          <div className="flex flex-row w-full justify-center">
+            <div className="relative w-full min-h-[587px]">
+              {pagina?.imagen_quinta_nosotros && (
+                <Image
+                  layout="fill"
+                  objectFit="cover"
+                  src={pagina?.imagen_quinta_nosotros}
+                />
+              )}
+            </div>
+          </div>
+          <div className="flex gap-9 flex-row my-[50px] flex-wrap-reverse lg:flex-nowrap w-full justify-center">
+            <div className="flex flex-col lg:w-1/2 w-full">
+              {pagina?.imagen_sexta_nosotros && (
+                <Image
+                  width="658px"
+                  height="747px"
+                  objectFit="cover"
+                  src={pagina?.imagen_sexta_nosotros}
+                />
+              )}
+            </div>
+            <div className="flex flex-col lg:w-1/2 w-full justify-center">
+              <span className="z-[10] uppercase text-center mb-9 tituloPrimera ">
+                {pagina?.titulo_sexta_nosotros}
+              </span>
+              <p className="uppercase parrafoPrimera  text-center">
+                {pagina?.parrafo_sexta_nosotros}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <Footer options={opciones}></Footer>
       <style jsx>{`

@@ -5,7 +5,7 @@ import { CgClose } from "react-icons/cg";
 import { useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import useMobile from "../hooks/useMobile";
-import { BsBag } from "react-icons/bs";
+import { IoIosCart } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
 const FormularioCheckout = dynamic(() => import("./Checkout"), {
   ssr: false,
@@ -70,25 +70,17 @@ const MiniCart = ({ opciones, tasas }) => {
   return (
     <>
       <div className="flex justify-end p-2 pr-5 mt-1">
-        <div
-          style={{
-            borderRadius: "20px",
-          }}
-          className="flex flex-row w-full bg-gray-100 px-5 py-3"
-        >
-          {" "}
-          <span onClick={() => handleOpen()} className="minicartD">
-            <BsBag size="20px" />
-            {cantidad !== 0 && (
-              <span
-                style={{ color: "#fff !important" }}
-                className="bubble animate__animated animate__bounceIn"
-              >
-                {cantidad}
-              </span>
-            )}
-          </span>
-        </div>
+        <span onClick={() => handleOpen()} className="minicartD">
+          <IoIosCart size="25px" />
+          {cantidad !== 0 && (
+            <span
+              style={{ color: "#fff !important" }}
+              className="bubble animate__animated animate__bounceIn"
+            >
+              {cantidad}
+            </span>
+          )}
+        </span>
       </div>
 
       {open && (
@@ -542,7 +534,7 @@ const MiniCart = ({ opciones, tasas }) => {
           font-family: ${opciones?.fuente_titulos};
           font-size: 13px;
           top: 19px;
-          background-color: #f7546c;
+          background-color: #000000;
           color: #fff !important;
           border-radius: 100%;
           padding: -1px;

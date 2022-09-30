@@ -1,15 +1,15 @@
 import dynamic from "next/dynamic";
 const Nav = dynamic(() => import("../components/Nav"));
 const Image = dynamic(() => import("next/image"));
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 const Grid = dynamic(() => import("../components/Grid"));
 const Footer = dynamic(() => import("../components/Footer"));
 import { DefaultSeo } from "next-seo";
-import { BsArrowRightCircleFill } from "react-icons/bs";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import useMobile from "../hooks/useMobile";
 import Edad from "./Edad";
-const HomePrintly = ({ opciones, pagina, categorias }) => {
+const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
   const { isMobile } = useMobile();
   const variablesBoton = {
     initial: {
@@ -22,39 +22,6 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
   const variablesIcono = {
     initial: { marginLeft: "0px" },
     hover: { marginLeft: "10px" },
-  };
-  const destacados = Object?.values(pagina?.destacados).map((key) => {
-    return key;
-  });
-  const spanMotion = {
-    initial: {
-      fontFamily: opciones?.fuente_global,
-      fontSize: "20px",
-      color: "#35233C",
-      display: "flex",
-      gap: "5px",
-    },
-    hover: {
-      color: "#ffffff",
-    },
-  };
-  const divMotion = {
-    initial: {
-      backgroundColor: "#F0F0F0",
-      borderRadius: "15px",
-    },
-    hover: {
-      backgroundColor: "#F7546C",
-    },
-  };
-  const divMotion2 = {
-    initial: {
-      x: 0,
-      width: "fit-content",
-    },
-    hover: {
-      x: 7,
-    },
   };
   return (
     <>
@@ -82,299 +49,493 @@ const HomePrintly = ({ opciones, pagina, categorias }) => {
         }}
       />
       <Nav categorias={categorias} opciones={opciones} />
-      <div className="flex flex-row w-full h-full justify-center">
-        <div className="flex flex-col w-full h-full items-center p-3 max-w-[1200px]">
-          <div className="flex lg:mt-[150px]  lg:flex-nowrap flex-wrap flex-row w-full justify-center">
-            <div className="flex flex-col w-full items-start justify-center lg:w-1/2">
-              <h1
-                style={{
-                  fontFamily: opciones.fuente_global,
-                  fontSize: "40px",
-                  fontWeight: "bold",
-                  lineHeight: "1.1",
-                  maxWidth: "420px",
-                }}
-              >
-                {pagina?.titulo}
-              </h1>
-            </div>
-            <div className="flex flex-col w-full items-end my-[15px] justify-center lg:w-1/2">
-              <p
-                dangerouslySetInnerHTML={{ __html: pagina?.parrafo }}
-                style={{
-                  fontFamily: opciones.fuente_global,
-                  fontSize: "20px",
-                  fontWeight: "500",
-                  lineHeight: "1.1",
-                }}
-              ></p>
-            </div>
-          </div>
-          <div
-            style={{ borderRadius: "15px" }}
-            className="flex flex-row w-full lg:flex-nowrap flex-wrap gap-5 lg:mt-[100px] min-h-[424px] justify-center"
-          >
-            {destacados?.map((e, index) => {
-              if (e?.novedad?.si === "true") {
-                return (
-                  <div
-                    key={index}
-                    className="flex relative flex-col h-full min-h-[424px] items-between   w-full lg:w-2/4 p-6"
-                  >
-                    <div className="flex flex-row w-full justify-between">
-                      <div className="flex flex-col h-full justify-between min-h-[390px] items-between z-50">
-                        <div className="flex flex-col z-50">
-                          <span
-                            style={{
-                              fontFamily: opciones.fuente_global,
-                              fontSize: "14px",
-                              color: "#fff",
-                              textTransform: "uppercase",
-                            }}
-                          >
-                            {e?.pre_titulo}
-                          </span>
-                          <span
-                            className="my-3"
-                            style={{
-                              fontFamily: opciones.fuente_global,
-                              fontSize: "24px",
-                              color: "#fff",
-                              fontWeight: "bold",
-                              maxWidth: "280px",
-                            }}
-                          >
-                            {e?.titulo}
-                          </span>
-                          <span
-                            style={{
-                              fontFamily: opciones.fuente_global,
-                              fontSize: "14px",
-                              color: "#fff",
-                              maxWidth: "210px",
-                            }}
-                          >
-                            {e?.parrafo}
-                          </span>
-                        </div>
-                        <motion.div
-                          initial={{
-                            x: 0,
-                            width: "fit-content",
-                          }}
-                          whileHover={{
-                            x: 7,
-                          }}
-                          className="z-29 w-fit-content"
-                        >
-                          <Link href={e?.enlace} passHref>
-                            <motion.a
-                              initial={{
-                                x: 0,
-                                width: "fit-content",
-                              }}
-                              whileHover={{
-                                x: 100,
-                              }}
-                            >
-                              <BsArrowRightCircleFill
-                                color="white"
-                                size="30px"
-                              />
-                            </motion.a>
-                          </Link>
-                        </motion.div>
-                      </div>
-                      <div
-                        className="flex flex-row justify-center items-center"
-                        style={{
-                          fontFamily: opciones.fuente_global,
-                          fontSize: "14px",
-                          color: "#fff",
-                          backgroundColor: "#F7546C",
-                          zIndex: "29",
-                          height: "30px",
-                          borderRadius: "20px",
-                          padding: "0px 20px",
-                        }}
-                      >
-                        ¡Novedad!
-                      </div>
-                    </div>
+      <div className="flex flex-row w-full  alto items-end justify-center">
+        <div className="flex flex-col justify-end w-full h-full">
+          <div className="relative w-full h-full">
+            <div className="flex flex-col lg:justify-end justify-start items-center lg:items-start w-full h-full">
+              <div className="p-9 z-[10]">
+                <h1 style={{ fontWeight: "normal" }}>
+                  {" "}
+                  <span className="z-[10] uppercase w-full text-center lg:text-left block titulo lg:ml-[40px]">
+                    {pagina.titulo}
+                  </span>
+                </h1>
+              </div>
 
-                    <Image
-                      style={{ borderRadius: "15px" }}
-                      objectFit="cover"
-                      layout="fill"
-                      src={e.imagen}
-                      quality={100}
-                    ></Image>
-                  </div>
-                );
-              } else {
-                return (
-                  <div
-                    key={index}
-                    className="flex relative flex-col min-h-[424px]  h-full w-full lg:w-1/4 p-6"
-                  >
-                    <div className="flex flex-row w-full justify-between">
-                      <div className="flex flex-col h-full justify-between min-h-[390px] items-between z-50">
-                        <div className="flex flex-col z-50">
-                          <span
-                            style={{
-                              fontFamily: opciones.fuente_global,
-                              fontSize: "14px",
-                              color: "#fff",
-                              textTransform: "uppercase",
-                            }}
-                          >
-                            {e?.pre_titulo}
-                          </span>
-                          <span
-                            className="my-3"
-                            style={{
-                              fontFamily: opciones.fuente_global,
-                              fontSize: "24px",
-                              color: "#fff",
-                              fontWeight: "bold",
-                              maxWidth: "280px",
-                            }}
-                          >
-                            {e?.titulo}
-                          </span>
-                          <span
-                            style={{
-                              fontFamily: opciones.fuente_global,
-                              fontSize: "14px",
-                              color: "#fff",
-                              maxWidth: "210px",
-                            }}
-                          >
-                            {e?.parrafo}
-                          </span>
-                        </div>
-                        <motion.div
-                          initial={{
-                            width: "fit-content",
-                            x: 0,
-                          }}
-                          whileHover={{
-                            x: 7,
-                          }}
-                          className="z-29 w-fit-content"
-                        >
-                          <Link href={e?.enlace} passHref>
-                            <motion.a>
-                              <BsArrowRightCircleFill
-                                color="white"
-                                size="30px"
-                              />
-                            </motion.a>
-                          </Link>
-                        </motion.div>
-                      </div>
-                    </div>
-                    <Image
-                      style={{ borderRadius: "15px" }}
-                      objectFit="cover"
-                      layout="fill"
-                      src={e.imagen}
-                      quality={100}
-                    ></Image>
-                  </div>
-                );
-              }
-            })}
-          </div>
-          <div className="flex lg:my-[100px] my-[20px]  lg:flex-nowrap flex-wrap flex-row w-full justify-center">
-            <div className="flex flex-col w-full items-center lg:items-start justify-center lg:w-1/2">
-              <h1
-                style={{
-                  fontFamily: opciones.fuente_global,
-                  fontSize: "22px",
-                  fontWeight: "bold",
-                  lineHeight: "1.1",
-                  maxWidth: "284px",
-                }}
-                className="text-center lg:text-left"
-              >
-                Más de 500 productos para Todo tipo de empresas
-              </h1>
+              <Image
+                objectFit="cover"
+                src={pagina.primera_imagen}
+                layout="fill"
+                priority="high"
+              ></Image>
             </div>
-            <div className="flex flex-col w-full items-center lg:items-end my-[15px]  justify-center lg:w-1/2">
-              <Link href="/tienda">
-                <a>
-                  <motion.button
-                    initial={{
-                      fontFamily: opciones?.fuente_global,
-                      color: "#ffffff",
-                      backgroundColor: "#F7546C",
-                      border: "1px solid #F7546C",
-                      padding: "5px 25px",
-                      borderRadius: "20px",
-                      fontSize: "15px",
-                      fontWeight: "bold",
-                    }}
-                    whileHover={{
-                      fontFamily: opciones?.fuente_global,
-                      color: "#F7546C",
-                      backgroundColor: "transparent",
-                      border: "1px solid #F7546C",
-                      fontSize: "15px",
-                    }}
-                  >
-                    Ver todos los<br></br> productos
-                  </motion.button>
-                </a>
-              </Link>
-            </div>
-          </div>
-          <div className="flex flex-row  flex-wrap gap-3  w-full justify-center">
-            {categorias?.map((e, index) => {
-              return (
-                <AnimatePresence>
-                  <motion.div
-                    key={index}
-                    variants={divMotion}
-                    initial="initial"
-                    whileHover="hover"
-                    className="flex flex-col items-end justify-end relative p-5 lg:max-w-[270px] min-h-[133px]  lg:w-1/4 w-1/2"
-                  >
-                    <motion.div variants={divMotion2} className="z-[29]">
-                      <Link href={"/" + e?.slug} passHref>
-                        <a>
-                          <motion.span variants={spanMotion}>
-                            {e?.name}{" "}
-                            <BsArrowRightCircleFill
-                              color="#35233C"
-                              size="20px"
-                            />
-                          </motion.span>
-                        </a>
-                      </Link>
-                    </motion.div>
-
-                    {e?.image?.src && (
-                      <Image
-                        objectFit="contain"
-                        objectPosition="left"
-                        layout="fill"
-                        src={e?.image?.src}
-                      />
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-              );
-            })}
           </div>
         </div>
       </div>
+      <div className="flex flex-row w-full justify-center mt-[50px] lg:mt-[100px]">
+        <div className="flex flex-col w-full h-full max-w-[1212px]">
+          <div className="flex flex-row flex-wrap lg:min-h-[1016px]  w-full lg:h-[1016px]">
+            <div className="flex flex-col h-full w-full lg:w-2/3">
+              <div className="relative w-full min min-h-[776px] h-full">
+                <div className="flex flex-col items-center w-full h-full">
+                  <div className="lg:p-[100px] p-9 max-w-[560px]  lg:text-center z-[10]">
+                    <h2 style={{ fontWeight: "normal" }}>
+                      <span
+                        style={{
+                          fontSize: "55px",
+                        }}
+                        className="tituloPrimera   uppercase z-[10]"
+                      >
+                        {pagina.segunda_primer_titulo}
+                      </span>
+                    </h2>
 
+                    {!isMobile && (
+                      <p
+                        style={{
+                          fontFamily: opciones.fuente_global,
+                          textTransform: "uppercase",
+
+                          marginTop: "20px",
+                        }}
+                      >
+                        {pagina.segunda_primer_parrafo}
+                      </p>
+                    )}
+                  </div>
+                  {pagina.segunda_primera_imagen_fondo && (
+                    <Image
+                      objectFit="cover"
+                      layout="fill"
+                      src={pagina.segunda_primera_imagen_fondo}
+                    ></Image>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{ color: "white" }}
+              className="flex flex-col min-h-[500px] lg:w-1/3 w-full h-full"
+            >
+              <div className="flex flex-col  h-full w-full">
+                <div className="flex flex-row h-1/2">
+                  <div className="relative w-full h-full">
+                    <div className="flex flex-col items-center justify-end lg:justify-center w-full h-full">
+                      <div className="p-9 lg:text-center z-[10]">
+                        <span
+                          style={{
+                            fontSize: "40px",
+                          }}
+                          className="tituloPrimera uppercase z-[10]"
+                        >
+                          {pagina.segunda_segundo_titulo}
+                        </span>
+                        <p>{pagina.segunda_segundo_parrafo}</p>
+
+                        <Link href={pagina.segundo_enlace}>
+                          <motion.button
+                            initial={{
+                              border: "2px solid white",
+                              color: "white",
+                              backgroundColor: "transparent",
+                              zIndex: "10",
+                              padding: "20px 20px",
+                              marginTop: "25px",
+                              fontSize: "14px",
+                              fontFamily: opciones.fuente_titulos,
+                              textTransform: "uppercase",
+                            }}
+                            whileHover={{
+                              backgroundColor: "white",
+                              color: "black",
+                            }}
+                          >
+                            Compra tu pack de vinos
+                          </motion.button>
+                        </Link>
+                      </div>
+                      {pagina.segunda_segunda_imagen_fondo && (
+                        <Image
+                          objectFit="cover"
+                          layout="fill"
+                          src={pagina.segunda_segunda_imagen_fondo}
+                        ></Image>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                {!isMobile && (
+                  <>
+                    <div className="flex flex-row h-1/2">
+                      <div className="relative w-full h-full">
+                        <div className="flex flex-col items-center justify-center w-full h-full">
+                          <div className="p-9 text-center z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_tercer_titulo}
+                            </span>
+                            <p>{pagina.segunda_tercer_parrafo}</p>
+                          </div>
+                          {pagina.segunda_tercera_imagen_fondo && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_tercera_imagen_fondo}
+                            ></Image>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {!isMobile && (
+        <>
+          <div className="flex flex-row  w-full justify-center">
+            <div className="flex flex-col w-full h-full max-w-[1212px]">
+              <div className="flex flex-row h-[508px] flex-wrap  w-full">
+                <div className="flex flex-col w-full lg:w-2/3">
+                  <div className="flex flex-row min-h-[500px] lg:min-h-[508px] h-full w-full">
+                    <div
+                      style={{ color: "black" }}
+                      className="flex flex-col h-full w-full"
+                    >
+                      <div className="relative w-full h-full">
+                        <div className="flex flex-col lg:items-end items-center justify-start w-full h-full">
+                          <div className="p-9 text-center z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                                maxWidth: "260px",
+                                display: "block",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_cuarto_titulo}
+                            </span>
+                            <p>{pagina.segunda_cuarto_parrafo}</p>
+                          </div>
+                          {pagina.segunda_cuarta_imagen_fondo_ && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_cuarta_imagen_fondo_}
+                            ></Image>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col w-full h-full lg:w-1/3">
+                  <div className="flex flex-row min-h-[500px] h-full w-full">
+                    <div
+                      style={{ color: "white" }}
+                      className="flex flex-col w-full h-full"
+                    >
+                      <div className="relative w-full h-full">
+                        <div className="flex flex-col items-center justify-start w-full h-full">
+                          <div className="p-9 text-center h-full z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_quinto_titulo}
+                            </span>
+                            <Link href={pagina.quinto_enlace}>
+                              <motion.button
+                                initial={{
+                                  border: "2px solid white",
+                                  color: "white",
+                                  backgroundColor: "transparent",
+                                  zIndex: "10",
+                                  padding: "20px 20px",
+                                  marginTop: "25px",
+                                  fontSize: "14px",
+                                  fontFamily: opciones.fuente_titulos,
+                                  textTransform: "uppercase",
+                                }}
+                                whileHover={{
+                                  backgroundColor: "white",
+                                  color: "black",
+                                }}
+                              >
+                                Encuentra tu Nuevo lugar favorito
+                              </motion.button>
+                            </Link>
+                          </div>
+                          {pagina.segunda_quinta_imagen_fondo && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_quinta_imagen_fondo}
+                            ></Image>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row  w-full justify-center">
+            <div className="flex flex-col w-full h-full max-w-[1212px]">
+              <div className="lg:flex hidden flex-row flex-wrap h-[508px]  w-full">
+                <div className="flex flex-col w-full lg:w-1/3">
+                  <div className="flex flex-row min-h-[500px] lg:min-h-[508px] h-full w-full">
+                    <div
+                      style={{ color: "black" }}
+                      className="flex flex-col h-full w-full"
+                    >
+                      <div className="relative bg-[#F9F8F4] w-full h-full">
+                        <div className="flex flex-col items-center justify-center w-full h-full">
+                          <div className="p-9 text-center z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                                maxWidth: "260px",
+                                display: "block",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_sexta_titulo}
+                            </span>
+                            <p>{pagina.segunda_sexto_parrafo}</p>
+                          </div>
+                          {pagina.segunda_sexta_imagen_fondo && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_sexta_imagen_fondo}
+                            ></Image>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col w-full h-full lg:w-1/3">
+                  <div className="flex flex-row min-h-[500px] h-full w-full">
+                    <div
+                      style={{ color: "white" }}
+                      className="flex flex-col w-full h-full"
+                    >
+                      <div className="relative w-full h-full">
+                        <div className="flex flex-col items-center justify-start w-full h-full">
+                          <div className="p-9 text-center h-full z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_septima_titulo}
+                            </span>
+                          </div>
+                          {pagina.segunda_septima_imagen_fondo && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_septima_imagen_fondo}
+                            ></Image>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col w-full h-full lg:w-1/3">
+                  <div className="flex flex-row min-h-[500px] h-full w-full">
+                    <div
+                      style={{ color: "white" }}
+                      className="flex flex-col w-full h-full"
+                    >
+                      <div className="relative w-full h-full">
+                        <div className="flex flex-col items-center justify-center w-full h-full">
+                          <div className="p-9 text-center  z-[10]">
+                            <span
+                              style={{
+                                fontSize: "36px",
+                              }}
+                              className="tituloPrimera uppercase z-[10]"
+                            >
+                              {pagina.segunda_octava_titulo}
+                            </span>
+                          </div>
+                          {pagina.segunda_octava_imagen_fondo && (
+                            <Image
+                              objectFit="cover"
+                              layout="fill"
+                              src={pagina.segunda_octava_imagen_fondo}
+                            ></Image>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      <div className="flex flex-row w-full justify-center mt-[40px] lg:mt-[100px]">
+        <div className="flex flex-col w-full h-full max-w-[1200px]">
+          <div className="flex flex-row w-full">
+            <span className="tituloseccion ml-3 mb-7 uppercase">
+              Elige tu vino
+            </span>
+          </div>
+          <div className="flex flex-row flex-wrap lg:flex-nowrap justify-center w-full min-h-[508px] h-full">
+            <Grid max="3" productos={vinos} opciones={opciones} />
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row w-full mb-7 max-h-[63px] justify-center mt-[40px] lg:mt-[100px]">
+        <div className="flex flex-col lt w-full max-w-[1200px]">
+          <div className="flex flex-row justify-center w-full">
+            <Link href="/categoria/todos">
+              <a>
+                <motion.button
+                  variants={variablesBoton}
+                  initial="initial"
+                  whileHover="hover"
+                  className="flex flex-row gap-2 items-center"
+                >
+                  TODOS NUESTROS PRODUCTOS{" "}
+                  <motion.div variants={variablesIcono}>
+                    <AiOutlineArrowRight />
+                  </motion.div>
+                </motion.button>
+              </a>
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/*  <div className="flex flex-row w-full justify-center mt-[40px] lg:mt-[100px]">
+        <div className="flex flex-col w-full max-w-[1200px]">
+          <div className="flex flex-row min-h-[339px] my-9 w-full bg-black">
+            <div className="flex flex-col justify-center p-5 w-full lg:w-1/3">
+              {" "}
+              <Image
+                width="300"
+                height="100"
+                objectFit="contain"
+                src={pagina.titulo_banner}
+              ></Image>
+              <p
+                className="lg:ml-[40px]"
+                style={{
+                  color: "white",
+                  fontFamily: opciones.fuente_global,
+                  fontSize: "14px",
+                  textTransform: "uppercase",
+                }}
+              >
+                {pagina.parrafo_banner}
+              </p>
+            </div>
+            <div className="lg:flex hidden flex-col w-2/3">
+              <div className="relative w-full h-full">
+                <Image
+                  objectFit="cover"
+                  layout="fill"
+                  src={pagina.imagen_fondo_banner}
+                ></Image>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> */}
+      {/*     <div className="flex flex-row p-5 w-full justify-center mt-[40px] lg:mt-[100px]">
+        <div className="flex flex-col w-full max-w-[1200px]">
+          <span
+            style={{
+              fontFamily: opciones.fuente_titulos,
+              fontSize: "36px",
+              textTransform: "uppercase",
+            }}
+          >
+            ¡AQUí y ahora!
+          </span>
+          <p
+            style={{
+              fontFamily: opciones.fuente_global,
+              fontSize: "16px",
+              textTransform: "uppercase",
+            }}
+          >
+            ESOS MOMENTOS QUE nos hacen ser diferentes
+          </p>
+        </div>
+      </div> */}
       <Footer options={opciones}></Footer>
 
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .titulo {
+          font-family: ${opciones.fuente_titulos};
+          font-size: 120px;
+          line-height: 1.1;
+        }
+        .tituloPrimera {
+          font-family: ${opciones.fuente_titulos};
+          line-height: 1.1;
+        }
+        .parrafoPrimera {
+          font-family: ${opciones.fuente_global};
+          line-height: 1.1;
+          font-size: 16px;
+        }
+        .alto {
+          height: calc(100vh - 144px);
+        }
+        .tituloseccion {
+          font-family: ${opciones.fuente_titulos};
+          font-size: 36px;
+          line-height: 1.1;
+        }
+        @media (max-width: 1022px) {
+          .titulo {
+            font-family: ${opciones.fuente_titulos};
+            font-size: 90px;
+            line-height: 1.1;
+          }
+          .flex-col {
+            min-height: 500px;
+          }
+        }
+        @media (max-width: 768px) {
+          .titulo {
+            font-family: ${opciones.fuente_titulos};
+            font-size: 55px;
+            line-height: 1.1;
+          }
+          .flex-col {
+            min-height: 500px;
+          }
+          .flex-col.lt {
+            min-height: fit-content;
+          }
+          .flex-col.min {
+            min-height: 790px;
+          }
+        }
+      `}</style>
       <Edad options={opciones} />
     </>
   );
 };
-export default HomePrintly;
+export default HomeCuervos;
