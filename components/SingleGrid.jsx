@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 const Image = dynamic(() => import("next/image"));
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Precio from "../components/Precio";
 import { useDispatch } from "react-redux";
@@ -9,16 +9,8 @@ import { useVariations } from "../hooks/useVariations";
 
 const SingleGrid = ({ producto, opciones }) => {
   const { variacion } = useVariations(producto?.id);
-  const [oferta, setOferta] = useState(false);
-  useEffect((e) => {
-    producto?.categories.map((e) => {
-      if (e.name === "destacados") {
-        setOferta(true);
-      }
-    });
-  }, []);
 
-  console.log(producto);
+  const [cambioImagen, setCambioImagen] = useState(false);
   const dispatch = useDispatch();
   function definirVariaciones(p, v) {
     const atributos = p.attributes
@@ -39,13 +31,26 @@ const SingleGrid = ({ producto, opciones }) => {
   }
   //const atributos = definirVariaciones(producto, variaciones);
 
+  const textMotion = {
+    initial: {
+      fontFamily: opciones.fuente_global,
+      zIndex: "10",
+      color: cambioImagen ? "#fff" : "#000",
+      display: "flex",
+      border: cambioImagen ? "1px solid #fff" : "1px solid #000",
+      width: "fit-content",
+      padding: "10px 20px",
+      marginTop: "10px",
+    },
+    hover: { backgroundColor: "#000", color: "#fff", border: "1px solid #000" },
+  };
   const boton = {
     initial: { visibility: "hidden" },
     hover: { visibility: "visible" },
   };
   const caja = {
-    initial: { height: "154px" },
-    hover: { height: "195px" },
+    initial: { height: "119px" },
+    hover: { height: "160px" },
   };
   const caja2 = {
     initial: { minHeight: "231px" },
@@ -100,28 +105,6 @@ const SingleGrid = ({ producto, opciones }) => {
                 className="relative flex flex-row  w-full   max-w-[404px]"
               >
                 <div className="flex items-center flex-col p-7">
-                  <div className="flex mb-3 flex-row w-full justify-center">
-                    {oferta === true && (
-                      <div
-                        style={{
-                          backgroundColor: "#BABABA",
-                          borderRadius: "20px",
-                          padding: "5px 13px",
-                        }}
-                        className="flex flex-col justify-center items-center"
-                      >
-                        <span
-                          style={{
-                            color: "white",
-                            fontSize: "10px",
-                            fontFamily: opciones.fuente_global,
-                          }}
-                        >
-                          Oferta del mes
-                        </span>
-                      </div>
-                    )}
-                  </div>
                   <Link
                     href={{
                       pathname: "/productos/[slug]",
@@ -147,6 +130,7 @@ const SingleGrid = ({ producto, opciones }) => {
                   <Precio
                     precio={producto?.regular_price}
                     rebaja={producto?.sale_price}
+                    hover={cambioImagen}
                     opciones={opciones}
                     variable={producto?.type === "variable"}
                     variaciones={variacion}
