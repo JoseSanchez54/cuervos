@@ -159,7 +159,9 @@ const MenuLateral = ({ opciones, categorias }) => {
                       >
                         {hijos?.map((res, index) => {
                           if (hijos.length === 0) {
-                            return <span>No hay más subcategorías</span>;
+                            return (
+                              <span key={index}>No hay más subcategorías</span>
+                            );
                           } else {
                             return (
                               <>
@@ -324,12 +326,19 @@ const MenuLateral = ({ opciones, categorias }) => {
                         {options?.imagen_promocion && (
                           <>
                             <div className="flex flex-col justify-start gap-5 p-5 mt-[150px] h-full">
-                              {hijos.map((res) => {
+                              {hijos.map((res, index) => {
                                 if (hijos.length === 0) {
-                                  return <span>No hay más subcategorías</span>;
+                                  return (
+                                    <span key={index}>
+                                      No hay más subcategorías
+                                    </span>
+                                  );
                                 } else {
                                   return (
-                                    <button style={{ textAlign: "start" }}>
+                                    <button
+                                      key={index}
+                                      style={{ textAlign: "start" }}
+                                    >
                                       <Link href={"/categoria/" + res.slug}>
                                         <a className="enlaceinf uppercase">
                                           {res.name}
