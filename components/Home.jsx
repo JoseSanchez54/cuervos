@@ -6,10 +6,11 @@ import Link from "next/link";
 const Grid = dynamic(() => import("./Grid"));
 const Footer = dynamic(() => import("./Footer"));
 const CatSlider = dynamic(() => import("./CatSlider"));
+const SecSlider = dynamic(() => import("./SecSlider"));
 import { DefaultSeo } from "next-seo";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import useMobile from "../hooks/useMobile";
-const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
+const HomePrintly = ({ opciones, pagina, categorias, ofertas, sectores }) => {
   const { isMobile } = useMobile();
   const variablesBoton = {
     initial: {
@@ -331,7 +332,7 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
             </div>
           </div>
 
-          <div className="flex flex-row   gap-3  w-full justify-center">
+          <div className="flex flex-row lg:flex-wrap   gap-3  w-full justify-center">
             {isMobile ? (
               <div className="contents">
                 <CatSlider categorias={categorias} opciones={opciones} />
@@ -461,6 +462,54 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
                 </a>
               </Link>
             </div>
+          </div>
+          <div className="flex flex-row flex-wrap gap-3 w-full justify-center">
+            <>
+              {isMobile ? (
+                <SecSlider opciones={opciones} sectores={sectores} />
+              ) : (
+                <>
+                  {sectores.map((sec, index) => {
+                    return (
+                      <AnimatePresence>
+                        <Link
+                          key={index}
+                          passHref
+                          href={"/sectores/" + sec?.slug}
+                        >
+                          <a className="min-h-[126px] max-w-[285px] justify-end items-end w-1/4">
+                            <motion.div
+                              initial="initial"
+                              whileHover="hover"
+                              className="flex flex-col relative p-5 min-h-[126px] max-w-[285px] justify-end items-end"
+                            >
+                              <motion.span
+                                variants={divMotion2}
+                                className="z-[20] flex gap-1"
+                                style={{
+                                  fontFamily: opciones.fuente_global,
+                                  fontSize: "20px",
+                                  fontWeight: "bold",
+                                  color: "#ffffff",
+                                  textTransform: "capitalize",
+                                }}
+                              >
+                                {sec?.meta.nombre} <IconoFlecha />
+                              </motion.span>
+                              <Image
+                                objectFit="cover"
+                                layout="fill"
+                                src={sec?.meta?.imagen}
+                              />
+                            </motion.div>
+                          </a>
+                        </Link>
+                      </AnimatePresence>
+                    );
+                  })}
+                </>
+              )}
+            </>
           </div>
         </div>
       </div>

@@ -18,7 +18,6 @@ const SingleGrid = ({ producto, opciones }) => {
     });
   }, []);
 
-  console.log(producto);
   const dispatch = useDispatch();
   function definirVariaciones(p, v) {
     const atributos = p.attributes
@@ -104,7 +103,7 @@ const SingleGrid = ({ producto, opciones }) => {
                     {oferta === true && (
                       <div
                         style={{
-                          backgroundColor: "#BABABA",
+                          backgroundColor: "#F7546C",
                           borderRadius: "20px",
                           padding: "5px 13px",
                         }}
@@ -117,7 +116,7 @@ const SingleGrid = ({ producto, opciones }) => {
                             fontFamily: opciones.fuente_global,
                           }}
                         >
-                          Oferta del mes
+                          ¡Novedad!
                         </span>
                       </div>
                     )}
