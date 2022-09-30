@@ -9,13 +9,12 @@ const Grid = ({ productos, opciones, max = 1000 }) => {
       {isMobile ? (
         <>
           <div className="contents">
-            <OfertaSlider productos={productos} opciones={opciones} />
+            <OfertaSlider categorias={productos} opciones={opciones} />
           </div>
         </>
       ) : (
         <>
           {productos.map((producto, index) => {
-            console.log(producto);
             return (
               <>
                 {index < max && (
