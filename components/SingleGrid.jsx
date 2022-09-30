@@ -65,7 +65,7 @@ const SingleGrid = ({ producto, opciones }) => {
         whileHover="hover"
         key={producto?.id}
         style={{ cursor: "pointer", borderRadius: "20px" }}
-        className="flex flex-col z-[21] w-full    max-w-[232px]"
+        className="flex flex-col z-[21] w-full lg:max-w-[232px]"
       >
         <Link
           href={{

@@ -27,7 +27,7 @@ const Nav = ({ opciones, categorias }) => {
   return (
     <>
       {!isMobile ? (
-        <div className="flex sticky top-0 bg-white pt-[8px] z-[30] flex-row w-full justify-between">
+        <div className="flex sticky top-0 bg-white pt-[8px] z-[90] flex-row w-full justify-between">
           <div className="flex flex-col w-1/3 h-auto items-start py-1 px-5 justify-center">
             {opciones?.logo_principal && (
               <Link href="/">
@@ -155,7 +155,7 @@ const Nav = ({ opciones, categorias }) => {
           </div>
         </div>
       ) : (
-        <div className="flex sticky top-0 bg-white pt-[8px] z-[30] flex-row w-full justify-between">
+        <div className="flex sticky top-0 bg-white pt-[8px] z-[90] flex-row w-full justify-between">
           <div className="flex flex-col justify-center items-start p-2 w-1/2">
             {opciones?.logo_principal && (
               <Link href="/">
