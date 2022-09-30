@@ -100,7 +100,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                               res.slug !== "vetados" &&
                               res.slug !== "destacados" && (
                                 <button
-                                  key={index}
+                                  key={res.id}
                                   style={{ textAlign: "start" }}
                                   onClick={(e) => handleSeccion(res.id)}
                                 >
@@ -116,7 +116,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                     <div className="flex flex-col gap-3 w-full">
                       {menuBruto?.map((e, index) => {
                         return (
-                          <Link key={index} href={e.enlace}>
+                          <Link key={e.enlace} href={e.enlace}>
                             <a className="enlaceBot uppercase">{e.label}</a>
                           </Link>
                         );
@@ -250,7 +250,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                   <div className="flex flex-col gap-3 w-full">
                     {menuBruto.map((e, index) => {
                       return (
-                        <Link key={index} href={e.enlace}>
+                        <Link key={e.enlace} href={e.enlace}>
                           <a className="enlaceBot">{e.label}</a>
                         </Link>
                       );
@@ -336,7 +336,7 @@ const MenuLateral = ({ opciones, categorias }) => {
                                 } else {
                                   return (
                                     <button
-                                      key={index}
+                                      key={res.slug}
                                       style={{ textAlign: "start" }}
                                     >
                                       <Link href={"/categoria/" + res.slug}>
