@@ -371,7 +371,7 @@ const HomePrintly = ({ opciones, pagina, categorias, ofertas }) => {
               );
             })}
           </div>
-          <div className="flex flex-row gap-5 mt-9 w-full justify-center">
+          <div className="flex flex-row w-full justify-center">
             <Grid productos={ofertas} opciones={opciones} max={5} />
           </div>
         </div>

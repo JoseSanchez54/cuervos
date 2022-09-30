@@ -17,15 +17,15 @@ const Precio = ({
         <>
           {rebaja ? (
             <>
-              <div className="flex gap-2 z-[11] justify-center flex-row w-full">
-                <div className="flex items-center flex-col">
+              <div className="flex gap-2 z-[11] flex-row w-full">
+                <div className="flex flex-col">
                   <span
                     style={{
                       color: hover ? "white" : "black",
                       fontFamily: opciones.fuente_global,
                       textDecoration: "line-through",
                     }}
-                    className="rebaja items-center"
+                    className="rebaja"
                   >
                     {rebaja}€
                   </span>
@@ -45,8 +45,8 @@ const Precio = ({
             </>
           ) : (
             <>
-              <div className="flex justify-center  z-[11] flex-row w-full">
-                <div className="flex items-center flex-col">
+              <div className="flex  z-[11] flex-row w-full">
+                <div className="flex flex-col">
                   <span
                     style={{
                       color: hover ? "white" : "black",

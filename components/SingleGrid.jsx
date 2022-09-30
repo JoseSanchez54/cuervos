@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 const Image = dynamic(() => import("next/image"));
 import Link from "next/link";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Precio from "../components/Precio";
 import { useDispatch } from "react-redux";
 import { useVariations } from "../hooks/useVariations";
@@ -44,76 +44,48 @@ const SingleGrid = ({ producto, opciones }) => {
     },
     hover: { backgroundColor: "#000", color: "#fff", border: "1px solid #000" },
   };
-  const boton = {
-    initial: { visibility: "hidden" },
-    hover: { visibility: "visible" },
-  };
-  const caja = {
-    initial: { height: "119px" },
-    hover: { height: "160px" },
-  };
-  const caja2 = {
-    initial: { minHeight: "231px" },
-    hover: { minHeight: "190px" },
+  const texto = {
+    initial: { color: "#000", zIndex: "10" },
+    hover: { color: "#fff" },
   };
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial="initial"
-        whileHover="hover"
-        key={producto?.id}
-        style={{ cursor: "pointer", borderRadius: "20px" }}
-        className="flex flex-col z-[21] w-full    max-w-[232px]"
+    <div
+      key={producto?.id}
+      style={{ cursor: "pointer" }}
+      className="flex flex-col z-[21] w-full h-[508px] max-h-[508px]  max-w-[404px]"
+    >
+      <Link
+        href={{
+          pathname: "/productos/[slug]",
+          query: { slug: producto?.slug },
+        }}
       >
-        <Link
-          href={{
-            pathname: "/productos/[slug]",
-            query: { slug: producto?.slug },
-          }}
-        >
-          <>
-            <motion.div
-              variants={caja2}
-              style={{
-                borderRadius: "20px 20px 0px 0px",
-              }}
-              className="flex   relative flex-row w-full"
-            >
-              <Image
-                style={{
-                  borderRadius: "20px 20px 0px 0px",
-                }}
-                objectFit="cover"
-                layout="fill"
-                src={producto?.images[0].src}
-              ></Image>
-            </motion.div>
+        <>
+          <div className="flex min-h-[231px] relative flex-row w-full">
+            <Image
+              objectFit="cover"
+              layout="fill"
+              src={producto?.images[0].src}
+            ></Image>
+          </div>
+          <a className="h-full">
             <>
-              <motion.div
-                variants={caja}
-                style={{
-                  backgroundColor: "#F5F5F7",
-                  borderRadius: "0 0 20px 20px",
-                }}
-                className="relative flex flex-row  w-full   max-w-[404px]"
-              >
-                <div className="flex items-center flex-col p-7">
+              <div className="relative w-full max-h-[508px] h-full max-w-[404px]">
+                <div className="flex flex-col p-7">
                   <Link
                     href={{
                       pathname: "/productos/[slug]",
                       query: { slug: producto?.slug },
                     }}
                   >
-                    <a className="z-[20] text-center mb-3">
+                    <a className="z-[20] mb-3">
                       <span
                         style={{
                           color: "#131214",
                           fontFamily: opciones.fuente_global,
                           textTransform: "uppercase",
                           fontWeight: "bold",
-                          textAlign: "center",
-                          fontSize: "16px",
                         }}
                         className="z-[10]"
                       >
@@ -130,7 +102,7 @@ const SingleGrid = ({ producto, opciones }) => {
                     variaciones={variacion}
                   />
                   <Link
-                    variants={boton}
+                    variants={texto}
                     initial="initial"
                     whileHover="hover"
                     href={{
@@ -140,7 +112,7 @@ const SingleGrid = ({ producto, opciones }) => {
                     passHref
                   >
                     <motion.a
-                      variants={boton}
+                      variants={texto}
                       initial="initial"
                       whileHover="hover"
                     >
@@ -148,12 +120,12 @@ const SingleGrid = ({ producto, opciones }) => {
                     </motion.a>
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             </>
-          </>
-        </Link>
-      </motion.div>
-    </AnimatePresence>
+          </a>
+        </>
+      </Link>
+    </div>
   );
 };
 export default SingleGrid;
