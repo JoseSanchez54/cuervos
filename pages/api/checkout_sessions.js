@@ -3,7 +3,7 @@ import WooCommerce from "../../woocommerce/Woocommerce";
 import dateFormat from "dateformat";
 export default async function handler(req, res) {
   const { items, formulario, envio, cupon, sessionID } = req.body;
-  let nota;
+  let nota = undefined;
 
   const itemsWc = [];
   items.map((i) => {
@@ -295,14 +295,15 @@ export default async function handler(req, res) {
         (res) => res.data
       );
     }
-
-    WooCommerce.post("orders/" + wc.id + "/notes", nota)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+    if (nota !== undefined) {
+      WooCommerce.post("orders/" + wc.id + "/notes", nota)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    }
 
     const session = await stripe.checkout.sessions
       .create({
