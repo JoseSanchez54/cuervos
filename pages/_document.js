@@ -4,6 +4,10 @@ export default function Document() {
   return (
     <Html>
       <Head>
+        <meta
+          name="facebook-domain-verification"
+          content="c7lyi1fw4w0n0sjui7w3cvwqzm7u61"
+        />
         <script
           src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
           async=""
