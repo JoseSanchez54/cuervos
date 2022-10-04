@@ -98,25 +98,15 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
 
   const { query } = useRouter();
   const { wc_order_id, session_id, suscripcion } = query;
-  if (suscripcion) {
-    const { data: dataWC } = useSWR(
-      () =>
-        `/api/success/${wc_order_id}?sus=${suscripcion}&sesion=${session_id}`,
-      {
-        susID: suscripcion,
-        sesion: session_id,
-        wc_order_id: wc_order_id,
-      }
-    );
-  } else {
-    const { data, error } = useSWR(
-      () => `/api/checkout_sessions/${session_id}`,
-      {
-        sesion: session_id,
-        id: wc_order_id,
-      }
-    );
-  }
+  const { data: dataWC } = useSWR(
+    () => `/api/success/${wc_order_id}?sus=${suscripcion}&sesion=${session_id}`,
+    {
+      susID: suscripcion,
+      sesion: session_id,
+      wc_order_id: wc_order_id,
+    }
+  );
+  const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
 
   const canvasStyles = {
     position: "fixed",
@@ -146,11 +136,13 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
       num_items: order?.line_items.length,
     };
 
-    import("react-facebook-pixel")
-      .then((module) => module.default)
-      .then((ReactPixel) => {
-        ReactPixel.track("Purchase", toFB);
-      });
+    if (toFB.content_name !== undefined) {
+      import("react-facebook-pixel")
+        .then((module) => module.default)
+        .then((ReactPixel) => {
+          ReactPixel.track("Purchase", toFB);
+        });
+    }
 
     dispatch({
       type: "@EMPTY_CART",
