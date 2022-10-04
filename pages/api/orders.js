@@ -28,13 +28,15 @@ export default async (req, res) => {
         });
     } else {
       await WooCommerce.put("orders/" + id, {
-        status: "processing ",
+        status: "processing",
         set_paid: true,
       })
         .then((response) => {
+          console.log("entra");
           return res.status(200).json(response.data);
         })
         .catch((error) => {
+          console.log("no entra");
           return res.status(500).json({ Error: "Error en la api" });
         });
     }
