@@ -35,7 +35,9 @@ export default async (req, res) => {
       _stripe_session_id: session,
     },
   };
-  await WooCommerce.put("subscriptions/" + sus, estadoSUS);
+  if (sus) {
+    await WooCommerce.put("subscriptions/" + sus, estadoSUS);
+  }
 
   return res.status(200).json({ estado: "ok" });
 };

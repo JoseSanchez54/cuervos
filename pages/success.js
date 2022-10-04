@@ -98,15 +98,21 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
 
   const { query } = useRouter();
   const { wc_order_id, session_id, suscripcion } = query;
-  const { data: dataWC } = useSWR(
-    () => `/api/success/${wc_order_id}?sus=${suscripcion}&sesion=${session_id}`,
-    {
-      susID: suscripcion,
-      sesion: session_id,
-      wc_order_id: wc_order_id,
-    }
-  );
-  const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
+  if (suscripcion) {
+    const { data: dataWC } = useSWR(
+      () =>
+        `/api/success/${wc_order_id}?sus=${suscripcion}&sesion=${session_id}`,
+      {
+        susID: suscripcion,
+        sesion: session_id,
+        wc_order_id: wc_order_id,
+      }
+    );
+  } else {
+    const { data, error } = useSWR(
+      () => `/api/checkout_sessions/${session_id}`
+    );
+  }
 
   const canvasStyles = {
     position: "fixed",
