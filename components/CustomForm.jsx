@@ -6,7 +6,6 @@ const CustomForm = ({ status, message, onValidated }) => {
   let email, checkbox;
   console.log(checkbox);
   const submit = (e) =>
-    e.preventdefault() &&
     email &&
     checkbox &&
     email.value.indexOf("@") > -1 &&

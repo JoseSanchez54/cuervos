@@ -110,7 +110,11 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     );
   } else {
     const { data, error } = useSWR(
-      () => `/api/checkout_sessions/${session_id}`
+      () => `/api/checkout_sessions/${session_id}`,
+      {
+        sesion: session_id,
+        id: wc_order_id,
+      }
     );
   }
 
