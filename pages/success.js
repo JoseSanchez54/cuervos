@@ -136,13 +136,11 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
       num_items: order?.line_items.length,
     };
 
-    if (toFB.content_name !== undefined) {
-      import("react-facebook-pixel")
-        .then((module) => module.default)
-        .then((ReactPixel) => {
-          ReactPixel.track("Purchase", toFB);
-        });
-    }
+    import("react-facebook-pixel")
+      .then((module) => module.default)
+      .then((ReactPixel) => {
+        ReactPixel.track("Purchase", toFB);
+      });
 
     dispatch({
       type: "@EMPTY_CART",
