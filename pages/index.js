@@ -4,6 +4,7 @@ import HomeCuervos from "../components/Home";
 import { useOptions } from "../hooks/useOptions";
 import { useProducts } from "../hooks/useProducts";
 import { usePages } from "../hooks/usePages";
+import Head from "next/head";
 
 export default function Home({ options, categorias, pagesNew, vinos }) {
   const { isLoading, options: optionsSWR } = useOptions(options);
@@ -12,6 +13,12 @@ export default function Home({ options, categorias, pagesNew, vinos }) {
 
   return (
     <>
+      <Head>
+        <meta
+          name="facebook-domain-verification"
+          content="c7lyi1fw4w0n0sjui7w3cvwqzm7u61"
+        />
+      </Head>
       <HomeCuervos
         pagina={data}
         categorias={categorias}
