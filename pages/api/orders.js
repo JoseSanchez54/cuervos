@@ -32,11 +32,9 @@ export default async (req, res) => {
         set_paid: true,
       })
         .then((response) => {
-          console.log("entra");
           return res.status(200).json(response.data);
         })
         .catch((error) => {
-          console.log("no entra");
           return res.status(500).json({ Error: "Error en la api" });
         });
     }
