@@ -124,19 +124,22 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   order?.line_items.map((item) => {
     ids.push(item.product_id);
   });
-  const toFB = {
-    content_name: order?.line_items[0].name,
-    content_ids: ids,
-    content_type: "product",
-    value: order?.total,
-    currency: "EUR",
-    num_items: order?.line_items.length,
-  };
-  if (toFB.content_name !== "") {
+
+  if (toFB.value) {
     import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
-        ReactPixel.track("Purchase", toFB);
+        const toFB = {
+          content_name: order?.line_items[0].name,
+          content_ids: ids,
+          content_type: "product",
+          value: order?.total,
+          currency: "EUR",
+          num_items: order?.line_items.length,
+        };
+        if (toFB.value) {
+          ReactPixel.track("Purchase", toFB);
+        }
       });
   }
 
