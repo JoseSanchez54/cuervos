@@ -98,14 +98,15 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
                 });
               }}
               onApprove={(data, actions) => {
-                axios
-                  .post("/api/orders", {
-                    id: localStorage.getItem("idPedido"),
-                  })
-                  .then(localStorage.removeItem("idPedido"));
+                axios.post("/api/orders", {
+                  id: localStorage.getItem("idPedido"),
+                });
+
                 return actions.order.capture().then((details) => {
                   const name = details.payer.name.given_name;
-                  Router.push("/success");
+                  Router.push(
+                    "/success?wc_order_id=" + localStorage.getItem("idPedido")
+                  );
                 });
               }}
             />
