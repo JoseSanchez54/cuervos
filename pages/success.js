@@ -132,12 +132,14 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     currency: "EUR",
     num_items: order?.line_items.length,
   };
+  if (toFB.content_name !== "") {
+    import("react-facebook-pixel")
+      .then((module) => module.default)
+      .then((ReactPixel) => {
+        ReactPixel.track("Purchase", toFB);
+      });
+  }
 
-  import("react-facebook-pixel")
-    .then((module) => module.default)
-    .then((ReactPixel) => {
-      ReactPixel.track("Purchase", toFB);
-    });
   useEffect(() => {
     fire();
     dispatch({
