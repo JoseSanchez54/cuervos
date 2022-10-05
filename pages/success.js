@@ -130,7 +130,6 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
-        console.log("ejecucion");
         const toFB = {
           content_name: order?.line_items[0].name,
           content_ids: ids,
@@ -141,7 +140,6 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
         };
         if (toFB.value) {
           const res = ReactPixel.track("Purchase", toFB);
-          console.log("ejecutado", res);
         }
       });
 
