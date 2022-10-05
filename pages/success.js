@@ -140,7 +140,8 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
           num_items: order?.line_items.length,
         };
         if (toFB.value) {
-          ReactPixel.track("Purchase", toFB);
+          const res = ReactPixel.track("Purchase", toFB);
+          console.log("ejecutado", res);
         }
       });
 
@@ -148,7 +149,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     dispatch({
       type: "@EMPTY_CART",
     });
-  }, []);
+  }, [wc_order_id]);
 
   return (
     <>
