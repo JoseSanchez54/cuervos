@@ -125,24 +125,25 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   order?.line_items.map((item) => {
     ids.push(item.product_id);
   });
-  import("react-facebook-pixel")
-    .then((module) => module.default)
-    .then((ReactPixel) => {
-      console.log("ejecucion");
-      const toFB = {
-        content_name: order?.line_items[0].name,
-        content_ids: ids,
-        content_type: "product",
-        value: order?.total,
-        currency: "EUR",
-        num_items: order?.line_items.length,
-      };
-      if (toFB.value) {
-        ReactPixel.track("Purchase", toFB);
-      }
-    });
 
   useEffect(() => {
+    import("react-facebook-pixel")
+      .then((module) => module.default)
+      .then((ReactPixel) => {
+        console.log("ejecucion");
+        const toFB = {
+          content_name: order?.line_items[0].name,
+          content_ids: ids,
+          content_type: "product",
+          value: order?.total,
+          currency: "EUR",
+          num_items: order?.line_items.length,
+        };
+        if (toFB.value) {
+          ReactPixel.track("Purchase", toFB);
+        }
+      });
+
     fire();
     dispatch({
       type: "@EMPTY_CART",
