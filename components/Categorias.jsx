@@ -10,7 +10,11 @@ const Categorias = ({ opciones, pagina, categorias, productos, actual }) => {
   return (
     <>
       <DefaultSeo
-        title={pagina?.titulo_pagina + " - " + actual?.name}
+        title={
+          actual?.name === "todos"
+            ? pagina?.titulo_pagina + " - Productos"
+            : pagina?.titulo_pagina + " - " + actual?.name
+        }
         description={pagina?.descripcion_de_pagina}
         canonical={process.env.URLFINAL + "/" + actual?.slug}
         additionalLinkTags={[
