@@ -19,7 +19,6 @@ import {
   FBPixelProvider,
   FBPixelScript,
 } from "@rivercode/facebook-conversion-api-nextjs/components";
-import { hotjar } from "react-hotjar";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -74,7 +73,10 @@ function MyApp({ Component, pageProps }) {
     >
       <PersistGate persistor={store.__persistor}>
         <NextUIProvider>
-          <Script>{`(function(h,o,t,j,a,r){
+          <Script
+            id="hotjar"
+            strategy="afterInteractive"
+          >{`(function(h,o,t,j,a,r){
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
         h._hjSettings={hjid:3194824,hjsv:6};
         a=o.getElementsByTagName('head')[0];
