@@ -19,10 +19,12 @@ import {
   FBPixelProvider,
   FBPixelScript,
 } from "@rivercode/facebook-conversion-api-nextjs/components";
+import { hotjar } from "react-hotjar";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
+    hotjar.initialize("3194824", "6");
     const mainDataLayer = {
       pageTypeName: pageProps.page || null,
       url: router.pathname,
