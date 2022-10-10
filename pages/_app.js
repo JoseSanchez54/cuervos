@@ -22,6 +22,9 @@ import {
 import { hotjar } from "react-hotjar";
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    hotjar.initialize("3194824", "6");
+  }, []);
   const router = useRouter();
   useEffect(() => {
     hotjar.initialize("3194824", "6");
@@ -30,8 +33,8 @@ function MyApp({ Component, pageProps }) {
       url: router.pathname,
     };
     gtmVirtualPageView(mainDataLayer);
-    hotjar.stateChange("/my/page");
   }, [pageProps]);
+
   useEffect(() => {
     import("react-facebook-pixel")
       .then((x) => x.default)
