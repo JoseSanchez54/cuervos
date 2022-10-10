@@ -53,6 +53,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
     setTexto("AÑADIDO");
     if (variable) {
       const productoAdd = addToCart(seleccion, lista);
+      console.log(producto.categories[0].name);
 
       if (producto.type === "variable-subscription") {
         productoAdd = {
@@ -66,7 +67,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           content_type: "product",
           value: productoAdd.price,
           currency: "EUR",
-          content_category: productoAdd.categories[0].name,
+          content_category: producto.categories[0].name,
           contents: {
             id: productoAdd.id,
             quantity: 1,
