@@ -30,6 +30,7 @@ function MyApp({ Component, pageProps }) {
       url: router.pathname,
     };
     gtmVirtualPageView(mainDataLayer);
+    hotjar.stateChange("/my/page");
   }, [pageProps]);
   useEffect(() => {
     import("react-facebook-pixel")
