@@ -11,6 +11,7 @@ import Grid from "../../components/Grid";
 import Footer from "../../components/Footer";
 import Edad from "../../components/Edad";
 import useSWR from "swr";
+import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
 
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
@@ -126,6 +127,16 @@ const SingleProduct = ({
   }
 
   const [isVino, setIsVino] = useState(false);
+  fbEvent({
+    eventName: "ViewContent", // ViewContent, AddToCart, InitiateCheckout or Purchase
+    products: [
+      {
+        sku: product.id,
+        quantity: 1,
+      },
+    ],
+    enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+  });
   useEffect(() => {
     const productToFB = {
       content_ids: product.id,

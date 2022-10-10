@@ -2,6 +2,7 @@ import { addToCart } from "../utils/addToCart";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
 
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
   const [sus, setSus] = useState(null);
@@ -53,7 +54,6 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
     setTexto("AÑADIDO");
     if (variable) {
       const productoAdd = addToCart(seleccion, lista);
-      console.log(producto.categories[0].name);
 
       if (producto.type === "variable-subscription") {
         productoAdd = {
@@ -62,6 +62,18 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           idPadre: producto.id,
           variable: true,
         };
+        fbEvent({
+          eventName: "AddToCart", // ViewContent, AddToCart, InitiateCheckout or Purchase
+          products: [
+            {
+              sku: producto.id,
+              quantity: 1,
+            },
+          ],
+          value: productoAdd.price, // optional
+          currency: "EUR", // optional
+          enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+        });
         const productToFB = {
           content_ids: productoAdd.id,
           content_type: "product",
@@ -116,6 +128,18 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
             quantity: 1,
           },
         };
+        fbEvent({
+          eventName: "AddToCart", // ViewContent, AddToCart, InitiateCheckout or Purchase
+          products: [
+            {
+              sku: producto.id,
+              quantity: 1,
+            },
+          ],
+          value: productoAdd.price, // optional
+          currency: "EUR", // optional
+          enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+        });
 
         import("react-facebook-pixel")
           .then((module) => module.default)
@@ -150,6 +174,18 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           quantity: 1,
         },
       };
+      fbEvent({
+        eventName: "AddToCart", // ViewContent, AddToCart, InitiateCheckout or Purchase
+        products: [
+          {
+            sku: producto.id,
+            quantity: 1,
+          },
+        ],
+        value: productoAdd.price, // optional
+        currency: "EUR", // optional
+        enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+      });
       import("react-facebook-pixel")
         .then((module) => module.default)
         .then((ReactPixel) => {
