@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { useOrders } from "../hooks/useOrders";
 import { DefaultSeo } from "next-seo";
+import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
 export async function getStaticProps() {
   const template = await axios
     .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
@@ -125,7 +126,13 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   order?.line_items.map((item) => {
     ids.push(item.product_id);
   });
-
+  fbEvent({
+    eventName: "Purchase", // ViewContent, AddToCart, InitiateCheckout or Purchase
+    products: ids,
+    value: order?.total, // optional
+    currency: "EUR", // optional
+    enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+  });
   useEffect(() => {
     import("react-facebook-pixel")
       .then((module) => module.default)

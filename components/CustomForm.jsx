@@ -4,7 +4,7 @@ import { useOptions } from "../hooks/useOptions";
 const CustomForm = ({ status, message, onValidated }) => {
   const { options } = useOptions();
   let email, checkbox;
-  console.log(checkbox);
+
   const submit = (e) =>
     email &&
     checkbox &&
