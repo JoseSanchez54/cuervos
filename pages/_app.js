@@ -87,8 +87,9 @@ function MyApp({ Component, pageProps }) {
         })(window,document,'script','dataLayer','${process.env.GTM_ID}');`}
           </Script>
           <FBPixelScript />
-
-          <Component {...pageProps} />
+          <FBPixelProvider>
+            <Component {...pageProps} />
+          </FBPixelProvider>
 
           {cookies === "false" && <CookieAd funcion={setCookies} />}
           <Washapp />
