@@ -15,6 +15,11 @@ import { gtmVirtualPageView } from "../utils/gtm";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import WooCommerce from "../woocommerce/Woocommerce";
+import {
+  FBPixelProvider,
+  FBPixelScript,
+} from "@rivercode/facebook-conversion-api-nextjs/components";
+import { hotjar } from "react-hotjar";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -69,6 +74,14 @@ function MyApp({ Component, pageProps }) {
     >
       <PersistGate persistor={store.__persistor}>
         <NextUIProvider>
+          <Script>{`(function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3194824,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}</Script>
           <Script id="google-tag-manager" strategy="afterInteractive">
             {`
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -77,8 +90,10 @@ function MyApp({ Component, pageProps }) {
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','${process.env.GTM_ID}');`}
           </Script>
+          <FBPixelScript />
 
           <Component {...pageProps} />
+
           {cookies === "false" && <CookieAd funcion={setCookies} />}
           <Washapp />
         </NextUIProvider>
