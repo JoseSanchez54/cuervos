@@ -8,7 +8,7 @@ const userReducer = (
   action
 ) => {
   switch (action.type) {
-    case "@Add":
+    case "@AddUser":
       return {
         ...state,
         token: action.token,

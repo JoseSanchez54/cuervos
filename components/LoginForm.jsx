@@ -3,7 +3,6 @@ import { GrClose } from "react-icons/gr/";
 import axios from "axios";
 import { Input, useInput } from "@nextui-org/react";
 import { useState, useMemo } from "react";
-import SyncLoader from "react-spinners/SyncLoader";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
 
@@ -69,7 +68,7 @@ const LoginForm = ({ opciones, login, set }) => {
       .post("/api/login", data)
       .then((response) => {
         dispatch({
-          type: "@Add",
+          type: "@AddUser",
           token: response.data.token,
           email: form.email,
         });
