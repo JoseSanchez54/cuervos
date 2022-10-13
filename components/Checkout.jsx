@@ -122,6 +122,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       ...provided,
       width: "100%",
       maxHeight: "200px",
+      minHeight: "100px",
       backgroundColor: "white",
     }),
     control: () => ({
