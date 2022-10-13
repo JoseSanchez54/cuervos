@@ -127,14 +127,16 @@ const SingleProduct = ({
   }
 
   const [isVino, setIsVino] = useState(false);
+  console.log(product);
   fbEvent({
     eventName: "ViewContent", // ViewContent, AddToCart, InitiateCheckout or Purchase
-    products: [
-      {
-        sku: product.id,
-        quantity: 1,
-      },
-    ],
+    eventParams: {
+      content_ids: [product.id],
+      content_name: product.name,
+      content_type: "product",
+      value: product.price,
+      currency: "EUR",
+    },
     enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
   });
   useEffect(() => {
