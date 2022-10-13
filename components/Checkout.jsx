@@ -161,7 +161,6 @@ const FormularioCheckout = ({ onAction, opciones }) => {
   const [pais, setPais] = useState("");
   const [completo, setCompleto] = useState(false);
 
-
   const handleCheck = (e, nombre) => {
     setFormulario({
       ...formulario,
@@ -311,6 +310,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       politicas.checked === true
     ) {
       setCompleto(true);
+      setError("");
     } else if (!validarEmail(formulario.email)) {
       setCompleto(false);
       setError("Comprueba tu email");
