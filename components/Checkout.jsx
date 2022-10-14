@@ -317,7 +317,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       setError("Comprueba tu email");
     } else {
       setCompleto(false);
-      setError("Por favor compruebe todos los campos");
+      setError("Por favor compruebe todos los campos y recuerde aceptar la política de privacidad");
       e.target.setAttribute("action", "");
     }
   };
