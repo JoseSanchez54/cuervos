@@ -151,11 +151,11 @@ const SingleProduct = ({
         quantity: 1,
       },
     };
-    import("react-facebook-pixel")
+    /*    import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
         ReactPixel.track("ViewContent", productToFB);
-      });
+      }); */
 
     product?.categories.map((f) => {
       if (f.slug === "destacados") {
