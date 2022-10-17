@@ -127,13 +127,13 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     ids.push(item.product_id);
   });
   fbEvent({
-    eventName: "Purchase", // ViewContent, AddToCart, InitiateCheckout or Purchase
-    test_event_code: "TEST6001",
+    eventName: "Purchase",
+    value: "1000", // ViewContent, AddToCart, InitiateCheckout or Purchase
     currency: "EUR", // optional
     // default false (Require Facebook Pixel to be loaded, see step 2)
   });
   useEffect(() => {
-    import("react-facebook-pixel")
+    /*  import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
         const toFB = {
@@ -147,7 +147,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
         if (toFB.value) {
           const res = ReactPixel.track("Purchase", toFB);
         }
-      });
+      }); */
 
     fire();
     dispatch({
