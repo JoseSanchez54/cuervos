@@ -138,6 +138,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
         eventName: "Purchase",
         eventID: wc_order_id, // ViewContent, AddToCart, InitiateCheckout or Purchase
         products: ids,
+        content_type: "product",
         value: order.total,
         num_items: order?.line_items.length,
         content_type: "product", // optional
