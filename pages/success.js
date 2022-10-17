@@ -52,6 +52,7 @@ export async function getStaticProps() {
 }
 
 const Success = ({ categorias, opciones, orders: orders1 }) => {
+  const { orders } = useOrders(orders1);
   const dispatch = useDispatch();
 
   const refAnimationInstance = useRef(null);
@@ -100,14 +101,18 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
 
   const { query } = useRouter();
   const { wc_order_id, session_id, suscripcion } = query;
-  const { data: dataWC } = useSWR(
-    () => `/api/success/${wc_order_id}?sus=${suscripcion}&sesion=${session_id}`,
-    {
-      susID: suscripcion,
-      sesion: session_id,
-      wc_order_id: wc_order_id,
-    }
-  );
+  if (wc_order_id && session_id && suscripcion) {
+    const { data: dataWC } = useSWR(
+      () =>
+        `/api/success/${wc_order_id}?sus=${suscripcion}&sesion=${session_id}`,
+      {
+        susID: suscripcion,
+        sesion: session_id,
+        wc_order_id: wc_order_id,
+      }
+    );
+  }
+
   const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
 
   const canvasStyles = {
@@ -118,26 +123,28 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     top: 0,
     left: 0,
   };
-  const { orders } = useOrders(orders1);
 
   const ids = [];
 
   const order = orders?.find((order) => order.id == wc_order_id);
   order?.line_items.map((item) => {
-    ids.push(item.product_id);
+    const to = {
+      id: item.product_id,
+      quantity: 1,
+    };
+    ids.push(to);
   });
-  fbEvent({
-    eventName: "Purchase", // ViewContent, AddToCart, InitiateCheckout or Purchase
-    products: [
-      {
-        sku: "product123",
-        quantity: 1,
-      },
-    ],
-    value: 1000, // optional
-    currency: "USD", // optional
-    enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
-  });
+
+  if (ids.length > 0 && order) {
+    fbEvent({
+      eventName: "Purchase", // ViewContent, AddToCart, InitiateCheckout or Purchase
+      products: ids,
+      value: order.total, // optional
+      currency: "EUR", // optional
+      enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+    });
+  }
+
   useEffect(() => {
     /*  import("react-facebook-pixel")
       .then((module) => module.default)
