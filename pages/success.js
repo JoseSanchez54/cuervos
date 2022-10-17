@@ -143,7 +143,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   }
 
   useEffect(() => {
-    /*  import("react-facebook-pixel")
+     import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
         const toFB = {
@@ -157,7 +157,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
         if (toFB.value) {
           const res = ReactPixel.track("Purchase", toFB);
         }
-      }); */
+      }); 
 
     fire();
     dispatch({
