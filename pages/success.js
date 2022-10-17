@@ -128,6 +128,12 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   });
   fbEvent({
     eventName: "Purchase", // ViewContent, AddToCart, InitiateCheckout or Purchase
+    products: [
+      {
+        sku: "product123",
+        quantity: 1,
+      },
+    ],
     value: 1000, // optional
     currency: "USD", // optional
     enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
