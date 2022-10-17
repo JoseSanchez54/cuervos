@@ -127,7 +127,7 @@ const SingleProduct = ({
   }
 
   const [isVino, setIsVino] = useState(false);
-  console.log(product);
+
   fbEvent({
     eventName: "ViewContent", // ViewContent, AddToCart, InitiateCheckout or Purchase
     eventParams: {
