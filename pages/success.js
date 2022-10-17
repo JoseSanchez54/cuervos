@@ -138,12 +138,13 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
       products: ids,
       value: order.total, // optional
       currency: "EUR", // optional
-      enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+      enableStandardPixel: false,
+      test_event_code: "TEST6001", // default false (Require Facebook Pixel to be loaded, see step 2)
     });
   }
 
   useEffect(() => {
-     import("react-facebook-pixel")
+    import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
         const toFB = {
@@ -157,7 +158,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
         if (toFB.value) {
           const res = ReactPixel.track("Purchase", toFB);
         }
-      }); 
+      });
 
     fire();
     dispatch({
