@@ -128,7 +128,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   });
   fbEvent({
     eventName: "Purchase", // ViewContent, AddToCart, InitiateCheckout or Purchase
-    // optional
+    test_event_code: "TEST6001",
     currency: "EUR", // optional
     // default false (Require Facebook Pixel to be loaded, see step 2)
   });
