@@ -6,6 +6,7 @@ import { useCallback, useRef, useEffect } from "react";
 import Nav from "../components/Nav";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import Footer from "../components/Footer";
+import { getCookie } from "cookies-next";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { useOrders } from "../hooks/useOrders";
@@ -131,11 +132,14 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     };
     ids.push(to);
   });
+  const fbp = getCookie("_fbp");
+  const fbc = getCookie("_fbc");
 
   if (ids.length > 0 && order) {
     fbEvent(
       {
         eventName: "Purchase",
+        fbp: fbp,
         eventID: wc_order_id, // ViewContent, AddToCart, InitiateCheckout or Purchase
         products: ids,
         content_type: "product",
