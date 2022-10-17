@@ -128,10 +128,9 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   });
   fbEvent({
     eventName: "Purchase", // ViewContent, AddToCart, InitiateCheckout or Purchase
-    products: ids,
-    value: order?.total, // optional
+    // optional
     currency: "EUR", // optional
-    enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+    // default false (Require Facebook Pixel to be loaded, see step 2)
   });
   useEffect(() => {
     import("react-facebook-pixel")
