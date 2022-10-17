@@ -127,10 +127,10 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     ids.push(item.product_id);
   });
   fbEvent({
-    eventName: "Purchase",
-    value: "1000", // ViewContent, AddToCart, InitiateCheckout or Purchase
-    currency: "EUR", // optional
-    // default false (Require Facebook Pixel to be loaded, see step 2)
+    eventName: "Purchase", // ViewContent, AddToCart, InitiateCheckout or Purchase
+    value: 1000, // optional
+    currency: "USD", // optional
+    enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
   });
   useEffect(() => {
     /*  import("react-facebook-pixel")
