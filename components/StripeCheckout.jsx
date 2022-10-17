@@ -19,7 +19,6 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
   const [loading, setLoading] = useState(false);
   const actualCart = useSelector((state) => state.cartReducer.cart);
   const total = useSelector((state) => state.cartReducer.total);
-  envio = envio.replace(",", ".");
   actualCart.map((e) => {
     const actual = e.meta_data.find((x) => x.key === "_subscription_period");
     if (actual && sub == false) {
