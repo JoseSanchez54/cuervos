@@ -134,9 +134,12 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
 
   if (ids.length > 0 && order) {
     fbEvent({
-      eventName: "Purchase", // ViewContent, AddToCart, InitiateCheckout or Purchase
+      eventName: "Purchase",
+      eventID: order.id, // ViewContent, AddToCart, InitiateCheckout or Purchase
       products: ids,
-      value: order.total, // optional
+      value: order.total,
+      num_items: order?.line_items.length,
+      content_type: "product", // optional
       currency: "EUR", // optional
       enableStandardPixel: false,
       test_event_code: "TEST6001", // default false (Require Facebook Pixel to be loaded, see step 2)
@@ -149,6 +152,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
       .then((ReactPixel) => {
         const toFB = {
           content_name: order?.line_items[0].name,
+          eventID: order.id,
           content_ids: ids,
           content_type: "product",
           value: order?.total,
