@@ -7,6 +7,7 @@ import { BiTrash } from "react-icons/bi";
 import useMobile from "../hooks/useMobile";
 import { IoIosCart } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
+import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
 const FormularioCheckout = dynamic(() => import("./Checkout"), {
   ssr: false,
 });
@@ -232,6 +233,17 @@ const MiniCart = ({ opciones, tasas }) => {
                             <button
                               onClick={() => {
                                 handleCheckout(checkout);
+                                const arr = [];
+                                actualCart.map((e) => {
+                                  arr.push({
+                                    sku: e.sku,
+                                    quantity: "1",
+                                  });
+                                });
+                                fbEvent({
+                                  eventName: "InitiateCheckout",
+                                  products: arr,
+                                });
 
                                 import("react-facebook-pixel")
                                   .then((module) => module.default)
@@ -255,6 +267,18 @@ const MiniCart = ({ opciones, tasas }) => {
                       <button
                         onClick={() => {
                           handleCheckout(checkout);
+                          const arr = [];
+                          actualCart.map((e) => {
+                            arr.push({
+                              sku: e.sku,
+                              quantity: "1",
+                            });
+                          });
+                          fbEvent({
+                            eventName: "InitiateCheckout",
+                            products: arr,
+                          });
+
                           import("react-facebook-pixel")
                             .then((module) => module.default)
                             .then((ReactPixel) => {

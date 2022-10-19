@@ -146,7 +146,6 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
         content_type: "product",
         value: order.total,
         num_items: order?.line_items.length,
-        content_type: "product", // optional
         currency: "EUR", // optional
         enableStandardPixel: false,
         // default false (Require Facebook Pixel to be loaded, see step 2)
