@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
+import { getCookie } from "cookies-next";
 
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
+  const fbp = getCookie("_fbp");
   const [sus, setSus] = useState(null);
   const [error, setError] = useState("");
   const [texto, setTexto] = useState("COMPRAR AHORA");
@@ -63,7 +65,8 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           variable: true,
         };
         fbEvent({
-          eventName: "AddToCart", // ViewContent, AddToCart, InitiateCheckout or Purchase
+          eventName: "AddToCart",
+          fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
           products: [
             {
               sku: producto.id,
@@ -76,6 +79,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         });
         const productToFB = {
           content_ids: productoAdd.id,
+          fbp: fbp,
           content_type: "product",
           value: productoAdd.price,
           currency: "EUR",
@@ -119,6 +123,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         };
         const productToFB = {
           content_ids: producto.id,
+          fbp: fbp,
           content_type: "product",
           value: producto.price,
           currency: "EUR",
@@ -129,7 +134,8 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           },
         };
         fbEvent({
-          eventName: "AddToCart", // ViewContent, AddToCart, InitiateCheckout or Purchase
+          eventName: "AddToCart",
+          fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
           products: [
             {
               sku: producto.id,
@@ -165,6 +171,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
       });
       const productToFB = {
         content_ids: producto.id,
+        fbp: fbp,
         content_type: "product",
         value: producto.price,
         currency: "EUR",
@@ -175,7 +182,8 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
         },
       };
       fbEvent({
-        eventName: "AddToCart", // ViewContent, AddToCart, InitiateCheckout or Purchase
+        eventName: "AddToCart",
+        fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
         products: [
           {
             sku: producto.id,

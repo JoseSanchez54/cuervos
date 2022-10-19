@@ -8,12 +8,14 @@ import useMobile from "../hooks/useMobile";
 import { IoIosCart } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
 import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
+import { getCookie } from "cookies-next";
 const FormularioCheckout = dynamic(() => import("./Checkout"), {
   ssr: false,
 });
 const Image = dynamic(() => import("next/image"), {
   ssr: false,
 });
+const fbp = getCookie("_fbp");
 
 const MiniCart = ({ opciones, tasas }) => {
   const { isMobile } = useMobile();
@@ -64,6 +66,7 @@ const MiniCart = ({ opciones, tasas }) => {
     content_category: "Checkout",
     content_ids: actualCart.map((e) => e.id),
     content_type: "product",
+    fbp: fbp,
     value: total,
     currency: "EUR",
   };
@@ -242,6 +245,7 @@ const MiniCart = ({ opciones, tasas }) => {
                                 });
                                 fbEvent({
                                   eventName: "InitiateCheckout",
+                                  fbp: fbp,
                                   products: arr,
                                 });
 
@@ -277,6 +281,7 @@ const MiniCart = ({ opciones, tasas }) => {
                           fbEvent({
                             eventName: "InitiateCheckout",
                             products: arr,
+                            fbp: fbp,
                           });
 
                           import("react-facebook-pixel")

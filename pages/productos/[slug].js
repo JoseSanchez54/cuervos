@@ -11,6 +11,7 @@ import Grid from "../../components/Grid";
 import Footer from "../../components/Footer";
 import Edad from "../../components/Edad";
 import useSWR from "swr";
+import { getCookie } from "cookies-next";
 import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
 
 export const getStaticPaths = async () => {
@@ -127,10 +128,11 @@ const SingleProduct = ({
   }
 
   const [isVino, setIsVino] = useState(false);
-
+  const fbp = getCookie("_fbp");
   useEffect(() => {
     fbEvent({
-      eventName: "ViewContent", // ViewContent, AddToCart, InitiateCheckout or Purchase
+      eventName: "ViewContent",
+      fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
       products: [
         {
           sku: product.id,
@@ -144,6 +146,7 @@ const SingleProduct = ({
     const productToFB = {
       content_ids: product.id,
       content_type: "product",
+      fbp: fbp,
       value: product.price,
       currency: "EUR",
       content_category: product.categories[0].name,
