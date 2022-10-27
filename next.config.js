@@ -18,21 +18,7 @@ module.exports = {
       },
     ];
   },
-  loaders: [
-    {
-      test: /\.css$/,
-      loaders: ["style?insertAt=top", "css"],
-    },
-  ],
-  experimental: {
-    concurrentFeatures: true,
-    urlImports: [
-      "https://framer.com/m/",
-      "https://framerusercontent.com/",
-      "https://ga.jspm.io/",
-      "https://jspm.dev/",
-    ],
-  },
+
   reactStrictMode: false,
   images: {
     remotePatterns: [],
