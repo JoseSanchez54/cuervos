@@ -137,10 +137,19 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
 
   useEffect(() => {
     if (ids.length > 0 && order) {
-      console.log("fb");
+      console.log(order);
       fbEvent({
         eventName: "Purchase",
         fbp: fbp,
+        fbc: fbc,
+        em: order.billing.email,
+        ph: order.billing.phone,
+        fn: order.billing.first_name,
+        ln: order.billing.last_name,
+        ct: order.billing.city,
+        st: order.billing.state,
+        zp: order.billing.postcode,
+        country: order.billing.country,
         eventID: wc_order_id, // ViewContent, AddToCart, InitiateCheckout or Purchase
         products: ids,
         content_type: "product",
