@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { useOrders } from "../hooks/useOrders";
 import { DefaultSeo } from "next-seo";
-import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
+
 export async function getStaticProps() {
   const template = await axios
     .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
@@ -134,11 +134,9 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   });
   const fbp = getCookie("_fbp");
   const fbc = getCookie("_fbc");
-
-  useEffect(() => {
-    if (ids.length > 0 && order) {
-      console.log(order);
-      fbEvent({
+  if (ids.length > 0 && order) {
+    axios.post("/api/facebook", {
+      datos: {
         eventName: "Purchase",
         fbp: fbp,
         fbc: fbc,
@@ -157,9 +155,10 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
         num_items: order?.line_items.length,
         currency: "EUR", // optional
         enableStandardPixel: false,
-        // default false (Require Facebook Pixel to be loaded, see step 2)
-      });
-    }
+      },
+    });
+  }
+  useEffect(() => {
     import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
