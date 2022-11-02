@@ -18,8 +18,11 @@ const Image = dynamic(() => import("next/image"), {
 const fbp = getCookie("_fbp");
 
 const MiniCart = ({ opciones, tasas }) => {
+  /* Using the useMobile hook to check if the user is on a mobile device. */
   const { isMobile } = useMobile();
+/* Importing the useDispatch hook from the react-redux library. */
   const dispatch = useDispatch();
+/* Using the useSelector hook to get the cart from the redux store. */
   const actualCart = useSelector((state) => state.cartReducer.cart);
 
   const total = useSelector((state) => state.cartReducer.total);
@@ -36,6 +39,15 @@ const MiniCart = ({ opciones, tasas }) => {
   let claseAltoFill = "flex flex-col justify-between alto";
   let claseAltoEmpty = "flex flex-col justify-center alto";
   let claseAltoOut = "flex flex-col justify-start alto";
+/**
+ * If the cart has items and the checkout is not active, return the class that makes the cart full. If
+ * the cart has no items and the checkout is not active, return the class that makes the cart empty. If
+ * the cart has items and the checkout is active, return the class that makes the cart out
+ * 
+ * Returns:
+ *   The function controlDeClases is returning the value of the variable claseAltoFill, claseAltoEmpty,
+ * or claseAltoOut.
+ */
   const controlDeClases = () => {
     if (actualCart?.length > 0 && !checkout) {
       return claseAltoFill;
