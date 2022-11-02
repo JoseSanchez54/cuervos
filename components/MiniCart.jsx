@@ -255,12 +255,6 @@ const MiniCart = ({ opciones, tasas }) => {
                                     quantity: "1",
                                   });
                                 });
-                                axios.post("/api/facebook", {
-                                  datos: {
-                                    eventName: "InitiateCheckout",
-                                    fbp: fbp,
-                                  },
-                                });
 
                                 import("react-facebook-pixel")
                                   .then((module) => module.default)
@@ -290,12 +284,6 @@ const MiniCart = ({ opciones, tasas }) => {
                               sku: e.sku,
                               quantity: "1",
                             });
-                          });
-                          axios.post("/api/facebook", {
-                            datos: {
-                              eventName: "InitiateCheckout",
-                              fbp: fbp,
-                            },
                           });
 
                           import("react-facebook-pixel")

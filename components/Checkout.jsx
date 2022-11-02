@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import validarEmail from "../utils/validarEmail";
 import Link from "next/link";
+import { getCookie } from "cookies-next";
+import axios from "axios";
 const StripeCheckout = dynamic(() => import("./StripeCheckout"), {
   ssr: true,
 });
@@ -17,6 +19,13 @@ const Checkbox = dynamic(() =>
 );
 const datosPaises = require("../utils/data.json");
 const FormularioCheckout = ({ onAction, opciones }) => {
+  const fbp = getCookie("_fbp");
+  axios.post("/api/facebook", {
+    datos: {
+      eventName: "InitiateCheckout",
+      fbp: fbp,
+    },
+  });
   const dispatch = useDispatch();
   const customers = useSWR("customers", fetcherWc);
   const usuario = useSelector((state) => state.userReducer);
@@ -317,7 +326,9 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       setError("Comprueba tu email");
     } else {
       setCompleto(false);
-      setError("Por favor compruebe todos los campos y recuerde aceptar la política de privacidad");
+      setError(
+        "Por favor compruebe todos los campos y recuerde aceptar la política de privacidad"
+      );
       e.target.setAttribute("action", "");
     }
   };
