@@ -1,7 +1,5 @@
 export default async (req, res) => {
   const { datos } = req.body;
-  console.log(req);
-
   const bizSdk = require("facebook-nodejs-business-sdk");
   const process = require("process");
   const ServerEvent = bizSdk.ServerEvent;

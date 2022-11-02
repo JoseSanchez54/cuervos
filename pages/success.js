@@ -134,31 +134,32 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   });
   const fbp = getCookie("_fbp");
   const fbc = getCookie("_fbc");
-  if (ids.length > 0 && order) {
-    axios.post("/api/facebook", {
-      datos: {
-        eventName: "Purchase",
-        fbp: fbp,
-        fbc: fbc,
-        em: order.billing.email,
-        ph: order.billing.phone,
-        fn: order.billing.first_name,
-        ln: order.billing.last_name,
-        ct: order.billing.city,
-        st: order.billing.state,
-        zp: order.billing.postcode,
-        country: order.billing.country,
-        eventID: wc_order_id, // ViewContent, AddToCart, InitiateCheckout or Purchase
-        products: ids,
-        content_type: "product",
-        value: order.total,
-        num_items: order?.line_items.length,
-        currency: "EUR", // optional
-        enableStandardPixel: false,
-      },
-    });
-  }
+
   useEffect(() => {
+    if (ids.length > 0 && order) {
+      axios.post("/api/facebook", {
+        datos: {
+          eventName: "Purchase",
+          fbp: fbp,
+          fbc: fbc,
+          em: order.billing.email,
+          ph: order.billing.phone,
+          fn: order.billing.first_name,
+          ln: order.billing.last_name,
+          ct: order.billing.city,
+          st: order.billing.state,
+          zp: order.billing.postcode,
+          country: order.billing.country,
+          eventID: wc_order_id, // ViewContent, AddToCart, InitiateCheckout or Purchase
+          products: ids,
+          content_type: "product",
+          value: order.total,
+          num_items: order?.line_items.length,
+          currency: "EUR", // optional
+          enableStandardPixel: false,
+        },
+      });
+    }
     import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
