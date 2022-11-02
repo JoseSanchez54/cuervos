@@ -2,7 +2,7 @@ import { addToCart } from "../utils/addToCart";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
+import axios from "axios";
 import { getCookie } from "cookies-next";
 
 const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
@@ -64,18 +64,21 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           idPadre: producto.id,
           variable: true,
         };
-        fbEvent({
-          eventName: "AddToCart",
-          fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
-          products: [
-            {
-              sku: producto.id,
-              quantity: 1,
-            },
-          ],
-          value: productoAdd.price, // optional
-          currency: "EUR", // optional
-          enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+        axios.post("/api/facebook", {
+          datos: {
+            eventName: "AddToCart",
+            fbp: fbp,
+            // ViewContent, AddToCart, InitiateCheckout or Purchase
+            products: [
+              {
+                sku: producto.id,
+                quantity: 1,
+              },
+            ],
+            content_type: "product",
+            value: productoAdd.price,
+            currency: "EUR", // optional
+          },
         });
         const productToFB = {
           content_ids: productoAdd.id,
@@ -133,18 +136,22 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
             quantity: 1,
           },
         };
-        fbEvent({
-          eventName: "AddToCart",
-          fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
-          products: [
-            {
-              sku: producto.id,
-              quantity: 1,
-            },
-          ],
-          value: productoAdd.price, // optional
-          currency: "EUR", // optional
-          enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+
+        axios.post("/api/facebook", {
+          datos: {
+            eventName: "AddToCart",
+            fbp: fbp,
+            // ViewContent, AddToCart, InitiateCheckout or Purchase
+            products: [
+              {
+                sku: producto.id,
+                quantity: 1,
+              },
+            ],
+            content_type: "product",
+            value: productoAdd.price,
+            currency: "EUR", // optional
+          },
         });
 
         import("react-facebook-pixel")
@@ -181,18 +188,21 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
           quantity: 1,
         },
       };
-      fbEvent({
-        eventName: "AddToCart",
-        fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
-        products: [
-          {
-            sku: producto.id,
-            quantity: 1,
-          },
-        ],
-        value: productoAdd.price, // optional
-        currency: "EUR", // optional
-        enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
+
+      axios.post("/api/facebook", {
+        datos: {
+          eventName: "AddToCart",
+          fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
+          products: [
+            {
+              sku: producto.id,
+              quantity: 1,
+            },
+          ],
+          content_type: "product",
+          value: productoAdd.price,
+          currency: "EUR", // optional
+        },
       });
       import("react-facebook-pixel")
         .then((module) => module.default)

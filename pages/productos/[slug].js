@@ -12,7 +12,6 @@ import Footer from "../../components/Footer";
 import Edad from "../../components/Edad";
 import useSWR from "swr";
 import { getCookie } from "cookies-next";
-import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
 
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
@@ -129,20 +128,15 @@ const SingleProduct = ({
 
   const [isVino, setIsVino] = useState(false);
   const fbp = getCookie("_fbp");
-  useEffect(() => {
-    fbEvent({
+  axios.post("/api/facebook", {
+    datos: {
       eventName: "ViewContent",
       fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
-      products: [
-        {
-          sku: product.id,
-          quantity: 1,
-        },
-      ],
-      value: product.price, // optional
+      content_type: "product",
       currency: "EUR", // optional
-      enableStandardPixel: false, // default false (Require Facebook Pixel to be loaded, see step 2)
-    });
+    },
+  });
+  useEffect(() => {
     const productToFB = {
       content_ids: product.id,
       content_type: "product",
