@@ -15,10 +15,6 @@ import { gtmVirtualPageView } from "../utils/gtm";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import WooCommerce from "../woocommerce/Woocommerce";
-import {
-  FBPixelProvider,
-  FBPixelScript,
-} from "@rivercode/facebook-conversion-api-nextjs/components";
 import { hotjar } from "react-hotjar";
 
 function MyApp({ Component, pageProps }) {
