@@ -6,6 +6,7 @@ import { useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import useMobile from "../hooks/useMobile";
 import { IoIosCart } from "react-icons/io";
+import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { getCookie } from "cookies-next";
 const FormularioCheckout = dynamic(() => import("./Checkout"), {
