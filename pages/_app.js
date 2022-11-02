@@ -82,10 +82,8 @@ function MyApp({ Component, pageProps }) {
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','${process.env.GTM_ID}');`}
           </Script>
-          <FBPixelScript />
-          <FBPixelProvider>
-            <Component {...pageProps} />
-          </FBPixelProvider>
+
+          <Component {...pageProps} />
 
           {cookies === "false" && <CookieAd funcion={setCookies} />}
           <Washapp />
