@@ -98,7 +98,7 @@ export default async (req, res) => {
             console.log("Error: ", err);
           }
         );
-      } else if (datos.eventName === "ViewContent") {
+      } else if (datos.eventName === "InitiateCheckout") {
         const userData1 = new UserData()
           .setFbp(datos.fbp)
           .setClientIpAddress(req.connection.remoteAddress)
