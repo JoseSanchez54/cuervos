@@ -8,9 +8,8 @@ const Footer = dynamic(() => import("../components/Footer"));
 import { DefaultSeo } from "next-seo";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import useMobile from "../hooks/useMobile";
-import { fbEvent } from "@rivercode/facebook-conversion-api-nextjs";
 import Edad from "./Edad";
-import { useEffect } from "react";
+
 const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
   const { isMobile } = useMobile();
   const variablesBoton = {
