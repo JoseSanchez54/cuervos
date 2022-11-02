@@ -125,4 +125,5 @@ export default async (req, res) => {
       process.exit(1);
     }
   })();
+  res.status(200).json({ status: "success" });
 };
