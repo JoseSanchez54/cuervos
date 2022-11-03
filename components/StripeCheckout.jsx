@@ -85,7 +85,6 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
                     actualCart: actualCart,
                   })
                   .then((res) => {
-                    console.log(res.data.id);
                     localStorage.setItem("idPedido", res.data.id);
                     setIdPedidoPaypal(res.data.id);
                   })

@@ -39,7 +39,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
   const taxes = useSelector((state) => state.cartReducer.taxes);
   const envios = useSelector((state) => state.cartReducer.envios);
   const peso = useSelector((state) => state.cartReducer.peso);
-  console.log(actualCart);
+
   axios.post("/api/facebook", {
     datos: {
       eventName: "InitiateCheckout",

@@ -31,7 +31,7 @@ export const getStaticPaths = async () => {
 };
 export async function getStaticProps(context) {
   const slug = context.params.slug;
-  console.log(context.params);
+
   const pagesNew = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/paginas"
   );
@@ -65,7 +65,6 @@ export async function getStaticProps(context) {
   };
 }
 const Embajador = ({ embajador, options, categorias }) => {
-  console.log(embajador);
   return (
     <>
       {

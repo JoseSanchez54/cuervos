@@ -198,7 +198,6 @@ export default async function handler(req, res) {
     if (cupon.code) {
       wc = await WooCommerce.post("orders", formulario2)
         .then((response) => {
-          console.log(response);
           return response.data;
         })
         .catch((error) => {
@@ -207,7 +206,6 @@ export default async function handler(req, res) {
     } else {
       wc = await WooCommerce.post("orders", formulario)
         .then((response) => {
-          console.log(response);
           return response.data;
         })
         .catch((error) => {
