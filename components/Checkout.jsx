@@ -20,12 +20,7 @@ const Checkbox = dynamic(() =>
 const datosPaises = require("../utils/data.json");
 const FormularioCheckout = ({ onAction, opciones }) => {
   const fbp = getCookie("_fbp");
-  axios.post("/api/facebook", {
-    datos: {
-      eventName: "InitiateCheckout",
-      fbp: fbp,
-    },
-  });
+
   const dispatch = useDispatch();
   const customers = useSWR("customers", fetcherWc);
   const usuario = useSelector((state) => state.userReducer);
@@ -44,6 +39,15 @@ const FormularioCheckout = ({ onAction, opciones }) => {
   const taxes = useSelector((state) => state.cartReducer.taxes);
   const envios = useSelector((state) => state.cartReducer.envios);
   const peso = useSelector((state) => state.cartReducer.peso);
+  console.log(actualCart);
+  axios.post("/api/facebook", {
+    datos: {
+      eventName: "InitiateCheckout",
+      fbp: fbp,
+      cart: actualCart,
+      total: total,
+    },
+  });
   const [formulario, setFormulario] = useState({
     nombre: "",
     apellido: "",
