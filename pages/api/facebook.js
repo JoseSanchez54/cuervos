@@ -41,10 +41,13 @@ export default async (req, res) => {
           .setEventTime(current_timestamp)
           .setUserData(userData1)
           .setCustomData(customData1)
+          .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(access_token, pixel_id)
-          .setEvents([serverEvent1])
-          .setTestEventCode("TEST91275");
+        const eventRequest1 = new EventRequest(
+          access_token,
+          pixel_id
+        ).setEvents([serverEvent1]);
+        //.setTestEventCode("TEST91275");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             console.log("Execute 2 Requests OK. Response: ", response);
@@ -54,6 +57,14 @@ export default async (req, res) => {
           }
         );
       } else if (datos.eventName === "AddToCart") {
+        const content = new Content()
+          .setId(datos.products[0].id)
+          .setQuantity(1);
+
+        const customData = new CustomData()
+          .setContents([content])
+          .setCurrency("eur")
+          .setValue(datos.value);
         const userData1 = new UserData()
           .setFbp(datos.fbp)
           .setClientIpAddress(req.connection.remoteAddress)
@@ -62,11 +73,14 @@ export default async (req, res) => {
           .setEventName("AddToCart")
           .setEventTime(current_timestamp)
           .setUserData(userData1)
+          .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(access_token, pixel_id)
-          .setEvents([serverEvent1])
+        const eventRequest1 = new EventRequest(
+          access_token,
+          pixel_id
+        ).setEvents([serverEvent1]);
 
-          .setTestEventCode("TEST91275");
+        //.setTestEventCode("TEST91275");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             console.log("Execute 2 Requests OK. Response: ", response);
@@ -84,10 +98,13 @@ export default async (req, res) => {
           .setEventName("ViewContent")
           .setEventTime(current_timestamp)
           .setUserData(userData1)
+          .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(access_token, pixel_id)
-          .setEvents([serverEvent1])
-          .setTestEventCode("TEST91275");
+        const eventRequest1 = new EventRequest(
+          access_token,
+          pixel_id
+        ).setEvents([serverEvent1]);
+        //.setTestEventCode("TEST91275");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             console.log("Execute 2 Requests OK. Response: ", response);
@@ -105,10 +122,13 @@ export default async (req, res) => {
           .setEventName("InitiateCheckout")
           .setEventTime(current_timestamp)
           .setUserData(userData1)
+          .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(access_token, pixel_id)
-          .setEvents([serverEvent1])
-          .setTestEventCode("TEST91275");
+        const eventRequest1 = new EventRequest(
+          access_token,
+          pixel_id
+        ).setEvents([serverEvent1]);
+        //.setTestEventCode("TEST91275");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             console.log("Execute 2 Requests OK. Response: ", response);
