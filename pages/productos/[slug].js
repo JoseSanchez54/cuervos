@@ -131,6 +131,8 @@ const SingleProduct = ({
   axios.post("/api/facebook", {
     datos: {
       eventName: "ViewContent",
+      id: product.id,
+      price: product.price,
       fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
       content_type: "product",
       currency: "EUR", // optional
