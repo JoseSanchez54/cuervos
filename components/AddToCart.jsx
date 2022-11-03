@@ -200,7 +200,7 @@ const AddToCart = ({ seleccion, lista, producto, opciones, precio }) => {
             },
           ],
           content_type: "product",
-          value: productoAdd.price,
+          value: producto.price,
           currency: "EUR", // optional
         },
       });
