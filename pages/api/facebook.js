@@ -20,6 +20,12 @@ export default async (req, res) => {
       const api = bizSdk.FacebookAdsApi.init(access_token);
       let current_timestamp = Math.floor(new Date() / 1000);
       if (datos.eventName === "Purchase") {
+        const productos = [];
+        await datos.products.forEach((element) => {
+          const content = new Content().setId(element.id).setQuantity(1);
+          productos.push(content);
+        });
+
         const userData1 = new UserData()
           .setEmail(datos.em)
           .setPhone(datos.ph)
@@ -34,6 +40,7 @@ export default async (req, res) => {
           .setClientIpAddress(req.connection.remoteAddress)
           .setClientUserAgent(req.headers["user-agent"]);
         const customData1 = new CustomData()
+          .setContents(productos)
           .setCurrency(datos.currency)
           .setValue(datos.value);
         const serverEvent1 = new ServerEvent()
@@ -43,11 +50,9 @@ export default async (req, res) => {
           .setCustomData(customData1)
           .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(
-          access_token,
-          pixel_id
-        ).setEvents([serverEvent1]);
-        //.setTestEventCode("TEST91275");
+        const eventRequest1 = new EventRequest(access_token, pixel_id)
+          .setEvents([serverEvent1])
+          .setTestEventCode("TEST91275");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             console.log("Execute 2 Requests OK. Response: ", response);
