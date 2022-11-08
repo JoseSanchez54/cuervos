@@ -27,14 +27,6 @@ export default async (req, res) => {
         });
 
         const userData1 = new UserData()
-          .setEmail(datos.em)
-          .setPhone(datos.ph)
-          .setFirstName(datos.fn)
-          .setLastName(datos.ln)
-          .setCity(datos.ct)
-          .setState(datos.st)
-          .setZip(datos.zp)
-          .setCountry(datos.country)
           .setFbp(datos.fbp)
           .setFbc(datos.fbc)
           .setClientIpAddress(req.connection.remoteAddress)
