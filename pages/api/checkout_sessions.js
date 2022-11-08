@@ -54,6 +54,7 @@ export default async function handler(req, res) {
         quantity: 1,
       });
     } else {
+      sus = false;
       lineItems.push({
         price_data: {
           currency: "EUR",

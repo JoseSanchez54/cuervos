@@ -25,7 +25,6 @@ export default async (req, res) => {
           const content = new Content().setId(element.id).setQuantity(1);
           productos.push(content);
         });
-
         const userData1 = new UserData()
           .setFbp(datos.fbp)
           .setFbc(datos.fbc)
