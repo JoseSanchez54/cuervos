@@ -1,3 +1,4 @@
+import WooCommerce from "../../woocommerce/Woocommerce";
 export default async (req, res) => {
   const { datos } = req.body;
   const bizSdk = require("facebook-nodejs-business-sdk");
@@ -17,14 +18,33 @@ export default async (req, res) => {
           `"Missing required test config. Got pixel_id: '${pixel_id}', access_token: '${access_token}'"`
         );
       }
+
       const api = bizSdk.FacebookAdsApi.init(access_token);
       let current_timestamp = Math.floor(new Date() / 1000);
       if (datos.eventName === "Purchase") {
+        const order = await WooCommerce.get("orders/" + datos.eventID)
+          .then((response) => {
+            return response.data;
+          })
+          .catch((error) => {
+            console.log(error.response.data);
+          });
+        const ids = [];
+
+        await order?.line_items.forEach((item) => {
+          const to = {
+            id: item.product_id,
+            quantity: 1,
+          };
+          ids.push(to);
+        });
+
         const productos = [];
-        await datos.products.forEach((element) => {
+        ids.forEach((element) => {
           const content = new Content().setId(element.id).setQuantity(1);
           productos.push(content);
         });
+
         const userData1 = new UserData()
           .setFbp(datos.fbp)
           .setFbc(datos.fbc)
@@ -33,7 +53,7 @@ export default async (req, res) => {
         const customData1 = new CustomData()
           .setContents(productos)
           .setCurrency(datos.currency)
-          .setValue(datos.value);
+          .setValue(order.total);
         const serverEvent1 = new ServerEvent()
           .setEventName("Purchase")
           .setEventTime(current_timestamp)
@@ -41,9 +61,11 @@ export default async (req, res) => {
           .setCustomData(customData1)
           .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(access_token, pixel_id)
-          .setEvents([serverEvent1])
-          .setTestEventCode("TEST91275");
+        const eventRequest1 = new EventRequest(
+          access_token,
+          pixel_id
+        ).setEvents([serverEvent1]);
+        //.setTestEventCode("TEST91275");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             console.log(

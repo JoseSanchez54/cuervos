@@ -5,7 +5,6 @@ export default async (req, res) => {
   const estado = {
     status: "processing",
   };
-  console.log("----------------------", req.query);
 
   const sus = req.query.sus;
   const session = req.query.sesion;
@@ -36,7 +35,7 @@ export default async (req, res) => {
       _stripe_session_id: session,
     },
   };
-  if (sus) {
+  if (sus && sus !== "undefined") {
     await WooCommerce.put("subscriptions/" + sus, estadoSUS);
   }
 
