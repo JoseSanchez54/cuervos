@@ -18,7 +18,6 @@ export default async (req, res) => {
           `"Missing required test config. Got pixel_id: '${pixel_id}', access_token: '${access_token}'"`
         );
       }
-
       const api = bizSdk.FacebookAdsApi.init(access_token);
       let current_timestamp = Math.floor(new Date() / 1000);
       if (datos.eventName === "Purchase") {
