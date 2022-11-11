@@ -117,6 +117,7 @@ const SingleProduct = ({
     fallbackData: products[0],
   });
   const product = pedidos1.data;
+
   function removeTags(str) {
     if (str === null || str === "") return false;
     else str = str.toString();
@@ -223,6 +224,14 @@ const SingleProduct = ({
   });
 
   const [seleccion, setSeleccion] = useState(newTT);
+  const b = variations.data.find(
+    (e) => e.attributes[0].option === seleccion.botellas
+  );
+  const [black, setBlack] = useState({
+    precio: b?.regular_price,
+    rebaja: b?.sale_price,
+  });
+  console.log(black);
   const handleVariations = (e, tipo) => {
     document
       .getElementsByClassName("activoVariacion")[0]
@@ -234,6 +243,13 @@ const SingleProduct = ({
     };
     e.target.classList.add("activoVariacion");
     setSeleccion(resultado);
+    const b = variations.data.find(
+      (e) => e.attributes[0].option === resultado.botellas
+    );
+    setBlack({
+      precio: b?.regular_price,
+      rebaja: b?.sale_price,
+    });
   };
   const { isMobile } = useMobile();
 
@@ -379,20 +395,33 @@ const SingleProduct = ({
                     <span className="inyectado uppercase mb-6">
                       {removeTags(product?.short_description)}
                     </span>
-
-                    <span
-                      className="precio"
-                      key={product?.id}
-                      style={{
-                        color: "black",
-                        fontSize: "1.5rem",
-                        fontWeight: "bold",
-                        marginTop: "10px",
-                        fontFamily: options.fuente_titulo,
-                      }}
-                    >
-                      {precio}€
-                    </span>
+                    <div className="flex gap-3 flex-row items-center">
+                      {" "}
+                      <span
+                        style={{
+                          fontFamily: options.fuente_global,
+                          textDecoration: "line-through",
+                          fontSize: "1.5rem",
+                          marginTop: "10px",
+                        }}
+                        className="rebaja"
+                      >
+                        {black.precio}€
+                      </span>
+                      <span
+                        className="precio"
+                        key={product?.id}
+                        style={{
+                          color: "black",
+                          fontSize: "1.5rem",
+                          fontWeight: "bold",
+                          marginTop: "6px",
+                          fontFamily: options.fuente_titulo,
+                        }}
+                      >
+                        {black.rebaja}€
+                      </span>
+                    </div>
                   </div>
                 </div>
 
