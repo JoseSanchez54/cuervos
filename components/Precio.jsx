@@ -27,7 +27,7 @@ const Precio = ({
                     }}
                     className="rebaja"
                   >
-                    {rebaja}€
+                    {precio}€
                   </span>
                 </div>
                 <div className="flex flex-col">
@@ -38,7 +38,7 @@ const Precio = ({
                     }}
                     className="rebaja"
                   >
-                    {precio}€
+                    {rebaja}€
                   </span>
                 </div>
               </div>
