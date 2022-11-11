@@ -232,7 +232,6 @@ const SingleProduct = ({
     precio: b !== undefined ? b?.regular_price : product?.regular_price,
     rebaja: b !== undefined ? b?.sale_price : product?.sale_price,
   });
-  console.log(black);
   const handleVariations = (e, tipo) => {
     document
       .getElementsByClassName("activoVariacion")[0]
@@ -402,27 +401,31 @@ const SingleProduct = ({
                       <span
                         style={{
                           fontFamily: options.fuente_global,
-                          textDecoration: "line-through",
+                          textDecoration:
+                            black.rebaja !== "" ? "line-through" : "none",
                           fontSize: "1.5rem",
+                          fontWeight: black.rebaja !== "" ? "normal" : "bold",
                           marginTop: "10px",
                         }}
                         className="rebaja"
                       >
                         {black.precio}€
                       </span>
-                      <span
-                        className="precio"
-                        key={product?.id}
-                        style={{
-                          color: "black",
-                          fontSize: "1.5rem",
-                          fontWeight: "bold",
-                          marginTop: "6px",
-                          fontFamily: options.fuente_titulo,
-                        }}
-                      >
-                        {black.rebaja}€
-                      </span>
+                      {black.rebaja && (
+                        <span
+                          className="precio"
+                          key={product?.id}
+                          style={{
+                            color: "black",
+                            fontSize: "1.5rem",
+                            fontWeight: "bold",
+                            marginTop: "6px",
+                            fontFamily: options.fuente_titulo,
+                          }}
+                        >
+                          {black.rebaja}€
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
