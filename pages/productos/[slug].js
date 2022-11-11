@@ -12,6 +12,7 @@ import Footer from "../../components/Footer";
 import Edad from "../../components/Edad";
 import useSWR from "swr";
 import { getCookie } from "cookies-next";
+import PrecioPag from "../../components/PrecioPaginaPro";
 
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
@@ -378,19 +379,13 @@ const SingleProduct = ({
                     <span className="inyectado uppercase mb-6">
                       {removeTags(product?.short_description)}
                     </span>
-                    <span
-                      className="precio"
-                      key={product?.id}
-                      style={{
-                        color: "black",
-                        fontSize: "1.5rem",
-                        fontWeight: "bold",
-                        marginTop: "10px",
-                        fontFamily: options.fuente_titulo,
-                      }}
-                    >
-                      {precio}€
-                    </span>
+                    <PrecioPag
+                      precio={product?.regular_price}
+                      rebaja={product?.sale_price}
+                      opciones={options}
+                      hover={false}
+                      variaciones={variations.data}
+                    />
                   </div>
                 </div>
 
