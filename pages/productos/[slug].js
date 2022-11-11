@@ -227,9 +227,10 @@ const SingleProduct = ({
   const b = variations.data.find(
     (e) => e.attributes[0].option === seleccion.botellas
   );
+
   const [black, setBlack] = useState({
-    precio: b?.regular_price,
-    rebaja: b?.sale_price,
+    precio: b !== undefined ? b?.regular_price : product?.regular_price,
+    rebaja: b !== undefined ? b?.sale_price : product?.sale_price,
   });
   console.log(black);
   const handleVariations = (e, tipo) => {
@@ -395,6 +396,7 @@ const SingleProduct = ({
                     <span className="inyectado uppercase mb-6">
                       {removeTags(product?.short_description)}
                     </span>
+
                     <div className="flex gap-3 flex-row items-center">
                       {" "}
                       <span
