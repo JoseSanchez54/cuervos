@@ -379,13 +379,20 @@ const SingleProduct = ({
                     <span className="inyectado uppercase mb-6">
                       {removeTags(product?.short_description)}
                     </span>
-                    <PrecioPag
-                      precio={product?.regular_price}
-                      rebaja={product?.sale_price}
-                      opciones={options}
-                      hover={false}
-                      variaciones={variations.data}
-                    />
+
+                    <span
+                      className="precio"
+                      key={product?.id}
+                      style={{
+                        color: "black",
+                        fontSize: "1.5rem",
+                        fontWeight: "bold",
+                        marginTop: "10px",
+                        fontFamily: options.fuente_titulo,
+                      }}
+                    >
+                      {precio}€
+                    </span>
                   </div>
                 </div>
 
