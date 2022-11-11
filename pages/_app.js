@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import WooCommerce from "../woocommerce/Woocommerce";
 import { hotjar } from "react-hotjar";
+import BlackF from "../components/BlackF";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -84,7 +85,7 @@ function MyApp({ Component, pageProps }) {
           </Script>
 
           <Component {...pageProps} />
-
+          <BlackF />
           {cookies === "false" && <CookieAd funcion={setCookies} />}
           <Washapp />
         </NextUIProvider>

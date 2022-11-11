@@ -356,6 +356,12 @@ const SingleProduct = ({
               <div className="w-full flex flex-col self-start top-[90px]">
                 <div className="flex flex-row w-full">
                   <div className="flex p-5 flex-col">
+                    <Image
+                      objectFit="contain"
+                      height="274px"
+                      width="1920px"
+                      src="/banner2.jpg"
+                    ></Image>
                     <h1 style={{ fontWeight: "normal" }}>
                       <span className="etiqueta">{product?.name}</span>
                     </h1>
