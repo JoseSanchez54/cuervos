@@ -79,7 +79,7 @@ const Precio = ({
                             }}
                             className="rebaja"
                           >
-                            {variaciones[0]?.regular_price / 2}€
+                            {variaciones[0]?.regular_price}€
                           </span>
                         </div>
                         <div className="flex flex-col">
@@ -90,7 +90,7 @@ const Precio = ({
                             }}
                             className="rebaja"
                           >
-                            {rebaja ? rebaja : variaciones[0]?.sale_price / 2}€
+                            {rebaja ? rebaja : variaciones[0]?.sale_price}€
                           </span>
                         </div>
                       </div>
@@ -106,7 +106,7 @@ const Precio = ({
                             }}
                             className="rebaja"
                           >
-                            {precio ? precio : variaciones[0]?.price / 2}€
+                            {precio ? precio : variaciones[0]?.price}€
                           </span>
                         </div>
                       </div>
