@@ -39,7 +39,7 @@ export default async (req, res) => {
         });
 
         const productos = [];
-        ids.forEach((element) => {
+        await ids.forEach((element) => {
           const content = new Content().setId(element.id).setQuantity(1);
           productos.push(content);
         });
@@ -68,11 +68,9 @@ export default async (req, res) => {
           .setCustomData(customData1)
           .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(
-          access_token,
-          pixel_id
-        ).setEvents([serverEvent1]);
-        //.setTestEventCode("TEST91275");
+        const eventRequest1 = new EventRequest(access_token, pixel_id)
+          .setEvents([serverEvent1])
+          .setTestEventCode("TEST91275");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             console.log(
