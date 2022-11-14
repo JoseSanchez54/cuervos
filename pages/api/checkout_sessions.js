@@ -1,11 +1,10 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import WooCommerce from "../../woocommerce/Woocommerce";
-import dateFormat from "dateformat";
 import * as Sentry from "@sentry/nextjs";
 export default async function handler(req, res) {
   const { items, formulario, envio, cupon, sessionID } = req.body;
 
-  const itemsWc = [];
+  /*   const itemsWc = [];
   await items.map((i) => {
     if (i.variable === false) {
       itemsWc.push({
@@ -19,15 +18,15 @@ export default async function handler(req, res) {
         quantity: 1,
       });
     }
-  });
+  }); */
   /*   let periodico = "";
   let intervalo = ""; */
 
   const lineItems = [];
   /*   const lineItemsWC = []; */
   /*  let sus = false; */
-  await items.map((i) => {
-    /*  const metadata = Object?.values(i?.meta_data).map((key) => {
+  /*   await items.map((i) => {
+     const metadata = Object?.values(i?.meta_data).map((key) => {
       return key;
     });
 
@@ -54,8 +53,8 @@ export default async function handler(req, res) {
         },
         quantity: 1,
       });
-    } else { */
-    /*  sus = false; */
+    } else { 
+      sus = false; 
 
     lineItems.push({
       price_data: {
@@ -70,9 +69,9 @@ export default async function handler(req, res) {
 
       quantity: 1,
     });
-    /* } */
-  });
-  lineItems.push({
+     } 
+  }); */
+  items.push({
     price_data: {
       currency: "EUR",
       unit_amount_decimal: envio * 100,
@@ -85,7 +84,7 @@ export default async function handler(req, res) {
     },
     quantity: 1,
   });
-  console.log(lineItems);
+
   /*   await items.map((i) => {
     const metadata = Object?.values(i?.meta_data).map((key) => {
       return key;
@@ -121,6 +120,7 @@ export default async function handler(req, res) {
 
   let cup = {};
   if (cupon) {
+    console.log("entra");
     if (cupon?.discount_type === "percent") {
       await stripe.coupons
         .create({
@@ -283,7 +283,7 @@ export default async function handler(req, res) {
     const sus = false;
     const session = await stripe.checkout.sessions
       .create({
-        line_items: lineItems,
+        line_items: items,
         mode: /* sus ? "subscription" : "payment" */ "payment",
         success_url: sus
           ? `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}&suscripcion=${suscripcion.id}`

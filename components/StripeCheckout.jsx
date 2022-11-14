@@ -25,25 +25,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
       setSub(true);
     }
   }); */
-  /*   const itemsWc = [];
-  actualCart.map((i) => {
-    if (i.variable === false) {
-      itemsWc.push({
-        product_id: i.id,
-        quantity: 1,
-        sale_price: i.sale_price,
-        regular_price: i.regular_price,
-      });
-    } else {
-      itemsWc.push({
-        product_id: i.id,
-        variation_id: i.idPadre,
-        quantity: 1,
-        sale_price: i.sale_price,
-        regular_price: i.regular_price,
-      });
-    }
-  }); */
+
   const costo =
     (parseFloat(total) < 50 && formulario.shipping.state !== "GC") ||
     (parseFloat(total) < 50 && formulario.shipping.state !== "TF") ||
@@ -68,12 +50,28 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
 
   const router = useRouter();
 
-  const handle = (e) => {
+  const handle = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const lineItems = [];
+    await actualCart.map((i) => {
+      lineItems.push({
+        price_data: {
+          currency: "EUR",
+          unit_amount_decimal:
+            i.sale_price !== "" ? i.sale_price * 100 : i.regular_price * 100,
+          product_data: {
+            name: i.nombrePadre,
+            images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
+          },
+        },
+
+        quantity: 1,
+      });
+    });
     axios
       .post("/api/checkout_sessions", {
-        items: actualCart,
+        items: lineItems,
         formulario: formulario,
         envio: envio,
         cupon: cupon,
