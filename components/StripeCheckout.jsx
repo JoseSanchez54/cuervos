@@ -84,19 +84,35 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
 
   return (
     <>
-      {/*       {loading && (
+      {loading && (
         <>
-          <div className="flex fixed z-50 bg-black opacity-30 top-0 right-0 left-0 bottom-0 flex-row w-screen h-screen justify-center items-center">
+          <div className="flex fixed z-50 bg-black opacity-60 top-0 right-0 left-0 bottom-0 flex-row w-screen h-screen justify-center items-center">
             <div className="flex flex-col w-full h-full justify-center items-center ">
               <ClipLoader color={"#000"} loading={loading} size="45px" />
-              <span>
+              <span
+                style={{
+                  color: "white",
+                  fontSize: "23px",
+                  fontWeight: "bold",
+                  fontFamily: "Helvetica",
+                }}
+              >
                 Espera unos momentos mientras te redirigimos de forma segura
               </span>
-              <span>No abandones ni recargues la pagina</span>
+              <span
+                style={{
+                  color: "white",
+                  fontSize: "19px",
+                  fontWeight: "bold",
+                  fontFamily: "Helvetica",
+                }}
+              >
+                No abandones ni recargues la página
+              </span>
             </div>
           </div>
         </>
-      )} */}
+      )}
       <button className="items-center my-3" onClick={(e) => handle(e)}>
         Pagar {loading && <ClipLoader size="16px" color="white" />}
       </button>
