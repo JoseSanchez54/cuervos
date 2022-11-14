@@ -1,6 +1,7 @@
-import Stripe from 'stripe';
-import { buffer } from 'micro';
-import Cors from 'micro-cors';
+import Stripe from "stripe";
+import { buffer } from "micro";
+import Cors from "micro-cors";
+import * as Sentry from "@sentry/nextjs";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -14,13 +15,13 @@ export const config = {
 };
 
 const cors = Cors({
-  allowMethods: ['POST', 'HEAD'],
+  allowMethods: ["POST", "HEAD"],
 });
 
 const webhookHandler = async (req, res) => {
-  if (req.method === 'POST') {
+  if (req.method === "POST") {
     const buf = await buffer(req);
-    const signature = req.headers['stripe-signature'];
+    const signature = req.headers["stripe-signature"];
 
     let event;
     try {
@@ -32,27 +33,29 @@ const webhookHandler = async (req, res) => {
     } catch (err) {
       // On error, log and return the error message.
       console.log(`❌ Error message: ${err.message}`);
+      Sentry.captureException(err);
       res.status(400).send(`Webhook Error: ${err.message}`);
       return;
     }
 
     // Successfully constructed event.
-    console.log('✅ Success:', event.id);
+    console.log("✅ Success:", event.id);
 
     switch (event.type) {
-      case 'payment_intent.succeeded': {
+      case "payment_intent.succeeded": {
         const paymentIntent = event.data.object;
         console.log(`PaymentIntent status: ${paymentIntent.status}`);
         break;
       }
-      case 'payment_intent.payment_failed': {
+      case "payment_intent.payment_failed": {
         const paymentIntent = event.data.object;
+        Sentry.captureException(paymentIntent.last_payment_error?.message);
         console.log(
           `❌ Payment failed: ${paymentIntent.last_payment_error?.message}`
         );
         break;
       }
-      case 'charge.succeeded': {
+      case "charge.succeeded": {
         const charge = event.data.object;
         console.log(`Charge id: ${charge.id}`);
         break;
@@ -66,8 +69,8 @@ const webhookHandler = async (req, res) => {
     // Return a response to acknowledge receipt of the event.
     res.json({ received: true });
   } else {
-    res.setHeader('Allow', 'POST');
-    res.status(405).end('Method Not Allowed');
+    res.setHeader("Allow", "POST");
+    res.status(405).end("Method Not Allowed");
   }
 };
 

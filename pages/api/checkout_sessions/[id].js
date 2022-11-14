@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import * as Sentry from "@sentry/nextjs";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export default async function handler(req, res) {
@@ -10,6 +11,7 @@ export default async function handler(req, res) {
     const checkout_session = await stripe.checkout.sessions.retrieve(id);
     res.status(200).json(checkout_session);
   } catch (err) {
+    Sentry.captureException(err);
     res.status(500).json({ statusCode: 500 });
   }
 }

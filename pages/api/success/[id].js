@@ -1,4 +1,5 @@
 import WooCommerce from "../../../woocommerce/Woocommerce";
+import * as Sentry from "@sentry/nextjs";
 
 /* A function that is called when a user makes a payment. */
 export default async (req, res) => {
@@ -13,7 +14,9 @@ export default async (req, res) => {
     .then((response) => {
       return response;
     })
-    .catch((error) => {});
+    .catch((error) => {
+      Sentry.captureException(error);
+    });
   const estadoSUS = {
     status: "active",
     meta_data: [

@@ -1,4 +1,5 @@
 import WooCommerce from "../../woocommerce/Woocommerce";
+import * as Sentry from "@sentry/nextjs";
 export default async (req, res) => {
   const { datos } = req.body;
   const bizSdk = require("facebook-nodejs-business-sdk");
@@ -26,6 +27,7 @@ export default async (req, res) => {
             return response.data;
           })
           .catch((error) => {
+            Sentry.captureException(error);
             console.log(error.response.data);
           });
         const ids = [];
@@ -81,6 +83,7 @@ export default async (req, res) => {
             );
           },
           (err) => {
+            Sentry.captureException(err);
             console.log("Error: ", err);
           }
         );
@@ -120,6 +123,7 @@ export default async (req, res) => {
             );
           },
           (err) => {
+            Sentry.captureException(err);
             console.log("Error: ", err);
           }
         );
@@ -155,6 +159,7 @@ export default async (req, res) => {
             );
           },
           (err) => {
+            Sentry.captureException(err);
             console.log("Error: ", err);
           }
         );
@@ -194,12 +199,14 @@ export default async (req, res) => {
             );
           },
           (err) => {
+            Sentry.captureException(err);
             console.log("Error: ", err);
           }
         );
       }
     } catch (error) {
       console.log(error);
+      Sentry.captureException(error);
       process.exit(1);
     }
   })();

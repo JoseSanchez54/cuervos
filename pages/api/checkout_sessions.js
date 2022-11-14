@@ -1,6 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import WooCommerce from "../../woocommerce/Woocommerce";
 import dateFormat from "dateformat";
+import * as Sentry from "@sentry/nextjs";
 export default async function handler(req, res) {
   const { items, formulario, envio, cupon, sessionID } = req.body;
 
@@ -173,6 +174,7 @@ export default async function handler(req, res) {
             return response.data;
           })
           .catch((error) => {
+            Sentry.captureException(error);
             console.log(error);
           });
       })
@@ -182,6 +184,7 @@ export default async function handler(req, res) {
             return response.data;
           })
           .catch((error) => {
+            Sentry.captureException(error);
             console.log(error);
           });
       });
@@ -210,6 +213,7 @@ export default async function handler(req, res) {
           return response.data;
         })
         .catch((error) => {
+          Sentry.captureException(error);
           console.log(error);
         });
     }

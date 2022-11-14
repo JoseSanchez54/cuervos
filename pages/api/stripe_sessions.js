@@ -1,5 +1,4 @@
 import Stripe from "stripe";
-import WooCommerce from "../../woocommerce/Woocommerce";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
