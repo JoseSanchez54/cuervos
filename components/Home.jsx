@@ -55,12 +55,12 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
           <div className="relative w-full h-full">
             <div className="flex flex-col lg:justify-end justify-start items-center lg:items-start w-full h-full">
               <div className="p-9 z-[10]">
-                <h1 style={{ fontWeight: "normal" }}>
+                {/* <h1 style={{ fontWeight: "normal" }}>
                   {" "}
                   <span className="z-[10] uppercase w-full text-center lg:text-left block titulo lg:ml-[40px]">
                     {pagina.titulo}
                   </span>
-                </h1>
+                </h1> */}
               </div>
 
               <Image
