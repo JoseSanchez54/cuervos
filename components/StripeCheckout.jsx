@@ -19,12 +19,31 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
   const [loading, setLoading] = useState(false);
   const actualCart = useSelector((state) => state.cartReducer.cart);
   const total = useSelector((state) => state.cartReducer.total);
-  actualCart.map((e) => {
+  /*   actualCart.map((e) => {
     const actual = e.meta_data.find((x) => x.key === "_subscription_period");
     if (actual && sub == false) {
       setSub(true);
     }
-  });
+  }); */
+  /*   const itemsWc = [];
+  actualCart.map((i) => {
+    if (i.variable === false) {
+      itemsWc.push({
+        product_id: i.id,
+        quantity: 1,
+        sale_price: i.sale_price,
+        regular_price: i.regular_price,
+      });
+    } else {
+      itemsWc.push({
+        product_id: i.id,
+        variation_id: i.idPadre,
+        quantity: 1,
+        sale_price: i.sale_price,
+        regular_price: i.regular_price,
+      });
+    }
+  }); */
   const costo =
     (parseFloat(total) < 50 && formulario.shipping.state !== "GC") ||
     (parseFloat(total) < 50 && formulario.shipping.state !== "TF") ||

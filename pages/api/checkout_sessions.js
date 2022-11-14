@@ -20,18 +20,18 @@ export default async function handler(req, res) {
       });
     }
   });
-  let periodico = "";
-  let intervalo = "";
+  /*   let periodico = "";
+  let intervalo = ""; */
 
   const lineItems = [];
-  const lineItemsWC = [];
-  let sus = false;
+  /*   const lineItemsWC = []; */
+  /*  let sus = false; */
   await items.map((i) => {
-    const metadata = Object?.values(i?.meta_data).map((key) => {
+    /*  const metadata = Object?.values(i?.meta_data).map((key) => {
       return key;
     });
 
-    if (i.type === "subscription") {
+      if (i.type === "subscription") {
       periodico = metadata?.filter((m) => m.key === "_subscription_period")[0]
         ?.value;
       intervalo = metadata?.filter(
@@ -54,22 +54,23 @@ export default async function handler(req, res) {
         },
         quantity: 1,
       });
-    } else {
-      sus = false;
-      lineItems.push({
-        price_data: {
-          currency: "EUR",
-          unit_amount_decimal:
-            i.sale_price !== "" ? i.sale_price * 100 : i.regular_price * 100,
-          product_data: {
-            name: i.nombrePadre,
-            images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
-          },
-        },
+    } else { */
+    /*  sus = false; */
 
-        quantity: 1,
-      });
-    }
+    lineItems.push({
+      price_data: {
+        currency: "EUR",
+        unit_amount_decimal:
+          i.sale_price !== "" ? i.sale_price * 100 : i.regular_price * 100,
+        product_data: {
+          name: i.nombrePadre,
+          images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
+        },
+      },
+
+      quantity: 1,
+    });
+    /* } */
   });
   lineItems.push({
     price_data: {
@@ -84,7 +85,8 @@ export default async function handler(req, res) {
     },
     quantity: 1,
   });
-  await items.map((i) => {
+  console.log(lineItems);
+  /*   await items.map((i) => {
     const metadata = Object?.values(i?.meta_data).map((key) => {
       return key;
     });
@@ -114,8 +116,8 @@ export default async function handler(req, res) {
         },
         quantity: 1,
       });
-    }
-  });
+    } 
+  });*/
 
   let cup = {};
   if (cupon) {
@@ -165,9 +167,7 @@ export default async function handler(req, res) {
       },
     };
 
-    const cs = await WooCommerce.get(
-      "customers?email=" + formulario.billing.email
-    )
+    await WooCommerce.get("customers?email=" + formulario.billing.email)
       .then((response) => {
         WooCommerce.put("customers/" + response.data[0].id, wcForm)
           .then((response) => {
@@ -218,7 +218,7 @@ export default async function handler(req, res) {
         });
     }
 
-    const wcCustomer = WooCommerce.post("customers", wcForm)
+    await WooCommerce.post("customers", wcForm)
       .then((response) => {
         return response.data;
       })
@@ -246,13 +246,13 @@ export default async function handler(req, res) {
         state: formulario.billing.state,
       },
     });
-    function addDaysToDate(date, days) {
+    /*     function addDaysToDate(date, days) {
       var res = new Date(date);
       res.setDate(res.getDate() + days);
       return res;
-    }
+    } */
 
-    var data = {
+    /*     var data = {
       customer_id: wcCustomer.id,
       parent_id: wc.id,
       status: "on-hold",
@@ -273,18 +273,18 @@ export default async function handler(req, res) {
       shipping: wcForm?.shipping,
       line_items: lineItemsWC,
       shipping_lines: wcForm?.shipping_lines,
-    };
+    }; */
     let suscripcion = undefined;
-    if (sus) {
+    /*    if (sus) {
       suscripcion = await WooCommerce.post("subscriptions", data).then(
         (res) => res.data
       );
-    }
-
+    } */
+    const sus = false;
     const session = await stripe.checkout.sessions
       .create({
         line_items: lineItems,
-        mode: sus ? "subscription" : "payment",
+        mode: /* sus ? "subscription" : "payment" */ "payment",
         success_url: sus
           ? `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}&suscripcion=${suscripcion.id}`
           : `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
@@ -297,7 +297,7 @@ export default async function handler(req, res) {
         customer: customer?.id,
         metadata: {
           order_id: wc?.id,
-          sus_id: suscripcion?.id,
+          /* sus_id: suscripcion?.id */
         },
       })
       .then((session) => {
