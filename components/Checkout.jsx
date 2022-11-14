@@ -411,6 +411,13 @@ const FormularioCheckout = ({ onAction, opciones }) => {
         mensaje: "Actualmente no enviamos a tu pais",
       });
     }
+    if (formulario.provincia === "TF" || formulario.provincia === "GC") {
+      setTax({
+        ...tax,
+        error: true,
+        mensaje: "Actualmente no enviamos a tu región",
+      });
+    }
   }, [pais]);
   const totalDescontado =
     parseFloat(formulario.total) * parseFloat(cupon?.descuento);
@@ -913,7 +920,8 @@ const FormularioCheckout = ({ onAction, opciones }) => {
           </div>
 
           <div className="flex flex-row w-full justify-center mt-5">
-            {completo ? (
+            {(completo && formulario.provincia !== "GC") ||
+            (completo && formulario.provincia !== "TF") ? (
               <>
                 <div className="flex items-center flex-col">
                   {" "}

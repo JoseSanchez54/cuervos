@@ -150,10 +150,6 @@
                 "shortCode": "P"
             },
             {
-                "name": "Las Palmas",
-                "shortCode": "GC"
-            },
-            {
                 "name": "Pontevedra",
                 "shortCode": "PO"
             },
@@ -164,10 +160,6 @@
             {
                 "name": "Salamanca",
                 "shortCode": "SA"
-            },
-            {
-                "name": "Santa Cruz de Tenerife",
-                "shortCode": "TF"
             },
             {
                 "name": "Segovia",
