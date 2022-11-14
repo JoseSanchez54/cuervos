@@ -70,7 +70,7 @@ export default async (req, res) => {
           .setActionSource("website");
         const eventRequest1 = new EventRequest(access_token, pixel_id)
           .setEvents([serverEvent1])
-          .setTestEventCode("TEST91275");
+          .setTestEventCode("TEST94768");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             console.log(
