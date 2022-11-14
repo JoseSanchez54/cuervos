@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const { items, formulario, envio, cupon, sessionID } = req.body;
 
   const itemsWc = [];
-  items.map((i) => {
+  await items.map((i) => {
     if (i.variable === false) {
       itemsWc.push({
         product_id: i.id,
