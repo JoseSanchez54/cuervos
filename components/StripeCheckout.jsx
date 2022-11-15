@@ -84,11 +84,10 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
 
   return (
     <>
-      {loading && (
+      {!loading && (
         <>
-          <div className="flex fixed z-50 bg-black opacity-60 top-0 right-0 left-0 bottom-0 flex-row w-screen h-screen justify-center items-center">
+          <div className="flex fixed z-[199] bg-black opacity-80 top-0 right-0 left-0 bottom-0 flex-row w-screen h-screen justify-center items-center">
             <div className="flex flex-col w-full h-full justify-center items-center ">
-              <ClipLoader color={"#fff"} loading={loading} size="45px" />
               <span
                 style={{
                   color: "white",
@@ -107,10 +106,13 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
                   fontWeight: "bold",
                   fontFamily: "Helvetica",
                   textAlign: "center",
+                  marginTop: "10px",
+                  marginBottom: "10px",
                 }}
               >
                 No abandones ni recargues la página
               </span>
+              <ClipLoader color={"#fff"} loading={true} size="45px" />
             </div>
           </div>
         </>
