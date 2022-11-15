@@ -95,6 +95,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
                   fontSize: "23px",
                   fontWeight: "bold",
                   fontFamily: "Helvetica",
+                  textAlign: "center",
                 }}
               >
                 Espera unos momentos mientras te redirigimos de forma segura
@@ -105,6 +106,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
                   fontSize: "19px",
                   fontWeight: "bold",
                   fontFamily: "Helvetica",
+                  textAlign: "center",
                 }}
               >
                 No abandones ni recargues la página
