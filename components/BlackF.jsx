@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const BlackF = () => {
+  const router = useRouter();
   const [activo, setActivo] = useState(true);
   const handleActivo = () => {
     setActivo(true);
@@ -14,6 +16,11 @@ const BlackF = () => {
       setActivo(false);
     }
   }, []);
+  const handleClose = () => {
+    setActivo(true);
+    localStorage.setItem("blackf", "true");
+    router.push("/categoria/todosvinos");
+  };
   return (
     <>
       {!activo && (
@@ -94,7 +101,12 @@ const BlackF = () => {
                           style={{ color: "white" }}
                           href="/categoria/todosvinos"
                         >
-                          <button className="botoncompra">COMPRAR</button>
+                          <button
+                            onClick={() => handleClose()}
+                            className="botoncompra"
+                          >
+                            COMPRAR
+                          </button>
                         </Link>
                       </div>
                     </div>
