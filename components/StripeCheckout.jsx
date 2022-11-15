@@ -88,7 +88,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
         <>
           <div className="flex fixed z-50 bg-black opacity-60 top-0 right-0 left-0 bottom-0 flex-row w-screen h-screen justify-center items-center">
             <div className="flex flex-col w-full h-full justify-center items-center ">
-              <ClipLoader color={"#000"} loading={loading} size="45px" />
+              <ClipLoader color={"#fff"} loading={loading} size="45px" />
               <span
                 style={{
                   color: "white",
