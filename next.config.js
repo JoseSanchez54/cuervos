@@ -55,6 +55,7 @@ moduleExports = {
     NEXT_PUBLIC_FB_PIXEL_ID: process.env.NEXT_PUBLIC_FB_PIXEL_ID,
     NEXT_PUBLIC_FB_DEBUG: process.env.NEXT_PUBLIC_FB_DEBUG,
     SENTRY_DSN: process.env.SENTRY_DSN,
+    SECRETO: process.env.SECRETO,
   },
   swcMinify: true,
 

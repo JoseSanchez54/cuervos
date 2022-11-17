@@ -11,6 +11,14 @@ export default function Home({ options, categorias, pagesNew, vinos }) {
   const { data, isValidating } = usePages(pagesNew, "Principal");
   const { products: productosSWR } = useProducts(vinos);
 
+  const handle = () => {
+    axios.post("/api/addFire", {
+      newMail: "mail23",
+      nombre: "nombre",
+      phone: "phone",
+      secreto: process.env.SECRETO,
+    });
+  };
   return (
     <>
       <Head>
@@ -19,7 +27,7 @@ export default function Home({ options, categorias, pagesNew, vinos }) {
           content="c7lyi1fw4w0n0sjui7w3cvwqzm7u61"
         />
       </Head>
-
+      <button onClick={() => handle()}>TEst</button>
       <HomeCuervos
         pagina={data}
         categorias={categorias}

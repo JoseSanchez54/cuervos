@@ -93,6 +93,7 @@ export default async (req, res) => {
             nombre: order.billing.first_name,
             apellido: order.billing.last_name,
             phone: order.billing.phone,
+            secreto: process.env.SECRETO,
           });
         } catch (error) {
           Sentry.captureException(error);
