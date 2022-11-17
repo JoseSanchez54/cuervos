@@ -87,6 +87,16 @@ export default async (req, res) => {
             console.log("Error: ", err);
           }
         );
+        try {
+          axios.post("/api/addFire", {
+            newMail: order.billing.email,
+            nombre: order.billing.first_name,
+            apellido: order.billing.last_name,
+            phone: order.billing.phone,
+          });
+        } catch (error) {
+          Sentry.captureException(error);
+        }
       } else if (datos.eventName === "AddToCart") {
         const content = new Content()
           .setId(datos.products[0].sku)

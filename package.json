@@ -25,6 +25,7 @@
     "decimal.js": "^10.3.1",
     "dexie": "^3.2.2",
     "facebook-nodejs-business-sdk": "^15.0.0",
+    "firebase": "^9.14.0",
     "framer-motion": "^6.3.16",
     "html-entities": "^2.3.3",
     "instantsearch.css": "^7.4.5",

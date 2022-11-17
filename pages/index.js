@@ -19,6 +19,7 @@ export default function Home({ options, categorias, pagesNew, vinos }) {
           content="c7lyi1fw4w0n0sjui7w3cvwqzm7u61"
         />
       </Head>
+
       <HomeCuervos
         pagina={data}
         categorias={categorias}
