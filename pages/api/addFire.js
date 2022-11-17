@@ -12,8 +12,6 @@ export default async (req, res) => {
   }
   if (req.method === "GET") {
     const mails = await getMail();
-    const mail = mails.find((mail) => mail.mail === datos.email);
+    return res.status(200).json(mails);
   }
-
-  return res.status(200).json(mails);
 };
