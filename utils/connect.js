@@ -29,6 +29,8 @@ export async function addMail(newMail, phone, nombre) {
       mail: newMail,
       phone: phone,
       nombre: nombre,
+      fuente: "criaCuervos",
+      tipo: "Ecommerce",
     });
 
     console.log("Document written with ID: ", docRef.id);
