@@ -32,8 +32,6 @@ export async function addMail(newMail, phone, nombre) {
       fuente: "criaCuervos",
       tipo: "Ecommerce",
     });
-
-    console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
