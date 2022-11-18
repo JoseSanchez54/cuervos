@@ -23,13 +23,13 @@ export async function getMail() {
   const mailList = mailSnapshot.docs.map((doc) => doc.data());
   return mailList;
 }
-export async function addMail(newMail, phone, nombre) {
+export async function addMail(newMail, phone, nombre, fuente) {
   try {
     const docRef = await addDoc(collection(db, "mails"), {
       mail: newMail,
       phone: phone,
       nombre: nombre,
-      fuente: "criaCuervos",
+      fuente: fuente,
       tipo: "Ecommerce",
     });
   } catch (e) {
