@@ -59,7 +59,9 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
         price_data: {
           currency: "EUR",
           unit_amount_decimal:
-            i.sale_price !== "" ? i.sale_price * 100 : i.regular_price * 100,
+            i.sale_price !== ""
+              ? (parseFloat(i.sale_price) * 100).toFixed(2)
+              : (parseFloat(i.regular_price) * 100).toFixed(2),
           product_data: {
             name: i.nombrePadre,
             images: i?.images ? [i?.images[0]?.src] : [i?.image?.src],
