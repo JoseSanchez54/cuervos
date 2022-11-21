@@ -70,6 +70,12 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     signalId: "",
     facturacion: false,
   });
+  useEffect(() => {
+    setFormulario({
+      ...formulario,
+      total: total,
+    });
+  }, [total]);
 
   /**
    * I'm trying to get the coupon code from the user and then check if it exists in the database and if

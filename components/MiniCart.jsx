@@ -9,6 +9,7 @@ import { IoIosCart } from "react-icons/io";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { getCookie } from "cookies-next";
+import { useRouter } from "next/router";
 const FormularioCheckout = dynamic(() => import("./Checkout"), {
   ssr: false,
 });
@@ -18,6 +19,7 @@ const Image = dynamic(() => import("next/image"), {
 const fbp = getCookie("_fbp");
 
 const MiniCart = ({ opciones, tasas }) => {
+  const router = useRouter();
   /* Using the useMobile hook to check if the user is on a mobile device. */
   const { isMobile } = useMobile();
   /* Importing the useDispatch hook from the react-redux library. */
@@ -205,14 +207,15 @@ const MiniCart = ({ opciones, tasas }) => {
                               <span className="miniCartPrice">{price}€</span>
                               {!checkout && (
                                 <BiTrash
-                                  onClick={() =>
+                                  onClick={() => {
                                     dispatch({
                                       type: "@RemoveFromCart",
                                       id: producto.id,
                                       precio: price,
                                       peso: producto.weight,
-                                    })
-                                  }
+                                    });
+                                    router.push(window.location.pathname);
+                                  }}
                                   size="20px"
                                   color="#000"
                                   className="cursor-pointer"
