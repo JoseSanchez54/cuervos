@@ -70,9 +70,22 @@ export default async (req, res) => {
           .setCustomData(customData1)
           .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(access_token, pixel_id)
-          .setEvents([serverEvent1])
-          .setTestEventCode("TEST94768");
+        const eventRequest1 = new EventRequest(
+          access_token,
+          pixel_id
+        ).setEvents([serverEvent1]);
+        //.setTestEventCode("TEST13758");
+        try {
+          axios.post("/api/addFire", {
+            newMail: order.billing.email,
+            nombre: order.billing.first_name,
+            apellido: order.billing.last_name,
+            phone: order.billing.phone,
+            secreto: process.env.SECRETO,
+          });
+        } catch (error) {
+          Sentry.captureException(error);
+        }
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             console.log(
@@ -87,17 +100,6 @@ export default async (req, res) => {
             console.log("Error: ", err);
           }
         );
-        try {
-          axios.post("/api/addFire", {
-            newMail: order.billing.email,
-            nombre: order.billing.first_name,
-            apellido: order.billing.last_name,
-            phone: order.billing.phone,
-            secreto: process.env.SECRETO,
-          });
-        } catch (error) {
-          Sentry.captureException(error);
-        }
       } else if (datos.eventName === "AddToCart") {
         const content = new Content()
           .setId(datos.products[0].sku)

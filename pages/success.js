@@ -102,14 +102,30 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
 
   const { query } = useRouter();
   const { wc_order_id, session_id, suscripcion } = query;
-  const { data: dataWC } = useSWR(
-    () => `/api/success/${wc_order_id}?sus=${suscripcion}&sesion=${session_id}`,
-    {
-      susID: suscripcion,
-      sesion: session_id,
-      wc_order_id: wc_order_id,
-    }
-  );
+  if (wc_order_id) {
+    axios.post("/api/facebook", {
+      datos: {
+        eventName: "Purchase",
+        fbp: fbp,
+        fbc: fbc,
+        eventID: wc_order_id, // ViewContent, AddToCart, InitiateCheckout or Purchase
+        content_type: "product",
+        currency: "EUR", // optional
+        enableStandardPixel: false,
+      },
+    });
+  }
+  /*   const { data: dataWC } = suscripcion
+    ? useSWR(
+        () =>
+          `/api/success/${wc_order_id}?sus=${suscripcion}&sesion=${session_id}`,
+        {
+          susID: suscripcion,
+          sesion: session_id,
+          wc_order_id: wc_order_id,
+        }
+      )
+    : ""; */
 
   const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
 
@@ -136,20 +152,6 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   const fbc = getCookie("_fbc");
 
   useEffect(() => {
-    if (wc_order_id) {
-      axios.post("/api/facebook", {
-        datos: {
-          eventName: "Purchase",
-          fbp: fbp,
-          fbc: fbc,
-          eventID: wc_order_id, // ViewContent, AddToCart, InitiateCheckout or Purchase
-          content_type: "product",
-          currency: "EUR", // optional
-          enableStandardPixel: false,
-        },
-      });
-    }
-
     import("react-facebook-pixel")
       .then((module) => module.default)
       .then((ReactPixel) => {
@@ -171,7 +173,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     dispatch({
       type: "@EMPTY_CART",
     });
-  }, [wc_order_id]);
+  }, []);
 
   return (
     <>
