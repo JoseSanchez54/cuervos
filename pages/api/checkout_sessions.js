@@ -285,9 +285,7 @@ export default async function handler(req, res) {
       .create({
         line_items: items,
         mode: /* sus ? "subscription" : "payment" */ "payment",
-        success_url: sus
-          ? `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}&suscripcion=${suscripcion.id}`
-          : `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
+        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
         discounts: [
           {
