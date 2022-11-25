@@ -377,7 +377,7 @@ const SingleProduct = ({
                       objectFit="contain"
                       height="274px"
                       width="1920px"
-                      src="/banner3.jpg"
+                      src="/banner5.jpg"
                     ></Image>
                     <h1 style={{ fontWeight: "normal" }}>
                       <span className="etiqueta">{product?.name}</span>
