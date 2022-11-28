@@ -613,7 +613,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                     type="text"
                     name="cupon"
                     placeholder="Cupon"
-                    onChange={(e) => getCupones(e)}
+                    onBlur={(e) => getCupones(e)}
                     disabled={completo}
                   />
                   <Checkbox
