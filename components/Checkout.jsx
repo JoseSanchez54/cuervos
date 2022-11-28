@@ -797,7 +797,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                   )}
                 </div>
               </div>
-              //////////////
+
               <div className="flex flex-row w-full justify-center mt-5">
                 {completo ? (
                   <>
@@ -855,7 +855,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                         <span className="subtotal">Subtotal:</span>
                       </div>
                       <div className="flex flex-col items-end w-1/2">
-                        <span className="subtotal">{subtotal}€</span>
+                        <span className="subtotal">{subtotal.toFixed(2)}€</span>
                       </div>
                     </div>
                     <div className="flex flex-row w-full pb-2 mt-5 individualTax">

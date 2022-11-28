@@ -8,8 +8,12 @@ const StripeCardForm = ({ items, cupon, formulario, envio }) => {
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   );
   const appearance = {
-    theme: "stripe",
+    theme: "night",
     labels: "floating",
+    variables: {
+      boxShadow: "none",
+      // See all possible variables below
+    },
   };
   const options = {
     clientSecret,

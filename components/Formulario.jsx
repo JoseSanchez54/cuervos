@@ -12,12 +12,9 @@ const Formulario = ({ cupon, formulario, envio }) => {
   const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
-  const [clientSecret, setClientSecret] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [processing, setProcessing] = useState(false);
-  const [succeeded, setSucceeded] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const total = useSelector((state) => state.cartReducer.total);
   const costo =
@@ -93,31 +90,12 @@ const Formulario = ({ cupon, formulario, envio }) => {
     setDisabled(event.empty);
     setErrorMsg(event.error ? event.error.message : "");
   };
-  const cardStyle = {
-    hidePostalCode: true,
-    style: {
-      base: {
-        color: "#32325d",
-        fontFamily: "Arial, sans-serif",
-        fontSmoothing: "antialiased",
-        fontSize: "16px",
-        "::placeholder": {
-          color: "#32325d",
-        },
-      },
-      invalid: {
-        fontFamily: "Arial, sans-serif",
-        color: "#fa755a",
-        iconColor: "#fa755a",
-      },
-    },
-  };
 
   return (
     <>
       <div className="flex flex-col w-full justify-center">
         <form
-          style={{ width: "100%", textAlign: "center" }}
+          style={{ width: "100%", textAlign: "center", boxShadow: "none" }}
           id="payment-form w-full"
           onSubmit={handleSubmit}
         >
@@ -156,6 +134,7 @@ const Formulario = ({ cupon, formulario, envio }) => {
           {/* Show a success message upon completion */}
           <p>{message}</p>
         </form>
+        <span className="text-center my-[40px]">o</span>
         <PayPalScriptProvider
           options={{ "client-id": process.env.CLIENT_ID, currency: "EUR" }}
         >
