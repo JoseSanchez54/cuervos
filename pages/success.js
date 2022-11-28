@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import WooCommerce from "../woocommerce/Woocommerce";
 import axios from "axios";
 import { useCallback, useRef, useEffect } from "react";
@@ -101,7 +100,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   }, [makeShot]);
 
   const { query } = useRouter();
-  const { wc_order_id, session_id, suscripcion } = query;
+  const { wc_order_id } = query;
 
   if (wc_order_id) {
     axios.put("/api/orders?id=" + wc_order_id);
@@ -129,8 +128,6 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
       )
     : ""; */
 
-  const { data, error } = useSWR(() => `/api/checkout_sessions/${session_id}`);
-
   const canvasStyles = {
     position: "fixed",
     pointerEvents: "none",
@@ -153,7 +150,6 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   const fbp = getCookie("_fbp");
   const fbc = getCookie("_fbc");
 
-  const completarPedido = (wc_order_id) => {};
   useEffect(() => {
     import("react-facebook-pixel")
       .then((module) => module.default)
@@ -261,7 +257,6 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
         </div>
       </div>
       <Footer options={opciones}></Footer>
-      <style jsx>{``}</style>
     </>
   );
 };

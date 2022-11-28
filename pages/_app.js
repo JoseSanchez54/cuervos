@@ -44,10 +44,7 @@ function MyApp({ Component, pageProps }) {
       });
   }, [router.events]);
 
-  const redirectURL =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : process.env.URLFINAL;
+
   const [cookies, setCookies] = useState(false);
   const store = useStore();
   const dispatch = useDispatch();

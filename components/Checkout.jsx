@@ -9,9 +9,6 @@ import Link from "next/link";
 import { getCookie } from "cookies-next";
 import axios from "axios";
 import StripeCardForm from "./StripeCardForm";
-const StripeCheckout = dynamic(() => import("./StripeCheckout"), {
-  ssr: true,
-});
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
@@ -616,7 +613,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                     type="text"
                     name="cupon"
                     placeholder="Cupon"
-                    onChange={(e) => getCupones(e)}
+                    onBlur={(e) => getCupones(e)}
                     disabled={completo}
                   />
                   <Checkbox
