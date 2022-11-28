@@ -977,6 +977,15 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                 formulario={data}
                 cupon={cupon}
                 items={actualCart}
+                envio={
+                  formulario.provincia === "GC" ||
+                  formulario.provincia === "TF" ||
+                  formulario.provincia === "PM"
+                    ? "20"
+                    : total > 50
+                    ? "0"
+                    : precioEnvio?.precio
+                }
               />
             </div>
           </>

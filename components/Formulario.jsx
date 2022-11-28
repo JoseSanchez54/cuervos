@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 import axios from "axios";
-const Formulario = ({ items, cupon, clientSecret, formulario }) => {
+const Formulario = ({ cupon, formulario, envio }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");

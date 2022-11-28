@@ -2,7 +2,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Formulario from "./Formulario";
 import { useState, useEffect } from "react";
-const StripeCardForm = ({ items, cupon, formulario }) => {
+const StripeCardForm = ({ items, cupon, formulario, envio }) => {
   const [clientSecret, setClientSecret] = useState("");
   const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -40,6 +40,7 @@ const StripeCardForm = ({ items, cupon, formulario }) => {
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <Formulario
+            envio={envio}
             formulario={formulario}
             clientSecret={clientSecret}
             cupon={cupon}
