@@ -797,137 +797,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                   )}
                 </div>
               </div>
-
-              <div className="flex flex-row taxes">
-                <div className="flex flex-col w-full mx-2 scroll">
-                  {pais.valor && (
-                    <span className="errorMessage">{tax.mensaje}</span>
-                  )}
-                  {tax.tasa !== "" && (
-                    <>
-                      {" "}
-                      <div className="flex flex-row w-full mt-5 individualTax">
-                        <div className="flex flex-col w-1/2">
-                          <span className="subtotal">Subtotal:</span>
-                        </div>
-                        <div className="flex flex-col items-end w-1/2">
-                          <span className="subtotal">{subtotal}€</span>
-                        </div>
-                      </div>
-                      <div className="flex flex-row w-full pb-2 mt-5 individualTax">
-                        <div className="flex flex-col w-1/2">
-                          <span className="subtotal">
-                            Impuestos:
-                            <span className="peque">
-                              {" "}
-                              ({tax.tasa + "% I.V.A"})
-                            </span>
-                          </span>
-                        </div>
-                        <div className="flex flex-col items-end w-1/2">
-                          <span className="subtotal">+{iva}€</span>
-                        </div>
-                      </div>
-                      {cupon && (
-                        <>
-                          <div
-                            key="cupones"
-                            className="flex flex-row w-full pb-2 mt-5 border-b-2 individualTax"
-                          >
-                            <div className="flex flex-col w-1/2">
-                              <span className="subtotal">Cupon</span>
-                            </div>
-                            <div className="flex flex-col items-end w-1/2">
-                              <span className="subtotal">
-                                {cupon?.tipo === "porcentaje"
-                                  ? "-" + cupon.descuento * 100 + "%"
-                                  : "-" + cupon.descuento + "€"}
-                              </span>
-                            </div>
-                          </div>
-                        </>
-                      )}
-                      <div className="flex flex-row w-full pb-2 mt-5 border-b-2 individualTax">
-                        <div className="flex flex-col w-1/2">
-                          <span className="subtotal">Envío:</span>
-                        </div>
-                        <div className="flex flex-col items-end w-1/2">
-                          <span className="subtotal">
-                            +
-                            {formulario.provincia === "GC" ||
-                            formulario.provincia === "TF" ||
-                            formulario.provincia === "PM"
-                              ? "20€"
-                              : total > 50
-                              ? "0€"
-                              : precioEnvio?.precio}
-                          </span>
-                        </div>
-                      </div>
-                    </>
-                  )}
-
-                  <div className="flex flex-row w-full mt-5 individualTax">
-                    <div className="flex flex-col w-1/2">
-                      <span className="subtotal">Total:</span>
-                    </div>
-                    <div className="flex flex-col items-end w-1/2">
-                      <span className="subtotal">
-                        {cupon ? (
-                          <>
-                            {cupon?.tipo === "porcentaje" ? (
-                              <>
-                                {tax.tasa === ""
-                                  ? parseFloat(formulario.total) -
-                                    totalDescontado +
-                                    "€"
-                                  : parseFloat(formulario.total) -
-                                    totalDescontado +
-                                    parseFloat(precioEnvio.precio) +
-                                    "€"}
-                              </>
-                            ) : (
-                              <>
-                                {cupon && tax.tasa === ""
-                                  ? parseFloat(formulario.total) -
-                                    parseInt(cupon?.descuento) +
-                                    "€"
-                                  : parseFloat(formulario.total) -
-                                    parseInt(cupon?.descuento) +
-                                    parseFloat(precioEnvio.precio) +
-                                    "€"}
-                              </>
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            {tax.tasa === ""
-                              ? parseFloat(formulario.total) + "€"
-                              : parseFloat(formulario.total) +
-                                parseFloat(precioEnvio.precio) +
-                                "€"}
-                          </>
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                  {error && (
-                    <>
-                      {" "}
-                      <span
-                        style={{
-                          fontFamily: opciones?.fuente_global,
-                          color: "red",
-                        }}
-                        className="error my-5"
-                      >
-                        {error}
-                      </span>
-                    </>
-                  )}
-                </div>
-              </div>
-
+              //////////////
               <div className="flex flex-row w-full justify-center mt-5">
                 {completo ? (
                   <>
@@ -972,6 +842,135 @@ const FormularioCheckout = ({ onAction, opciones }) => {
 
         {completo && (
           <>
+            <div className="flex flex-row taxes">
+              <div className="flex flex-col w-full mx-2 scroll">
+                {pais.valor && (
+                  <span className="errorMessage">{tax.mensaje}</span>
+                )}
+                {tax.tasa !== "" && (
+                  <>
+                    {" "}
+                    <div className="flex flex-row w-full mt-5 individualTax">
+                      <div className="flex flex-col w-1/2">
+                        <span className="subtotal">Subtotal:</span>
+                      </div>
+                      <div className="flex flex-col items-end w-1/2">
+                        <span className="subtotal">{subtotal}€</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-row w-full pb-2 mt-5 individualTax">
+                      <div className="flex flex-col w-1/2">
+                        <span className="subtotal">
+                          Impuestos:
+                          <span className="peque">
+                            {" "}
+                            ({tax.tasa + "% I.V.A"})
+                          </span>
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-end w-1/2">
+                        <span className="subtotal">+{iva}€</span>
+                      </div>
+                    </div>
+                    {cupon && (
+                      <>
+                        <div
+                          key="cupones"
+                          className="flex flex-row w-full pb-2 mt-5 border-b-2 individualTax"
+                        >
+                          <div className="flex flex-col w-1/2">
+                            <span className="subtotal">Cupon</span>
+                          </div>
+                          <div className="flex flex-col items-end w-1/2">
+                            <span className="subtotal">
+                              {cupon?.tipo === "porcentaje"
+                                ? "-" + cupon.descuento * 100 + "%"
+                                : "-" + cupon.descuento + "€"}
+                            </span>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    <div className="flex flex-row w-full pb-2 mt-5 border-b-2 individualTax">
+                      <div className="flex flex-col w-1/2">
+                        <span className="subtotal">Envío:</span>
+                      </div>
+                      <div className="flex flex-col items-end w-1/2">
+                        <span className="subtotal">
+                          +
+                          {formulario.provincia === "GC" ||
+                          formulario.provincia === "TF" ||
+                          formulario.provincia === "PM"
+                            ? "20€"
+                            : total > 50
+                            ? "0€"
+                            : precioEnvio?.precio}
+                        </span>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                <div className="flex flex-row w-full mt-5 individualTax">
+                  <div className="flex flex-col w-1/2">
+                    <span className="subtotal">Total:</span>
+                  </div>
+                  <div className="flex flex-col items-end w-1/2">
+                    <span className="subtotal">
+                      {cupon ? (
+                        <>
+                          {cupon?.tipo === "porcentaje" ? (
+                            <>
+                              {tax.tasa === ""
+                                ? parseFloat(formulario.total) -
+                                  totalDescontado +
+                                  "€"
+                                : parseFloat(formulario.total) -
+                                  totalDescontado +
+                                  parseFloat(precioEnvio.precio) +
+                                  "€"}
+                            </>
+                          ) : (
+                            <>
+                              {cupon && tax.tasa === ""
+                                ? parseFloat(formulario.total) -
+                                  parseInt(cupon?.descuento) +
+                                  "€"
+                                : parseFloat(formulario.total) -
+                                  parseInt(cupon?.descuento) +
+                                  parseFloat(precioEnvio.precio) +
+                                  "€"}
+                            </>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {tax.tasa === ""
+                            ? parseFloat(formulario.total) + "€"
+                            : parseFloat(formulario.total) +
+                              parseFloat(precioEnvio.precio) +
+                              "€"}
+                        </>
+                      )}
+                    </span>
+                  </div>
+                </div>
+                {error && (
+                  <>
+                    {" "}
+                    <span
+                      style={{
+                        fontFamily: opciones?.fuente_global,
+                        color: "red",
+                      }}
+                      className="error my-5"
+                    >
+                      {error}
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
             <div className="flex flex-row w-full">
               <StripeCardForm
                 formulario={data}

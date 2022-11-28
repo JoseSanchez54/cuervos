@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import Router from "next/router";
 
 /**
  * I'm trying to create a stripe session and then redirect to the stripe checkout page.
@@ -14,6 +13,7 @@ import Router from "next/router";
  * </code>
  */
 export default function StripeCheckout({ formulario, envio, cupon }) {
+
   const [sub, setSub] = useState(false);
   const [idPedidoPaypal, setIdPedidoPaypal] = useState("");
   const [loading, setLoading] = useState(false);
@@ -155,7 +155,7 @@ export default function StripeCheckout({ formulario, envio, cupon }) {
 
                 return actions.order.capture().then((details) => {
                   const name = details.payer.name.given_name;
-                  Router.push(
+                  router.push(
                     "/success?wc_order_id=" + localStorage.getItem("idPedido")
                   );
                 });

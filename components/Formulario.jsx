@@ -7,7 +7,9 @@ import { useSelector } from "react-redux";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 const Formulario = ({ cupon, formulario, envio }) => {
+  const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
@@ -184,7 +186,7 @@ const Formulario = ({ cupon, formulario, envio }) => {
 
                 return actions.order.capture().then((details) => {
                   const name = details.payer.name.given_name;
-                  Router.push(
+                  router.push(
                     "/success?wc_order_id=" + localStorage.getItem("idPedido")
                   );
                 });
