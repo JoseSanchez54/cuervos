@@ -85,7 +85,7 @@ const Formulario = ({ cupon, formulario, envio }) => {
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
     } else {
-      setMessage("An unexpected error occured.");
+      setMessage("Ha ocurrido un error");
     }
   };
   const handleChange = async (event) => {
@@ -106,6 +106,7 @@ const Formulario = ({ cupon, formulario, envio }) => {
             fontSize: "1.2rem",
             fontWeight: "bold",
             color: "#000",
+            fontFamily: "Fjalla One",
           }}
         >
           Elige tu metodo de pago

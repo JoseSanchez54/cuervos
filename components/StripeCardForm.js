@@ -8,22 +8,53 @@ const StripeCardForm = ({ items, cupon, formulario, envio }) => {
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   );
   const appearance = {
-    theme: "night",
-    labels: "floating",
+    theme: "flat",
     variables: {
-      boxShadow: "none",
-      // See all possible variables below
+      fontFamily: ' "Gill Sans", sans-serif',
+      fontLineHeight: "1.5",
+      borderRadius: "10px",
+      colorBackground: "#F6F8FA",
+      colorPrimaryText: "#262626",
+    },
+    rules: {
+      ".Block": {
+        backgroundColor: "var(--colorBackground)",
+        boxShadow: "none",
+        padding: "12px",
+      },
+      ".Input": {
+        padding: "12px",
+      },
+      ".Input:focus": {
+        outline: "none",
+        boxShadow: "none",
+      },
+      ".Input:disabled, .Input--invalid:disabled": {
+        color: "lightgray",
+      },
+      ".Tab": {
+        padding: "10px 12px 8px 12px",
+        border: "none",
+      },
+      ".Tab:hover": {
+        border: "none",
+        boxShadow:
+          "0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 7px rgba(18, 42, 66, 0.04)",
+      },
+      ".Tab:focus": { outline: "none", boxShadow: "none" },
+      ".Tab--selected, .Tab--selected:focus, .Tab--selected:hover": {
+        border: "none",
+        backgroundColor: "#fff",
+        boxShadow: "none",
+      },
+      ".Label": {
+        fontWeight: "500",
+      },
     },
   };
   const options = {
     clientSecret,
     appearance,
-    rules: {
-      ".Tab:active": {
-        border: "1px solid #E0E6EB",
-        backgroundColor: "#000000",
-      },
-    },
   };
   useEffect(() => {
     const getClientSecret = async () => {
