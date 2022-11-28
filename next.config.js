@@ -56,6 +56,7 @@ moduleExports = {
     NEXT_PUBLIC_FB_DEBUG: process.env.NEXT_PUBLIC_FB_DEBUG,
     SENTRY_DSN: process.env.SENTRY_DSN,
     SECRETO: process.env.SECRETO,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   },
   swcMinify: true,
 

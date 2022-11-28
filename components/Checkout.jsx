@@ -8,6 +8,7 @@ import validarEmail from "../utils/validarEmail";
 import Link from "next/link";
 import { getCookie } from "cookies-next";
 import axios from "axios";
+import StripeCardForm from "./StripeCardForm";
 const StripeCheckout = dynamic(() => import("./StripeCheckout"), {
   ssr: true,
 });
@@ -98,7 +99,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
         });
 
       const cupon1 = await cupones.find((c) => c.code === codigo);
-      const expira = await new Date(cupon1?.date_expires);
+      const expira = new Date(cupon1?.date_expires);
       if (!cupon1) {
         setErrorCupon("Cupón no encontrado");
         setCupon(null);
@@ -249,6 +250,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       phone: formulario.telefono,
       coupon: cupon,
     },
+    coupon_lines: cupon && [{ code: cupon.code }],
     meta_data: [
       {
         key: "codigoPais",
@@ -262,7 +264,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
 
     line_items: actualCart.map((item) => ({
       product_id: item.id,
-      quantity: item.cantidad,
+      quantity: "1",
       variation_id: item?.variacion?.id,
     })),
     shipping_lines: [
@@ -494,436 +496,314 @@ const FormularioCheckout = ({ onAction, opciones }) => {
             </div>
           </>
         )}
-
-        <form onSubmit={(e) => actionForm(e)} method="post" target="_blank">
-          <div className="flex flex-row fila">
-            <div className="flex flex-col w-full mx-2 md:w-1/2">
-              <input
-                type="text"
-                name="nombre"
-                placeholder={"Nombre"}
-                value={formulario.nombre}
-                onChange={(e) => handleFormulario(e)}
-                disabled={completo}
-              />
-            </div>
-            <div className="flex flex-col w-full mx-2 md:w-1/2">
-              <input
-                type="text"
-                name="apellido"
-                placeholder={"Apellidos"}
-                value={formulario.apellido}
-                onChange={(e) => handleFormulario(e)}
-                disabled={completo}
-              />
-            </div>
-          </div>
-          <div className="flex flex-row fila">
-            <div className="flex flex-col w-full mx-2 md:w-1/2">
-              <input
-                type="email"
-                name="email"
-                value={formulario.email}
-                placeholder={"Email"}
-                onChange={(e) => handleFormulario(e)}
-                disabled={completo}
-              />
-            </div>
-            <div className="flex flex-col w-full mx-2 md:w-1/2">
-              <input
-                type="tel"
-                name="telefono"
-                value={formulario.telefono}
-                placeholder={"Teléfono"}
-                onChange={(e) => handleFormulario(e)}
-                disabled={completo}
-              />
-            </div>
-          </div>
-          <div className="flex flex-row fila">
-            <div className="flex flex-col w-full mx-2 ">
-              <input
-                type="text"
-                name="direccion"
-                value={formulario.direccion}
-                placeholder="Dirección"
-                onChange={(e) => handleFormulario(e)}
-                disabled={completo}
-              />
-            </div>
-          </div>
-          <div className="flex flex-row">
-            <div className="flex flex-col w-full mx-2 md:w-1/2">
-              <Select
-                placeholder={formulario.completo ? "España" : "País"}
-                name="pais"
-                options={optionsPais}
-                onChange={(e) => handlePais(e)}
-                styles={customStyles}
-                isDisabled={completo}
-              />
-            </div>
-            <div className="flex flex-col w-full mx-2 md:w-1/2">
-              <Select
-                placeholder={
-                  formulario.completo ? formulario.provinciaLabel : "Provincia"
-                }
-                isDisabled={completo}
-                name="provincia"
-                styles={customStyles}
-                options={arrt}
-                onChange={(e) => handleProvincias(e)}
-              />
-            </div>
-          </div>
-          <div className="flex flex-row fila">
-            <div className="flex flex-col w-full mx-2 md:w-1/2">
-              <input
-                type="text"
-                name="ciudad"
-                value={formulario.ciudad}
-                placeholder={"Ciudad"}
-                onChange={(e) => handleFormulario(e)}
-                disabled={completo}
-              />
-            </div>
-            <div className="flex flex-col w-full mx-2 md:w-1/2">
-              <input
-                type="text"
-                name="cp"
-                value={formulario.cp}
-                placeholder={"Código postal"}
-                onChange={(e) => handleFormulario(e)}
-                disabled={completo}
-              />
-            </div>
-          </div>
-          <div className="flex flex-row fila">
-            <div className="flex flex-col gap-5 z-0 w-full mx-2">
-              <input
-                type="text"
-                name="cupon"
-                placeholder="Cupon"
-                onChange={(e) => getCupones(e)}
-                disabled={completo}
-              />
-              <Checkbox
-                css={{
-                  span: {
-                    fontFamily: opciones?.fuente_global,
-                  },
-                }}
-                name="facturacion"
-                onChange={(e) => handleCheck(e, "facturacion")}
-                isRequired={false}
-                defaultSelected={false}
-                size="xs"
-              >
-                Tengo una dirección de facturación diferente
-              </Checkbox>
-              {formulario.facturacion && (
-                <>
-                  {" "}
-                  <div className="flex flex-row fila">
-                    <div className="flex flex-col w-full mx-2 md:w-1/2">
-                      <input
-                        type="text"
-                        name="nombreFacturacion"
-                        placeholder={"Nombre"}
-                        value={formulario.nombreFacturacion}
-                        onChange={(e) => handleFormulario(e)}
-                        disabled={completo}
-                      />
-                    </div>
-                    <div className="flex flex-col w-full mx-2 md:w-1/2">
-                      <input
-                        type="text"
-                        name="apellidoFacturacion"
-                        placeholder={"Apellidos"}
-                        value={formulario.apellidoFacturacion}
-                        onChange={(e) => handleFormulario(e)}
-                        disabled={completo}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row fila">
-                    <div className="flex flex-col w-full mx-2 md:w-1/2">
-                      <input
-                        type="email"
-                        name="emailFacturacion"
-                        value={formulario.emailFacturacion}
-                        placeholder={"Email"}
-                        onChange={(e) => handleFormulario(e)}
-                        disabled={completo}
-                      />
-                    </div>
-                    <div className="flex flex-col w-full mx-2 md:w-1/2">
-                      <input
-                        type="tel"
-                        name="telefonoFacturacion"
-                        value={formulario.telefonoFacturacion}
-                        placeholder={"Teléfono"}
-                        onChange={(e) => handleFormulario(e)}
-                        disabled={completo}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row fila">
-                    <div className="flex flex-col w-full mx-2 ">
-                      <input
-                        type="text"
-                        name="direccionFacturacion"
-                        value={formulario.direccionFacturacion}
-                        placeholder="Dirección"
-                        onChange={(e) => handleFormulario(e)}
-                        disabled={completo}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row">
-                    <div className="flex flex-col w-full mx-2 md:w-1/2">
-                      <Select
-                        placeholder={formulario.completo ? "España" : "País"}
-                        name="paisFacturacion"
-                        options={optionsPais}
-                        onChange={(e) => handlePais(e)}
-                        styles={customStyles}
-                        isDisabled={completo}
-                      />
-                    </div>
-                    <div className="flex flex-col w-full mx-2 md:w-1/2">
-                      <Select
-                        placeholder={
-                          formulario.completo
-                            ? formulario.provinciaLabel
-                            : "Provincia"
-                        }
-                        isDisabled={completo}
-                        name="provinciaFacturacion"
-                        styles={customStyles}
-                        options={arrt}
-                        onChange={(e) => handleProvincias(e)}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row fila">
-                    <div className="flex flex-col w-full mx-2 md:w-1/2">
-                      <input
-                        type="text"
-                        name="ciudadFacturacion"
-                        value={formulario.ciudadFacturacion}
-                        placeholder={"Ciudad"}
-                        onChange={(e) => handleFormulario(e)}
-                        disabled={completo}
-                      />
-                    </div>
-                    <div className="flex flex-col w-full mx-2 md:w-1/2">
-                      <input
-                        type="text"
-                        name="cpFacturacion"
-                        value={formulario.cpFacturacion}
-                        placeholder={"Código postal"}
-                        onChange={(e) => handleFormulario(e)}
-                        disabled={completo}
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
-
-              <Checkbox
-                css={{
-                  span: {
-                    fontFamily: opciones?.fuente_global,
-                  },
-                }}
-                name="comerciales"
-                onChange={(e) => handleCheck(e, "comerciales")}
-                isRequired={true}
-                defaultSelected={false}
-                size="xs"
-              >
-                Acepto recibir comunicaciones comerciales
-              </Checkbox>
-              <Checkbox
-                css={{
-                  span: {
-                    fontFamily: opciones?.fuente_global,
-                  },
-                }}
-                name="politicas"
-                onChange={(e) => handleCheck(e, "politicas")}
-                isRequired={true}
-                defaultSelected={false}
-                size="xs"
-              >
-                Acepto la
-                <Link href="/legal/politica-de-privacidad">
-                  <a
-                    style={{
-                      marginLeft: "2px",
-                      marginRight: "2px",
+        {!completo && (
+          <>
+            <form onSubmit={(e) => actionForm(e)} method="post" target="_blank">
+              <div className="flex flex-row fila">
+                <div className="flex flex-col w-full mx-2 md:w-1/2">
+                  <input
+                    type="text"
+                    name="nombre"
+                    placeholder={"Nombre"}
+                    value={formulario.nombre}
+                    onChange={(e) => handleFormulario(e)}
+                    disabled={completo}
+                  />
+                </div>
+                <div className="flex flex-col w-full mx-2 md:w-1/2">
+                  <input
+                    type="text"
+                    name="apellido"
+                    placeholder={"Apellidos"}
+                    value={formulario.apellido}
+                    onChange={(e) => handleFormulario(e)}
+                    disabled={completo}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-row fila">
+                <div className="flex flex-col w-full mx-2 md:w-1/2">
+                  <input
+                    type="email"
+                    name="email"
+                    value={formulario.email}
+                    placeholder={"Email"}
+                    onChange={(e) => handleFormulario(e)}
+                    disabled={completo}
+                  />
+                </div>
+                <div className="flex flex-col w-full mx-2 md:w-1/2">
+                  <input
+                    type="tel"
+                    name="telefono"
+                    value={formulario.telefono}
+                    placeholder={"Teléfono"}
+                    onChange={(e) => handleFormulario(e)}
+                    disabled={completo}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-row fila">
+                <div className="flex flex-col w-full mx-2 ">
+                  <input
+                    type="text"
+                    name="direccion"
+                    value={formulario.direccion}
+                    placeholder="Dirección"
+                    onChange={(e) => handleFormulario(e)}
+                    disabled={completo}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-row">
+                <div className="flex flex-col w-full mx-2 md:w-1/2">
+                  <Select
+                    placeholder={formulario.completo ? "España" : "País"}
+                    name="pais"
+                    options={optionsPais}
+                    onChange={(e) => handlePais(e)}
+                    styles={customStyles}
+                    isDisabled={completo}
+                  />
+                </div>
+                <div className="flex flex-col w-full mx-2 md:w-1/2">
+                  <Select
+                    placeholder={
+                      formulario.completo
+                        ? formulario.provinciaLabel
+                        : "Provincia"
+                    }
+                    isDisabled={completo}
+                    name="provincia"
+                    styles={customStyles}
+                    options={arrt}
+                    onChange={(e) => handleProvincias(e)}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-row fila">
+                <div className="flex flex-col w-full mx-2 md:w-1/2">
+                  <input
+                    type="text"
+                    name="ciudad"
+                    value={formulario.ciudad}
+                    placeholder={"Ciudad"}
+                    onChange={(e) => handleFormulario(e)}
+                    disabled={completo}
+                  />
+                </div>
+                <div className="flex flex-col w-full mx-2 md:w-1/2">
+                  <input
+                    type="text"
+                    name="cp"
+                    value={formulario.cp}
+                    placeholder={"Código postal"}
+                    onChange={(e) => handleFormulario(e)}
+                    disabled={completo}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-row fila">
+                <div className="flex flex-col gap-5 z-0 w-full mx-2">
+                  <input
+                    type="text"
+                    name="cupon"
+                    placeholder="Cupon"
+                    onChange={(e) => getCupones(e)}
+                    disabled={completo}
+                  />
+                  <Checkbox
+                    css={{
+                      span: {
+                        fontFamily: opciones?.fuente_global,
+                      },
                     }}
+                    name="facturacion"
+                    onChange={(e) => handleCheck(e, "facturacion")}
+                    isRequired={false}
+                    defaultSelected={false}
+                    size="xs"
                   >
-                    {" "}
-                    {" política de privacidad"}
-                  </a>
-                </Link>
-                {" y "}
-                <Link href="/legal/aviso_legal">
-                  <a style={{ marginLeft: "2px" }}>
-                    {" "}
-                    {" términos y condiciones"}
-                  </a>
-                </Link>
-              </Checkbox>
-              {cupon === null && errorCupon !== null && (
-                <span
-                  style={{
-                    fontFamily: opciones?.fuente_global,
-                    color: "red",
-                  }}
-                  className="error"
-                >
-                  {errorCupon}
-                </span>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-row taxes">
-            <div className="flex flex-col w-full mx-2 scroll">
-              {pais.valor && (
-                <span className="errorMessage">{tax.mensaje}</span>
-              )}
-              {tax.tasa !== "" && (
-                <>
-                  {" "}
-                  <div className="flex flex-row w-full mt-5 individualTax">
-                    <div className="flex flex-col w-1/2">
-                      <span className="subtotal">Subtotal:</span>
-                    </div>
-                    <div className="flex flex-col items-end w-1/2">
-                      <span className="subtotal">{subtotal}€</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-row w-full pb-2 mt-5 individualTax">
-                    <div className="flex flex-col w-1/2">
-                      <span className="subtotal">
-                        Impuestos:
-                        <span className="peque"> ({tax.tasa + "% I.V.A"})</span>
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-end w-1/2">
-                      <span className="subtotal">+{iva}€</span>
-                    </div>
-                  </div>
-                  {cupon && (
+                    Tengo una dirección de facturación diferente
+                  </Checkbox>
+                  {formulario.facturacion && (
                     <>
-                      <div
-                        key="cupones"
-                        className="flex flex-row w-full pb-2 mt-5 border-b-2 individualTax"
-                      >
-                        <div className="flex flex-col w-1/2">
-                          <span className="subtotal">Cupon</span>
+                      {" "}
+                      <div className="flex flex-row fila">
+                        <div className="flex flex-col w-full mx-2 md:w-1/2">
+                          <input
+                            type="text"
+                            name="nombreFacturacion"
+                            placeholder={"Nombre"}
+                            value={formulario.nombreFacturacion}
+                            onChange={(e) => handleFormulario(e)}
+                            disabled={completo}
+                          />
                         </div>
-                        <div className="flex flex-col items-end w-1/2">
-                          <span className="subtotal">
-                            {cupon?.tipo === "porcentaje"
-                              ? "-" + cupon.descuento * 100 + "%"
-                              : "-" + cupon.descuento + "€"}
-                          </span>
+                        <div className="flex flex-col w-full mx-2 md:w-1/2">
+                          <input
+                            type="text"
+                            name="apellidoFacturacion"
+                            placeholder={"Apellidos"}
+                            value={formulario.apellidoFacturacion}
+                            onChange={(e) => handleFormulario(e)}
+                            disabled={completo}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-row fila">
+                        <div className="flex flex-col w-full mx-2 md:w-1/2">
+                          <input
+                            type="email"
+                            name="emailFacturacion"
+                            value={formulario.emailFacturacion}
+                            placeholder={"Email"}
+                            onChange={(e) => handleFormulario(e)}
+                            disabled={completo}
+                          />
+                        </div>
+                        <div className="flex flex-col w-full mx-2 md:w-1/2">
+                          <input
+                            type="tel"
+                            name="telefonoFacturacion"
+                            value={formulario.telefonoFacturacion}
+                            placeholder={"Teléfono"}
+                            onChange={(e) => handleFormulario(e)}
+                            disabled={completo}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-row fila">
+                        <div className="flex flex-col w-full mx-2 ">
+                          <input
+                            type="text"
+                            name="direccionFacturacion"
+                            value={formulario.direccionFacturacion}
+                            placeholder="Dirección"
+                            onChange={(e) => handleFormulario(e)}
+                            disabled={completo}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-row">
+                        <div className="flex flex-col w-full mx-2 md:w-1/2">
+                          <Select
+                            placeholder={
+                              formulario.completo ? "España" : "País"
+                            }
+                            name="paisFacturacion"
+                            options={optionsPais}
+                            onChange={(e) => handlePais(e)}
+                            styles={customStyles}
+                            isDisabled={completo}
+                          />
+                        </div>
+                        <div className="flex flex-col w-full mx-2 md:w-1/2">
+                          <Select
+                            placeholder={
+                              formulario.completo
+                                ? formulario.provinciaLabel
+                                : "Provincia"
+                            }
+                            isDisabled={completo}
+                            name="provinciaFacturacion"
+                            styles={customStyles}
+                            options={arrt}
+                            onChange={(e) => handleProvincias(e)}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-row fila">
+                        <div className="flex flex-col w-full mx-2 md:w-1/2">
+                          <input
+                            type="text"
+                            name="ciudadFacturacion"
+                            value={formulario.ciudadFacturacion}
+                            placeholder={"Ciudad"}
+                            onChange={(e) => handleFormulario(e)}
+                            disabled={completo}
+                          />
+                        </div>
+                        <div className="flex flex-col w-full mx-2 md:w-1/2">
+                          <input
+                            type="text"
+                            name="cpFacturacion"
+                            value={formulario.cpFacturacion}
+                            placeholder={"Código postal"}
+                            onChange={(e) => handleFormulario(e)}
+                            disabled={completo}
+                          />
                         </div>
                       </div>
                     </>
                   )}
-                  <div className="flex flex-row w-full pb-2 mt-5 border-b-2 individualTax">
-                    <div className="flex flex-col w-1/2">
-                      <span className="subtotal">Envío:</span>
-                    </div>
-                    <div className="flex flex-col items-end w-1/2">
-                      <span className="subtotal">
-                        +
-                        {formulario.provincia === "GC" ||
-                        formulario.provincia === "TF" ||
-                        formulario.provincia === "PM"
-                          ? "20€"
-                          : total > 50
-                          ? "0€"
-                          : precioEnvio?.precio}
-                      </span>
-                    </div>
-                  </div>
-                </>
-              )}
 
-              <div className="flex flex-row w-full mt-5 individualTax">
-                <div className="flex flex-col w-1/2">
-                  <span className="subtotal">Total:</span>
-                </div>
-                <div className="flex flex-col items-end w-1/2">
-                  <span className="subtotal">
-                    {cupon ? (
-                      <>
-                        {cupon?.tipo === "porcentaje" ? (
-                          <>
-                            {tax.tasa === ""
-                              ? parseFloat(formulario.total) -
-                                totalDescontado +
-                                "€"
-                              : parseFloat(formulario.total) -
-                                totalDescontado +
-                                parseFloat(precioEnvio.precio) +
-                                "€"}
-                          </>
-                        ) : (
-                          <>
-                            {cupon && tax.tasa === ""
-                              ? parseFloat(formulario.total) -
-                                parseInt(cupon?.descuento) +
-                                "€"
-                              : parseFloat(formulario.total) -
-                                parseInt(cupon?.descuento) +
-                                parseFloat(precioEnvio.precio) +
-                                "€"}
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        {tax.tasa === ""
-                          ? parseFloat(formulario.total) + "€"
-                          : parseFloat(formulario.total) +
-                            parseFloat(precioEnvio.precio) +
-                            "€"}
-                      </>
-                    )}
-                  </span>
+                  <Checkbox
+                    css={{
+                      span: {
+                        fontFamily: opciones?.fuente_global,
+                      },
+                    }}
+                    name="comerciales"
+                    onChange={(e) => handleCheck(e, "comerciales")}
+                    isRequired={true}
+                    defaultSelected={false}
+                    size="xs"
+                  >
+                    Acepto recibir comunicaciones comerciales
+                  </Checkbox>
+                  <Checkbox
+                    css={{
+                      span: {
+                        fontFamily: opciones?.fuente_global,
+                      },
+                    }}
+                    name="politicas"
+                    onChange={(e) => handleCheck(e, "politicas")}
+                    isRequired={true}
+                    defaultSelected={false}
+                    size="xs"
+                  >
+                    Acepto la
+                    <Link href="/legal/politica-de-privacidad">
+                      <a
+                        style={{
+                          marginLeft: "2px",
+                          marginRight: "2px",
+                        }}
+                      >
+                        {" "}
+                        {" política de privacidad"}
+                      </a>
+                    </Link>
+                    {" y "}
+                    <Link href="/legal/aviso_legal">
+                      <a style={{ marginLeft: "2px" }}>
+                        {" "}
+                        {" términos y condiciones"}
+                      </a>
+                    </Link>
+                  </Checkbox>
+                  {cupon === null && errorCupon !== null && (
+                    <span
+                      style={{
+                        fontFamily: opciones?.fuente_global,
+                        color: "red",
+                      }}
+                      className="error"
+                    >
+                      {errorCupon}
+                    </span>
+                  )}
                 </div>
               </div>
-              {error && (
-                <>
-                  {" "}
-                  <span
-                    style={{
-                      fontFamily: opciones?.fuente_global,
-                      color: "red",
-                    }}
-                    className="error my-5"
-                  >
-                    {error}
-                  </span>
-                </>
-              )}
-            </div>
-          </div>
 
-          <div className="flex flex-row w-full justify-center mt-5">
-            {completo ? (
-              <>
-                <div className="flex items-center flex-col">
-                  {" "}
-                  <StripeCheckout
+              <div className="flex flex-row w-full justify-center mt-5">
+                {completo ? (
+                  <>
+                    <div className="flex items-center flex-col w-full p-4">
+                      {" "}
+                      {/* <StripeCheckout
                     formulario={data}
                     envio={
                       formulario.provincia === "GC" ||
@@ -935,28 +815,180 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                         : precioEnvio?.precio
                     }
                     cupon={cupon}
+                  /> */}
+                      <button
+                        style={{
+                          fontFamily: opciones?.fuente_global,
+                          textDecoration: "underline",
+                        }}
+                        className="mt-6"
+                        onClick={() => setCompleto(false)}
+                      >
+                        Volver a editar los datos
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <input
+                    className="botonForm mt-9"
+                    type="submit"
+                    value="Continuar"
                   />
-                  <button
-                    style={{
-                      fontFamily: opciones?.fuente_global,
-                      textDecoration: "underline",
-                    }}
-                    className="mt-6"
-                    onClick={() => setCompleto(false)}
-                  >
-                    Volver a editar los datos
-                  </button>
+                )}
+              </div>
+            </form>
+          </>
+        )}
+
+        {completo && (
+          <>
+            <div className="flex flex-row taxes">
+              <div className="flex flex-col w-full mx-2 scroll">
+                {pais.valor && (
+                  <span className="errorMessage">{tax.mensaje}</span>
+                )}
+                {tax.tasa !== "" && (
+                  <>
+                    {" "}
+                    <div className="flex flex-row w-full mt-5 individualTax">
+                      <div className="flex flex-col w-1/2">
+                        <span className="subtotal">Subtotal:</span>
+                      </div>
+                      <div className="flex flex-col items-end w-1/2">
+                        <span className="subtotal">{subtotal.toFixed(2)}€</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-row w-full pb-2 mt-5 individualTax">
+                      <div className="flex flex-col w-1/2">
+                        <span className="subtotal">
+                          Impuestos:
+                          <span className="peque">
+                            {" "}
+                            ({tax.tasa + "% I.V.A"})
+                          </span>
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-end w-1/2">
+                        <span className="subtotal">+{iva}€</span>
+                      </div>
+                    </div>
+                    {cupon && (
+                      <>
+                        <div
+                          key="cupones"
+                          className="flex flex-row w-full pb-2 mt-5 border-b-2 individualTax"
+                        >
+                          <div className="flex flex-col w-1/2">
+                            <span className="subtotal">Cupon</span>
+                          </div>
+                          <div className="flex flex-col items-end w-1/2">
+                            <span className="subtotal">
+                              {cupon?.tipo === "porcentaje"
+                                ? "-" + cupon.descuento * 100 + "%"
+                                : "-" + cupon.descuento + "€"}
+                            </span>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    <div className="flex flex-row w-full pb-2 mt-5 border-b-2 individualTax">
+                      <div className="flex flex-col w-1/2">
+                        <span className="subtotal">Envío:</span>
+                      </div>
+                      <div className="flex flex-col items-end w-1/2">
+                        <span className="subtotal">
+                          +
+                          {formulario.provincia === "GC" ||
+                          formulario.provincia === "TF" ||
+                          formulario.provincia === "PM"
+                            ? "20€"
+                            : total > 50
+                            ? "0€"
+                            : precioEnvio?.precio}
+                        </span>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                <div className="flex flex-row w-full mt-5 individualTax">
+                  <div className="flex flex-col w-1/2">
+                    <span className="subtotal">Total:</span>
+                  </div>
+                  <div className="flex flex-col items-end w-1/2">
+                    <span className="subtotal">
+                      {cupon ? (
+                        <>
+                          {cupon?.tipo === "porcentaje" ? (
+                            <>
+                              {tax.tasa === ""
+                                ? parseFloat(formulario.total) -
+                                  totalDescontado +
+                                  "€"
+                                : parseFloat(formulario.total) -
+                                  totalDescontado +
+                                  parseFloat(precioEnvio.precio) +
+                                  "€"}
+                            </>
+                          ) : (
+                            <>
+                              {cupon && tax.tasa === ""
+                                ? parseFloat(formulario.total) -
+                                  parseInt(cupon?.descuento) +
+                                  "€"
+                                : parseFloat(formulario.total) -
+                                  parseInt(cupon?.descuento) +
+                                  parseFloat(precioEnvio.precio) +
+                                  "€"}
+                            </>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {tax.tasa === ""
+                            ? parseFloat(formulario.total) + "€"
+                            : parseFloat(formulario.total) +
+                              parseFloat(precioEnvio.precio) +
+                              "€"}
+                        </>
+                      )}
+                    </span>
+                  </div>
                 </div>
-              </>
-            ) : (
-              <input
-                className="botonForm mt-9"
-                type="submit"
-                value="Continuar"
+                {error && (
+                  <>
+                    {" "}
+                    <span
+                      style={{
+                        fontFamily: opciones?.fuente_global,
+                        color: "red",
+                      }}
+                      className="error my-5"
+                    >
+                      {error}
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="flex flex-row w-full">
+              <StripeCardForm
+                formulario={data}
+                cupon={cupon}
+                items={actualCart}
+                envio={
+                  formulario.provincia === "GC" ||
+                  formulario.provincia === "TF" ||
+                  formulario.provincia === "PM"
+                    ? "20"
+                    : total > 50
+                    ? "0"
+                    : precioEnvio?.precio
+                }
               />
-            )}
-          </div>
-        </form>
+            </div>
+          </>
+        )}
 
         <div className="flex flex-row justify-center mt-2 mb-9">
           <button className="atras" onClick={onAction}>

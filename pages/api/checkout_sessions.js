@@ -71,7 +71,7 @@ export default async function handler(req, res) {
     });
      } 
   }); */
-  items.push({
+/*   items.push({
     price_data: {
       currency: "EUR",
       unit_amount_decimal: envio * 100,
@@ -83,7 +83,7 @@ export default async function handler(req, res) {
       },
     },
     quantity: 1,
-  });
+  }); */
 
   /*   await items.map((i) => {
     const metadata = Object?.values(i?.meta_data).map((key) => {
@@ -281,13 +281,11 @@ export default async function handler(req, res) {
       );
     } */
     const sus = false;
-    const session = await stripe.checkout.sessions
+    /*     const session = await stripe.checkout.sessions
       .create({
         line_items: items,
-        mode: /* sus ? "subscription" : "payment" */ "payment",
-        success_url: sus
-          ? `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}&suscripcion=${suscripcion.id}`
-          : `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
+        mode: "payment",
+        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}&wc_order_id=${wc.id}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
         discounts: [
           {
@@ -297,12 +295,11 @@ export default async function handler(req, res) {
         customer: customer?.id,
         metadata: {
           order_id: wc?.id,
-          /* sus_id: suscripcion?.id */
         },
       })
       .then((session) => {
         return session;
-      });
-    res.status(200).json(session);
+      }); */
+    res.status(200).json({});
   }
 }

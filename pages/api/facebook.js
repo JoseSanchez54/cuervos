@@ -1,5 +1,6 @@
 import WooCommerce from "../../woocommerce/Woocommerce";
 import * as Sentry from "@sentry/nextjs";
+import axios from "axios";
 export default async (req, res) => {
   const { datos } = req.body;
   const bizSdk = require("facebook-nodejs-business-sdk");
@@ -75,6 +76,21 @@ export default async (req, res) => {
           pixel_id
         ).setEvents([serverEvent1]);
         //.setTestEventCode("TEST13758");
+
+        Promise.all([eventRequest1.execute()]).then(
+          (response) => {
+            /* console.log(
+              "Execute 2 Requests OK. URL:" +
+                req.headers.referer +
+                "Response: ",
+              response
+            ); */
+          },
+          (err) => {
+            Sentry.captureException(err);
+            console.log("Error: ", err);
+          }
+        );
         try {
           axios.post("/api/addFire", {
             newMail: order.billing.email,
@@ -86,20 +102,6 @@ export default async (req, res) => {
         } catch (error) {
           Sentry.captureException(error);
         }
-        Promise.all([eventRequest1.execute()]).then(
-          (response) => {
-            console.log(
-              "Execute 2 Requests OK. URL:" +
-                req.headers.referer +
-                "Response: ",
-              response
-            );
-          },
-          (err) => {
-            Sentry.captureException(err);
-            console.log("Error: ", err);
-          }
-        );
       } else if (datos.eventName === "AddToCart") {
         const content = new Content()
           .setId(datos.products[0].sku)
@@ -128,12 +130,12 @@ export default async (req, res) => {
         //.setTestEventCode("TEST91275");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
-            console.log(
+            /*  console.log(
               "Execute 2 Requests OK. URL:" +
                 req.headers.referer +
                 "Response: ",
               response
-            );
+            ); */
           },
           (err) => {
             Sentry.captureException(err);
@@ -164,12 +166,12 @@ export default async (req, res) => {
         //.setTestEventCode("TEST91275");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
-            console.log(
+            /*  console.log(
               "Execute 2 Requests OK. URL:" +
                 req.headers.referer +
                 "Response: ",
               response
-            );
+            ); */
           },
           (err) => {
             Sentry.captureException(err);
@@ -204,12 +206,12 @@ export default async (req, res) => {
         //.setTestEventCode("TEST91275");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
-            console.log(
+            /* console.log(
               "Execute 2 Requests OK. URL:" +
                 req.headers.referer +
                 "Response: ",
               response
-            );
+            ); */
           },
           (err) => {
             Sentry.captureException(err);
