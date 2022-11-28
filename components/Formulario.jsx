@@ -8,6 +8,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { Collapse } from "@nextui-org/react";
 const Formulario = ({ cupon, formulario, envio }) => {
   const router = useRouter();
   const stripe = useStripe();
@@ -93,38 +94,101 @@ const Formulario = ({ cupon, formulario, envio }) => {
 
   return (
     <>
-      <div className="flex flex-col w-full justify-center">
+      <div
+        style={{ backgroundColor: "#f5f5f57a", padding: "21px" }}
+        className="flex mt-9 flex-col w-full justify-center"
+      >
+        <span
+          style={{
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+            color: "#000",
+          }}
+        >
+          Elige tu metodo de pago
+        </span>
         <form
           style={{ width: "100%", textAlign: "center", boxShadow: "none" }}
           id="payment-form w-full"
           onSubmit={handleSubmit}
         >
-          <PaymentElement />
+          <Collapse.Group>
+            <Collapse title="Stripe">
+              <PaymentElement />
+              <button
+                style={{
+                  fontFamily: "Helvetica",
+                  fontSize: "14px",
+                  fontWeight: "normal",
+                  color: "white",
+                  backgroundColor: "#000000",
+                  padding: "10px 20px",
+                  marginTop: "20px",
+                }}
+                id="submit"
+              >
+                <span id="button-text">
+                  {processing ? (
+                    <div className="spinner" id="spinner"></div>
+                  ) : (
+                    "Pagar ahora"
+                  )}
+                </span>
+              </button>
+            </Collapse>
+            <Collapse title="Paypal">
+              {" "}
+              <PayPalScriptProvider
+                options={{
+                  "client-id": process.env.CLIENT_ID,
+                  currency: "EUR",
+                }}
+              >
+                <>
+                  <PayPalButtons
+                    currency="EUR"
+                    style={{ layout: "horizontal" }}
+                    createOrder={(data, actions) => {
+                      axios
+                        .post("/api/orders", {
+                          formulario: formulario,
+                        })
+                        .then((res) => {
+                          localStorage.setItem("idPedido", res.data.id);
+                          setIdPedidoPaypal(res.data.id);
+                        })
+                        .catch((err) => {
+                          console.log("error StripeCheckout");
+                        });
+                      return actions.order.create({
+                        purchase_units: [unidad],
+                      });
+                    }}
+                    onApprove={(data, actions) => {
+                      axios.post("/api/orders", {
+                        id: localStorage.getItem("idPedido"),
+                      });
+
+                      return actions.order.capture().then((details) => {
+                        const name = details.payer.name.given_name;
+                        router.push(
+                          "/success?wc_order_id=" +
+                            localStorage.getItem("idPedido")
+                        );
+                      });
+                    }}
+                  />
+                </>
+              </PayPalScriptProvider>
+            </Collapse>
+          </Collapse.Group>
+
           {/*      <CardElement
             id="card-element"
             options={cardStyle}
             onChange={handleChange}
           /> */}
-          <button
-            style={{
-              fontFamily: "Helvetica",
-              fontSize: "14px",
-              fontWeight: "normal",
-              color: "white",
-              backgroundColor: "#000000",
-              padding: "10px 20px",
-              marginTop: "20px",
-            }}
-            id="submit"
-          >
-            <span id="button-text">
-              {processing ? (
-                <div className="spinner" id="spinner"></div>
-              ) : (
-                "Pagar ahora"
-              )}
-            </span>
-          </button>
+
           {/* Show any error that happens when processing the payment */}
           {errorMsg && (
             <div className="card-error" role="alert">
@@ -134,45 +198,6 @@ const Formulario = ({ cupon, formulario, envio }) => {
           {/* Show a success message upon completion */}
           <p>{message}</p>
         </form>
-        <span className="text-center my-[40px]">o</span>
-        <PayPalScriptProvider
-          options={{ "client-id": process.env.CLIENT_ID, currency: "EUR" }}
-        >
-          <>
-            <PayPalButtons
-              currency="EUR"
-              style={{ layout: "horizontal" }}
-              createOrder={(data, actions) => {
-                axios
-                  .post("/api/orders", {
-                    formulario: formulario,
-                  })
-                  .then((res) => {
-                    localStorage.setItem("idPedido", res.data.id);
-                    setIdPedidoPaypal(res.data.id);
-                  })
-                  .catch((err) => {
-                    console.log("error StripeCheckout");
-                  });
-                return actions.order.create({
-                  purchase_units: [unidad],
-                });
-              }}
-              onApprove={(data, actions) => {
-                axios.post("/api/orders", {
-                  id: localStorage.getItem("idPedido"),
-                });
-
-                return actions.order.capture().then((details) => {
-                  const name = details.payer.name.given_name;
-                  router.push(
-                    "/success?wc_order_id=" + localStorage.getItem("idPedido")
-                  );
-                });
-              }}
-            />
-          </>
-        </PayPalScriptProvider>
       </div>
       <style jsx>{`
         #root {
@@ -187,7 +212,7 @@ const Formulario = ({ cupon, formulario, envio }) => {
             0px 2px 5px 0px rgba(50, 50, 93, 0.1),
             0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
           border-radius: 7px;
-          padding: 40px;
+          padding: 10px;
         }
 
         input {

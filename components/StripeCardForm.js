@@ -18,6 +18,12 @@ const StripeCardForm = ({ items, cupon, formulario, envio }) => {
   const options = {
     clientSecret,
     appearance,
+    rules: {
+      ".Tab:active": {
+        border: "1px solid #E0E6EB",
+        backgroundColor: "#000000",
+      },
+    },
   };
   useEffect(() => {
     const getClientSecret = async () => {
