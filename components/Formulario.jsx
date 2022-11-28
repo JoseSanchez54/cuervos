@@ -4,6 +4,7 @@ import {
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
+import Image from "next/image";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 import axios from "axios";
@@ -109,7 +110,7 @@ const Formulario = ({ cupon, formulario, envio }) => {
             fontFamily: "Fjalla One",
           }}
         >
-          Elige tu metodo de pago
+          Elige tu método de pago
         </span>
         <form
           style={{ width: "100%", textAlign: "center", boxShadow: "none" }}
@@ -117,7 +118,20 @@ const Formulario = ({ cupon, formulario, envio }) => {
           onSubmit={handleSubmit}
         >
           <Collapse.Group>
-            <Collapse title="Stripe">
+            <Collapse
+              contentLeft={
+                <Image
+                  objectFit="contain"
+                  width="50px"
+                  height="50px"
+                  src="/creditcard.png"
+                ></Image>
+              }
+              css={{
+                fontFamily: "Futura PT",
+              }}
+              title="Tarjeta de crédito"
+            >
               <PaymentElement />
               <button
                 style={{
@@ -140,7 +154,20 @@ const Formulario = ({ cupon, formulario, envio }) => {
                 </span>
               </button>
             </Collapse>
-            <Collapse title="Paypal">
+            <Collapse
+              css={{
+                fontFamily: "Futura PT",
+              }}
+              contentLeft={
+                <Image
+                  objectFit="contain"
+                  width="50px"
+                  height="50px"
+                  src="/paypal.png"
+                ></Image>
+              }
+              title="Paypal"
+            >
               {" "}
               <PayPalScriptProvider
                 options={{
