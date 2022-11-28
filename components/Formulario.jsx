@@ -75,7 +75,10 @@ const Formulario = ({ cupon, formulario, envio }) => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/success?wc_order_id=" + wcID,
+        return_url:
+          process.env.NODE_ENV === "development"
+            ? "http://localhost:3000/success" + wcID
+            : "https://vinoscriacuervos.com/success" + wcID,
       },
     });
 
