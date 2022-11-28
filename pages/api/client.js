@@ -4,6 +4,7 @@ const stripeSecret = new Stripe(process.env.STRIPE_SECRET_KEY);
 export default async (req, res) => {
   if (req.method === "POST") {
     const { items, cupon } = req.body;
+    console.log(items);
 
     let total = 0;
     items.map((e) => {
@@ -20,9 +21,7 @@ export default async (req, res) => {
       total = total - cupon.descuento;
       total = parseFloat(total).toFixed(2);
     }
-    if (total < 50) {
-      total = parseFloat(total) + 4.95;
-    }
+
     try {
       const payment = await stripeSecret.paymentIntents.create({
         amount: parseFloat(total) * 100,
