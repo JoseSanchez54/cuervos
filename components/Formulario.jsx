@@ -153,6 +153,13 @@ const Formulario = ({ cupon, formulario, envio }) => {
                   )}
                 </span>
               </button>
+              {errorMsg && (
+                <div className="card-error" role="alert">
+                  {errorMsg}
+                </div>
+              )}
+              {/* Show a success message upon completion */}
+              <p>{message}</p>
             </Collapse>
             <Collapse
               css={{
@@ -221,13 +228,6 @@ const Formulario = ({ cupon, formulario, envio }) => {
           /> */}
 
           {/* Show any error that happens when processing the payment */}
-          {errorMsg && (
-            <div className="card-error" role="alert">
-              {errorMsg}
-            </div>
-          )}
-          {/* Show a success message upon completion */}
-          <p>{message}</p>
         </form>
       </div>
       <style jsx>{`
