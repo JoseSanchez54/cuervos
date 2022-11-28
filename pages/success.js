@@ -102,7 +102,9 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
 
   const { query } = useRouter();
   const { wc_order_id, session_id, suscripcion } = query;
+
   if (wc_order_id) {
+    axios.put("/api/orders?id=" + wc_order_id);
     axios.post("/api/facebook", {
       datos: {
         eventName: "Purchase",
@@ -151,6 +153,7 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
   const fbp = getCookie("_fbp");
   const fbc = getCookie("_fbc");
 
+  const completarPedido = (wc_order_id) => {};
   useEffect(() => {
     import("react-facebook-pixel")
       .then((module) => module.default)

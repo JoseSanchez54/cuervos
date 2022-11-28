@@ -4,11 +4,11 @@ const stripeSecret = new Stripe(process.env.STRIPE_SECRET_KEY);
 export default async (req, res) => {
   if (req.method === "POST") {
     const { items, cupon } = req.body;
-    console.log("---------------", cupon);
+
     let total = 0;
     items.map((e) => {
       let transformado = parseFloat(e.price).toFixed(2);
-      console.log(transformado);
+
       total = parseFloat(total) + parseFloat(transformado);
     });
     total = parseFloat(total).toFixed(2);
@@ -16,11 +16,9 @@ export default async (req, res) => {
       let descuento = total * cupon.descuento;
       total = total - descuento;
       total = parseFloat(total).toFixed(2);
-      console.log("rt", total);
-    } else {
+    } else if (cupon.tipo === "fijo") {
       total = total - cupon.descuento;
       total = parseFloat(total).toFixed(2);
-      console.log("rtf", total);
     }
     if (total < 50) {
       total = parseFloat(total) + 4.95;
@@ -36,7 +34,7 @@ export default async (req, res) => {
       });
     } catch (error) {
       Sentry.captureException(error);
-      console.log(error);
+
       return res.status(400).json({
         message: error.message,
       });

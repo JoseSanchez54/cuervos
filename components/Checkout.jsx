@@ -250,6 +250,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       phone: formulario.telefono,
       coupon: cupon,
     },
+    coupon_lines: cupon && [{ code: cupon.code }],
     meta_data: [
       {
         key: "codigoPais",
@@ -263,7 +264,7 @@ const FormularioCheckout = ({ onAction, opciones }) => {
 
     line_items: actualCart.map((item) => ({
       product_id: item.id,
-      quantity: item.cantidad,
+      quantity: "1",
       variation_id: item?.variacion?.id,
     })),
     shipping_lines: [
@@ -972,7 +973,11 @@ const FormularioCheckout = ({ onAction, opciones }) => {
         {completo && (
           <>
             <div className="flex flex-row w-full">
-              <StripeCardForm cupon={cupon} items={actualCart} />
+              <StripeCardForm
+                formulario={data}
+                cupon={cupon}
+                items={actualCart}
+              />
             </div>
           </>
         )}

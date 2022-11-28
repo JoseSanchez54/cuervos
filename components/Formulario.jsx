@@ -1,7 +1,13 @@
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import { useState, useEffect } from "react";
-
-const Formulario = ({ items, cupon }) => {
+import {
+  useStripe,
+  useElements,
+  PaymentElement,
+} from "@stripe/react-stripe-js";
+import { useSelector } from "react-redux";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useState } from "react";
+import axios from "axios";
+const Formulario = ({ items, cupon, clientSecret, formulario }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
@@ -10,31 +16,38 @@ const Formulario = ({ items, cupon }) => {
   const [processing, setProcessing] = useState(false);
   const [succeeded, setSucceeded] = useState(false);
   const [success, setSuccess] = useState(false);
-  useEffect(() => {
-    const getClientSecret = async () => {
-      const response = await fetch("/api/client", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          items: items,
-          cupon: cupon,
-        }),
-      });
-      const data = await response.json();
-      setClientSecret(data.client_secret);
-      return data.client_secret;
-    };
-    getClientSecret();
-  }, []);
-  const handleSubmit = async (ev) => {
+  const [message, setMessage] = useState("");
+  const total = useSelector((state) => state.cartReducer.total);
+  const costo =
+    (parseFloat(total) < 50 && formulario.shipping.state !== "GC") ||
+    (parseFloat(total) < 50 && formulario.shipping.state !== "TF") ||
+    (parseFloat(total) < 50 && formulario.shipping.state !== "PM")
+      ? parseFloat(total) + parseFloat(envio)
+      : formulario.shipping.state === "GC" ||
+        formulario.shipping.state === "TF" ||
+        formulario.shipping.state === "PM"
+      ? parseFloat(total) + parseFloat(envio)
+      : parseFloat(total);
+
+  let unidad = {
+    amount: {
+      currency: "EUR",
+      value: !cupon
+        ? costo
+        : cupon.tipo !== "porcentaje"
+        ? costo - parseFloat(cupon.amount)
+        : (costo - parseFloat((total * cupon.amount) / 100)).toFixed(2),
+    },
+  };
+
+  /*   const handleSubmit = async (ev) => {
     ev.preventDefault();
     setProcessing(true);
 
     const payload = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: elements.getElement(CardElement),
+
       },
     });
 
@@ -47,6 +60,29 @@ const Formulario = ({ items, cupon }) => {
 
       setProcessing(false);
       setSucceeded(true);
+    }
+  }; */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!stripe || !elements) {
+      return;
+    }
+    const wcID = await axios
+      .post("/api/orders", { formulario: formulario, tipo: "stripe" })
+      .then((e) => e.data.id);
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: "http://localhost:3000/success?wc_order_id=" + wcID,
+      },
+    });
+
+    if (error.type === "card_error" || error.type === "validation_error") {
+      setMessage(error.message);
+    } else {
+      setMessage("An unexpected error occured.");
     }
   };
   const handleChange = async (event) => {
@@ -77,17 +113,18 @@ const Formulario = ({ items, cupon }) => {
 
   return (
     <>
-      <div className="flex flex-row w-full justify-center">
+      <div className="flex flex-col w-full justify-center">
         <form
           style={{ width: "100%", textAlign: "center" }}
           id="payment-form w-full"
           onSubmit={handleSubmit}
         >
-          <CardElement
+          <PaymentElement />
+          {/*      <CardElement
             id="card-element"
             options={cardStyle}
             onChange={handleChange}
-          />
+          /> */}
           <button
             style={{
               fontFamily: "Helvetica",
@@ -98,7 +135,6 @@ const Formulario = ({ items, cupon }) => {
               padding: "10px 20px",
               marginTop: "20px",
             }}
-            disabled={processing || disabled || succeeded}
             id="submit"
           >
             <span id="button-text">
@@ -116,15 +152,46 @@ const Formulario = ({ items, cupon }) => {
             </div>
           )}
           {/* Show a success message upon completion */}
-          <p className={succeeded ? "result-message" : "result-message hidden"}>
-            Payment succeeded, see the result in your
-            <a href={`https://dashboard.stripe.com/test/payments`}>
-              {" "}
-              Stripe dashboard.
-            </a>{" "}
-            Refresh the page to pay again.
-          </p>
+          <p>{message}</p>
         </form>
+        <PayPalScriptProvider
+          options={{ "client-id": process.env.CLIENT_ID, currency: "EUR" }}
+        >
+          <>
+            <PayPalButtons
+              currency="EUR"
+              style={{ layout: "horizontal" }}
+              createOrder={(data, actions) => {
+                axios
+                  .post("/api/orders", {
+                    formulario: formulario,
+                  })
+                  .then((res) => {
+                    localStorage.setItem("idPedido", res.data.id);
+                    setIdPedidoPaypal(res.data.id);
+                  })
+                  .catch((err) => {
+                    console.log("error StripeCheckout");
+                  });
+                return actions.order.create({
+                  purchase_units: [unidad],
+                });
+              }}
+              onApprove={(data, actions) => {
+                axios.post("/api/orders", {
+                  id: localStorage.getItem("idPedido"),
+                });
+
+                return actions.order.capture().then((details) => {
+                  const name = details.payer.name.given_name;
+                  Router.push(
+                    "/success?wc_order_id=" + localStorage.getItem("idPedido")
+                  );
+                });
+              }}
+            />
+          </>
+        </PayPalScriptProvider>
       </div>
       <style jsx>{`
         #root {
