@@ -39,7 +39,6 @@ const Formulario = ({ cupon, formulario, envio }) => {
       ? parseFloat(unidad) + parseFloat(envio)
       : parseFloat(unidad);
   const final = (parseFloat(costo) + parseFloat(unidad)).toFixed(2);
-  console.log(costo, unidad, final);
   const unidad1 = {
     amount: {
       currency: "EUR",
@@ -101,7 +100,6 @@ const Formulario = ({ cupon, formulario, envio }) => {
     setDisabled(event.empty);
     setErrorMsg(event.error ? event.error.message : "");
   };
-  console.log(unidad1);
   return (
     <>
       <div
