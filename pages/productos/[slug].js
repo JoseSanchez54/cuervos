@@ -12,7 +12,6 @@ import Footer from "../../components/Footer";
 import Edad from "../../components/Edad";
 import useSWR from "swr";
 import { getCookie } from "cookies-next";
-import PrecioPag from "../../components/PrecioPaginaPro";
 
 export const getStaticPaths = async () => {
   const products = await WooCommerce.get("products?per_page=50").then(
@@ -373,12 +372,6 @@ const SingleProduct = ({
               <div className="w-full flex flex-col self-start top-[90px]">
                 <div className="flex flex-row w-full">
                   <div className="flex p-5 flex-col">
-                    <Image
-                      objectFit="contain"
-                      height="274px"
-                      width="1920px"
-                      src="/banner3.jpg"
-                    ></Image>
                     <h1 style={{ fontWeight: "normal" }}>
                       <span className="etiqueta">{product?.name}</span>
                     </h1>
