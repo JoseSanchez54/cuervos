@@ -19,25 +19,31 @@ const Formulario = ({ cupon, formulario, envio }) => {
   const [processing, setProcessing] = useState(false);
   const [message, setMessage] = useState("");
   const total = useSelector((state) => state.cartReducer.total);
+  let unidad = total;
+  if (cupon.tipo === "porcentaje") {
+    let descuento = total * cupon.descuento;
+    unidad = total - descuento;
+    unidad = parseFloat(unidad).toFixed(2);
+  } else if (cupon.tipo === "fijo") {
+    unidad = unidad - cupon.descuento;
+    unidad = parseFloat(unidad).toFixed(2);
+  }
   const costo =
-    (parseFloat(total) < 50 && formulario.shipping.state !== "GC") ||
-    (parseFloat(total) < 50 && formulario.shipping.state !== "TF") ||
-    (parseFloat(total) < 50 && formulario.shipping.state !== "PM")
-      ? parseFloat(total) + parseFloat(envio)
+    (parseFloat(unidad) < 50 && formulario.shipping.state !== "GC") ||
+    (parseFloat(unidad) < 50 && formulario.shipping.state !== "TF") ||
+    (parseFloat(unidad) < 50 && formulario.shipping.state !== "PM")
+      ? parseFloat(unidad) + parseFloat(envio)
       : formulario.shipping.state === "GC" ||
         formulario.shipping.state === "TF" ||
         formulario.shipping.state === "PM"
-      ? parseFloat(total) + parseFloat(envio)
-      : parseFloat(total);
-
-  let unidad = {
+      ? parseFloat(unidad) + parseFloat(envio)
+      : parseFloat(unidad);
+  const final = (parseFloat(costo) + parseFloat(unidad)).toFixed(2);
+  console.log(costo, unidad, final);
+  const unidad1 = {
     amount: {
       currency: "EUR",
-      value: !cupon
-        ? costo
-        : cupon.tipo !== "porcentaje"
-        ? costo - parseFloat(cupon.amount)
-        : (costo - parseFloat((total * cupon.amount) / 100)).toFixed(2),
+      value: String(costo),
     },
   };
 
@@ -95,7 +101,7 @@ const Formulario = ({ cupon, formulario, envio }) => {
     setDisabled(event.empty);
     setErrorMsg(event.error ? event.error.message : "");
   };
-
+  console.log(unidad1);
   return (
     <>
       <div
@@ -199,7 +205,7 @@ const Formulario = ({ cupon, formulario, envio }) => {
                           console.log("error StripeCheckout");
                         });
                       return actions.order.create({
-                        purchase_units: [unidad],
+                        purchase_units: [unidad1],
                       });
                     }}
                     onApprove={(data, actions) => {
