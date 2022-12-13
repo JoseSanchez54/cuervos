@@ -401,7 +401,7 @@ const HomeCuervos = ({ opciones, pagina, categorias, vinos }) => {
             </span>
           </div>
           <div className="flex flex-row flex-wrap lg:flex-nowrap justify-center w-full min-h-[508px] h-full">
-            <Grid max="3" productos={vinos} opciones={opciones} />
+            <Grid max="4" productos={vinos} opciones={opciones} />
           </div>
         </div>
       </div>
