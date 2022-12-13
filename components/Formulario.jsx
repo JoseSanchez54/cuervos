@@ -83,8 +83,8 @@ const Formulario = ({ cupon, formulario, envio }) => {
       confirmParams: {
         return_url:
           process.env.NODE_ENV === "development"
-            ? "http://localhost:3000/success" + wcID
-            : "https://vinoscriacuervos.com/success" + wcID,
+            ? "http://localhost:3000/success?wc_order_id=" + wcID
+            : "https://vinoscriacuervos.com/success?wc_order_id=" + wcID,
       },
     });
 
