@@ -77,7 +77,6 @@ export default function Tienda({
   productos,
   categoriaActual,
 }) {
-  console.log(productos);
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { data } = usePages(pagesNew, "tienda");
   const { products: productosSWR } = useProducts(productos, categoriaActual);
