@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+/* import dynamic from "next/dynamic";
 import axios from "axios";
 import WooCommerce from "../woocommerce/Woocommerce";
 import { useState, useEffect } from "react";
@@ -344,3 +344,4 @@ const Configurador = ({ options, categorias, productos }) => {
   );
 };
 export default Configurador;
+ */
