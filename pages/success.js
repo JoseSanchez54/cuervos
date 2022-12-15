@@ -18,9 +18,7 @@ export async function getStaticProps() {
   const internos = await axios
     .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
     .then((res) => res.data);
-  const posts = await axios
-    .get(process.env.URLBASE + "wp-json/wp/v2/allposts")
-    .then((res) => res?.data);
+
 
   const options = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
@@ -42,7 +40,6 @@ export async function getStaticProps() {
     props: {
       opciones: options.data[0],
       template: template,
-      entradas: posts,
       internos: internos,
       categorias,
       orders,

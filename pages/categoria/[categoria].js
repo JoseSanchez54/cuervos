@@ -31,9 +31,6 @@ export async function getStaticProps(props) {
   const internos = await axios
     .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
     .then((res) => res.data);
-  const posts = await axios
-    .get(process.env.URLBASE + "wp-json/wp/v2/allposts")
-    .then((res) => res?.data);
 
   const pagesNew = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/paginas"
@@ -64,7 +61,6 @@ export async function getStaticProps(props) {
       options: options.data[0],
       pagesNew: home2,
       template: template,
-      entradas: posts,
       internos: internos,
       productos,
       categorias,
@@ -81,6 +77,7 @@ export default function Tienda({
   productos,
   categoriaActual,
 }) {
+  console.log(productos);
   const { isLoading, options: optionsSWR } = useOptions(options);
   const { data } = usePages(pagesNew, "tienda");
   const { products: productosSWR } = useProducts(productos, categoriaActual);

@@ -23,9 +23,7 @@ export async function getStaticProps() {
   const pagesNew = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/paginas"
   );
-  const pagina = await pagesNew.data.find(
-    (page) => page.pagina_asociada === "area"
-  );
+
   const productos = await WooCommerce.get(
     "products?per_page=3&status=publish&category=1447&orderby=id&order=asc"
   ).then((response) => {
