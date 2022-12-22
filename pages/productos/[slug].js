@@ -129,17 +129,18 @@ const SingleProduct = ({
 
   const [isVino, setIsVino] = useState(false);
   const fbp = getCookie("_fbp");
-  axios.post("/api/facebook", {
-    datos: {
-      eventName: "ViewContent",
-      id: product.id,
-      price: product.price,
-      fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
-      content_type: "product",
-      currency: "EUR", // optional
-    },
-  });
+
   useEffect(() => {
+    axios.post("/api/facebook", {
+      datos: {
+        eventName: "ViewContent",
+        id: product.id,
+        price: product.price,
+        fbp: fbp, // ViewContent, AddToCart, InitiateCheckout or Purchase
+        content_type: "product",
+        currency: "EUR", // optional
+      },
+    });
     const productToFB = {
       content_ids: product.id,
       content_type: "product",

@@ -38,14 +38,6 @@ const FormularioCheckout = ({ onAction, opciones }) => {
   const envios = useSelector((state) => state.cartReducer.envios);
   const peso = useSelector((state) => state.cartReducer.peso);
 
-  axios.post("/api/facebook", {
-    datos: {
-      eventName: "InitiateCheckout",
-      fbp: fbp,
-      cart: actualCart,
-      total: total,
-    },
-  });
   const [formulario, setFormulario] = useState({
     nombre: "",
     apellido: "",
@@ -417,6 +409,16 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       });
     }
   }, [pais]);
+  useEffect(() => {
+    axios.post("/api/facebook", {
+      datos: {
+        eventName: "InitiateCheckout",
+        fbp: fbp,
+        cart: actualCart,
+        total: total,
+      },
+    });
+  }, []);
   const totalDescontado =
     parseFloat(formulario.total) * parseFloat(cupon?.descuento);
 

@@ -19,7 +19,6 @@ export async function getStaticProps() {
     .get(process.env.URLBASE + "/wp-json/jet-cct/ajustes_internos/")
     .then((res) => res.data);
 
-
   const options = await axios.get(
     process.env.URLBASE + "/wp-json/jet-cct/opciones_generales/"
   );
@@ -101,17 +100,6 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
 
   if (wc_order_id) {
     axios.put("/api/orders?id=" + wc_order_id);
-    axios.post("/api/facebook", {
-      datos: {
-        eventName: "Purchase",
-        fbp: fbp,
-        fbc: fbc,
-        eventID: wc_order_id, // ViewContent, AddToCart, InitiateCheckout or Purchase
-        content_type: "product",
-        currency: "EUR", // optional
-        enableStandardPixel: false,
-      },
-    });
   }
   /*   const { data: dataWC } = suscripcion
     ? useSWR(
@@ -169,6 +157,27 @@ const Success = ({ categorias, opciones, orders: orders1 }) => {
     dispatch({
       type: "@EMPTY_CART",
     });
+  }, []);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    wc_order_id = params.get("wc_order_id");
+    if (
+      wc_order_id !== "" &&
+      wc_order_id !== null &&
+      wc_order_id !== undefined
+    ) {
+      axios.post("/api/facebook", {
+        datos: {
+          eventName: "Purchase",
+          fbp: fbp,
+          fbc: fbc,
+          eventID: wc_order_id, // ViewContent, AddToCart, InitiateCheckout or Purchase
+          content_type: "product",
+          currency: "EUR", // optional
+          enableStandardPixel: false,
+        },
+      });
+    }
   }, []);
 
   return (

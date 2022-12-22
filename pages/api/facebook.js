@@ -22,6 +22,7 @@ export default async (req, res) => {
       }
       const api = bizSdk.FacebookAdsApi.init(access_token);
       let current_timestamp = Math.floor(new Date() / 1000);
+      console.log(datos);
       if (datos.eventName === "Purchase") {
         const order = await WooCommerce.get("orders/" + datos.eventID)
           .then((response) => {
@@ -42,10 +43,11 @@ export default async (req, res) => {
         });
 
         const productos = [];
-        await ids.forEach((element) => {
+        ids.forEach((element) => {
           const content = new Content().setId(element.id).setQuantity(1);
           productos.push(content);
         });
+        console.log(order);
 
         const userData1 = new UserData()
           .setFbp(datos.fbp)
