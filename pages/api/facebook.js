@@ -1,6 +1,5 @@
 import WooCommerce from "../../woocommerce/Woocommerce";
 import * as Sentry from "@sentry/nextjs";
-import axios from "axios";
 export default async (req, res) => {
   const { datos } = req.body;
   const bizSdk = require("facebook-nodejs-business-sdk");
@@ -22,7 +21,7 @@ export default async (req, res) => {
       }
       const api = bizSdk.FacebookAdsApi.init(access_token);
       let current_timestamp = Math.floor(new Date() / 1000);
-      console.log(datos);
+
       if (datos.eventName === "Purchase") {
         const order = await WooCommerce.get("orders/" + datos.eventID)
           .then((response) => {
@@ -47,7 +46,6 @@ export default async (req, res) => {
           const content = new Content().setId(element.id).setQuantity(1);
           productos.push(content);
         });
-        console.log(order);
 
         const userData1 = new UserData()
           .setFbp(datos.fbp)
@@ -73,9 +71,11 @@ export default async (req, res) => {
           .setCustomData(customData1)
           .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(access_token, pixel_id)
-          .setEvents([serverEvent1])
-          .setTestEventCode("TEST20324");
+        const eventRequest1 = new EventRequest(
+          access_token,
+          pixel_id
+        ).setEvents([serverEvent1]);
+        //.setTestEventCode("TEST20324");
 
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
@@ -122,9 +122,11 @@ export default async (req, res) => {
           .setCustomData(customData)
           .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(access_token, pixel_id)
-          .setEvents([serverEvent1])
-          .setTestEventCode("TEST20324");
+        const eventRequest1 = new EventRequest(
+          access_token,
+          pixel_id
+        ).setEvents([serverEvent1]);
+        //.setTestEventCode("TEST20324");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             /*  console.log(
@@ -156,9 +158,11 @@ export default async (req, res) => {
           .setUserData(userData1)
           .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(access_token, pixel_id)
-          .setEvents([serverEvent1])
-          .setTestEventCode("TEST20324");
+        const eventRequest1 = new EventRequest(
+          access_token,
+          pixel_id
+        ).setEvents([serverEvent1]);
+        //.setTestEventCode("TEST20324");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             /*  console.log(
@@ -194,9 +198,11 @@ export default async (req, res) => {
           .setUserData(userData1)
           .setEventSourceUrl(req.headers.referer)
           .setActionSource("website");
-        const eventRequest1 = new EventRequest(access_token, pixel_id)
-          .setEvents([serverEvent1])
-          .setTestEventCode("TEST20324");
+        const eventRequest1 = new EventRequest(
+          access_token,
+          pixel_id
+        ).setEvents([serverEvent1]);
+        //.setTestEventCode("TEST20324");
         Promise.all([eventRequest1.execute()]).then(
           (response) => {
             /* console.log(
