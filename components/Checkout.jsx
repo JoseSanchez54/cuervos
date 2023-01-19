@@ -405,7 +405,6 @@ const FormularioCheckout = ({ onAction, opciones }) => {
       setTax({
         ...tax,
         error: true,
-        mensaje: "Actualmente no enviamos a tu pais",
       });
     }
   }, [pais]);
