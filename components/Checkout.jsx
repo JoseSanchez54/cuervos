@@ -325,6 +325,8 @@ const FormularioCheckout = ({ onAction, opciones }) => {
     } else if (!validarEmail(formulario.email)) {
       setCompleto(false);
       setError("Comprueba tu email");
+    } else if (politicas.checked !== true) {
+      setError("Recuerde aceptar la política de privacidad");
     } else {
       setCompleto(false);
       setError(
@@ -777,14 +779,12 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                           marginRight: "2px",
                         }}
                       >
-                        {" "}
                         {" política de privacidad"}
                       </a>
                     </Link>
                     {" y "}
                     <Link href="/legal/aviso_legal">
                       <a style={{ marginLeft: "2px" }}>
-                        {" "}
                         {" términos y condiciones"}
                       </a>
                     </Link>
@@ -798,6 +798,17 @@ const FormularioCheckout = ({ onAction, opciones }) => {
                       className="error"
                     >
                       {errorCupon}
+                    </span>
+                  )}
+                  {error && (
+                    <span
+                      style={{
+                        fontFamily: opciones?.fuente_global,
+                        color: "red",
+                      }}
+                      className="error"
+                    >
+                      {error}
                     </span>
                   )}
                 </div>
